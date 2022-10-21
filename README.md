@@ -14,9 +14,9 @@ In order to build this project you first have to install:
 
 ## Setup
 
-Open Terminal 
-Change into working directory 
-“git clone https://github.com/SCCapstone/DKMS.git” into command line
+* Open Terminal 
+* Change into working directory 
+* “git clone https://github.com/SCCapstone/DKMS.git” into command line
 
 ## Running
 
