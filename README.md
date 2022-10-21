@@ -1,4 +1,4 @@
-# Project Name
+# DKMS Spotify 
 
 Social media focused Web and Mobile application for Spotify. This application will consist of different feeds where users can post, share, and comment with other users. While also including items such as a personized profile page that enhances the user interaction experience. This application uses Spotifys Web API to build and pull data from current Spotify users. This is use frameworks such as Next.js and React. 
 
@@ -16,7 +16,7 @@ In order to build this project you first have to install:
 
 Open Terminal 
 Change into working directory 
-git clone https://github.com/SCCapstone/DKMS.git into command line
+“git clone https://github.com/SCCapstone/DKMS.git” into command line
 
 ## Running
 
@@ -51,8 +51,8 @@ Explain how to run the automated tests.
 
 # Authors
 
-Dalton Craven 20dalton00@gmail.com
-Sophie Crane sophieccrane@gmail.com
-Kevin Nguyen kevin.nguyen423@gmail.com
-Mason Joseph masondj1029@gmail.com
+* Dalton Craven 20dalton00@gmail.com
+* Sophie Crane sophieccrane@gmail.com
+* Kevin Nguyen kevin.nguyen423@gmail.com
+* Mason Joseph masondj1029@gmail.com
 
