@@ -1,6 +1,6 @@
 # DKMS Spotify 
 
-Social media focused Web and Mobile application for Spotify. This application will consist of different feeds where users can post, share, and comment with other users. While also including items such as a personized profile page that enhances the user interaction experience. This application uses Spotifys Web API to build and pull data from current Spotify users. This is use frameworks such as Next.js and React. 
+Social media focused Web and Mobile application for Spotify. This application(https://github.com/SCCapstone/DKMS/wiki/Project-Description) will consist of different feeds where users can post, share, and comment with other users. While also including items such as a personized profile page that enhances the user interaction experience. This application uses Spotifys Web API to build and pull data from current Spotify users. This is use frameworks such as Next.js and React. 
 
 
 ## External Requirements
