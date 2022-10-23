@@ -52,7 +52,7 @@ Explain how to run the automated tests.
 # Authors
 
 * Dalton Craven 20dalton00@gmail.com
-* Sophie Crane sophieccrane@gmail.com
+* Sophie Caroline Crane sophieccrane@gmail.com
 * Kevin Nguyen kevin.nguyen423@gmail.com
 * Mason Joseph masondj1029@gmail.com
 
