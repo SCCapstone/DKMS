@@ -54,6 +54,7 @@
     ],
     "no-unused-vars": "off",
     "no-use-before-define": "off",
+    "no-void": "off",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/consistent-type-exports": [
       "error",
