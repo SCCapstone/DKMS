@@ -1,0 +1,23 @@
+.title {
+    line-height: 1.15;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: black;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.border {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.main {
+    margin-left: 302px;
+    margin-right: 48px;
+    height: 100vh;
+    background-color: white;
+}
