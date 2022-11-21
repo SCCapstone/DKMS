@@ -1,18 +1,51 @@
 .title {
-    line-height: 1.15;
+    line-height: 40px;
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
     letter-spacing: -0.025em;
     color: black;
-    padding-top: 10px;
-    padding-left: 10px;
+    padding: 5px 10px 5px 10px;
+}
+
+.feedItem {
+    height: fit-content;
+}
+
+.userName {
+    line-height: 17px;
+    font-size: medium;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: black;
+    padding: 5px 15px 5px 15px;
+}
+
+.commentButton {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    border: none;
+    background: white;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content {
+    
 }
 
 .border {
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
+    border-bottom: 1px solid black;
+    width: 99%;
+    margin: 0 auto;
 }
 
 .main {
