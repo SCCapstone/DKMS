@@ -12,7 +12,7 @@
     height: fit-content;
 }
 
-.userName {
+.name {
     line-height: 17px;
     font-size: medium;
     font-weight: 600;
@@ -21,7 +21,7 @@
     padding: 5px 15px 5px 15px;
 }
 
-.commentButton {
+.bigButton {
     width: 24px;
     height: 24px;
     fill: none;
@@ -31,15 +31,45 @@
     padding-right: 5px;
 }
 
-.vertical {
+.smallButton {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    border: none;
+    background: white;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.itemTop {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
+.itemBottom {
+    padding: 30px 0px 5px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .content {
-    
+    line-height: 17px;
+    font-size: small;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: black;
+    padding: 5px 15px 5px 15px;
 }
 
 .border {
