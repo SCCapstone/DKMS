@@ -41,6 +41,26 @@
     padding-right: 5px;
 }
 
+.likeButton {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    border: none;
+    background: white;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.likeButtonClicked {
+    width: 18px;
+    height: 18px;
+    fill: black;
+    border: none;
+    background: white;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
 .itemTop {
     display: flex;
     flex-direction: row;
