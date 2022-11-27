@@ -1,3 +1,85 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/strict",
+    "next/core-web-vitals",
+    "airbnb",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "plugins": ["prettier"],
+  "ignorePatterns": ["coverage", "build"],
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "import/extensions": ["error", "never"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.*", "src/tests/**/*"] }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "warnOnUnassignedImports": true
+      }
+    ],
+    "no-unused-vars": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/consistent-type-exports": [
+      "error",
+      { "fixMixedExportsWithInlineTypeSpecifier": true }
+    ],
+    "@typescript-eslint/consistent-type-imports": ["error"],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { "ignoreTypeReferences": false }
+    ],
+    "prefer-arrow-callback": "error",
+    "prettier/prettier": "error",
+    "react/function-component-definition": [
+      "warn",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "no-undef": "off",
+    "react/no-unstable-nested-components": "off"
+  }
 }
