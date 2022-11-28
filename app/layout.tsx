@@ -1,3 +1,4 @@
+import Footer from "../components/ui/Footer";
 import Navbar from "../components/ui/Navbar";
 
 import "./globals.css";
@@ -18,6 +19,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         <main className="container mx-auto p-4 md:px-8 flex-grow">
           {children}
         </main>
+        <Footer />
       </Providers>
     </body>
   </html>
