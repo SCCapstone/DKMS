@@ -8,7 +8,7 @@ const Feed = () => {
         <div>
             <h1 className="normal-case font-bold">Feed</h1>
             <div className="divider"></div>
-            <FeedItem />
+            <FeedItem username=" " feedContent=" " />
         </div>
     )
 };

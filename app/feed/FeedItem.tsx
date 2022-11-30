@@ -1,11 +1,11 @@
 import LikeButton from "./LikeButton";
 import "../globals.css";
 
-export const FeedItem = () => {
+export const FeedItem = ({ username, feedContent }: {username:string, feedContent:string}) => {
     return <div>
         <div className="h-fit">
             <div className="flex flex-row justify-between items-center">
-                <div>Name</div>
+                <div>{ username }</div>
                 <div>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13 11.5C13 12.0523 12.5523 12.5 12 12.5C11.4477 12.5 11 12.0523 11 11.5C11 10.9477 11.4477 10.5 12 10.5C12.5523 10.5 13 10.9477 13 11.5Z" stroke="#090909"/>
@@ -15,7 +15,7 @@ export const FeedItem = () => {
                     </svg>
                 </div>
             </div>
-            <div>Content</div>
+            <div>{ feedContent }</div>
             <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
                 <div className="flex flex-row justify-start items-center">
                     <div>
