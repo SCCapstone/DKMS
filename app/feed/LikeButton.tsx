@@ -6,7 +6,7 @@ export const LikeButton = ({filled = false}: {filled?:boolean}) => {
     const [state, setState] = useState(filled);
 
     useEffect(() => {
-        console.log("state change");
+        console.log("like change");
     }, [state]);
 
     const onClick = () => {
