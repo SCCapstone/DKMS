@@ -26,6 +26,7 @@
   "ignorePatterns": ["coverage", "build"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
+    "camelcase": "off",
     "import/extensions": ["error", "never"],
     "import/no-extraneous-dependencies": [
       "error",

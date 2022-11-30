@@ -1,25 +1,20 @@
-import Image from "next/image";
+import Footer from "../components/ui/Footer";
 
-const Home = ({ user }: { user: { name: string } }) => (
+import type { User } from "next-auth";
+
+const Home = ({ user }: { user: User }) => (
   <div>
     <main>
       <h1>
         Welcome to <a href="https://nextjs.org">Next.js 13</a>, {user.name}!
       </h1>
+
+      <p>Here is some information about yourself (according to Spotify):</p>
+      <pre>{JSON.stringify(user, null, 2)}</pre>
     </main>
 
-    <footer>
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by{" "}
-        <span>
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </span>
-      </a>
-    </footer>
+    <hr />
+    <Footer />
   </div>
 );
 

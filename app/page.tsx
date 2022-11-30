@@ -1,17 +1,11 @@
+import { unstable_getServerSession } from "next-auth/next";
+
 import Home from "./Home";
 
-const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/hello", {
-    cache: "no-store",
-  });
-
-  return res.json() as Promise<{ name: string }>;
-};
-
 const Page = async () => {
-  const user = await getData();
+  const session = await unstable_getServerSession();
 
-  return <Home user={user} />;
+  return <Home user={session!.user!} />;
 };
 
 export default Page;
