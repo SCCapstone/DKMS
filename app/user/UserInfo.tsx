@@ -1,6 +1,6 @@
-import Footer from "../components/ui/Footer";
+import Footer from "../../components/ui/Footer";
 
-import UserInfo from "./UserInfo";
+import UserClient from "./UserClient";
 
 import type { User } from "next-auth";
 
@@ -17,7 +17,7 @@ const Home = ({ user }: { user: User }) => (
       </p>
       <pre>{JSON.stringify(user, null, 2)}</pre>
       <hr />
-      <UserInfo />
+      <UserClient />
     </main>
 
     <hr />

@@ -2,7 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 
-const UserInfo = () => {
+const UserClient = () => {
   const session = useSession();
 
   if (session.status === "authenticated") {
@@ -24,4 +24,4 @@ const UserInfo = () => {
   return <p>Loading client-side info...</p>;
 };
 
-export default UserInfo;
+export default UserClient;
