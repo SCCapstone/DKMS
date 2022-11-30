@@ -1,6 +1,6 @@
-import Navbar from "../ui/navbar";
-
 import "./globals.css";
+
+import Navbar from "../ui/navbar";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
