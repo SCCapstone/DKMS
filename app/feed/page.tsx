@@ -7,7 +7,7 @@ import FeedItem from "./FeedItem";
 const Feed = () => {
     return (
         <div>
-            <h1>Feed</h1>
+            <h1 className="normal-case font-bold">Feed</h1>
             <div className="divider"></div>
             <FeedItem />
         </div>
