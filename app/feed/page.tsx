@@ -10,13 +10,12 @@ import FeedItem from "./FeedItem";
 import type { DocumentData } from "firebase/firestore";
 
 const Feed = () => {
-  const [usernames, setUsernames] = useState<DocumentData[]>([]);
+  const [feedItems, setFeedItems] = useState<DocumentData[]>([]);
 
-  console.log(usernames);
   useEffect(
     () =>
       onSnapshot(collection(db, "feed_content"), (snapshot) =>
-        setUsernames(snapshot.docs.map((doc) => doc.data()))
+        setFeedItems(snapshot.docs.map((doc) => doc.data()))
       ),
     []
   );
@@ -26,13 +25,13 @@ const Feed = () => {
       <h1 className="normal-case font-bold">Feed</h1>
       <div className="divider" />
       <ul>
-        {usernames.map((username) => (
-          // TODO FIX THIS SOPHIE
+        {feedItems.map((feedItem) => (
+          // SOPHIE FIX THIS
           <FeedItem
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            username={username.username}
+            username={feedItem.username}
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            feedContent={username.content}
+            feedContent={feedItem.content}
           />
         ))}
       </ul>
