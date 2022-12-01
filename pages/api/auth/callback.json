@@ -1,0 +1,43 @@
+{
+  token: {
+    name: "Dalton",
+    email: "daltoncraven@protonmail.com",
+    picture: "https://i.scdn.co/image/ab6775700000ee856d1dbb4f8d6427cc46709f21",
+    sub: "cravend123"
+  },
+  user: {
+    id: "cravend123",
+    name: "Dalton",
+    country: undefined,
+    email: "daltoncraven@protonmail.com",
+    url: "https: //open.spotify.com/user/cravend123",
+    totalFollowers: 36,
+    image: "https: //i.scdn.co/image/ab6775700000ee856d1dbb4f8d6427cc46709f21"
+  },
+  account: {
+    provider: "spotify",
+    type: "oauth",
+    providerAccountId: "cravend123",
+    access_token: "BQBEkuAIRpx_sO3q-Po2muBEHPHSyj4xDmfuHdLYMVGYGFfw-43Pqw-UywpHtdQsSVrAWVKVVQDIOPTIryZRLVI37JAa8nDOVeYGiFOX7xK0bdZe0AphhaDjuG-6WZYJRjGGQsnpD-dKNBHj9QJwqnwOF8dZZgH9po5dYMxpXvtBnY-0ENPm8f4",
+    token_type: "Bearer",
+    expires_at: 1669834794,
+    refresh_token: "AQDw1e3HGQTRDSzwrtD0egHYmrEiB3o6OyaQzCKh-ghqqtBc9s62rESTVkZGGedPYkto2A_QMZh3agil2wwZSHeNc16f9-v16Xc7g_N-Jy0GLezAbaoqqizbzUEtQ4jUVb0",
+    scope: "user-read-email"
+  },
+  profile: {
+    display_name: "Dalton",
+    email: "daltoncraven@protonmail.com",
+    external_urls: { spotify: "https://open.spotify.com/user/cravend123" },
+    followers: { href: null, total: 36 },
+    href: "https: //api.spotify.com/v1/users/cravend123",
+    id: "cravend123",
+    images: [
+        [Object
+        ]
+      ],
+    type: "user",
+    uri: "spotify:user:cravend123"
+    },
+  isNewUser: undefined
+  }
+}
