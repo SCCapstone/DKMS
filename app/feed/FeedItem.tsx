@@ -1,7 +1,7 @@
 import LikeButton from "./LikeButton";
 import "../globals.css";
 
-export const FeedItem = ({ username, feedContent }: {username:string, feedContent:string}) => {
+export const FeedItem = ({ username, feedContent }: {username: any, feedContent: any}) => {
     return <div>
         <div className="h-fit">
             <div className="flex flex-row justify-between items-center">
