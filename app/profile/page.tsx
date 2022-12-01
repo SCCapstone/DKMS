@@ -1,20 +1,36 @@
 "use client";
 
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { unstable_getServerSession } from "next-auth";
 import React, { useState, useEffect } from "react";
 
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import FeedItem from "../feed/FeedItem";
 import db from "../firebase";
 
 import type { DocumentData } from "firebase/firestore";
 
-const Profile = () => {
+// TODO SOPHIE FIX THIS (make it a utility function so we can use it in other places)
+const getUser = async () => {
+  const session = await unstable_getServerSession(authOptions);
+
+  if (!session) {
+    throw new Error("No session");
+  }
+
+  const { user } = session;
+  return user;
+};
+
+const Profile = async () => {
   const [feedItems, setFeedItems] = useState<DocumentData[]>([]);
+
+  const user = await getUser();
 
   // change to profile's username
   const q = query(
     collection(db, "feed_content"),
-    where("username", "==", "sophiecra")
+    where("username", "==", user.id)
   );
 
   useEffect(() => {
