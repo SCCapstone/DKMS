@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt: ({ token, user }) => (user ? { ...token, ...user } : token),
+    jwt: ({ token, user }) => (user ? { ...token, user } : token),
     session: ({ session, token }) => ({ ...session, user: token.user }),
   },
 };
