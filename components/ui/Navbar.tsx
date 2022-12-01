@@ -7,7 +7,7 @@ export type ItemType = {
 
 const NavbarItem = ({ item }: { item: ItemType }) => (
   <li>
-    <Link className="normal-case font-bold" href={item.url}>
+    <Link className="font-bold" href={item.url}>
       {item.label}
     </Link>
   </li>
@@ -24,26 +24,34 @@ const navbarItems = [
   },
 ];
 
-const Navbar = () => (
-  <nav className="navbar">
-    <div className="navbar-start">
-      <h1>
-        <Link
-          className="normal-case text-xl btn btn-ghost rounded-none text-primary"
-          href="/"
-        >
-          DKMS
-        </Link>
-      </h1>
+const Navbar = ({ children }: { children: React.ReactNode }) => (
+  <div className="drawer drawer-mobile">
+    <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+    <div className="drawer-content flex flex-col items-center justify-center">
+      {children}
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label
+        htmlFor="my-drawer"
+        className="btn btn-primary drawer-button md:hidden"
+      >
+        Open drawer
+      </label>
     </div>
-    <div className="navbar-end">
-      <ul className="menu menu-horizontal">
-        {navbarItems.map((item) => (
-          <NavbarItem item={item} key={item.url} />
-        ))}
-      </ul>
+    <div className="drawer-side bg-primary text-primary-content p-4 w-64">
+      <span className="drawer-overlay" />
+      <div>
+        <h1 className="text-3xl text-center font-black">
+          <Link href="/">DKMS</Link>
+        </h1>
+        <hr />
+        <ul className="menu p-1">
+          {navbarItems.map((item) => (
+            <NavbarItem key={item.url} item={item} />
+          ))}
+        </ul>
+      </div>
     </div>
-  </nav>
+  </div>
 );
 
 export default Navbar;
