@@ -4,13 +4,18 @@ import db from "../firebase";
 import FeedItem from "../feed/FeedItem";
 import "../globals.css";
 import React, { useState, useEffect } from "react";
-import { onSnapshot, collection, DocumentData, query, where, getDocs, QuerySnapshot } from "firebase/firestore";
+import { collection, DocumentData, query, where, getDocs, QuerySnapshot } from "firebase/firestore";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { async } from "@firebase/util";
 
 const Profile = () => {
     const [feedItems, setFeedItems] = useState<DocumentData[]>([]);
 
+    const user = getUser();
+
     //change to profile's username
-    const q = query(collection(db, "feed_content"), where("username", "==", "sophiecra"));
+    const q = query(collection(db, "feed_content"), where("username", "==", user.id));
 
     useEffect(() => {
         async function fetchData() {
@@ -29,6 +34,17 @@ const Profile = () => {
             ))}
         </ul>
     </div>
+}
+
+const getUser = async () => {
+    const session = await unstable_getServerSession(authOptions);
+
+    if (!session) {
+        throw new Error("No session");
+      }
+
+    const user = session.user;
+    return user;
 }
 
 export default Profile;
