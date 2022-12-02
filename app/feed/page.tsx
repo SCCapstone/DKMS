@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import db from "../firebase";
 
 import FeedItem from "./FeedItem";
-import { onSnapshot, collection, DocumentData } from "firebase/firestore";
 
 import type { DocumentData } from "firebase/firestore";
 

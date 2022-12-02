@@ -22,19 +22,17 @@ const getUser = async () => {
   return user;
 };
 
-const Profile = async () => {
+const Profile = () => {
   const [feedItems, setFeedItems] = useState<DocumentData[]>([]);
-
-  const user = await getUser();
-
-  // change to profile's username
-  const q = query(
-    collection(db, "feed_content"),
-    where("username", "==", user.id)
-  );
 
   useEffect(() => {
     async function fetchData() {
+      const user = await getUser();
+      // change to profile's username
+      const q = query(
+        collection(db, "feed_content"),
+        where("username", "==", user.id)
+      );
       const qSnapshot = await getDocs(q);
       setFeedItems(qSnapshot.docs.map((doc) => doc.data()));
     }
