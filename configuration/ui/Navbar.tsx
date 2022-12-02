@@ -22,14 +22,6 @@ const navbarItems = [
     label: "Profile",
     url: "/profile",
   },
-  {
-    label: "Notifications",
-    url: "/components/notifications",
-  },
-  {
-    label: "Friends",
-    url: "/components/friends",
-  },
 ];
 
 const Navbar = () => (
