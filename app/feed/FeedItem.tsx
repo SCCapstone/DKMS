@@ -2,11 +2,17 @@ import "../globals.css";
 
 import LikeButton from "./LikeButton";
 
-const FeedItem = () => (
+const FeedItem = ({
+  username,
+  feedContent,
+}: {
+  username: string;
+  feedContent: string;
+}) => (
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div>Name</div>
+        <div>{username}</div>
         <div>
           <svg
             width="24"
@@ -37,7 +43,7 @@ const FeedItem = () => (
           </svg>
         </div>
       </div>
-      <div>Content</div>
+      <div>{feedContent}</div>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div className="flex flex-row justify-start items-center">
           <div>
