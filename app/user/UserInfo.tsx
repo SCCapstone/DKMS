@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import Footer from "../../configuration/ui/Footer";
 
+=======
+>>>>>>> eddd39ef810b97dabe4b7041e32d39562147746e
 import UserClient from "./UserClient";
 
 import type { User } from "next-auth";
@@ -19,9 +22,6 @@ const Home = ({ user }: { user: User }) => (
       <hr />
       <UserClient />
     </main>
-
-    <hr />
-    <Footer />
   </div>
 );
 
