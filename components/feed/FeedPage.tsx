@@ -1,8 +1,11 @@
 import FeedItem from "./FeedItem";
 
-import type { FeedItemRename } from "../profile/page";
+export type FeedItemContent = {
+  id: string;
+  data: { username: string; content: string };
+};
 
-const FeedPage = ({ data }: { data: FeedItemRename[] }) => (
+const FeedPage = ({ data }: { data: FeedItemContent[] }) => (
   <div>
     <div className="divider" />
     <ul>
