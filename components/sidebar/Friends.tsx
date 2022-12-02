@@ -21,7 +21,7 @@ const MOCK_DATA = [
   {
     id: "4",
     title: "Mason",
-    timestamp: "21",
+    timestamp: "21 hr",
     body: "Tyler Herro - Jack Harlow",
   },
 ];
