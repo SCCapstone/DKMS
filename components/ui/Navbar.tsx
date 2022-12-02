@@ -18,7 +18,7 @@ const NavbarItem = ({ item }: { item: ItemType }) => (
 const navbarItems = [
   {
     label: "Feed",
-    url: "/feed",
+    url: "/",
   },
   {
     label: "Profile",
