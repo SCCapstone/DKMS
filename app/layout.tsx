@@ -1,6 +1,3 @@
-import { Router } from "next/router";
-
-import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/ui/Navbar";
 
 import "./globals.css";
