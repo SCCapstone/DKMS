@@ -1,4 +1,4 @@
-import Footer from "../../components/ui/Footer";
+import Footer from "../../configuration/ui/Footer";
 
 import UserClient from "./UserClient";
 
