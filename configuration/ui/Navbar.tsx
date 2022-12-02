@@ -24,11 +24,11 @@ const navbarItems = [
   },
   {
     label: "Notifications",
-    url: "/notifications",
+    url: "/components/notifications",
   },
   {
     label: "Friends",
-    url: "/friends",
+    url: "/components/friends",
   },
 ];
 
