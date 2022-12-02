@@ -1,5 +1,4 @@
 import Friend from "../../../components/Friend";
-import "../../globals.css";
 
 const Friends = () => (
   <div>

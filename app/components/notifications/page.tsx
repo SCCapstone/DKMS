@@ -1,5 +1,4 @@
 import Notification from "../../../components/Notification";
-import "../../globals.css";
 
 const Notifications = () => (
   <div>

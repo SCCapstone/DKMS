@@ -1,6 +1,7 @@
 import { Router } from "next/router";
-import Navbar from "../components/ui/Navbar";
+
 import Sidebar from "../components/sidebar/Sidebar";
+import Navbar from "../components/ui/Navbar";
 
 import "./globals.css";
 import Providers from "./providers";
@@ -19,6 +20,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
             {children}
           </main>
         </Navbar>
+        <Sidebar>
+          <main className="container mx-auto p-4 md:px-8 flex-grow">
+            {children}
+          </main>
+        </Sidebar>
       </Providers>
     </body>
   </html>
