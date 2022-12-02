@@ -24,7 +24,7 @@ async function getData() {
   // change to profile's username
   const q = query(
     collection(db, "feed_content"),
-    where("username", "==", user.id)
+    where("username", "==", user.name)
   );
   const qSnapshot = await getDocs(q);
 
