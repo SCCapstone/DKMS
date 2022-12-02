@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 
+import Friends from "./Friends";
 import FriendsIcon from "./icons/FriendsIcon";
 import NotificationIcon from "./icons/NotificationIcon";
+import Notifications from "./Notifications";
 
 const SIDEBAR_MAPPINGS = {
-  notifications: () => null,
-  friends: () => null,
+  notifications: Notifications,
+  friends: Friends,
   none: () => null,
 } as const;
 
@@ -49,7 +51,7 @@ const SidebarContainer = () => {
   const Sidebar = SIDEBAR_MAPPINGS[selectedSidebar];
 
   return (
-    <div className="bg-gray-200 h-screen flex">
+    <div className="bg-gray-200 text-black h-screen flex">
       <Sidebar />
       <SidebarMenu currentSelection={selectedSidebar} onChange={handleChange} />
     </div>
