@@ -1,40 +1,28 @@
-"use client";
-
-import { onSnapshot, collection } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
 
 import db from "../firebase";
 
-import FeedItem from "./FeedItem";
+import FeedPage from "./FeedPage";
 
-import type { DocumentData } from "firebase/firestore";
+import type { FeedItemRename } from "../profile/page";
 
-const Feed = () => {
-  const [feedItems, setFeedItems] = useState<DocumentData[]>([]);
+async function getData() {
+  const items = collection(db, "feed_content");
 
-  useEffect(
-    () =>
-      onSnapshot(collection(db, "feed_content"), (snapshot) =>
-        setFeedItems(snapshot.docs.map((doc) => doc.data()))
-      ),
-    []
+  const itemsSnapshot = await getDocs(items);
+
+  return itemsSnapshot.docs.map(
+    (doc) => ({ id: doc.id, data: doc.data() } as FeedItemRename)
   );
+}
+
+const Feed = async () => {
+  const data = await getData();
 
   return (
     <div>
       <h1 className="normal-case font-bold">Feed</h1>
-      <div className="divider" />
-      <ul>
-        {feedItems.map((feedItem) => (
-          // SOPHIE FIX THIS
-          <FeedItem
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            username={feedItem.username}
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            feedContent={feedItem.content}
-          />
-        ))}
-      </ul>
+      <FeedPage data={data} />
     </div>
   );
 };
