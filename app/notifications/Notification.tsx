@@ -1,7 +1,5 @@
 import "../globals.css";
 
-import LikeButton from "../feed/LikeButton";
-
 const Notification = () => (
     <div>
     <div className="h-fit">
