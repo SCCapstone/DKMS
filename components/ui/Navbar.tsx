@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import Vercel from "./Vercel";
+
 export type ItemType = {
   label: string;
   url: string;
@@ -7,7 +9,7 @@ export type ItemType = {
 
 const NavbarItem = ({ item }: { item: ItemType }) => (
   <li>
-    <Link className="normal-case font-bold" href={item.url}>
+    <Link className="font-bold" href={item.url}>
       {item.label}
     </Link>
   </li>
@@ -24,26 +26,44 @@ const navbarItems = [
   },
 ];
 
-const Navbar = () => (
-  <nav className="navbar">
-    <div className="navbar-start">
-      <h1>
-        <Link
-          className="normal-case text-xl btn btn-ghost rounded-none text-primary"
-          href="/"
-        >
-          DKMS
-        </Link>
+const NavbarButton = () => (
+  // eslint-disable-next-line jsx-a11y/label-has-associated-control
+  <label
+    htmlFor="my-drawer"
+    className="btn btn-primary drawer-button md:hidden"
+  >
+    Open drawer
+  </label>
+);
+
+const NavbarContent = () => (
+  <div className="bg-primary text-primary-content p-4 w-64">
+    <span className="drawer-overlay" />
+    <nav className="flex flex-col h-full">
+      <h1 className="text-3xl text-center font-black">
+        <Link href="/">DKMS</Link>
       </h1>
-    </div>
-    <div className="navbar-end">
-      <ul className="menu menu-horizontal">
+      <ul className="menu p-1 grow">
         {navbarItems.map((item) => (
-          <NavbarItem item={item} key={item.url} />
+          <NavbarItem key={item.url} item={item} />
         ))}
       </ul>
+      <div className="place-self-center mx-auto">
+        <Vercel />
+      </div>
+    </nav>
+  </div>
+);
+
+const Navbar = ({ children }: { children: React.ReactNode }) => (
+  <div className="drawer drawer-mobile">
+    <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+    <div className="drawer-content">
+      {children}
+      <NavbarButton />
     </div>
-  </nav>
+    <NavbarContent />
+  </div>
 );
 
 export default Navbar;
