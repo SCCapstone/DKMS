@@ -43,7 +43,7 @@ const Friend = ({ title, timestamp, body }: { title: string; timestamp: string; 
         </div>
 );
 const Friends = () => (
-  <div className="w-64 h-screen">
+  <div className="w-64 p-4 h-screen">
     {MOCK_DATA.map((item) => (
       <Friend title={item.title} timestamp={item.timestamp} body={item.body} />
     ))}
