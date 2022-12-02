@@ -32,6 +32,12 @@
       "error",
       { "devDependencies": ["**/*.test.*", "src/tests/**/*"] }
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfline": "auto"
+      }
+    ],
     "import/order": [
       "error",
       {
@@ -68,7 +74,6 @@
       { "ignoreTypeReferences": false }
     ],
     "prefer-arrow-callback": "error",
-    "prettier/prettier": "error",
     "react/function-component-definition": [
       "warn",
       {

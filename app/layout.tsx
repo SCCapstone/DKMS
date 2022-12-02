@@ -20,11 +20,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
             {children}
           </main>
         </Navbar>
-        <Sidebar>
-          <main className="container mx-auto p-4 md:px-8 flex-grow">
-            {children}
-          </main>
-        </Sidebar>
       </Providers>
     </body>
   </html>
