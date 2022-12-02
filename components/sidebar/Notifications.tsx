@@ -46,11 +46,19 @@ const MOCK_DATA = [
 
 const Notification = ({ title, timestamp, body }: { title: string; timestamp: string; body: string }) => (
   <div>
-    <h1>{title}</h1>
-    <h2>{timestamp}</h2>
-    <p>{body}</p>
-
-  </div>
+            <div className="h-fit">
+                <div className="flex flex-row justify-between items-center">
+                    <div>
+                        <h1 className="normal-case font-bold">{title}</h1>
+                    </div>
+                    <div>
+                        <h1 className="normal-case font-bold">{timestamp}</h1>
+                    </div>
+                </div>
+                <div>{body}</div>
+            </div>
+            <div className="divider" />
+        </div>
 );
 const Notifications = () => (
   <div className="w-64 h-screen">
