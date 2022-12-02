@@ -1,5 +1,3 @@
-import "../globals.css";
-
 import LikeButton from "./LikeButton";
 
 const FeedItem = ({
