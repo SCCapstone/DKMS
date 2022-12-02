@@ -1,3 +1,4 @@
+import SidebarContainer from "../components/sidebar/SidebarContainter";
 import Navbar from "../components/ui/Navbar";
 
 import "./globals.css";
@@ -13,9 +14,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <body>
       <Providers>
         <Navbar>
-          <main className="container mx-auto p-4 md:px-8 flex-grow">
-            {children}
-          </main>
+          <div className="flex flex-row">
+            <main className="container mx-auto p-4 md:px-8 flex-grow">
+              {children}
+            </main>
+            <SidebarContainer />
+          </div>
         </Navbar>
       </Providers>
     </body>
