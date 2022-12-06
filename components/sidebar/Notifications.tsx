@@ -44,28 +44,41 @@ const MOCK_DATA = [
   },
 ];
 
-const Notification = ({ title, timestamp, body }: { title: string; timestamp: string; body: string }) => (
-  <div>
-            <div className="h-fit">
-                <div className="flex flex-row justify-between items-center">
-                    <div>
-                        <h1 className="normal-case font-bold">{title}</h1>
-                    </div>
-                    <div>
-                        <h1 className="normal-case font-bold">{timestamp}</h1>
-                    </div>
-                </div>
-                <div>{body}</div>
-            </div>
-            <div className="divider" />
+const Notification = ({
+  title,
+  timestamp,
+  body,
+}: {
+  title: string;
+  timestamp: string;
+  body: string;
+}) => (
+  <li>
+    <div className="h-fit">
+      <div className="flex flex-row justify-between items-center">
+        <div>
+          <h1 className="normal-case font-bold">{title}</h1>
         </div>
+        <div>
+          <h1 className="normal-case font-bold">{timestamp}</h1>
+        </div>
+      </div>
+      <div>{body}</div>
+    </div>
+    <div className="divider" />
+  </li>
 );
 const Notifications = () => (
-  <div className="w-64 p-4 h-screen">
+  <ul className="w-64 p-4 h-screen">
     {MOCK_DATA.map((item) => (
-      <Notification title={item.title} timestamp={item.timestamp} body={item.body} />
+      <Notification
+        key={item.id}
+        title={item.title}
+        timestamp={item.timestamp}
+        body={item.body}
+      />
     ))}
-  </div>
+  </ul>
 );
 
 export default Notifications;

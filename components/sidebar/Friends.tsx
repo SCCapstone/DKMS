@@ -26,28 +26,41 @@ const MOCK_DATA = [
   },
 ];
 
-const Friend = ({ title, timestamp, body }: { title: string; timestamp: string; body: string }) => (
-  <div>
-            <div className="h-fit">
-                <div className="flex flex-row justify-between items-center">
-                    <div>
-                        <h1 className="normal-case font-bold">{title}</h1>
-                    </div>
-                    <div>
-                        <h1 className="normal-case font-bold">{timestamp}</h1>
-                    </div>
-                </div>
-                <div>{body}</div>
-            </div>
-            <div className="divider" />
+const Friend = ({
+  title,
+  timestamp,
+  body,
+}: {
+  title: string;
+  timestamp: string;
+  body: string;
+}) => (
+  <li>
+    <div className="h-fit">
+      <div className="flex flex-row justify-between items-center">
+        <div>
+          <h1 className="normal-case font-bold">{title}</h1>
         </div>
+        <div>
+          <h1 className="normal-case font-bold">{timestamp}</h1>
+        </div>
+      </div>
+      <div>{body}</div>
+    </div>
+    <div className="divider" />
+  </li>
 );
 const Friends = () => (
-  <div className="w-64 p-4 h-screen">
+  <ul className="w-64 p-4 h-screen">
     {MOCK_DATA.map((item) => (
-      <Friend title={item.title} timestamp={item.timestamp} body={item.body} />
+      <Friend
+        key={item.id}
+        title={item.title}
+        timestamp={item.timestamp}
+        body={item.body}
+      />
     ))}
-  </div>
+  </ul>
 );
 
 export default Friends;
