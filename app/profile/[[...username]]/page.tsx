@@ -1,11 +1,12 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { unstable_getServerSession } from "next-auth";
+import { useRouter } from "next/router";
 
-import FeedPage from "../../components/feed/FeedPage";
-import { authOptions } from "../../pages/api/auth/[...nextauth]";
-import db from "../firebase";
+import FeedPage from "../../../components/feed/FeedPage";
+import { authOptions } from "../../../pages/api/auth/[...nextauth]";
+import db from "../../firebase";
 
-import type { FeedItemContent } from "../../components/feed/FeedPage";
+import type { FeedItemContent } from "../../../components/feed/FeedPage";
 
 // TODO SOPHIE FIX THIS (make it a utility function so we can use it in other places)
 const getUser = async () => {
@@ -16,15 +17,14 @@ const getUser = async () => {
   }
 
   const { user } = session;
-  return user;
+  return user.name;
 };
 
-async function getData() {
-  const user = await getUser();
+async function getData(username: string) {
   // change to profile's username
   const q = query(
     collection(db, "feed_content"),
-    where("username", "==", user.name)
+    where("username", "==", username)
   );
   const qSnapshot = await getDocs(q);
 
@@ -33,8 +33,15 @@ async function getData() {
   );
 }
 
-const Profile = async () => {
-  const data = await getData();
+const Profile = async ({ params }: { params: { username?: string[] } }) => {
+  let profile;
+  if (params.username === undefined) {
+    profile = await getUser();
+  } else {
+    [profile] = params.username;
+  }
+
+  const data = await getData(profile);
 
   return (
     <div>
