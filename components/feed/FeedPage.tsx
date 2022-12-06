@@ -5,7 +5,13 @@ export type FeedItemContent = {
   data: { username: string; content: string };
 };
 
-const FeedPage = ({ data }: { data: FeedItemContent[] }) => (
+const FeedPage = ({
+  data,
+  showLinks,
+}: {
+  data: FeedItemContent[];
+  showLinks?: boolean;
+}) => (
   <div>
     <div className="divider" />
     <ul>
@@ -14,6 +20,7 @@ const FeedPage = ({ data }: { data: FeedItemContent[] }) => (
           key={feedItem.id}
           username={feedItem.data.username}
           feedContent={feedItem.data.content}
+          showLink={showLinks}
         />
       ))}
     </ul>
