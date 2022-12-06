@@ -1,6 +1,5 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { unstable_getServerSession } from "next-auth";
-import { useRouter } from "next/router";
 
 import FeedPage from "../../../components/feed/FeedPage";
 import { authOptions } from "../../../pages/api/auth/[...nextauth]";
@@ -16,8 +15,12 @@ const getUser = async () => {
     throw new Error("No session");
   }
 
-  const { user } = session;
-  return user.name;
+  return session.user;
+};
+
+const getCurrentUsername = async () => {
+  const user = await getUser();
+  return user.id;
 };
 
 async function getData(username: string) {
@@ -34,18 +37,15 @@ async function getData(username: string) {
 }
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
-  let profile;
-  if (params.username === undefined) {
-    profile = await getUser();
-  } else {
-    [profile] = params.username;
-  }
+  const username = params.username
+    ? params.username[0]
+    : await getCurrentUsername();
 
-  const data = await getData(profile);
+  const data = await getData(username);
 
   return (
     <div>
-      <h1 className="normal-case font-bold">Profile</h1>
+      <h1 className="normal-case font-bold">Profile — {username}</h1>
       <FeedPage data={data} />
     </div>
   );

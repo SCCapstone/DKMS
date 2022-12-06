@@ -1,16 +1,24 @@
+import UsernameLink from "../ui/UsernameLink";
+
 import LikeButton from "./LikeButton";
 
 const FeedItem = ({
   username,
   feedContent,
+  showLink,
 }: {
   username: string;
   feedContent: string;
+  showLink?: boolean;
 }) => (
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div>{username}</div>
+        {showLink ? (
+          <UsernameLink username={username} />
+        ) : (
+          <div>{username}</div>
+        )}
         <div>
           <svg
             width="24"
