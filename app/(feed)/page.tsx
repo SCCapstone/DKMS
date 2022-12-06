@@ -1,10 +1,9 @@
 import { collection, getDocs } from "firebase/firestore";
 
-import FeedPage from "../components/feed/FeedPage";
+import FeedPage from "../../components/feed/FeedPage";
+import db from "../firebase";
 
-import db from "./firebase";
-
-import type { FeedItemContent } from "../components/feed/FeedPage";
+import type { FeedItemContent } from "../../components/feed/FeedPage";
 
 async function getData() {
   const items = collection(db, "feed_content");
