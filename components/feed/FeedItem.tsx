@@ -1,4 +1,4 @@
-import Link from "next/link";
+import UsernameLink from "../ui/UsernameLink";
 
 import LikeButton from "./LikeButton";
 
@@ -15,12 +15,7 @@ const FeedItem = ({
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
         {showLink ? (
-          <Link
-            className="link link-hover link-secondary"
-            href={`/profile/${username}`}
-          >
-            {username}
-          </Link>
+          <UsernameLink username={username} />
         ) : (
           <div>{username}</div>
         )}
