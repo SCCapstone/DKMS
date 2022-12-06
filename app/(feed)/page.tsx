@@ -21,7 +21,7 @@ const Feed = async () => {
   return (
     <div>
       <h1 className="normal-case font-bold">Feed</h1>
-      <FeedPage data={data} />
+      <FeedPage data={data} showLinks />
     </div>
   );
 };

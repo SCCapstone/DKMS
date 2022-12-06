@@ -1,16 +1,29 @@
+import Link from "next/link";
+
 import LikeButton from "./LikeButton";
 
 const FeedItem = ({
   username,
   feedContent,
+  showLink,
 }: {
   username: string;
   feedContent: string;
+  showLink?: boolean;
 }) => (
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div>{username}</div>
+        {showLink ? (
+          <Link
+            className="link link-hover link-secondary"
+            href={`/profile/${username}`}
+          >
+            {username}
+          </Link>
+        ) : (
+          <div>{username}</div>
+        )}
         <div>
           <svg
             width="24"
