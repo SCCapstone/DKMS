@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint -d app --report-unused-disable-directives warn",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "cypress open"
   },
   "dependencies": {
     "autoprefixer": "^10.4.13",
@@ -30,6 +31,7 @@
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
+    "cypress": "^12.4.0",
     "eslint": "^8.25.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "^13.0.2",
