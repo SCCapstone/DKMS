@@ -2,6 +2,7 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
+  projectId: "zche8i",
   component: {
     devServer: {
       framework: "next",
