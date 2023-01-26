@@ -9,6 +9,10 @@ export default defineConfig({
     },
   },
 
+  // macbook 11 size
+  viewportWidth: 1366,
+  viewportHeight: 768,
+
   e2e: {
     baseUrl: "http://localhost:3000",
   },
