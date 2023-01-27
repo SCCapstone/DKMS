@@ -1,13 +1,15 @@
 {
   "parser": "@typescript-eslint/parser",
   "env": {
-    "browser": true
+    "browser": true,
+    "cypress/globals": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/strict",
+    "plugin:cypress/recommended",
     "next/core-web-vitals",
     "airbnb",
     "prettier"
@@ -22,7 +24,7 @@
       }
     }
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "cypress"],
   "ignorePatterns": ["coverage", "build"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
