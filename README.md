@@ -35,20 +35,17 @@ emulator or in a physical phone.
 
 # Testing
 
-In 492 you will write automated tests. When you do you will need to add a
-section that explains how to run them.
-
-The unit tests are in `/test/unit`.
-
-The behavioral tests are in `/test/casper/`.
+The unit tests use the regexep '*.test.ts'
+The e2e tests are in '/cypress/e2e'.
 
 ## Testing Technology
 
-In some cases you need to install test runners, etc. Explain how.
+Make sure to run 'yarn install' before testing. 
 
 ## Running Tests
 
-Explain how to run the automated tests.
+In one terminal run the application using 'yarn dev'.
+Then in a second terminal run the tests using 'yarn test'. A window will pop up prompting you to choose E2E testing or component testing. Once one is picked, those tests will run. 
 
 # Authors
 
