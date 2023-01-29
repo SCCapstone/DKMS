@@ -45,7 +45,7 @@ Make sure to run 'yarn install' before testing.
 ## Running Tests
 
 In one terminal run the application using 'yarn dev'.
-Then in a second terminal run the tests using 'yarn test'. A window will pop up prompting you to choose E2E testing or component testing. Once one is picked, those tests will run. 
+Then in a second terminal run the tests using 'yarn test'. A window will pop up prompting you to choose E2E testing (behavior) or component testing (unit). Once one is picked, those tests will run. 
 
 # Authors
 
