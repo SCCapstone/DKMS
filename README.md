@@ -35,8 +35,8 @@ emulator or in a physical phone.
 
 # Testing
 
-The unit tests use the regexep '*.test.ts'
-The e2e tests are in '/cypress/e2e'.
+The unit tests use the regexep '*.ct.tsx'
+The beavior tests are in '/cypress/e2e'.
 
 ## Testing Technology
 
