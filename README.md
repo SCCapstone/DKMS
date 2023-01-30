@@ -35,17 +35,17 @@ emulator or in a physical phone.
 
 # Testing
 
-The unit tests use the regexep '*.ct.tsx'
-The beavior tests are in '/cypress/e2e'.
+The unit tests use the regex `**/*.test.{ts,tsx}`.
+The beavior tests are located in `/cypress/e2e` and use the regex `**/*.spec.{ts,tsx}`.
 
 ## Testing Technology
 
-Make sure to run 'yarn install' before testing. 
+Make sure to run 'yarn install' before testing.
 
 ## Running Tests
 
 In one terminal run the application using 'yarn dev'.
-Then in a second terminal run the tests using 'yarn test'. A window will pop up prompting you to choose E2E testing (behavior) or component testing (unit). Once one is picked, those tests will run. 
+Then in a second terminal run the tests using 'yarn test'. A window will pop up prompting you to choose E2E testing (behavior) or component testing (unit). Once one is picked, those tests will run.
 
 # Authors
 
