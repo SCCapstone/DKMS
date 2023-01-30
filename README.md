@@ -2,54 +2,94 @@
 
 [![Powered by Vercel](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)](https://vercel.com?utm_source=dkms&utm_campaign=oss)
 
-Social media focused Web and Mobile application for Spotify. This [application](https://github.com/SCCapstone/DKMS/wiki/Project-Description) will consist of different feeds where users can post, share, and comment with other users. While also including items such as a personized profile page that enhances the user interaction experience. This application uses Spotifys Web API to build and pull data from current Spotify users. This is use frameworks such as Next.js and React.
+DKMS is a social media-focused web application for Spotify. This [application](https://github.com/SCCapstone/DKMS/wiki/Project-Description) consists of a centralized feed where users can post, share, and comment with other users. Additionally, a personized profile page will enhance the user interaction experience. This application uses Spotify's Web API to build and pull data, as well as to authenticate users. DKMS is built using Next and React.
 
 ## External Requirements
 
 In order to build this project you first have to install:
 
 - [Node.js](https://nodejs.org/en/)
-- [React](https://reactjs.org/)
-- [Next-Auth](https://next-auth.js.org/)
-- [Axios](https://axios-http.com/docs/intro)
+- [Yarn](https://yarnpkg.com)
+
+The recommended way to get started is to use [Volta](https://volta.sh) to install both Node and Yarn.
 
 ## Setup
 
-- Open Terminal
-- Change into working directory
-- “git clone https://github.com/SCCapstone/DKMS.git” into command line
+To install all dependencies, clone the repository and run:
+
+```zsh
+yarn install
+```
+
+This will also configure Husky, used to run pre-commit checks.
 
 ## Running
 
-Specify the commands for a developer to run the app from the cloned repo.
+To run the repo in development mode, do:
+
+```zsh
+yarn dev
+```
+
+To build and start in production mode, do:
+
+```zsh
+yarn build && yarn start
+```
 
 # Deployment
 
-Webapps need a deployment section that explains how to get it deployed on the
-Internet. These should be detailed enough so anyone can re-deploy if needed
-. Note that you **do not put passwords in git**.
-
-Mobile apps will also sometimes need some instructions on how to build a
-"release" version, maybe how to sign it, and how to run that binary in an
-emulator or in a physical phone.
+The recommended way to deploy this app is by using a cloud deployment platform such as [Vercel](https://vercel.com). Manual deployment instructions can be found on the Next.js website: https://nextjs.org/docs/deployment.
 
 # Testing
 
-The unit tests use the regex `**/*.test.{ts,tsx}`.
-The beavior tests are located in `/cypress/e2e` and use the regex `**/*.spec.{ts,tsx}`.
-
 ## Testing Technology
+
+Cypress is used for E2E behavior specifications, individual component testing, and functional unit testing.
+
+The component and unit tests use the regex `**/*.test.{ts,tsx}`.
+The beavior specs are located in `/cypress/e2e` and use the regex `**/*.spec.{ts,tsx}`.
 
 Make sure to run 'yarn install' before testing.
 
 ## Running Tests
 
-In one terminal run the application using 'yarn dev'.
-Then in a second terminal run the tests using 'yarn test'. A window will pop up prompting you to choose E2E testing (behavior) or component testing (unit). Once one is picked, those tests will run.
+To start the Cypress test suite main menu, run:
+
+```zsh
+yarn test
+```
+
+The browser and type of test can be selected visually. For a shortcut to a specific type of test, see below:
+
+### Component & Unit
+
+To start component or unit tests, run:
+
+```zsh
+yarn test:component
+```
+
+A browser will open with an interactive list of tests to run.
+
+### Behavior (E2E)
+
+To start E2E tests, first start a production instance of the server:
+
+```zsh
+yarn build && yarn start
+```
+
+In a separate window, run:
+
+```zsh
+yarn test:e2e
+```
 
 # Authors
 
-- Dalton Craven 20dalton00@gmail.com
+- Dalton Craven daltoncraven@proton.me
 - Sophie Crane sophieccrane@gmail.com
 - Kevin Nguyen kevin.nguyen423@gmail.com
 - Mason Joseph masondj1029@gmail.com
+- Clay Crews claycrews2002@gmail.com
