@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint -d app -d cypress --report-unused-disable-directives warn",
     "prepare": "husky install",
-    "test": "cypress open"
+    "test": "cypress open",
+    "test:component": "cypress open --component --browser electron",
+    "test:e2e": "cypress open --e2e --browser electron"
   },
   "dependencies": {
     "autoprefixer": "^10.4.13",
