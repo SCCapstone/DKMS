@@ -27,7 +27,7 @@ jobs:
       # If there is no cache hit, install dependencies 
       - name: Install Dependencies 
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        build: yarn build
+        run: yarn build
 
       # Run all Cypress tests
       - name: Run E2E tests 🧪
