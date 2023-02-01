@@ -30,6 +30,7 @@ jobs:
         uses: cypress-io/github-action@v5.0.5 # use the explicit version number
         with:
           build: yarn build 
+          env: CYPRESS_SPOTIFY_USER=${{ secrets.CYPRESS_SPOTIFY_USER }},CYPRESS_SPOTIFY_PW=${{ secrets.CYPRESS_SPOTIFY_PW }}
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
