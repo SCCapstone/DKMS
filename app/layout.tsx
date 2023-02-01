@@ -12,14 +12,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     </head>
     <body>
       <Providers>
-        <Navbar>
-          <div className="flex flex-row">
-            <main className="container mx-auto p-4 md:px-8 flex-grow">
-              {children}
-            </main>
-            {/* <SidebarContainer /> */}
-          </div>
-        </Navbar>
+        <div className="flex flex-row flex-wrap">
+          <Navbar />
+          <main
+            role="main"
+            className="container w-auto mx-auto p-4 md:px-8 flex-grow"
+          >
+            {children}
+          </main>
+        </div>
       </Providers>
     </body>
   </html>
