@@ -16,6 +16,11 @@ export default defineConfig({
     specPattern: "**/*.test.{ts,tsx}",
   },
 
+  env: {
+    spotify_username: "",
+    spotify_password: "",
+  },
+
   e2e: {
     baseUrl: "http://localhost:3000",
     specPattern: "**/*.spec.{ts,tsx}",
