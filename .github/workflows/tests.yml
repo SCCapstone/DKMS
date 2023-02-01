@@ -9,12 +9,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Install dependencies, cache them correctly
-      # and run all Cypress tests
+      # Get path of cache 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          # generate a new cache when packages or source files change 
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}   
+          # if source files changed but packages did not, rebuild from a prior cache
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # If there is no cache hit, install dependencies 
+      - name: Install Dependencies 
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        build: yarn build
+
+      # Run all Cypress tests
       - name: Run E2E tests 🧪
         uses: cypress-io/github-action@v5.0.5 # use the explicit version number
         with:
-          build: yarn build
+          # Dependencies from cache or installed if no cache-hit
           start: yarn start
           env: CYPRESS_SPOTIFY_USER=${{ secrets.CYPRESS_SPOTIFY_USER }},CYPRESS_SPOTIFY_PW=${{ secrets.CYPRESS_SPOTIFY_PW }}
         env:
@@ -40,3 +59,5 @@ jobs:
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
           CYPRESS_SPOTIFY_USER: ${{ secrets.CYPRESS_SPOTIFY_USER }}
           CYPRESS_SPOTIFY_PW: ${{ secrets.CYPRESS_SPOTIFY_PW }}
+
+      
