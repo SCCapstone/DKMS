@@ -1,32 +1,10 @@
 import Link from "next/link";
 
-import SidebarContainer from "../sidebar/SidebarContainter";
+import SidebarContainer from "../../sidebar/SidebarContainter";
 
-import Vercel from "./Vercel";
+import NavbarItem from "./NavbarItem";
 
-export type ItemType = {
-  label: string;
-  url: string;
-};
-
-const navbarItems = [
-  {
-    label: "Feed",
-    url: "/",
-  },
-  {
-    label: "Profile",
-    url: "/profile",
-  },
-];
-
-const NavbarItem = ({ item }: { item: ItemType }) => (
-  <li>
-    <Link className="font-bold" href={item.url}>
-      {item.label}
-    </Link>
-  </li>
-);
+import type { ItemType } from "./NavbarItem";
 
 const DropdownButton = () => (
   // eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-tabindex
@@ -48,7 +26,7 @@ const DropdownButton = () => (
   </label>
 );
 
-const MobileNavbar = () => (
+const MobileNavbar = ({ items }: { items: readonly ItemType[] }) => (
   <nav className="navbar bg-primary text-primary-content md:hidden sticky top-0 drop-shadow">
     <div className="navbar-start">
       <div className="dropdown">
@@ -58,7 +36,7 @@ const MobileNavbar = () => (
           tabIndex={0}
           className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
-          {navbarItems.map((item) => (
+          {items.map((item) => (
             <NavbarItem key={item.url} item={item} />
           ))}
         </ul>
@@ -75,27 +53,4 @@ const MobileNavbar = () => (
   </nav>
 );
 
-const DesktopNavigation = () => (
-  <nav className="hidden md:block md:w-72 h-100% bg-primary text-primary-content">
-    <div className="flex flex-col py-4 h-screen sticky top-0">
-      <h1 className="text-3xl text-center font-black">
-        <Link href="/">DKMS</Link>
-      </h1>
-      <ul className="menu p-1 grow">
-        {navbarItems.map((item) => (
-          <NavbarItem key={item.url} item={item} />
-        ))}
-      </ul>
-      <Vercel className="place-self-center" />
-    </div>
-  </nav>
-);
-
-const NavbarContainer = () => (
-  <>
-    <DesktopNavigation />
-    <MobileNavbar />
-  </>
-);
-
-export default NavbarContainer;
+export default MobileNavbar;

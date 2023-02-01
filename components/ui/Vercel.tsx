@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Vercel = ({ className }: { className: string }) => (
+const VercelInline = ({ className }: { className: string }) => (
   <a
     target="_blank"
     rel="noopener noreferrer"
@@ -24,7 +24,7 @@ const Vercel = ({ className }: { className: string }) => (
   </a>
 );
 
-const VercelBlock = ({ className }: { className: string }) => (
+const Vercel = ({ className }: { className: string }) => (
   <a
     target="_blank"
     rel="noopener noreferrer"
@@ -52,4 +52,4 @@ const VercelBlock = ({ className }: { className: string }) => (
     </svg>
   </a>
 );
-export default VercelBlock;
+export default Vercel;
