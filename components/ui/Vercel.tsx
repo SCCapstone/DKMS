@@ -1,9 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Vercel = () => (
+const Vercel = ({ className }: { className: string }) => (
   <a
     target="_blank"
     rel="noopener noreferrer"
-    href="https://vercel.com?utm_source=dkms&utm_campaign=oss"
+    href="https://vercel.com"
+    className={className}
   >
     <span>Powered by </span>
     <svg
@@ -23,11 +24,12 @@ const Vercel = () => (
   </a>
 );
 
-const VercelBlock = () => (
+const VercelBlock = ({ className }: { className: string }) => (
   <a
     target="_blank"
     rel="noopener noreferrer"
-    href="https://vercel.com?utm_source=dkms&utm_campaign=oss"
+    href="https://vercel.com"
+    className={className}
   >
     <svg
       width="159"
