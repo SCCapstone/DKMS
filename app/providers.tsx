@@ -1,22 +1,13 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
-import { useState } from "react";
 
-import SidebarContext from "../components/Sidebar/SidebarContext";
+import SidebarProvider from "../components/Sidebar/SidebarProvider";
 
-import type { SidebarOptions } from "../components/Sidebar/types";
-
-const Providers = ({ children }: { children: React.ReactNode }) => {
-  const sidebarContextValue = useState<SidebarOptions>("friends");
-
-  return (
-    <SessionProvider>
-      <SidebarContext.Provider value={sidebarContextValue}>
-        {children}
-      </SidebarContext.Provider>
-    </SessionProvider>
-  );
-};
+const Providers = ({ children }: { children: React.ReactNode }) => (
+  <SessionProvider>
+    <SidebarProvider>{children}</SidebarProvider>
+  </SessionProvider>
+);
 
 export default Providers;
