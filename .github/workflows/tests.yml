@@ -30,6 +30,7 @@ jobs:
         uses: cypress-io/github-action@v5.0.5 # use the explicit version number
         with:
           build: yarn build 
+          runTests: false
           env: CYPRESS_SPOTIFY_USER=${{ secrets.CYPRESS_SPOTIFY_USER }},CYPRESS_SPOTIFY_PW=${{ secrets.CYPRESS_SPOTIFY_PW }}
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
@@ -44,6 +45,7 @@ jobs:
         uses: cypress-io/github-action@v5.0.5 # use the explicit version number
         with:
           # Dependencies from cache or installed if no cache-hit
+          install: false
           start: yarn start
           env: CYPRESS_SPOTIFY_USER=${{ secrets.CYPRESS_SPOTIFY_USER }},CYPRESS_SPOTIFY_PW=${{ secrets.CYPRESS_SPOTIFY_PW }}
         env:
