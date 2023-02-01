@@ -30,6 +30,13 @@ jobs:
         uses: cypress-io/github-action@v5.0.5 # use the explicit version number
         with:
           build: yarn build 
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          CYPRESS_SPOTIFY_USER: ${{ secrets.CYPRESS_SPOTIFY_USER }}
+          CYPRESS_SPOTIFY_PW: ${{ secrets.CYPRESS_SPOTIFY_PW }}
 
       # Run all Cypress tests
       - name: Run E2E tests 🧪
