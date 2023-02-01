@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import SidebarContainer from "../../sidebar/SidebarContainter";
+import SidebarContainer from "../sidebar/SidebarContainter";
 
 import NavbarItem from "./NavbarItem";
 
