@@ -36,6 +36,21 @@
 //   }
 // }
 
+Cypress.Commands.add("envLogin", () => {
+  const username: unknown = Cypress.env("CYPRESS_SPOTIFY_USER");
+  const password: unknown = Cypress.env("CYPRESS_SPOTIFY_PW");
+
+  if (typeof username !== "string") {
+    assert.fail("CYPRESS_SPOTIFY_USER is not set");
+  }
+
+  if (typeof password !== "string") {
+    assert.fail("CYPRESS_SPOTIFY_PW is not set");
+  }
+
+  cy.login(username, password);
+});
+
 Cypress.Commands.add("login", (user, pw) => {
   cy.session([user, pw], () => {
     cy.visit("/api/auth/signin/spotify");
@@ -73,6 +88,12 @@ declare global {
        * @example cy.login('username', 'password');
        */
       login(username: string, password: string): Chainable<JQuery>;
+
+      /**
+       * Custom command to log in to Spotify using environment variables.
+       * @example cy.envLogin();
+       */
+      envLogin(): Chainable<JQuery>;
 
       /**
        * Custom command to log out of Spotify and clear the session data.
