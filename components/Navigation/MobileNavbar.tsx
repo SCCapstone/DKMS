@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import SidebarContainer from "../sidebar/SidebarContainter";
+import SidebarMenu from "../Sidebar/SidebarMenu";
 
 import NavbarItem from "./NavbarItem";
 
@@ -48,7 +48,7 @@ const MobileNavbar = ({ items }: { items: readonly ItemType[] }) => (
       </Link>
     </div>
     <div className="navbar-end">
-      <SidebarContainer />
+      <SidebarMenu />
     </div>
   </nav>
 );

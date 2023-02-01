@@ -1,24 +1,29 @@
-import { FriendsIcon, NotificationsIcon } from "./icons";
+"use client";
+
+import { useSidebar } from "./SidebarContext";
+import SidebarIcons from "./SidebarIcons";
 
 import type { SidebarOptions } from "./types";
 
 const SidebarMenu = ({
   onChange,
-  currentSelection,
 }: {
-  onChange: (selection: SidebarOptions) => void;
-  currentSelection: SidebarOptions;
-}) => (
-  <div>
-    <NotificationsIcon
-      selected={currentSelection === "notifications"}
-      onClick={() => onChange("notifications")}
+  onChange?: (newSidebar: SidebarOptions) => void;
+}) => {
+  const [currentSidebar, setCurrentSidebar] = useSidebar();
+
+  const handleSidebarChange = (newSidebar: SidebarOptions) => {
+    const sidebarValue = newSidebar === currentSidebar ? "none" : newSidebar;
+    setCurrentSidebar(sidebarValue);
+    onChange?.(sidebarValue);
+  };
+
+  return (
+    <SidebarIcons
+      onChange={handleSidebarChange}
+      currentSelection={currentSidebar}
     />
-    <FriendsIcon
-      selected={currentSelection === "friends"}
-      onClick={() => onChange("friends")}
-    />
-  </div>
-);
+  );
+};
 
 export default SidebarMenu;

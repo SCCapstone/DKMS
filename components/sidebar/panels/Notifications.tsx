@@ -1,5 +1,7 @@
 import UsernameLink from "../../ui/UsernameLink";
 
+import BasePanel from "./BasePanel";
+
 const MOCK_DATA = [
   {
     id: "1",
@@ -49,6 +51,20 @@ const MOCK_DATA = [
     timestamp: "9:45 AM",
     body: "Kevin saved your playlist.",
   },
+  {
+    id: "8",
+    title: "Test Panel 1",
+    username: "kevinnguyen",
+    timestamp: "9:45 AM",
+    body: "Kevin saved your playlist.",
+  },
+  {
+    id: "9",
+    title: "Test Panel 2",
+    username: "kevinnguyen",
+    timestamp: "9:45 AM",
+    body: "Kevin saved your playlist.",
+  },
 ];
 
 const Notification = ({
@@ -80,17 +96,19 @@ const Notification = ({
   </li>
 );
 const Notifications = () => (
-  <ul className="w-64 p-4 h-screen">
-    {MOCK_DATA.map((item) => (
-      <Notification
-        key={item.id}
-        title={item.title}
-        timestamp={item.timestamp}
-        username={item.username}
-        body={item.body}
-      />
-    ))}
-  </ul>
+  <BasePanel>
+    <ul>
+      {MOCK_DATA.map((item) => (
+        <Notification
+          key={item.id}
+          title={item.title}
+          timestamp={item.timestamp}
+          username={item.username}
+          body={item.body}
+        />
+      ))}
+    </ul>
+  </BasePanel>
 );
 
 export default Notifications;

@@ -1,5 +1,7 @@
 import UsernameLink from "../../ui/UsernameLink";
 
+import BasePanel from "./BasePanel";
+
 const MOCK_DATA = [
   {
     id: "1",
@@ -60,17 +62,19 @@ const Friend = ({
   </li>
 );
 const Friends = () => (
-  <ul className="w-64 p-4 h-screen">
-    {MOCK_DATA.map((item) => (
-      <Friend
-        key={item.id}
-        title={item.title}
-        timestamp={item.timestamp}
-        username={item.username}
-        body={item.body}
-      />
-    ))}
-  </ul>
+  <BasePanel>
+    <ul>
+      {MOCK_DATA.map((item) => (
+        <Friend
+          key={item.id}
+          title={item.title}
+          timestamp={item.timestamp}
+          username={item.username}
+          body={item.body}
+        />
+      ))}
+    </ul>
+  </BasePanel>
 );
 
 export default Friends;
