@@ -1,37 +1,57 @@
-import UsernameLink from "../ui/UsernameLink";
+import UsernameLink from "../../ui/UsernameLink";
 
 const MOCK_DATA = [
   {
     id: "1",
     title: "Kevin",
     username: "kevinnguyen",
-    timestamp: "1 hr",
-    body: "Colors - Thunder Jackson",
+    timestamp: "11:23 AM",
+    body: "Yoooooo you gotta listen to Colors by Thunder Jackson bro. The Knocks Remix is...",
   },
   {
     id: "2",
     title: "Sophie",
     username: "sophie-saffron",
-    timestamp: "10 hr",
-    body: "Shotgun - George Ezra",
+    timestamp: "11:11 AM",
+    body: "Tightrope is such a great song...",
   },
   {
     id: "3",
     title: "Dalton",
     username: "cravend123",
-    timestamp: "12 hr",
-    body: "Les autres on verra - Madam Monsieur",
+    timestamp: "11:05 AM",
+    body: "Ever heard a song called Amoreuse by Clio?",
   },
   {
     id: "4",
-    title: "Mason",
-    username: "dkms",
-    timestamp: "21 hr",
-    body: "Tyler Herro - Jack Harlow",
+    title: "New Release",
+    timestamp: "10:27 AM",
+    body: "New release from Tame Impala",
+  },
+  {
+    id: "5",
+    title: "Dalton",
+    username: "cravend123",
+    timestamp: "10:11 AM",
+    body: "Dalton liked your post.",
+  },
+  {
+    id: "6",
+    title: "Sophie",
+    username: "sophie-saffron",
+    timestamp: "9:58 AM",
+    body: "Sophie commented on your post.",
+  },
+  {
+    id: "7",
+    title: "Kevin",
+    username: "kevinnguyen",
+    timestamp: "9:45 AM",
+    body: "Kevin saved your playlist.",
   },
 ];
 
-const Friend = ({
+const Notification = ({
   title,
   timestamp,
   username,
@@ -54,15 +74,15 @@ const Friend = ({
         </h4>
         <h5 className="normal-case font-bold">{timestamp}</h5>
       </div>
-      <div>{body}</div>
+      <p>{body}</p>
     </div>
     <div className="divider" />
   </li>
 );
-const Friends = () => (
+const Notifications = () => (
   <ul className="w-64 p-4 h-screen">
     {MOCK_DATA.map((item) => (
-      <Friend
+      <Notification
         key={item.id}
         title={item.title}
         timestamp={item.timestamp}
@@ -73,4 +93,4 @@ const Friends = () => (
   </ul>
 );
 
-export default Friends;
+export default Notifications;
