@@ -1,5 +1,5 @@
 import Navbar from "../components/Navigation";
-import { DesktopSidebar } from "../components/Sidebar";
+import { DesktopSidebar, MobileSidebar } from "../components/Sidebar";
 
 import "./globals.css";
 import Providers from "./providers";
@@ -15,11 +15,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <Providers>
         <div className="flex flex-row flex-wrap min-h-screen">
           <Navbar />
+
           <main
             role="main"
             className="container w-auto mx-auto p-4 md:px-8 flex-grow"
           >
-            {children}
+            <MobileSidebar>{children}</MobileSidebar>
           </main>
           <DesktopSidebar />
         </div>

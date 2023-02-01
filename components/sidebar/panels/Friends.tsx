@@ -62,7 +62,7 @@ const Friend = ({
   </li>
 );
 const Friends = () => (
-  <BasePanel>
+  <BasePanel title="Friends">
     <ul>
       {MOCK_DATA.map((item) => (
         <Friend
