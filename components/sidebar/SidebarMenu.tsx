@@ -1,7 +1,7 @@
 "use client";
 
+import SidebarIcons from "./icons";
 import { useSidebar } from "./SidebarContext";
-import SidebarIcons from "./SidebarIcons";
 
 import type { SidebarOptions } from "./types";
 

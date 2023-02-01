@@ -1,5 +1,7 @@
 import getSvg from "./getSvg";
 
+import type { SidebarOptions } from "../types";
+
 const DEFAULT_SIZE = 28;
 
 type IconProps = {
@@ -54,4 +56,24 @@ const PlaybackIcon = ({
   </IconButton>
 );
 
+const SidebarIcons = ({
+  onChange,
+  currentSelection,
+}: {
+  onChange: (selection: SidebarOptions) => void;
+  currentSelection: SidebarOptions;
+}) => (
+  <>
+    <NotificationsIcon
+      selected={currentSelection === "notifications"}
+      onClick={() => onChange("notifications")}
+    />
+    <FriendsIcon
+      selected={currentSelection === "friends"}
+      onClick={() => onChange("friends")}
+    />
+  </>
+);
+
+export default SidebarIcons;
 export { FriendsIcon, NotificationsIcon, PlaybackIcon };
