@@ -1,5 +1,3 @@
-import { SidebarOptions } from "../types";
-
 import getSvg from "./getSvg";
 
 const DEFAULT_SIZE = 28;
