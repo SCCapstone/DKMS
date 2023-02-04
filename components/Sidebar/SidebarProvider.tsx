@@ -7,7 +7,7 @@ import SidebarContext from "./SidebarContext";
 import type { SidebarOptions } from "./types";
 
 const SidebarProvider = ({ children }: { children: React.ReactNode }) => {
-  const sidebarContextValue = useState<SidebarOptions>("notifications");
+  const sidebarContextValue = useState<SidebarOptions>("none");
 
   return (
     <SidebarContext.Provider value={sidebarContextValue}>
