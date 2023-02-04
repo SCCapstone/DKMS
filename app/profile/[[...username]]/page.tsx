@@ -1,5 +1,5 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 
 import FeedPage from "../../../components/feed/FeedPage";
 import { formatFollowers } from "../../../lib/formatters";
@@ -10,7 +10,7 @@ import type { FeedItemContent } from "../../../components/feed/FeedPage";
 
 // TODO SOPHIE FIX THIS (make it a utility function so we can use it in other places)
 const getUser = async () => {
-  const session = await unstable_getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
   if (!session) {
     throw new Error("No session");
