@@ -4,20 +4,14 @@ describe("Login", () => {
   });
 
   it("should login to Spotify", () => {
-    cy.login(
-      Cypress.env("CYPRESS_SPOTIFY_USER") as string,
-      Cypress.env("CYPRESS_SPOTIFY_PW") as string
-    );
+    cy.envLogin();
 
     cy.visit("/");
     cy.url().should("eq", "http://localhost:3000/");
   });
 
   it("should logout of Spotify", () => {
-    cy.login(
-      Cypress.env("CYPRESS_SPOTIFY_USER") as string,
-      Cypress.env("CYPRESS_SPOTIFY_PW") as string
-    );
+    cy.envLogin();
 
     cy.visit("/");
 
