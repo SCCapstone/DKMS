@@ -1,11 +1,6 @@
-/* eslint-disable
-  no-shadow,
-  @typescript-eslint/no-unused-vars,
-  @typescript-eslint/consistent-type-definitions */
-import NextAuth from "next-auth";
-import { JWT } from "next-auth/jwt";
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 
-import type { DefaultSession, User } from "next-auth";
+import type { DefaultSession, User as NextAuthUser } from "next-auth";
 
 declare module "next-auth" {
   /**
@@ -22,13 +17,14 @@ declare module "next-auth" {
 
   interface Session extends DefaultSession {
     user: User;
+    accessToken: string;
   }
 }
 
 declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   interface JWT {
-    user: User;
+    user: NextAuthUser;
     accessToken: string;
     accessTokenExpires: number;
     refreshToken: string;
