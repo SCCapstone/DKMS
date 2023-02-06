@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
 
           <main
             role="main"
-            className="container w-auto mx-auto p-4 md:px-8 flex-grow"
+            className="container w-100% mx-auto p-4 md:px-8 flex-grow"
           >
             <MobileSidebar>{children}</MobileSidebar>
           </main>
