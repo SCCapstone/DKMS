@@ -13,7 +13,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     </head>
     <body>
       <Providers>
-        <div className="md:flex flex-row flex-wrap min-h-screen">
+        <div className="md:flex flex-row min-h-screen">
           <Navbar />
 
           <main
