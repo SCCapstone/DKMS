@@ -2,12 +2,8 @@ import Album from "components/music/Album";
 import Artist from "components/music/Artist";
 import Track from "components/music/Track";
 
-const SearchResults = async ({
-  resultsPromise,
-}: {
-  resultsPromise: Promise<SpotifyApi.SearchResponse>;
-}) => {
-  const { albums, tracks, artists } = await resultsPromise;
+const SearchResults = ({ results }: { results: SpotifyApi.SearchResponse }) => {
+  const { albums, tracks, artists } = results;
 
   return (
     <div>

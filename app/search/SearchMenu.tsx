@@ -1,13 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SearchMenu = ({
-  onSearch,
-}: {
-  onSearch?: (searchText: string) => void;
-}) => {
+const SearchMenu = () => {
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
+
+  const handleSearch = () => router.push(`/search/${searchText}`);
 
   return (
     <div className="form-control">
@@ -22,7 +22,7 @@ const SearchMenu = ({
         <button
           type="submit"
           className="btn btn-square"
-          onClick={() => onSearch?.(searchText)}
+          onClick={() => handleSearch()}
           disabled={!searchText}
         >
           <svg
