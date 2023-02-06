@@ -5,6 +5,9 @@ import type { NextAuthOptions } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import type { SpotifyProfile } from "next-auth/providers/spotify";
 
+// hard code for now, NextAuth doesn't get the number from Spotify
+const EXPIRES_IN = 3600000;
+
 type CustomProfile = {
   external_urls: {
     spotify: string;
@@ -54,7 +57,7 @@ const refreshAccessToken = async (token: JWT) => {
     return {
       ...token,
       accessToken: refreshedTokens.access_token,
-      accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+      accessTokenExpires: Date.now() + EXPIRES_IN,
       refreshToken: token.refreshToken,
     };
   } catch (error) {
@@ -92,7 +95,7 @@ export const authOptions: NextAuthOptions = {
 
         return {
           accessToken: account.access_token,
-          accessTokenExpires: Date.now() + (account.expires_at ?? 0) * 1000,
+          accessTokenExpires: Date.now() + EXPIRES_IN,
           refreshToken: account.refresh_token,
           user,
         };
