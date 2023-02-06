@@ -23,19 +23,19 @@ const SearchResults = ({
 
   return (
     <div>
-      <h2>Albums</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <h2 className="font-black">Albums</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {albums?.items.map((album, index) => (
           <Album key={album?.id ?? index} album={album} />
         ))}
       </div>
-      <h2>Artists</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <h2 className="font-black">Artists</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {artists?.items.map((artist, index) => (
           <Artist key={artist?.id ?? index} artist={artist} />
         ))}
       </div>
-      <h2>Tracks</h2>
+      <h2 className="font-black">Tracks</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {tracks?.items.map((track, index) => (
           <Track key={track?.id ?? index} track={track} />
