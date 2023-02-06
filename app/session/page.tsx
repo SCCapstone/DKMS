@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth/next";
 
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
-import UserInfo from "./UserInfo";
+import SessionInfo from "./SessionInfo";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
@@ -11,7 +11,7 @@ const Page = async () => {
     throw new Error("No session");
   }
 
-  return <UserInfo user={session.user} />;
+  return <SessionInfo session={session} />;
 };
 
 export default Page;
