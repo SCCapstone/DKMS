@@ -7,6 +7,8 @@ const Album = ({ album }: { album: SpotifyApi.AlbumObjectSimplified }) => {
   return (
     <a
       href={album.external_urls.spotify}
+      target="_blank"
+      rel="noopener noreferrer"
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">

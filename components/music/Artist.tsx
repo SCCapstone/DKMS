@@ -5,6 +5,8 @@ const Artist = ({ artist }: { artist: SpotifyApi.ArtistObjectFull }) => {
   return (
     <a
       href={artist.external_urls.spotify}
+      target="_blank"
+      rel="noopener noreferrer"
       className="card bg-base-300 hover:bg-base-100 transition shadow-xl"
     >
       <div className="pt-8 px-8">
