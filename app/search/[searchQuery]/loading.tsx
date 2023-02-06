@@ -1,3 +1,5 @@
-const Loading = () => <h1>loading search results...</h1>;
+import SearchResults from "./SearchResults";
+
+const Loading = () => <SearchResults results={undefined} />;
 
 export default Loading;

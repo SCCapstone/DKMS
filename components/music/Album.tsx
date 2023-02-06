@@ -2,7 +2,28 @@ import Image from "next/image";
 
 import joinArtists from "lib/joinArtists";
 
-const Album = ({ album }: { album: SpotifyApi.AlbumObjectSimplified }) => {
+import Skeleton from "../ui/Skeleton";
+
+const Album = ({
+  album,
+}: {
+  album: SpotifyApi.AlbumObjectSimplified | undefined;
+}) => {
+  if (!album) {
+    return (
+      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+        <figure className="relative aspect-square" />
+        <div className="card-body">
+          <h2 className="text-lg font-semibold truncate">
+            <Skeleton enableAnimation />
+          </h2>
+          <p>
+            <Skeleton enableAnimation />
+          </p>
+        </div>
+      </div>
+    );
+  }
   const image = album.images[0];
   return (
     <a

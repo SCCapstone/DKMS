@@ -2,7 +2,32 @@ import Image from "next/image";
 
 import joinArtists from "lib/joinArtists";
 
-const Track = ({ track }: { track: SpotifyApi.TrackObjectFull }) => {
+import Skeleton from "../ui/Skeleton";
+
+const Track = ({
+  track,
+}: {
+  track: SpotifyApi.TrackObjectFull | undefined;
+}) => {
+  if (!track) {
+    return (
+      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+        <figure className="relative aspect-square" />
+        <div className="card-body">
+          <h2 className="text-lg font-semibold">
+            <Skeleton enableAnimation />
+          </h2>
+          <p>
+            <Skeleton enableAnimation />
+          </p>
+          <p>
+            <Skeleton enableAnimation />
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const image = track.album.images[0];
   return (
     <a
