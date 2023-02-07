@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "../ui/Skeleton";
 
-const Artist = ({
+const Artist = async ({
   artist,
 }: {
   artist: SpotifyApi.ArtistObjectFull | undefined;
@@ -22,7 +23,10 @@ const Artist = ({
     );
   }
 
-  const image = artist.images[0] ?? { url: "", width: 0, height: 0 };
+  const { base64, img } = await getPlaiceholder(artist.images[0].url, {
+    size: 10,
+  });
+
   return (
     <a
       href={artist.external_urls.spotify}
@@ -32,7 +36,13 @@ const Artist = ({
     >
       <div className="pt-8 px-8">
         <figure className="rounded-full overflow-clip relative aspect-square shadow-2xl">
-          <Image src={image.url} alt={artist.name} fill />
+          <Image
+            src={img}
+            alt={artist.name}
+            fill
+            blurDataURL={base64}
+            placeholder="blur"
+          />
         </figure>
       </div>
       <div className="card-body items-center text-center">

@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { getPlaiceholder } from "plaiceholder";
 
 import joinArtists from "lib/joinArtists";
 
 import Skeleton from "../ui/Skeleton";
 
-const Track = ({
+const Track = async ({
   track,
 }: {
   track: SpotifyApi.TrackObjectFull | undefined;
@@ -28,7 +29,10 @@ const Track = ({
     );
   }
 
-  const image = track.album.images[0];
+  const { base64, img } = await getPlaiceholder(track.album.images[0].url, {
+    size: 10,
+  });
+
   return (
     <a
       href={track.external_urls.spotify}
@@ -37,7 +41,13 @@ const Track = ({
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">
-        <Image src={image.url} alt={track.name} fill />
+        <Image
+          src={img}
+          alt={track.name}
+          fill
+          placeholder="blur"
+          blurDataURL={base64}
+        />
       </figure>
       <div className="card-body">
         <h2 className="text-lg font-semibold truncate">{track.name}</h2>

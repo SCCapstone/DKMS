@@ -1,5 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withPlaiceholder } = require("@plaiceholder/next");
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withPlaiceholder({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -15,6 +18,6 @@ const nextConfig = {
       },
     ],
   },
-};
+});
 
 module.exports = nextConfig;

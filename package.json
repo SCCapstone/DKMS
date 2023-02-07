@@ -13,16 +13,19 @@
     "test:e2e": "cypress open --e2e --browser electron"
   },
   "dependencies": {
+    "@plaiceholder/next": "^2.5.0",
     "client-only": "^0.0.1",
     "daisyui": "^2.50.0",
     "firebase": "^9.16.0",
     "husky": "^8.0.3",
     "next": "^13.1.6",
     "next-auth": "^4.19.1",
+    "plaiceholder": "^2.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.1.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "sharp": "^0.31.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
