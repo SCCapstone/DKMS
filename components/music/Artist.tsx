@@ -23,7 +23,11 @@ const Artist = async ({
     );
   }
 
-  const { base64, img } = await getPlaiceholder(artist.images[0].url, {
+  const image = artist.images[0] ?? {
+    url: "/images/defaults/artist.png",
+  };
+
+  const { base64, img } = await getPlaiceholder(image.url, {
     size: 10,
   });
 

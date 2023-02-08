@@ -29,7 +29,9 @@ const Track = async ({
     );
   }
 
-  const { base64, img } = await getPlaiceholder(track.album.images[0].url, {
+  const image = track.album.images[0] ?? { url: "/images/defaults/track.png" };
+
+  const { base64, img } = await getPlaiceholder(image.url, {
     size: 10,
   });
 

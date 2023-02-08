@@ -26,7 +26,11 @@ const Album = async ({
     );
   }
 
-  const { base64, img } = await getPlaiceholder(album.images[0].url, {
+  const image = album.images[0] ?? {
+    url: "/images/defaults/album.png",
+  };
+
+  const { base64, img } = await getPlaiceholder(image.url, {
     size: 10,
   });
 
