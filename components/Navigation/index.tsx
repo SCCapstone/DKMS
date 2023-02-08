@@ -14,6 +14,10 @@ const NAVBAR_ITEMS = [
     label: "Search",
     url: "/search",
   },
+  {
+    label: "Settings",
+    url: "/settings",
+  },
 ] as const;
 
 const NavbarContainer = () => (
