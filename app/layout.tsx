@@ -1,3 +1,5 @@
+import "react-loading-skeleton/dist/skeleton.css";
+
 import Navbar from "../components/Navigation";
 import { DesktopSidebar, MobileSidebar } from "../components/Sidebar";
 
@@ -13,12 +15,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     </head>
     <body>
       <Providers>
-        <div className="md:flex flex-row flex-wrap min-h-screen">
+        <div className="md:flex flex-row min-h-screen">
           <Navbar />
 
           <main
             role="main"
-            className="container w-auto mx-auto p-4 md:px-8 flex-grow"
+            className="container w-100% mx-auto p-4 md:px-8 flex-grow"
           >
             <MobileSidebar>{children}</MobileSidebar>
           </main>

@@ -2,6 +2,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 
 import FeedPage from "../../../components/feed/FeedPage";
+import PageTitle from "../../../components/ui/PageTitle";
 import { formatFollowers } from "../../../lib/formatters";
 import { authOptions } from "../../../pages/api/auth/[...nextauth]";
 import db from "../../firebase";
@@ -47,10 +48,10 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
 
   return (
     <div>
-      <h1 className="normal-case font-bold">Profile — {username}</h1>
-      <h2 className="normal-case">
-        {formatFollowers(user.totalFollowers)} followers
-      </h2>
+      <PageTitle
+        title={`Profile — ${username}`}
+        subtitle={`${formatFollowers(user.totalFollowers)} followers`}
+      />
       <FeedPage data={data} />
     </div>
   );
