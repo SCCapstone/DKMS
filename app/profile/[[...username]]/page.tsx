@@ -1,10 +1,10 @@
-import FeedPage, { getUser } from "../../../components/feed/FeedPage";
+import FeedPage from "../../../components/feed/FeedPage";
 import { getFeedContent } from "../../../pages/api/feedContent/[id]";
+import getUser from "../../../utils/getUser";
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
   const username = params.username ? params.username[0] : await getUser();
 
-  // const data = await feedRequestHandler("GET", username, undefined);
   const data = await getFeedContent(username);
   return (
     <div>

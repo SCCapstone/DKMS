@@ -1,10 +1,9 @@
 "use client";
 
-import { getServerSession } from "next-auth";
 import { useState } from "react";
 
-import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import { postFeedContent } from "../../pages/api/feedContent/[id]";
+import getUser from "../../utils/getUser";
 
 import FeedItem from "./FeedItem";
 
@@ -13,16 +12,6 @@ export type FeedItemContent = {
   data: { username: string; content: string };
 };
 
-// TODO SOPHIE FIX THIS (make it a utility function so we can use it in other places)
-export async function getUser() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    throw new Error("No session");
-  }
-  return session.user.id;
-}
-
 const FeedPage = ({
   data,
   showLinks,
@@ -30,10 +19,13 @@ const FeedPage = ({
   data: FeedItemContent[];
   showLinks?: boolean;
 }) => {
+  // fix this - need to figure out await/async issues
   const user = getUser();
+
   const [postText, setPostText] = useState("");
 
-  const post = () => postFeedContent(user, `${postText}`);
+  // hard coded
+  const post = () => postFeedContent("sophie-saffron", `${postText}`);
 
   async function handleSubmit() {
     await post();
