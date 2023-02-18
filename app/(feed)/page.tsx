@@ -5,7 +5,7 @@ import { getFeedContent } from "../../pages/api/feedContent/[id]";
 import type { FeedItemContent } from "../../components/feed/FeedPage";
 
 const Feed = async () => {
-  const data: FeedItemContent[] = await getFeedContent(undefined);
+  const data: FeedItemContent[] = await getFeedContent();
 
   return (
     <div>

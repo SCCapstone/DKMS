@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type { FeedItemContent } from "../../../components/feed/FeedPage";
+import type {
+  FeedItemContent,
+  FeedComment,
+} from "../../../components/feed/FeedPage";
 
 const api_url =
   "https://firestore.googleapis.com/v1/projects/dkms-spotify/databases/(default)/documents/feed_content";
@@ -10,6 +13,22 @@ function uniqueId() {
   const dateString = Date.now().toString(36);
   const randomness = Math.random().toString(36).substr(2);
   return dateString + randomness;
+}
+
+async function getFeedComments(docId: string) {
+  const base_url = "https://firestore.googleapis.com/v1/";
+  const url = base_url.concat(docId, "/", "feed_comments");
+  const response = await fetch(url);
+  const res = await response.json();
+  const data = res.documents.map(
+    (document: any) =>
+      ({
+        id: document.name,
+        username: document.fields.username.stringValue,
+        comment: document.fields.comment.stringValue,
+      } as FeedComment)
+  ) as FeedComment[];
+  return data;
 }
 
 export async function postFeedContent(username: string, content: string) {
@@ -40,12 +59,13 @@ export async function getFeedContent(username?: string) {
   const res = await response.json();
   // Convert JSON to feed item content
   let data = res.documents.map(
-    (documents: any) =>
+    async (documents: any) =>
       ({
         id: documents.name as string,
         data: {
           username: documents.fields.username.stringValue as string,
           content: documents.fields.content.stringValue as string,
+          comments: await getFeedComments(documents.name as string),
         },
       } as FeedItemContent)
   ) as FeedItemContent[];

@@ -7,9 +7,15 @@ import { getUser } from "../../utils/getUser";
 
 import FeedItem from "./FeedItem";
 
+export type FeedComment = {
+  id: string;
+  username: string;
+  comment: string;
+};
+
 export type FeedItemContent = {
   id: string;
-  data: { username: string; content: string };
+  data: { username: string; content: string; comments: FeedComment[] };
 };
 
 const FeedPage = ({
@@ -19,7 +25,7 @@ const FeedPage = ({
   data: FeedItemContent[];
   showLinks?: boolean;
 }) => {
-  // fix this - need to figure out await/async issues
+  // TODO: fix this - need to figure out await/async issues
   const user = getUser();
 
   const [postText, setPostText] = useState("");
@@ -67,6 +73,7 @@ const FeedPage = ({
             username={feedItem.data.username}
             feedContent={feedItem.data.content}
             showLink={showLinks}
+            comments={feedItem.data.comments}
           />
         ))}
       </ul>
