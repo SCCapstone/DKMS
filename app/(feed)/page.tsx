@@ -1,6 +1,6 @@
 import FeedPage from "../../components/feed/FeedPage";
-import { getFeedContent } from "../../pages/api/feedContent/[id]";
 import PageTitle from "../../components/ui/PageTitle";
+import { getFeedContent } from "../../pages/api/feedContent/[id]";
 
 import type { FeedItemContent } from "../../components/feed/FeedPage";
 

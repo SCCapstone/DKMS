@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { postFeedContent } from "../../pages/api/feedContent/[id]";
-import getUser from "../../utils/getUser";
+import { getUser } from "../../utils/getUser";
 
 import FeedItem from "./FeedItem";
 
