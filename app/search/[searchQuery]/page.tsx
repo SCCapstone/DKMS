@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// eslint-disable-next-line import/no-unresolved
 import getSpotifyData from "lib/getSpotifyData";
 
 import SearchResults from "./SearchResults";
