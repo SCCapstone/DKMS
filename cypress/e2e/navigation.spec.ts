@@ -1,9 +1,6 @@
 describe("Navigation", () => {
   beforeEach(() => {
-    cy.login(
-      Cypress.env("CYPRESS_SPOTIFY_USER") as string,
-      Cypress.env("CYPRESS_SPOTIFY_PW") as string
-    );
+    cy.envLogin();
   });
 
   it("should navigate to the Profile page", () => {

@@ -12,7 +12,7 @@ const UserClient = () => {
           And here is some <em>client-side</em> information about yourself
           (according to Spotify):
         </p>
-        <pre>{JSON.stringify(session.data.user, null, 2)}</pre>
+        <pre>{JSON.stringify(session, null, 2)}</pre>
         <br />
         <button type="button" className="button" onClick={() => void signOut()}>
           Sign out
