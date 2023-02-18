@@ -27,7 +27,12 @@ yarn-error.log*
 
 # env files
 .env
+
+# cypress
 cypress.env.json
+/cypress/downloads
+/cypress/screenshots
+/cypress/videos
 
 # vercel
 .vercel

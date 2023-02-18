@@ -12,19 +12,16 @@ const FeedPage = ({
   data: FeedItemContent[];
   showLinks?: boolean;
 }) => (
-  <div>
-    <div className="divider" />
-    <ul>
-      {data.map((feedItem) => (
-        <FeedItem
-          key={feedItem.id}
-          username={feedItem.data.username}
-          feedContent={feedItem.data.content}
-          showLink={showLinks}
-        />
-      ))}
-    </ul>
-  </div>
+  <ul>
+    {data.map((feedItem) => (
+      <FeedItem
+        key={feedItem.id}
+        username={feedItem.data.username}
+        feedContent={feedItem.data.content}
+        showLink={showLinks}
+      />
+    ))}
+  </ul>
 );
 
 export default FeedPage;
