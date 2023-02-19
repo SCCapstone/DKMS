@@ -29,7 +29,6 @@ const getCurrentUsername = async () => {
 };
 
 const getUserProfile = async (username: string) =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   getSpotifyData<SpotifyApi.UserProfileResponse>(
     `https://api.spotify.com/v1/users/${username}`
   );

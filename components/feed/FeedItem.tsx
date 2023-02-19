@@ -18,11 +18,7 @@ const FeedItem = ({
         <div className="flex flex-row">
           {/* @ts-expect-error Server Component */}
           <ProfileImg username={username} />
-          {showLink ? (
-            <UsernameLink username={username} />
-          ) : (
-            <div>{username}</div>
-          )}
+          {showLink ? <UsernameLink username={username} /> : <p>{username}</p>}
         </div>
         <div>
           <svg

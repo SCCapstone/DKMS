@@ -3,16 +3,16 @@ import Image from "next/image";
 import getSpotifyData from "../../lib/getSpotifyData";
 
 const ProfileImg = async ({ username }: { username: string | undefined }) => {
-  let img;
-  if (username) {
-    const getUserProfile = async () =>
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      getSpotifyData<SpotifyApi.UserProfileResponse>(
-        `https://api.spotify.com/v1/users/${username}`
-      );
-    const profile = await getUserProfile();
-    img = profile.images ? profile.images[0] : undefined;
+  if (!username) {
+    throw new Error("No username provided");
   }
+
+  const getUserProfile = async () =>
+    getSpotifyData<SpotifyApi.UserProfileResponse>(
+      `https://api.spotify.com/v1/users/${username}`
+    );
+  const profile = await getUserProfile();
+  const img = profile.images ? profile.images[0] : undefined;
 
   if (img) {
     return (
@@ -26,7 +26,7 @@ const ProfileImg = async ({ username }: { username: string | undefined }) => {
           borderRadius: 30 / 2,
           marginRight: 7,
         }}
-        alt=""
+        alt={`${username}'s profile picture`}
       />
     );
   }
@@ -42,7 +42,7 @@ const ProfileImg = async ({ username }: { username: string | undefined }) => {
         borderRadius: 30 / 2,
         marginRight: 7,
       }}
-      alt=""
+      alt="default profile picture"
     />
   );
 };
