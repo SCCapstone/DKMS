@@ -7,6 +7,8 @@ import { getUser } from "../../utils/getUser";
 
 import FeedItem from "./FeedItem";
 
+import type { User } from "next-auth";
+
 export type FeedComment = {
   id: string;
   username: string;
@@ -25,13 +27,12 @@ const FeedPage = ({
   data: FeedItemContent[];
   showLinks?: boolean;
 }) => {
-  // TODO: fix this - need to figure out await/async issues
-  const user = getUser();
-
   const [postText, setPostText] = useState("");
 
-  // hard coded
-  const post = () => postFeedContent("sophie-saffron", `${postText}`);
+  async function post() {
+    const user: User = await getUser();
+    void postFeedContent(user.name, `${postText}`);
+  }
 
   async function handleSubmit() {
     await post();

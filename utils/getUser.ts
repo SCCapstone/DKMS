@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "../pages/api/auth/[...nextauth]";
 
+import type { User, Session } from "next-auth";
+
 export async function getUser() {
-  const session = await getServerSession(authOptions);
+  const session: Session = (await getServerSession(authOptions)) as Session;
 
   if (!session) {
     throw new Error("No session");
@@ -16,6 +14,6 @@ export async function getUser() {
 }
 
 export async function getUsername() {
-  const user = await getUser();
+  const user: User = await getUser();
   return user.id;
 }

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type {
   FeedItemContent,
   FeedComment,
@@ -18,8 +15,8 @@ function uniqueId() {
 async function getFeedComments(docId: string) {
   const base_url = "https://firestore.googleapis.com/v1/";
   const url = base_url.concat(docId, "/", "feed_comments");
-  const response = await fetch(url);
-  const res = await response.json();
+  const response: Response = await fetch(url);
+  const res: JSON = (await response.json()) as JSON;
   const data = res.documents.map(
     (document: any) =>
       ({
@@ -56,10 +53,10 @@ export async function postFeedContent(username: string, content: string) {
 export async function getFeedContent(username?: string) {
   // Fetch all feed items
   const response = await fetch(api_url);
-  const res = await response.json();
+  const res: JSON = (await response.json()) as JSON;
   // Convert JSON to feed item content
   let data = res.documents.map(
-    async (documents: any) =>
+    async (documents: JSON) =>
       ({
         id: documents.name as string,
         data: {

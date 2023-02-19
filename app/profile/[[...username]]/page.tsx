@@ -5,12 +5,17 @@ import PageTitle from "../../../components/ui/PageTitle";
 import { formatFollowers } from "../../../lib/formatters";
 import { getFeedContent } from "../../../pages/api/feedContent/[id]";
 
+import type { FeedItemContent } from "../../../components/feed/FeedPage";
+import type { User } from "next-auth";
+
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
-  const username = params.username ? params.username[0] : await getUsername();
+  const username: string = params.username
+    ? params.username[0]
+    : await getUsername();
 
-  const user = await getUser();
+  const user: User = await getUser();
 
-  const data = await getFeedContent(username);
+  const data: FeedItemContent[] = await getFeedContent();
   return (
     <div>
       <PageTitle
