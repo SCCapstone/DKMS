@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { themeChange } from "theme-change";
 
+import PageTitle from "../../components/ui/PageTitle";
+import { getLocalStorage, setLocalStorage } from "../../lib/localStorage";
+
 const Settings = () => {
   const themeValues = [
     "light",
@@ -36,30 +39,34 @@ const Settings = () => {
     "winter",
   ];
 
-  // change to save theme and button selections
-  const [showThemes, setShowThemes] = useState(false);
-  const [themes, setThemes] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment
+  const [theme, setTheme] = useState(
+    JSON.parse(getLocalStorage<string>("data-theme") ?? "dark")
+  );
+
+  const [showThemeList, setShowThemeList] = useState(false);
+  const [themeToggle, setThemeToggle] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
 
   function onChangeTheme() {
-    setShowThemes(!showThemes);
-    setThemes(!themes);
+    setShowThemeList(!showThemeList);
+    setThemeToggle(!themeToggle);
     setDarkMode(darkMode ? !darkMode : darkMode);
   }
 
   function onClickDarkMode() {
-    setDarkMode(!darkMode);
-    setThemes(themes ? !themes : themes);
-    setShowThemes(showThemes ? !showThemes : showThemes);
+    setThemeToggle(themeToggle ? !themeToggle : themeToggle);
+    setShowThemeList(showThemeList ? !showThemeList : showThemeList);
   }
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     themeChange(false);
-    setShowThemes(showThemes);
-    setThemes(themes);
-    setDarkMode(darkMode);
-  }, [showThemes, themes, darkMode]);
+  }, []);
+
+  useEffect(() => {
+    setLocalStorage("data-theme", JSON.stringify(theme));
+  }, [theme]);
 
   // ISSUES:
   // dark mode toggles on every other click of the toggle
@@ -68,15 +75,13 @@ const Settings = () => {
   // toggles need to save state on page change
   return (
     <div className="flex flex-col">
+      <PageTitle title="Settings" />
       <div className="flex flex-row mb-5">
         <h1 className="font-bold mr-5">Dark Mode</h1>
         <input
           type="checkbox"
           className="toggle toggle-success"
           onClick={onClickDarkMode}
-          checked={darkMode}
-          data-toggle-theme="light, dark"
-          data-act-class="ACTIVECLASS"
         />
       </div>
       <div className="flex flex-row mb-10">
@@ -85,13 +90,18 @@ const Settings = () => {
           type="checkbox"
           className="toggle toggle-success"
           onChange={onChangeTheme}
-          checked={themes}
+          checked={themeToggle}
         />
       </div>
-      <div style={{ display: showThemes ? "block" : "none" }}>
+      <div style={{ display: showThemeList ? "block" : "none" }}>
         <select
           className="text-primary select w-full max-w-xs"
           data-choose-theme
+          onChange={(e) => {
+            setTheme(e.target.value);
+          }}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          value={theme ?? "dark"}
         >
           <option className="text-primary" value="dark">
             dark (default)

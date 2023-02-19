@@ -1,4 +1,4 @@
-import "client-only";
+"use-client";
 
 /**
  * Reads a value from local storage.

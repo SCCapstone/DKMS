@@ -25,7 +25,8 @@
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.1.0",
     "server-only": "^0.0.1",
-    "sharp": "0.31.1"
+    "sharp": "0.31.1",
+    "theme-change": "^2.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
