@@ -1,10 +1,12 @@
+/* eslint-disable react/no-unknown-property */
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 
 import FeedPage from "../../../components/feed/FeedPage";
-import ProfileImg from "../../../components/feed/ProfileImg";
 import PageTitle from "../../../components/ui/PageTitle";
+import ProfileImg from "../../../components/userProfile/profileImg";
 import { formatFollowers } from "../../../lib/formatters";
+import getSpotifyData from "../../../lib/getSpotifyData";
 import { authOptions } from "../../../pages/api/auth/[...nextauth]";
 import db from "../../firebase";
 
@@ -26,6 +28,12 @@ const getCurrentUsername = async () => {
   return user.id;
 };
 
+const getUserProfile = async (username: string) =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  getSpotifyData<SpotifyApi.UserProfileResponse>(
+    `https://api.spotify.com/v1/users/${username}`
+  );
+
 async function getData(username: string) {
   // change to profile's username
   const q = query(
@@ -44,18 +52,22 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
     ? params.username[0]
     : await getCurrentUsername();
 
-  const user = await getUser();
+  const profile = await getUserProfile(username);
+
+  const followers = profile.followers ? profile.followers.total : 0;
+
   const data = await getData(username);
 
   return (
     <div>
+      <PageTitle title="Profile" />
       <div className="flex flex-row">
-        <ProfileImg img="" />
+        {/* @ts-expect-error Server Component */}
+        <ProfileImg username={username} />
         <h1 className="normal-case font-bold">Profile — {username}</h1>
       </div>
-      <h2 className="normal-case">
-        {formatFollowers(user.totalFollowers)} followers
-      </h2>
+      <h2 className="normal-case">{formatFollowers(followers)} followers</h2>
+      <div className="divider" />
       <FeedPage data={data} />
     </div>
   );

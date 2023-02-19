@@ -16,6 +16,12 @@ const nextConfig = withPlaiceholder({
         port: "",
         pathname: "/image/**",
       },
+      {
+        protocol: "https",
+        hostname: "scontent-mia3-2.xx.fbcdn.net",
+        port: "",
+        pathname: "/v/**",
+      },
     ],
   },
 });
