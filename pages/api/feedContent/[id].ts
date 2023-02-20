@@ -22,7 +22,7 @@ export async function postFeedComment(
   comment: string
 ) {
   const comment_id = uniqueId();
-  const url = base_url.concat(docId, "/feed_comments", comment_id);
+  const url = base_url.concat(docId, "/feed_comments/", comment_id);
   await fetch(url, {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
@@ -53,6 +53,7 @@ async function getFeedComments(docId: string) {
           id: document.name,
           username: document.fields.username.stringValue,
           comment: document.fields.comment.stringValue,
+          createTime: document.createTime,
         } as FeedComment)
     ) as FeedComment[];
   }
@@ -93,6 +94,7 @@ export async function getFeedContent(username?: string) {
             username: documents.fields.username.stringValue as string,
             content: documents.fields.content.stringValue as string,
             comments: await getFeedComments(documents.name as string),
+            createTime: documents.createTime as Date,
           },
         } as FeedItemContent)
     )

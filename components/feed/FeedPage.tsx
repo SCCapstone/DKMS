@@ -13,11 +13,17 @@ export type FeedComment = {
   id: string;
   username: string;
   comment: string;
+  createTime: Date;
 };
 
 export type FeedItemContent = {
   id: string;
-  data: { username: string; content: string; comments: FeedComment[] };
+  data: {
+    username: string;
+    content: string;
+    comments: FeedComment[];
+    createTime: Date;
+  };
 };
 
 const FeedPage = ({
@@ -36,7 +42,6 @@ const FeedPage = ({
 
   async function handleSubmit() {
     await post();
-    window.location.reload();
   }
 
   return (

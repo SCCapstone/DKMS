@@ -19,7 +19,6 @@ const FeedCommentBox = ({ docId }: { docId: string }) => {
 
   async function handleSubmit() {
     await post();
-    window.location.reload();
   }
 
   return (
