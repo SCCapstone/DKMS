@@ -71,6 +71,7 @@ const FeedPage = ({
         {data.map((feedItem) => (
           <FeedItem
             key={feedItem.id}
+            docId={feedItem.id}
             username={feedItem.data.username}
             feedContent={feedItem.data.content}
             showLink={showLinks}

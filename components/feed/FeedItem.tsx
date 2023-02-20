@@ -7,11 +7,13 @@ import LikeButton from "./LikeButton";
 import type { FeedComment } from "./FeedPage";
 
 const FeedItem = ({
+  docId,
   username,
   feedContent,
   showLink,
   comments,
 }: {
+  docId: string;
   username: string;
   feedContent: string;
   showLink?: boolean;
@@ -114,7 +116,7 @@ const FeedItem = ({
     </div>
     <div className="divider" />
     <div>
-      <FeedCommentBox />
+      <FeedCommentBox docId={docId} />
     </div>
     <ul className="ml-10">
       {comments.map((feedComment) => (

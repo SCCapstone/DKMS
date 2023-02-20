@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-const FeedCommentBox = () => (
+const FeedCommentBox = ({ docId }: { docId: string }) => (
   <div>
     <form>
       <label htmlFor="chat" className="sr-only">
