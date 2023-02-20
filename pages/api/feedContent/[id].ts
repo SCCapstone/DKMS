@@ -8,6 +8,7 @@ import type {
 
 const api_url =
   "https://firestore.googleapis.com/v1/projects/dkms-spotify/databases/(default)/documents/feed_content";
+const base_url = "https://firestore.googleapis.com/v1/";
 
 function uniqueId() {
   const dateString = Date.now().toString(36);
@@ -15,9 +16,31 @@ function uniqueId() {
   return dateString + randomness;
 }
 
+export async function postFeedComment(
+  docId: string,
+  username: string,
+  comment: string
+) {
+  const comment_id = uniqueId();
+  const url = base_url.concat(docId, "/", "feed_comments", comment_id);
+  await fetch(url, {
+    method: "PATCH",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({
+      fields: {
+        username: {
+          stringValue: username,
+        },
+        comment: {
+          stringValue: comment,
+        },
+      },
+    }),
+  });
+}
+
 async function getFeedComments(docId: string) {
   let data: FeedComment[];
-  const base_url = "https://firestore.googleapis.com/v1/";
   const url = base_url.concat(docId, "/", "feed_comments");
   const response = await fetch(url);
   const res = await response.json();
@@ -59,11 +82,10 @@ export async function postFeedContent(username: string, content: string) {
 }
 
 export async function getFeedContent(username?: string) {
-  // Fetch all feed items
   let data;
   const response = await fetch(api_url);
   const res = await response.json();
-  // Convert JSON to feed item content
+  console.log(res);
   data = (await Promise.all(
     res.documents.map(
       async (documents: any) =>
