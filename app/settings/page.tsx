@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { themeChange } from "theme-change";
 
 import PageTitle from "../../components/ui/PageTitle";
-import { getLocalStorage, setLocalStorage } from "../../lib/localStorage";
 
 const Settings = () => {
   const themeValues = [
@@ -39,19 +37,11 @@ const Settings = () => {
     "winter",
   ];
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment
-  const [theme, setTheme] = useState(
-    JSON.parse(getLocalStorage<string>("data-theme") ?? "dark")
-  );
+  const [theme, setTheme] = useState<string>();
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     themeChange(false);
   }, []);
-
-  useEffect(() => {
-    setLocalStorage("data-theme", JSON.stringify(theme));
-  }, [theme]);
 
   return (
     <div className="flex flex-col">
@@ -64,8 +54,7 @@ const Settings = () => {
           onChange={(e) => {
             setTheme(e.target.value);
           }}
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          value={theme ?? "dark"}
+          value={theme}
         >
           <option className="text-primary" value="dark">
             dark (default)
