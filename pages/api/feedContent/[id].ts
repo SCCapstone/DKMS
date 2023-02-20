@@ -64,17 +64,19 @@ export async function getFeedContent(username?: string) {
   const response = await fetch(api_url);
   const res = await response.json();
   // Convert JSON to feed item content
-  data = res.documents.map(
-    async (documents: any) =>
-      ({
-        id: documents.name as string,
-        data: {
-          username: documents.fields.username.stringValue as string,
-          content: documents.fields.content.stringValue as string,
-          comments: await getFeedComments(documents.name as string),
-        },
-      } as FeedItemContent)
-  ) as FeedItemContent[];
+  data = (await Promise.all(
+    res.documents.map(
+      async (documents: any) =>
+        ({
+          id: documents.name as string,
+          data: {
+            username: documents.fields.username.stringValue as string,
+            content: documents.fields.content.stringValue as string,
+            comments: await getFeedComments(documents.name as string),
+          },
+        } as FeedItemContent)
+    )
+  )) as FeedItemContent[];
   if (typeof username === "undefined") {
     return data;
   }
