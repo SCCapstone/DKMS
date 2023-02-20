@@ -9,12 +9,10 @@ const FeedItem = ({
   username,
   feedContent,
   showLink,
-  comments,
 }: {
   username: string;
   feedContent: string;
   showLink?: boolean;
-  comments: FeedComment[];
 }) => (
   <div>
     <div className="h-fit">
@@ -112,15 +110,6 @@ const FeedItem = ({
       </div>
     </div>
     <div className="divider" />
-    <ul>
-      {comments.map((feedComment) => (
-        <FeedItemComment
-          key={feedComment.id}
-          username={feedComment.username}
-          comment={feedComment.comment}
-        />
-      ))}
-    </ul>
   </div>
 );
 

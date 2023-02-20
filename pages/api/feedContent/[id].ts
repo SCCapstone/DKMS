@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type {
-  FeedItemContent,
   FeedComment,
+  FeedItemContent,
 } from "../../../components/feed/FeedPage";
 
 const api_url =
@@ -16,18 +16,23 @@ function uniqueId() {
 }
 
 async function getFeedComments(docId: string) {
+  let data: FeedComment[];
   const base_url = "https://firestore.googleapis.com/v1/";
   const url = base_url.concat(docId, "/", "feed_comments");
-  const response: Response = await fetch(url);
+  const response = await fetch(url);
   const res = await response.json();
-  const data = res.documents.map(
-    (document: any) =>
-      ({
-        id: document.name,
-        username: document.fields.username.stringValue,
-        comment: document.fields.comment.stringValue,
-      } as FeedComment)
-  ) as FeedComment[];
+  if (JSON.stringify(res) === "{}") {
+    data = [];
+  } else {
+    data = res.documents.map(
+      (document: any) =>
+        ({
+          id: document.name,
+          username: document.fields.username.stringValue,
+          comment: document.fields.comment.stringValue,
+        } as FeedComment)
+    ) as FeedComment[];
+  }
   return data;
 }
 
@@ -55,10 +60,11 @@ export async function postFeedContent(username: string, content: string) {
 
 export async function getFeedContent(username?: string) {
   // Fetch all feed items
+  let data;
   const response = await fetch(api_url);
   const res = await response.json();
   // Convert JSON to feed item content
-  let data = res.documents.map(
+  data = res.documents.map(
     async (documents: any) =>
       ({
         id: documents.name as string,
@@ -69,16 +75,17 @@ export async function getFeedContent(username?: string) {
         },
       } as FeedItemContent)
   ) as FeedItemContent[];
-  if (typeof username !== "undefined") {
-    data = data
-      .filter((user) => user.data.username === username)
-      .map(
-        (user) =>
-          ({
-            id: user.id,
-            data: user.data,
-          } as FeedItemContent)
-      );
+  if (typeof username === "undefined") {
+    return data;
   }
+  data = data
+    .filter((user) => user.data.username === username)
+    .map(
+      (user) =>
+        ({
+          id: user.id,
+          data: user.data,
+        } as FeedItemContent)
+    );
   return data;
 }

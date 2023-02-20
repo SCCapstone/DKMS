@@ -15,7 +15,7 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
 
   const user: User = await getUser();
 
-  const data: FeedItemContent[] = await getFeedContent();
+  const data: FeedItemContent[] = await getFeedContent(user.name);
   return (
     <div>
       <PageTitle
