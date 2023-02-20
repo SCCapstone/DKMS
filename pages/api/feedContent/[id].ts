@@ -22,7 +22,7 @@ export async function postFeedComment(
   comment: string
 ) {
   const comment_id = uniqueId();
-  const url = base_url.concat(docId, "/", "feed_comments", comment_id);
+  const url = base_url.concat(docId, "/feed_comments", comment_id);
   await fetch(url, {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
@@ -64,7 +64,6 @@ export async function postFeedContent(username: string, content: string) {
   const docID = uniqueId();
   const url = api_url.concat("/", docID);
 
-  // Creating response body for feed item
   await fetch(url, {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
@@ -85,7 +84,6 @@ export async function getFeedContent(username?: string) {
   let data;
   const response = await fetch(api_url);
   const res = await response.json();
-  console.log(res);
   data = (await Promise.all(
     res.documents.map(
       async (documents: any) =>
