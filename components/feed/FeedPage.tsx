@@ -74,6 +74,7 @@ const FeedPage = ({
             username={feedItem.data.username}
             feedContent={feedItem.data.content}
             showLink={showLinks}
+            comments={feedItem.data.comments}
           />
         ))}
       </ul>

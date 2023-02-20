@@ -8,9 +8,9 @@ const FeedItemComment = ({
   comment: string;
 }) => (
   <div>
-    <div className="divider" />
     <UsernameLink username={username} />
     <div>{comment}</div>
+    <div className="divider" />
   </div>
 );
 
