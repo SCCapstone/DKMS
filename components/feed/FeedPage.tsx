@@ -13,7 +13,6 @@ export type FeedComment = {
   id: string;
   username: string;
   comment: string;
-  createTime: Date;
 };
 
 export type FeedItemContent = {
@@ -22,7 +21,6 @@ export type FeedItemContent = {
     username: string;
     content: string;
     comments: FeedComment[];
-    createTime: Date;
   };
 };
 

@@ -94,7 +94,6 @@ export async function getFeedContent(username?: string) {
             username: documents.fields.username.stringValue as string,
             content: documents.fields.content.stringValue as string,
             comments: await getFeedComments(documents.name as string),
-            createTime: documents.createTime as Date,
           },
         } as FeedItemContent)
     )
