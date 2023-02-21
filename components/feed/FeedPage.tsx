@@ -27,19 +27,17 @@ export type FeedItemContent = {
 const FeedPage = ({
   data,
   showLinks,
+  user,
 }: {
   data: FeedItemContent[];
   showLinks?: boolean;
+  user: User;
 }) => {
   const [postText, setPostText] = useState("");
 
-  async function post() {
-    const user: User = await getUser();
-    void postFeedContent(user.name, `${postText}`);
-  }
-
   async function handleSubmit() {
-    await post();
+    await postFeedContent(user.id, `${postText}`);
+    window.location.reload();
   }
 
   return (
@@ -74,6 +72,7 @@ const FeedPage = ({
         {data.map((feedItem) => (
           <FeedItem
             key={feedItem.id}
+            currentUser={user}
             docId={feedItem.id}
             username={feedItem.data.username}
             feedContent={feedItem.data.content}

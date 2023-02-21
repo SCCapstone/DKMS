@@ -5,14 +5,17 @@ import FeedItemComment from "./FeedItemComment";
 import LikeButton from "./LikeButton";
 
 import type { FeedComment } from "./FeedPage";
+import type { User } from "next-auth";
 
 const FeedItem = ({
+  currentUser,
   docId,
   username,
   feedContent,
   showLink,
   comments,
 }: {
+  currentUser: User;
   docId: string;
   username: string;
   feedContent: string;
@@ -116,7 +119,7 @@ const FeedItem = ({
     </div>
     <div className="divider" />
     <div>
-      <FeedCommentBox docId={docId} />
+      <FeedCommentBox docId={docId} currentUser={currentUser} />
     </div>
     <ul className="ml-10">
       {comments.map((feedComment) => (

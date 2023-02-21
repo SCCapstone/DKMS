@@ -15,14 +15,14 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
 
   const user: User = await getUser();
 
-  const data: FeedItemContent[] = await getFeedContent(user.name);
+  const data: FeedItemContent[] = await getFeedContent(user.id);
   return (
     <div>
       <PageTitle
         title={`Profile — ${username}`}
         subtitle={`${formatFollowers(user.totalFollowers)} followers`}
       />
-      <FeedPage data={data} />
+      <FeedPage data={data} user={user} />
     </div>
   );
 };

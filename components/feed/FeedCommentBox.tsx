@@ -5,20 +5,21 @@
 import { useState } from "react";
 
 import { postFeedComment } from "pages/api/feedContent/[id]";
-import { getUser } from "utils/getUser";
 
 import type { User } from "next-auth";
 
-const FeedCommentBox = ({ docId }: { docId: string }) => {
+const FeedCommentBox = ({
+  docId,
+  currentUser,
+}: {
+  docId: string;
+  currentUser: User;
+}) => {
   const [commentText, setCommentText] = useState("");
 
-  async function post() {
-    const user: User = await getUser();
-    void postFeedComment(docId, user.name, `${commentText}`);
-  }
-
   async function handleSubmit() {
-    await post();
+    await postFeedComment(docId, currentUser.id, `${commentText}`);
+    window.location.reload();
   }
 
   return (

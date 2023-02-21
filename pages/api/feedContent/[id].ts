@@ -53,7 +53,6 @@ async function getFeedComments(docId: string) {
           id: document.name,
           username: document.fields.username.stringValue,
           comment: document.fields.comment.stringValue,
-          createTime: document.createTime,
         } as FeedComment)
     ) as FeedComment[];
   }
