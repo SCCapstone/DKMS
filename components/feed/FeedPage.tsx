@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { postFeedContent } from "../../pages/api/feedContent/[id]";
-import { getUser } from "../../utils/getUser";
 
 import FeedItem from "./FeedItem";
 
@@ -13,6 +12,7 @@ export type FeedComment = {
   id: string;
   username: string;
   comment: string;
+  createTime: Date;
 };
 
 export type FeedItemContent = {
@@ -21,6 +21,7 @@ export type FeedItemContent = {
     username: string;
     content: string;
     comments: FeedComment[];
+    createTime: Date;
   };
 };
 

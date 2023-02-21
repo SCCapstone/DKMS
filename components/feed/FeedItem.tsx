@@ -118,18 +118,20 @@ const FeedItem = ({
       </div>
     </div>
     <div className="divider" />
-    <div>
-      <FeedCommentBox docId={docId} currentUser={currentUser} />
+    <div className="flex flex-col justify-start">
+      <div>
+        <FeedCommentBox docId={docId} currentUser={currentUser} />
+      </div>
+      <ul className="ml-10">
+        {comments.map((feedComment) => (
+          <FeedItemComment
+            key={feedComment.id}
+            username={feedComment.username}
+            comment={feedComment.comment}
+          />
+        ))}
+      </ul>
     </div>
-    <ul className="ml-10">
-      {comments.map((feedComment) => (
-        <FeedItemComment
-          key={feedComment.id}
-          username={feedComment.username}
-          comment={feedComment.comment}
-        />
-      ))}
-    </ul>
   </div>
 );
 

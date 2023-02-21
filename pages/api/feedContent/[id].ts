@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type {
   FeedComment,
   FeedItemContent,
@@ -9,6 +6,36 @@ import type {
 const api_url =
   "https://firestore.googleapis.com/v1/projects/dkms-spotify/databases/(default)/documents/feed_content";
 const base_url = "https://firestore.googleapis.com/v1/";
+
+type FeedCommentDocument = {
+  name: string;
+  fields: {
+    username: {
+      stringValue: string;
+    };
+    comment: {
+      stringValue: string;
+    };
+  };
+  createTime: Date;
+};
+
+type FeedCommentResponse = {
+  documents: FeedCommentDocument[];
+};
+
+type FeedContentDocument = {
+  name: string;
+  fields: {
+    username: { stringValue: string };
+    content: { stringValue: string };
+  };
+  createTime: Date;
+};
+
+type FeedContentResponse = {
+  documents: FeedContentDocument[];
+};
 
 function uniqueId() {
   const dateString = Date.now().toString(36);
@@ -43,18 +70,19 @@ async function getFeedComments(docId: string) {
   let data: FeedComment[];
   const url = base_url.concat(docId, "/", "feed_comments");
   const response = await fetch(url);
-  const res = await response.json();
+  const res: FeedCommentResponse =
+    (await response.json()) as FeedCommentResponse;
   if (JSON.stringify(res) === "{}") {
     data = [];
   } else {
-    data = res.documents.map(
-      (document: any) =>
-        ({
-          id: document.name,
-          username: document.fields.username.stringValue,
-          comment: document.fields.comment.stringValue,
-        } as FeedComment)
-    ) as FeedComment[];
+    data = res.documents.map((documents: FeedCommentDocument) => ({
+      id: documents.name,
+      username: documents.fields.username.stringValue,
+      comment: documents.fields.comment.stringValue,
+      createTime: documents.createTime,
+    }));
+
+    data = data.sort((a, b) => a.createTime.valueOf() - b.createTime.valueOf());
   }
   return data;
 }
@@ -81,22 +109,27 @@ export async function postFeedContent(username: string, content: string) {
 }
 
 export async function getFeedContent(username?: string) {
-  let data;
+  let data: FeedItemContent[];
   const response = await fetch(api_url);
-  const res = await response.json();
-  data = (await Promise.all(
-    res.documents.map(
-      async (documents: any) =>
-        ({
-          id: documents.name as string,
-          data: {
-            username: documents.fields.username.stringValue as string,
-            content: documents.fields.content.stringValue as string,
-            comments: await getFeedComments(documents.name as string),
-          },
-        } as FeedItemContent)
-    )
-  )) as FeedItemContent[];
+  const res: FeedContentResponse =
+    (await response.json()) as FeedContentResponse;
+  data = await Promise.all(
+    res.documents.map(async (documents: FeedContentDocument) => ({
+      id: documents.name,
+      data: {
+        username: documents.fields.username.stringValue,
+        content: documents.fields.content.stringValue,
+        comments: await getFeedComments(documents.name),
+        createTime: documents.createTime,
+      },
+    }))
+  );
+
+  data = data.sort(
+    (a, b) => a.data.createTime.valueOf() - b.data.createTime.valueOf()
+  );
+  data = data.reverse();
+
   if (typeof username === "undefined") {
     return data;
   }
