@@ -15,10 +15,10 @@ const FeedCommentBox = ({
 }) => {
   const [commentText, setCommentText] = useState("");
 
-  async function handleSubmit() {
+  const handleSubmit = async () => {
     await postFeedComment(docId, currentUser.id, `${commentText}`);
     window.location.reload();
-  }
+  };
 
   return (
     <div className="mb-10 object-fill">

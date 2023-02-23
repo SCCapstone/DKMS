@@ -5,7 +5,7 @@ import { authOptions } from "../pages/api/auth/[...nextauth]";
 import type { User, Session } from "next-auth";
 
 export async function getUser() {
-  const session: Session = (await getServerSession(authOptions)) as Session;
+  const session = await getServerSession(authOptions);
 
   if (!session) {
     throw new Error("No session");
@@ -14,6 +14,6 @@ export async function getUser() {
 }
 
 export async function getUsername() {
-  const user: User = await getUser();
+  const user = await getUser();
   return user.id;
 }

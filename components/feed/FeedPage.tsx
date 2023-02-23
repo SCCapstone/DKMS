@@ -36,10 +36,10 @@ const FeedPage = ({
 }) => {
   const [postText, setPostText] = useState("");
 
-  async function handleSubmit() {
+  const handleSubmit = async () => {
     await postFeedContent(user.id, `${postText}`);
     window.location.reload();
-  }
+  };
 
   return (
     <div>
@@ -57,8 +57,7 @@ const FeedPage = ({
           </div>
           <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
             <button
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={() => handleSubmit()}
+              onClick={() => void handleSubmit()}
               disabled={!postText}
               type="submit"
               className="inline-flex items-center py-2.5 px-4 text-xs font-medium bg-primary text-center text-white rounded-lg focus:ring-4 "

@@ -37,17 +37,37 @@ type FeedContentResponse = {
   documents: FeedContentDocument[];
 };
 
-function uniqueId() {
+const uniqueId = () => {
   const dateString = Date.now().toString(36);
   const randomness = Math.random().toString(36).substr(2);
   return dateString + randomness;
-}
+};
 
-export async function postFeedComment(
+const getFeedComments = async (docId: string) => {
+  const url = base_url.concat(docId, "/", "feed_comments");
+  const response = await fetch(url);
+  const res = (await response.json()) as FeedCommentResponse;
+  if (JSON.stringify(res) === "{}") {
+    return [];
+  }
+  const baseData = res.documents.map((documents) => ({
+    id: documents.name,
+    username: documents.fields.username.stringValue,
+    comment: documents.fields.comment.stringValue,
+    createTime: documents.createTime,
+  }));
+
+  const formattedData = baseData.sort(
+    (a, b) => a.createTime.valueOf() - b.createTime.valueOf()
+  );
+  return formattedData;
+};
+
+export const postFeedComment = async (
   docId: string,
   username: string,
   comment: string
-) {
+) => {
   const comment_id = uniqueId();
   const url = base_url.concat(docId, "/feed_comments/", comment_id);
   await fetch(url, {
@@ -64,30 +84,9 @@ export async function postFeedComment(
       },
     }),
   });
-}
+};
 
-async function getFeedComments(docId: string) {
-  let data: FeedComment[];
-  const url = base_url.concat(docId, "/", "feed_comments");
-  const response = await fetch(url);
-  const res: FeedCommentResponse =
-    (await response.json()) as FeedCommentResponse;
-  if (JSON.stringify(res) === "{}") {
-    data = [];
-  } else {
-    data = res.documents.map((documents: FeedCommentDocument) => ({
-      id: documents.name,
-      username: documents.fields.username.stringValue,
-      comment: documents.fields.comment.stringValue,
-      createTime: documents.createTime,
-    }));
-
-    data = data.sort((a, b) => a.createTime.valueOf() - b.createTime.valueOf());
-  }
-  return data;
-}
-
-export async function postFeedContent(username: string, content: string) {
+export const postFeedContent = async (username: string, content: string) => {
   // Creating unique document id
   const docID = uniqueId();
   const url = api_url.concat("/", docID);
@@ -106,15 +105,13 @@ export async function postFeedContent(username: string, content: string) {
       },
     }),
   });
-}
+};
 
-export async function getFeedContent(username?: string) {
-  let data: FeedItemContent[];
+export const getFeedContent = async (username?: string) => {
   const response = await fetch(api_url);
-  const res: FeedContentResponse =
-    (await response.json()) as FeedContentResponse;
-  data = await Promise.all(
-    res.documents.map(async (documents: FeedContentDocument) => ({
+  const res = (await response.json()) as FeedContentResponse;
+  const baseData = await Promise.all(
+    res.documents.map(async (documents) => ({
       id: documents.name,
       data: {
         username: documents.fields.username.stringValue,
@@ -125,15 +122,14 @@ export async function getFeedContent(username?: string) {
     }))
   );
 
-  data = data.sort(
-    (a, b) => a.data.createTime.valueOf() - b.data.createTime.valueOf()
-  );
-  data = data.reverse();
+  const formattedData = baseData
+    .sort((a, b) => a.data.createTime.valueOf() - b.data.createTime.valueOf())
+    .reverse();
 
-  if (typeof username === "undefined") {
-    return data;
+  if (!username) {
+    return formattedData;
   }
-  data = data
+  return formattedData
     .filter((user) => user.data.username === username)
     .map(
       (user) =>
@@ -142,5 +138,4 @@ export async function getFeedContent(username?: string) {
           data: user.data,
         } as FeedItemContent)
     );
-  return data;
-}
+};
