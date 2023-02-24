@@ -110,6 +110,9 @@ export const postFeedContent = async (username: string, content: string) => {
 export const getFeedContent = async (username?: string) => {
   const response = await fetch(api_url);
   const res = (await response.json()) as FeedContentResponse;
+  if (JSON.stringify(res) === "{}") {
+    return [];
+  }
   const baseData = await Promise.all(
     res.documents.map(async (documents) => ({
       id: documents.name,
