@@ -52,7 +52,7 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
 
   const profile = await getUserProfile(username);
 
-  const followers = profile.followers ? profile.followers.total : 0;
+  const followers = profile.followers?.total ?? 0;
 
   const data = await getData(username);
 

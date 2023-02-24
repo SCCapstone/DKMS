@@ -12,7 +12,7 @@ const ProfileImg = async ({ username }: { username: string | undefined }) => {
       `https://api.spotify.com/v1/users/${username}`
     );
   const profile = await getUserProfile();
-  const img = profile.images ? profile.images[0] : undefined;
+  const img = profile.images?.[0];
 
   if (img) {
     return (
@@ -33,7 +33,7 @@ const ProfileImg = async ({ username }: { username: string | undefined }) => {
 
   return (
     <Image
-      src="/profileImgErr.svg"
+      src="/images/defaults/profileImage.png"
       width={96}
       height={96}
       style={{
