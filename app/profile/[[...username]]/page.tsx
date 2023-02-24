@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 
