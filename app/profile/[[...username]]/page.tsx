@@ -61,8 +61,8 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
       <PageTitle title="Profile" />
       <div className="flex flex-row">
         {/* @ts-expect-error Server Component */}
-        <ProfileImg username={username} />
-        <h1 className="normal-case font-bold">Profile — {username}</h1>
+        <ProfileImg username={username} isProfilePage />
+        <h1 className="normal-case font-bold mt-4">Profile — {username}</h1>
       </div>
       <h2 className="normal-case">{formatFollowers(followers)} followers</h2>
       <div className="divider" />

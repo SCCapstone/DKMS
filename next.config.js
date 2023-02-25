@@ -18,15 +18,7 @@ const nextConfig = withPlaiceholder({
       },
       {
         protocol: "https",
-        hostname: "scontent-mia3-2.xx.fbcdn.net",
-        port: "",
-        pathname: "/v/**",
-      },
-      {
-        protocol: "https",
-        hostname: "scontent-sea1-1.xx.fbcdn.net",
-        port: "",
-        pathname: "/v/**",
+        hostname: "**.fbcdn.net",
       },
     ],
   },
