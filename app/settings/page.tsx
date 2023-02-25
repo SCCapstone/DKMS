@@ -5,39 +5,49 @@ import { themeChange } from "theme-change";
 
 import PageTitle from "../../components/ui/PageTitle";
 
-const Settings = () => {
-  const themeValues = [
-    "light",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
-    "retro",
-    "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
-    "autumn",
-    "business",
-    "acid",
-    "lemonade",
-    "night",
-    "coffee",
-    "winter",
-  ];
+const THEME_VALUES = [
+  "light",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+] as const;
 
-  const [theme, setTheme] = useState<string>();
+const validateTheme = (input: string) => {
+  const strThemes = THEME_VALUES.toString();
+
+  if (!strThemes.includes(input)) {
+    throw new Error("Invalid theme value.");
+  }
+
+  return input as unknown as typeof THEME_VALUES;
+};
+
+const Settings = () => {
+  const [theme, setTheme] = useState<typeof THEME_VALUES>();
 
   useEffect(() => {
     themeChange(false);
@@ -52,20 +62,20 @@ const Settings = () => {
           className="text-primary select w-full max-w-xs"
           data-choose-theme
           onChange={(e) => {
-            setTheme(e.target.value);
+            setTheme(validateTheme(e.target.value));
           }}
           value={theme}
         >
           <option className="text-primary" value="dark">
-            dark (default)
+            Dark (default)
           </option>
-          {themeValues.map((value) => (
+          {THEME_VALUES.map((value) => (
             <option
               className="text-primary"
               key={value.toLowerCase()}
               value={value.toLowerCase()}
             >
-              {value}
+              {value[0].toUpperCase() + value.substring(1)}
             </option>
           ))}
         </select>
