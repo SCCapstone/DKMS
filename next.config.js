@@ -16,6 +16,10 @@ const nextConfig = withPlaiceholder({
         port: "",
         pathname: "/image/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.fbcdn.net",
+      },
     ],
   },
 });
