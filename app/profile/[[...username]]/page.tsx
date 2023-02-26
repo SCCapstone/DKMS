@@ -6,17 +6,21 @@ import ProfileImg from "../../../components/userProfile/profileImg";
 import { formatFollowers } from "../../../lib/formatters";
 import getSpotifyData from "../../../lib/getSpotifyData";
 import { authOptions } from "../../../pages/api/auth/[...nextauth]";
+import { getFeedContent } from "../../../pages/api/feedContent/[id]";
 import db from "../../firebase";
 
 import type { FeedItemContent } from "../../../components/feed/FeedPage";
-import { getFeedContent } from "../../../pages/api/feedContent/[id]";
-
 import type { User } from "next-auth";
 
 const getCurrentUsername = async () => {
   const user = await getUser();
   return user.id;
 };
+
+const getUserProfile = async (username: string) =>
+  getSpotifyData<SpotifyApi.UserProfileResponse>(
+    `https://api.spotify.com/v1/users/${username}`
+  );
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
   const username: string = params.username
