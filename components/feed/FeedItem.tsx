@@ -1,4 +1,5 @@
 import UsernameLink from "../ui/UsernameLink";
+import ProfileImg from "../userProfile/profileImg";
 
 import LikeButton from "./LikeButton";
 
@@ -14,11 +15,11 @@ const FeedItem = ({
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        {showLink ? (
-          <UsernameLink username={username} />
-        ) : (
-          <div>{username}</div>
-        )}
+        <div className="flex flex-row">
+          {/* @ts-expect-error Server Component */}
+          <ProfileImg username={username} />
+          {showLink ? <UsernameLink username={username} /> : <p>{username}</p>}
+        </div>
         <div>
           <svg
             width="24"
