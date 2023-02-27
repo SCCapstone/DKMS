@@ -71,6 +71,8 @@ const refreshAccessToken = async (token: JWT) => {
 export const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider<CustomProfile>({
+      authorization:
+        "https://accounts.spotify.com/authorize?scope=ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20user-follow-modify%20playlist-read-collaborative%20user-follow-read%20user-read-currently-playing%20user-read-playback-position%20user-library-modify%20playlist-modify-private%20playlist-modify-public%20user-read-email%20user-top-read%20streaming%20user-read-recently-played%20user-read-private%20user-library-read",
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
