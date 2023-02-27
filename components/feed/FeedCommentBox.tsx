@@ -37,12 +37,12 @@ const FeedCommentBox = ({
   };
 
   return (
-    <div className="mb-10 object-fill">
+    <div className="mb-10">
       <form>
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-4">
           <textarea
             id="chat"
-            className="disabled:opacity-75 mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="textarea w-full textarea-bordered"
             placeholder="Your response"
             rows={1}
             value={commentText}
@@ -52,11 +52,9 @@ const FeedCommentBox = ({
           />
           <button
             onClick={(e) => void handleSubmit(e)}
-            disabled={!commentText}
+            disabled={!commentText || isMutating}
             type="submit"
-            className={`${
-              isMutating ? "animate-pulse" : ""
-            } disabled:opacity-75 inline-flex items-center py-2.5 px-4 text-xs font-medium bg-primary text-center text-white rounded-lg focus:ring-4`}
+            className={`${isMutating ? "loading" : ""} btn btn-primary`}
           >
             Comment
           </button>

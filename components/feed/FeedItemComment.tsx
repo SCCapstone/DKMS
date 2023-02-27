@@ -3,12 +3,14 @@ import UsernameLink from "components/ui/UsernameLink";
 const FeedItemComment = ({
   username,
   comment,
+  showLink,
 }: {
   username: string;
   comment: string;
+  showLink?: boolean;
 }) => (
   <div>
-    <UsernameLink username={username} />
+    {showLink ? <UsernameLink username={username} /> : <p>{username}</p>}
     <div>{comment}</div>
     <div className="divider" />
   </div>

@@ -13,9 +13,8 @@ const getUserProfile = async (username: string) =>
   );
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
-  const username: string = params.username
-    ? params.username[0]
-    : await getUsername();
+  const currentUsername = await getUsername();
+  const username = params.username?.[0] ?? currentUsername;
 
   const profile = await getUserProfile(username);
 
@@ -27,12 +26,16 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
   return (
     <div>
       <PageTitle title="Profile" />
-      <div className="flex flex-row">
+      <div className="flex flex-row items-center">
         {/* @ts-expect-error Server Component */}
         <ProfileImg username={username} isProfilePage />
-        <h1 className="normal-case font-bold mt-4">Profile — {username}</h1>
+        <div className="flex flex-col">
+          <h1 className="normal-case font-bold">Profile — {username}</h1>
+          <h2 className="normal-case">
+            {formatFollowers(followers)} followers
+          </h2>
+        </div>
       </div>
-      <h2 className="normal-case">{formatFollowers(followers)} followers</h2>
       <div className="divider" />
       <FeedPage user={currentUser} data={data} />
     </div>

@@ -30,8 +30,12 @@ const FeedPage = ({
   user: User;
 }) => (
   <div>
-    <FeedTextBox userId={user.id} />
-    <div className="divider" />
+    {showLinks && (
+      <>
+        <FeedTextBox userId={user.id} />
+        <div className="divider" />
+      </>
+    )}
     <ul>
       {data.map((feedItem) => (
         <FeedItem
