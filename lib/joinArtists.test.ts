@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import joinArtists from "lib/joinArtists";
 
 describe("joinArtists()", () => {

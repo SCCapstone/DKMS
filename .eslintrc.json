@@ -26,6 +26,7 @@
   },
   "plugins": ["prettier", "cypress"],
   "ignorePatterns": ["coverage", "build"],
+  "reportUnusedDisableDirectives": true,
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
     "camelcase": "off",

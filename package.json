@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint -d app -d cypress --report-unused-disable-directives warn",
+    "lint": "next lint -d app -d components -d cypress -d lib -d pages -d types --report-unused-disable-directives error",
     "prepare": "husky install",
     "test": "cypress open",
     "test:component": "cypress open --component --browser electron",
