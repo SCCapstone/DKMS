@@ -1,28 +1,20 @@
-import { collection, getDocs } from "firebase/firestore";
+import { getFeedContent } from "lib/feed";
+import { getUser } from "utils/getUser";
 
 import FeedPage from "../../components/feed/FeedPage";
 import PageTitle from "../../components/ui/PageTitle";
-import db from "../firebase";
 
 import type { FeedItemContent } from "../../components/feed/FeedPage";
-
-async function getData() {
-  const items = collection(db, "feed_content");
-
-  const itemsSnapshot = await getDocs(items);
-
-  return itemsSnapshot.docs.map(
-    (doc) => ({ id: doc.id, data: doc.data() } as FeedItemContent)
-  );
-}
+import type { User } from "next-auth";
 
 const Feed = async () => {
-  const data = await getData();
+  const data: FeedItemContent[] = await getFeedContent();
+  const user: User = await getUser();
 
   return (
     <div>
       <PageTitle title="Feed" />
-      <FeedPage data={data} showLinks />
+      <FeedPage data={data} user={user} showLinks />
     </div>
   );
 };
