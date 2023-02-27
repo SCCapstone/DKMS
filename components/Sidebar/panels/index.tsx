@@ -14,6 +14,7 @@ const SidebarPanels = () => {
     case "notifications":
       return <Notifications />;
     case "playback":
+      /* @ts-expect-error Server Component */
       return <Playback />;
     default:
       return null;

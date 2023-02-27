@@ -1,3 +1,11 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable no-shadow */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState, useEffect } from "react";
 
 const track = {
@@ -8,13 +16,7 @@ const track = {
   artists: [{ name: "" }],
 };
 
-type Player = {
-  name: string;
-  getOAuthToken: string;
-  volume: number;
-};
-
-const WebPlayback = (token: string) => {
+const WebPlayback = (props: { token: string }) => {
   const [is_paused, setPaused] = useState(false);
   const [is_active, setActive] = useState(false);
   const [player, setPlayer] = useState(undefined);
@@ -27,10 +29,10 @@ const WebPlayback = (token: string) => {
 
     document.body.appendChild(script);
 
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const player: Player = new window.Spotify.Player({
+    (window as any).onSpotifyWebPlaybackSDKReady = () => {
+      const player = new (window as any).Spotify.Player({
         name: "Web Playback SDK",
-        getOAuthToken: (cb) => {
+        getOAuthToken: (cb: any) => {
           cb(props.token);
         },
         volume: 0.5,
@@ -38,15 +40,15 @@ const WebPlayback = (token: string) => {
 
       setPlayer(player);
 
-      player.addListener("ready", ({ device_id }) => {
+      player.addListener("ready", ({ device_id }: any) => {
         console.log("Ready with Device ID", device_id);
       });
 
-      player.addListener("not_ready", ({ device_id }) => {
+      player.addListener("not_ready", ({ device_id }: any) => {
         console.log("Device ID has gone offline", device_id);
       });
 
-      player.addListener("player_state_changed", (state) => {
+      player.addListener("player_state_changed", (state: any) => {
         if (!state) {
           return;
         }
@@ -54,7 +56,7 @@ const WebPlayback = (token: string) => {
         setTrack(state.track_window.current_track);
         setPaused(state.paused);
 
-        player.getCurrentState().then((state) => {
+        player.getCurrentState().then((state: any) => {
           !state ? setActive(false) : setActive(true);
         });
       });
@@ -91,6 +93,7 @@ const WebPlayback = (token: string) => {
           </div>
 
           <button
+            type="button"
             className="btn-spotify"
             onClick={() => {
               player.previousTrack();
@@ -100,6 +103,7 @@ const WebPlayback = (token: string) => {
           </button>
 
           <button
+            type="button"
             className="btn-spotify"
             onClick={() => {
               player.togglePlay();
@@ -109,6 +113,7 @@ const WebPlayback = (token: string) => {
           </button>
 
           <button
+            type="button"
             className="btn-spotify"
             onClick={() => {
               player.nextTrack();
