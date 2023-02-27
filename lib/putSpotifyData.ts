@@ -1,12 +1,12 @@
-import "server-only";
+import "client-only";
 
-import getServerAccessToken from "./getServerAccessToken";
+import getAccessToken from "./getAccessToken";
 
-const getSpotifyData = async <T>(
+const putSpotifyData = async (
   input: RequestInfo | URL,
   init?: RequestInit | undefined
 ) => {
-  const accessToken = await getServerAccessToken();
+  const accessToken = await getAccessToken();
 
   const res = await fetch(input, {
     ...init,
@@ -20,8 +20,6 @@ const getSpotifyData = async <T>(
     const { error } = (await res.json()) as { error: SpotifyApi.ErrorObject };
     throw new Error(`${error.status}: ${error.message}`);
   }
-
-  return res.json() as Promise<T>;
 };
 
-export default getSpotifyData;
+export default putSpotifyData;
