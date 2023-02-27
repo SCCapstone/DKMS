@@ -1,8 +1,8 @@
+import { getFeedContent } from "lib/feed";
 import { getUser } from "utils/getUser";
 
 import FeedPage from "../../components/feed/FeedPage";
 import PageTitle from "../../components/ui/PageTitle";
-import { getFeedContent } from "../../pages/api/feedContent/[id]";
 
 import type { FeedItemContent } from "../../components/feed/FeedPage";
 import type { User } from "next-auth";

@@ -3,17 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { postFeedComment } from "lib/feed";
+import { postFeedContent } from "lib/feed";
 
-import type { User } from "next-auth";
-
-const FeedCommentBox = ({
-  docId,
-  currentUser,
-}: {
-  docId: string;
-  currentUser: User;
-}) => {
+const FeedTextBox = ({ userId }: { userId: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -21,13 +13,13 @@ const FeedCommentBox = ({
   // Create inline loading UI
   const isMutating = isFetching || isPending;
 
-  const [commentText, setCommentText] = useState("");
+  const [postText, setPostText] = useState("");
 
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    setCommentText("");
-    await postFeedComment(docId, currentUser.id, `${commentText}`);
+    setPostText("");
+    await postFeedContent(userId, `${postText}`);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
@@ -37,33 +29,34 @@ const FeedCommentBox = ({
   };
 
   return (
-    <div className="mb-10 object-fill">
-      <form>
-        <div className="flex flex-row">
+    <form>
+      <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
           <textarea
-            id="chat"
-            className="disabled:opacity-75 mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Your response"
-            rows={1}
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            disabled={isMutating}
+            id="comment"
+            className="disabled:opacity-75 w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+            placeholder="Write your musical thoughts..."
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
             required
+            disabled={isMutating}
           />
+        </div>
+        <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
           <button
             onClick={(e) => void handleSubmit(e)}
-            disabled={!commentText}
+            disabled={!postText || isMutating}
             type="submit"
             className={`${
               isMutating ? "animate-pulse" : ""
             } disabled:opacity-75 inline-flex items-center py-2.5 px-4 text-xs font-medium bg-primary text-center text-white rounded-lg focus:ring-4`}
           >
-            Comment
+            Post
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
-export default FeedCommentBox;
+export default FeedTextBox;
