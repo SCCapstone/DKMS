@@ -4,7 +4,7 @@ import SidebarMenu from "../Sidebar/SidebarMenu";
 
 import NavbarItem from "./NavbarItem";
 
-import type { ItemType } from "./NavbarItem";
+import type { MenuItems } from "./NavbarItem";
 
 const DropdownButton = () => (
   // eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-tabindex
@@ -26,7 +26,7 @@ const DropdownButton = () => (
   </label>
 );
 
-const MobileNavbar = ({ items }: { items: readonly ItemType[] }) => (
+const MobileNavbar = ({ items }: { items: MenuItems }) => (
   <nav className="navbar bg-primary text-primary-content md:hidden sticky top-0 drop-shadow">
     <div className="navbar-start">
       <div className="dropdown">
@@ -37,7 +37,7 @@ const MobileNavbar = ({ items }: { items: readonly ItemType[] }) => (
           className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
           {items.map((item) => (
-            <NavbarItem key={item.url} item={item} />
+            <NavbarItem key={item.label} item={item} />
           ))}
         </ul>
       </div>
