@@ -4,7 +4,7 @@ import SearchResults from "./SearchResults";
 
 const getData = async (searchQuery: string) =>
   getSpotifyData<SpotifyApi.SearchResponse>(
-    `https://api.spotify.com/v1/search?q=${searchQuery}&type=album,track,artist&limit=4`
+    `https://api.spotify.com/v1/search?q=${searchQuery}&type=album,track,artist,playlist&limit=4`
   );
 
 const Page = async ({ params }: { params: { searchQuery: string } }) => {

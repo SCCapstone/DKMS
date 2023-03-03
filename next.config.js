@@ -20,6 +20,10 @@ const nextConfig = withPlaiceholder({
         protocol: "https",
         hostname: "**.fbcdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "mosaic.scdn.co",
+      },
     ],
   },
 });
