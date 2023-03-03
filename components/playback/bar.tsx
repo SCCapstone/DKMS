@@ -1,165 +1,95 @@
+import React, { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
+
+type PlaybackBarProps = {
+  accessToken: string;
+};
 
 const spotifyApi = new SpotifyWebApi();
 
-// Set the access token for the API instance after authentication
-spotifyApi.setAccessToken("YOUR_ACCESS_TOKEN_HERE");
-/*
-// Get the currently playing track
-spotifyApi.getMyCurrentPlaybackState().then((response) => {
-  const { item, is_playing, progress_ms } = response;
+const PlaybackBar = ({ accessToken }: PlaybackBarProps) => {
+  const [playerState, setPlayerState] =
+    useState<SpotifyApi.CurrentPlaybackResponse | null>(null);
 
-  // Create the playback bar HTML elements
-  const playbackBar = document.createElement("div");
-  playbackBar.classList.add("playback-bar");
+  useEffect(() => {
+    spotifyApi.setAccessToken(accessToken);
 
-  const playbackInfo = document.createElement("div");
-  playbackInfo.classList.add("playback-info");
-  playbackBar.appendChild(playbackInfo);
-
-  const playbackControls = document.createElement("div");
-  playbackControls.classList.add("playback-controls");
-  playbackBar.appendChild(playbackControls);
-
-  const playbackProgress = document.createElement("progress");
-  playbackProgress.classList.add("playback-progress");
-  playbackProgress.value = progress_ms ?? 0; // Use nullish coalescing operator to provide default value
-  playbackProgress.max = item?.duration_ms ?? 0; // Use optional chaining operator to access duration_ms property
-  playbackControls.appendChild(playbackProgress);
-
-  const playPauseButton = document.createElement("button");
-  playPauseButton.classList.add("playback-button");
-  playPauseButton.innerText = is_playing ? "Pause" : "Play";
-  playbackControls.appendChild(playPauseButton);
-
-  const nextButton = document.createElement("button");
-  nextButton.classList.add("playback-button");
-  nextButton.innerText = "Next";
-  playbackControls.appendChild(nextButton);
-
-  const prevButton = document.createElement("button");
-  prevButton.classList.add("playback-button");
-  prevButton.innerText = "Previous";
-  playbackControls.appendChild(prevButton);
-
-  const trackName = document.createElement("div");
-  trackName.classList.add("track-name");
-  trackName.innerText = item?.name ?? "";
-  playbackInfo.appendChild(trackName);
-
-  const artistName = document.createElement("div");
-  artistName.classList.add("artist-name");
-  artistName.innerText = item?.artists[0].name ?? "";
-  playbackInfo.appendChild(artistName);
-
-  // Add event listeners for the playback buttons
-  playPauseButton.addEventListener("click", () => {
-    const promise = is_playing ? spotifyApi.pause() : spotifyApi.play();
-    promise
-      .then(() => {
-        playPauseButton.innerText = is_playing ? "Play" : "Pause";
-      })
-      .catch((error) => {
-        console.error(`An error occurred: ${error}`);
+    spotifyApi
+      .getMyCurrentPlaybackState()
+      .then(
+        (
+          res: React.SetStateAction<SpotifyApi.CurrentPlaybackResponse | null>
+        ) => {
+          setPlayerState(res);
+        }
+      )
+      .catch((err: any) => {
+        console.error(err);
       });
-  });
+  }, [accessToken]);
 
-  nextButton.addEventListener("click", () => {
-    spotifyApi.skipToNext().catch((error) => {
-      console.error(`An error occurred: ${error}`);
-    });
-  });
-
-  prevButton.addEventListener("click", () => {
-    spotifyApi.skipToPrevious().catch((error) => {
-      console.error(`An error occurred: ${error}`);
-    });
-  });
-
-  // Append the playback bar to the page
-  const playbackContainer = document.getElementById("playback-container");
-  if (playbackContainer !== null) {
-    playbackContainer.appendChild(playbackBar);
-  }
-}); */
-
-spotifyApi.getMyCurrentPlaybackState()
-  .then((response) => {
-    const { item, is_playing, progress_ms } = response;
-
-    // Create the playback bar HTML elements
-    const playbackBar = document.createElement("div");
-    playbackBar.classList.add("playback-bar");
-
-    const playbackInfo = document.createElement("div");
-    playbackInfo.classList.add("playback-info");
-    playbackBar.appendChild(playbackInfo);
-
-    const playbackControls = document.createElement("div");
-    playbackControls.classList.add("playback-controls");
-    playbackBar.appendChild(playbackControls);
-
-    const playbackProgress = document.createElement("progress");
-    playbackProgress.classList.add("playback-progress");
-    playbackProgress.value = progress_ms ?? 0; // Use nullish coalescing operator to provide default value
-    playbackProgress.max = item?.duration_ms ?? 0; // Use optional chaining operator to access duration_ms property
-    playbackControls.appendChild(playbackProgress);
-
-    const playPauseButton = document.createElement("button");
-    playPauseButton.classList.add("playback-button");
-    playPauseButton.innerText = is_playing ? "Pause" : "Play";
-    playbackControls.appendChild(playPauseButton);
-
-    const nextButton = document.createElement("button");
-    nextButton.classList.add("playback-button");
-    nextButton.innerText = "Next";
-    playbackControls.appendChild(nextButton);
-
-    const prevButton = document.createElement("button");
-    prevButton.classList.add("playback-button");
-    prevButton.innerText = "Previous";
-    playbackControls.appendChild(prevButton);
-
-    const trackName = document.createElement("div");
-    trackName.classList.add("track-name");
-    trackName.innerText = item?.name ?? "";
-    playbackInfo.appendChild(trackName);
-
-    const artistName = document.createElement("div");
-    artistName.classList.add("artist-name");
-    artistName.innerText = item?.artists[0].name ?? "";
-    playbackInfo.appendChild(artistName);
-
-    // Add event listeners for the playback buttons
-    playPauseButton.addEventListener("click", () => {
-      const promise = is_playing ? spotifyApi.pause() : spotifyApi.play();
-      promise
+  const handlePlayPause = () => {
+    if (playerState?.is_playing) {
+      spotifyApi
+        .pause()
+        .then(() => console.log("Playback paused"))
+        .catch((error: any) => console.log("Error pausing playback:", error));
+    } else {
+      spotifyApi
+        .play()
         .then(() => {
-          playPauseButton.innerText = is_playing ? "Play" : "Pause";
+          console.log("Playback started.");
         })
-        .catch((error) => {
-          console.error(`An error occurred: ${error}`);
+        .catch((error: any) => {
+          console.error("Failed to start playback:", error);
         });
-    });
-
-    nextButton.addEventListener("click", () => {
-      spotifyApi.skipToNext().catch((error) => {
-        console.error(`An error occurred: ${error}`);
-      });
-    });
-
-    prevButton.addEventListener("click", () => {
-      spotifyApi.skipToPrevious().catch((error) => {
-        console.error(`An error occurred: ${error}`);
-      });
-    });
-
-    // Append the playback bar to the page
-    const playbackContainer = document.getElementById("playback-container");
-    if (playbackContainer !== null) {
-      playbackContainer.appendChild(playbackBar);
     }
-  })
-  .catch((error: string) => {
-    console.error(`An error occurred: ${error}`);
-  });
+  };
+
+  /* const handleSkipPrevious = () => {
+    spotifyApi.skipToPrevious();
+  };
+
+  const handleSkipNext = () => {
+    spotifyApi.skipToNext();
+  }; */
+
+  return (
+    <div
+      style={{
+        backgroundColor: "#111",
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80px",
+        borderTop: "1px solid #333",
+        color: "#fff",
+        zIndex: 9999,
+      }}
+    >
+      <button type="button" onClick={handlePlayPause}>
+        {playerState?.is_playing ? "Pause" : "Play"}
+      </button>
+    </div>
+  );
+};
+
+export default PlaybackBar;
+
+/* return (
+    <div>
+      <button type="button" onClick={handleSkipPrevious}>
+        Skip Previous
+      </button>
+      <button type="button" onClick={handlePlayPause}>
+        {playerState?.is_playing ? "Pause" : "Play"}
+      </button>
+       <button type="button" onClick={handleSkipNext}>
+        Skip Next
+      </button> 
+    </div>
+  );
+}; */
