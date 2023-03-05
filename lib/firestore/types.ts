@@ -1,7 +1,6 @@
-export type FirestoreUser = {
-  name: string;
-  email: string;
-};
+import type { User } from "next-auth";
+
+export type FirestoreUser = User;
 
 export type FirestoreFeedComment = {
   comment: string;

@@ -16,7 +16,7 @@ const getUserProfile = async (username: string) =>
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
   const currentUser = await getUser();
-  const currentUsername = currentUser.id;
+  const currentUsername = currentUser.username;
   const username = params.username?.[0] ?? currentUsername;
 
   const profile = await getUserProfile(username);
@@ -24,6 +24,7 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
 
   const isFollowed = await isUserFollowing(profile.id);
   const showFollowButton = username !== currentUsername && params.username?.[0];
+
   return (
     <div>
       <PageTitle title="Profile" />
@@ -31,7 +32,11 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
         {/* @ts-expect-error Server Component */}
         <ProfileImg username={username} isProfilePage />
         <div className="flex flex-col">
-          <h1 className="normal-case font-bold">Profile — {username}</h1>
+          <h1 className="normal-case font-bold">
+            {!profile.display_name || username === profile.display_name
+              ? username
+              : `${profile.display_name} — ${username}`}
+          </h1>
           <h2 className="normal-case">
             {formatFollowers(profile.followers?.total)} followers
           </h2>

@@ -1,4 +1,4 @@
-import { getDocs, query, where } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 
 import { usersCol } from "lib/firestore";
 import getSpotifyData from "lib/getSpotifyData";
@@ -6,14 +6,14 @@ import getSpotifyData from "lib/getSpotifyData";
 import SearchResults from "./SearchResults";
 
 const searchFirebase = async (searchQuery: string) => {
-  const q = query(
-    usersCol,
-    where("name", ">=", searchQuery),
-    where("name", "<=", `${searchQuery}\uf8ff`)
-  );
+  const usersSnapshot = await getDocs(usersCol);
+  const usersData = usersSnapshot.docs.map((doc) => doc.data());
 
-  const usersSnapshot = await getDocs(q);
-  return usersSnapshot.docs.map((doc) => doc.data());
+  return usersData.filter(
+    (user) =>
+      user.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.username.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 };
 const searchSpotify = async (searchQuery: string) =>
   getSpotifyData<SpotifyApi.SearchResponse>(

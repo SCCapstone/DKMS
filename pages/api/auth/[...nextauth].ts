@@ -1,5 +1,9 @@
+import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+import { cert } from "firebase-admin/app";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+
+import { firebaseConfig } from "lib/firestore";
 
 import type { NextAuthOptions } from "next-auth";
 import type { JWT } from "next-auth/jwt";
@@ -7,15 +11,6 @@ import type { SpotifyProfile } from "next-auth/providers/spotify";
 
 // hard code for now, NextAuth doesn't get the number from Spotify
 const EXPIRES_IN = 3600000;
-
-type CustomProfile = {
-  external_urls: {
-    spotify: string;
-  };
-  followers: {
-    total: number;
-  };
-} & SpotifyProfile;
 
 /**
  * Takes a token, and returns a new token with updated
@@ -69,21 +64,33 @@ const refreshAccessToken = async (token: JWT) => {
 };
 
 export const authOptions: NextAuthOptions = {
+  adapter: FirestoreAdapter({
+    ...firebaseConfig,
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY,
+    }),
+  }),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    SpotifyProvider<CustomProfile>({
+    SpotifyProvider<SpotifyApi.CurrentUsersProfileResponse & SpotifyProfile>({
       authorization:
         "https://accounts.spotify.com/authorize?scope=ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20user-follow-modify%20playlist-read-collaborative%20user-follow-read%20user-read-currently-playing%20user-read-playback-position%20user-library-modify%20playlist-modify-private%20playlist-modify-public%20user-read-email%20user-top-read%20streaming%20user-read-recently-played%20user-read-private%20user-library-read",
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
-      profile: (profile) => ({
+      profile: (profile: SpotifyApi.CurrentUsersProfileResponse) => ({
         id: profile.id,
-        name: profile.display_name,
-        email: profile.email,
+        displayName: profile.display_name ?? profile.id,
+        username: profile.id,
+        uri: profile.uri,
         url: profile.external_urls.spotify,
-        totalFollowers: profile.followers.total,
-        image: profile.images[0]?.url,
+        followers: profile.followers?.total ?? 0,
+        image: profile.images?.[0].url,
       }),
     }),
   ],
