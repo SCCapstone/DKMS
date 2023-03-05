@@ -90,7 +90,7 @@ export const authOptions: NextAuthOptions = {
         uri: profile.uri,
         url: profile.external_urls.spotify,
         followers: profile.followers?.total ?? 0,
-        image: profile.images?.[0].url,
+        image: profile.images?.[0]?.url,
       }),
     }),
   ],
