@@ -1,13 +1,19 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 const SearchMenu = () => {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
+  const [isPending, startTransition] = useTransition();
 
-  const handleSearch = () => router.push(`/search/${searchText}`);
+  const handleSearch = (e: React.MouseEvent) => {
+    e.preventDefault();
+    startTransition(() => {
+      router.push(`/search/${searchText}`);
+    });
+  };
 
   return (
     <div className="form-control">
@@ -20,25 +26,12 @@ const SearchMenu = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
+          onClick={(e) => handleSearch(e)}
+          disabled={!searchText || isPending}
           type="submit"
-          className="btn btn-square"
-          onClick={() => handleSearch()}
-          disabled={!searchText}
+          className={`${isPending ? "loading" : ""} btn btn-primary`}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          Search
         </button>
       </div>
     </div>
