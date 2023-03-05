@@ -37,7 +37,15 @@ const Page = async ({
 }) => {
   const results = await getData(searchParams.q);
 
-  return searchParams.q ? <SearchResults results={results} /> : <div />;
+  return searchParams.q ? (
+    <SearchResults results={results} />
+  ) : (
+    <div>{JSON.stringify(searchParams)}</div>
+  );
 };
 
 export default Page;
+
+// see:
+// https://beta.nextjs.org/docs/api-reference/file-conventions/page#searchparams-optional
+export const dynamic = "force-dynamic";
