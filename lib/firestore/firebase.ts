@@ -18,7 +18,15 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 export const firestore = getFirestore(firebaseApp);
 
-// This is just a helper to add the type to the db responses
+/**
+ * A helper to add types to db collections.
+ *
+ * Code explained / adapted from: https://plainenglish.io/blog/using-firestore-with-typescript-in-the-v9-sdk-cf36851bb099
+ * @param collectionName the name of the firestore collection
+ * @returns a collection reference with the type of the collection
+ * @see https://plainenglish.io/blog/using-firestore-with-typescript-in-the-v9-sdk-cf36851bb099
+ *
+ */
 const createCollection = <T = DocumentData>(collectionName: string) =>
   collection(firestore, collectionName) as CollectionReference<T>;
 
