@@ -16,7 +16,7 @@
     "@plaiceholder/next": "^2.5.0",
     "client-only": "^0.0.1",
     "daisyui": "^2.50.0",
-    "firebase": "^9.16.0",
+    "firebase": "^9.17.2",
     "husky": "^8.0.3",
     "next": "^13.2.3",
     "next-auth": "^4.19.1",
