@@ -1,17 +1,21 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 
 const SearchMenu = () => {
+  const searchParams = useSearchParams();
+
+  const searchQuery = searchParams?.get("q");
+
   const router = useRouter();
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(searchQuery ?? "");
   const [isPending, startTransition] = useTransition();
 
   const handleSearch = (e: React.MouseEvent) => {
     e.preventDefault();
     startTransition(() => {
-      router.push(`/search/${searchText}`);
+      router.replace(`/search?q=${searchText}`);
     });
   };
 
@@ -27,7 +31,7 @@ const SearchMenu = () => {
         />
         <button
           onClick={(e) => handleSearch(e)}
-          disabled={!searchText || isPending}
+          disabled={!searchText || isPending || searchQuery === searchText}
           type="submit"
           className={`${isPending ? "loading" : ""} btn btn-primary`}
         >
