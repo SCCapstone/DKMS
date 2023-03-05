@@ -16,7 +16,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
-export const firestore = getFirestore(firebaseApp);
+const firestore = getFirestore(firebaseApp);
+export default firestore;
 
 /**
  * A helper to add types to db collections.

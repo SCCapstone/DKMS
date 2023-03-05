@@ -1,6 +1,6 @@
 import { getDocs, query, where } from "firebase/firestore";
 
-import { usersCol } from "lib/firestore/firebase";
+import { usersCol } from "lib/firestore";
 import getSpotifyData from "lib/getSpotifyData";
 
 import SearchResults from "./SearchResults";
