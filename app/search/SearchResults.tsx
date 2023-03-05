@@ -65,8 +65,8 @@ const SearchResults = ({ results }: SearchResultsProps) => {
           <h2 className="font-black">DKMS Users</h2>
           <ul>
             {users.map((user) => (
-              <li key={user.name}>
-                <UsernameLink username={user.name} />
+              <li key={user.id}>
+                <UsernameLink username={user.username} />
               </li>
             ))}
           </ul>

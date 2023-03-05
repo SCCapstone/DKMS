@@ -4,7 +4,7 @@ import { collection, getFirestore } from "firebase/firestore";
 import type { FirestoreUser, FirestoreFeedContent } from "./types";
 import type { DocumentData, CollectionReference } from "firebase/firestore";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyA4I6SntGUr8boAz8_UsIhoWspRrjMWuxY",
   authDomain: "dkms-spotify.firebaseapp.com",
   projectId: "dkms-spotify",
@@ -31,5 +31,5 @@ export default firestore;
 const createCollection = <T = DocumentData>(collectionName: string) =>
   collection(firestore, collectionName) as CollectionReference<T>;
 
-export const usersCol = createCollection<FirestoreUser>("known_users");
+export const usersCol = createCollection<FirestoreUser>("users");
 export const feedCol = createCollection<FirestoreFeedContent>("feed_content");
