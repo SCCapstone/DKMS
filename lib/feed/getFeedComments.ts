@@ -1,21 +1,17 @@
-import { BASE_URL } from "./utils";
+import { getDocs } from "firebase/firestore";
 
-import type { FeedCommentResponse } from "./types";
+import { getCommentsCol } from "lib/firestore";
 
-const getFeedComments = async (docId: string) => {
-  const response = await fetch(`${BASE_URL}${docId}/feed_comments`);
-  const res = (await response.json()) as FeedCommentResponse;
-  if (JSON.stringify(res) === "{}") {
-    return [];
-  }
-  const data = res.documents.map((documents) => ({
-    id: documents.name,
-    username: documents.fields.username.stringValue,
-    comment: documents.fields.comment.stringValue,
-    createTime: documents.createTime,
+const getFeedComments = async (postId: string) => {
+  const feedSnapshot = await getDocs(getCommentsCol(postId));
+  const baseData = feedSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
   }));
 
-  return data.sort((a, b) => a.createTime.valueOf() - b.createTime.valueOf());
+  return baseData
+    .sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis())
+    .reverse();
 };
 
 export default getFeedComments;
