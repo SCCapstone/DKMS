@@ -5,7 +5,7 @@ import FeedCommentBox from "./FeedCommentBox";
 import FeedItemComment from "./FeedItemComment";
 import LikeButton from "./LikeButton";
 
-import type { FeedItemContent } from ".";
+import type { FeedItemType } from ".";
 import type { User } from "next-auth";
 
 const FeedItem = ({
@@ -13,21 +13,24 @@ const FeedItem = ({
   currentUser,
   showLink,
 }: {
-  data: FeedItemContent;
+  data: FeedItemType;
   currentUser: User;
   showLink: boolean;
 }) => (
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-row">
+        <div className="flex flex-row items-center pb-4">
           {/* @ts-expect-error Server Component */}
           <ProfileImg username={data.username} />
-          {showLink ? (
-            <UsernameLink username={data.username} />
-          ) : (
-            <p>{data.username}</p>
-          )}
+          <div>
+            {showLink ? (
+              <UsernameLink username={data.username} />
+            ) : (
+              <p>{data.username}</p>
+            )}
+            <p>{data.timestamp.toDate().toLocaleString()}</p>
+          </div>
         </div>
         <div>
           <svg
@@ -59,7 +62,7 @@ const FeedItem = ({
           </svg>
         </div>
       </div>
-      <div>{data.content}</div>
+      <p>{data.content}</p>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div className="flex flex-row justify-start items-center">
           <div>
@@ -108,8 +111,7 @@ const FeedItem = ({
         {data.comments.map((comment) => (
           <FeedItemComment
             key={comment.id}
-            username={comment.username}
-            comment={comment.content}
+            data={comment}
             showLink={showLink}
           />
         ))}

@@ -4,20 +4,21 @@ import FeedTextBox from "./FeedTextBox";
 import type { FirestoreFeedItem } from "lib/firestore/types";
 import type { User } from "next-auth";
 
-type FeedContent = {
+export type FeedCommentType = {
   id: string;
 } & FirestoreFeedItem;
 
-export type FeedItemContent = {
-  comments: FeedContent[];
-} & FeedContent;
+export type FeedItemType = {
+  id: string;
+  comments: FeedCommentType[];
+} & FirestoreFeedItem;
 
 const FeedPage = ({
   data,
   currentUser,
   showLinks = false,
 }: {
-  data: FeedItemContent[];
+  data: FeedItemType[];
   currentUser: User;
   showLinks?: boolean;
 }) => (

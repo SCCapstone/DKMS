@@ -1,22 +1,29 @@
 import UsernameLink from "components/ui/UsernameLink";
 import ProfileImg from "components/userProfile/profileImg";
 
+import type { FeedCommentType } from ".";
+
 const FeedItemComment = ({
-  username,
-  comment,
+  data,
   showLink,
 }: {
-  username: string;
-  comment: string;
+  data: FeedCommentType;
   showLink: boolean;
 }) => (
   <div>
-    <div className="flex flex-row">
+    <div className="flex flex-row items-center pb-4">
       {/* @ts-expect-error Server Component */}
-      <ProfileImg username={username} />
-      {showLink ? <UsernameLink username={username} /> : <p>{username}</p>}
-    </div>{" "}
-    <div>{comment}</div>
+      <ProfileImg username={data.username} />
+      <div>
+        {showLink ? (
+          <UsernameLink username={data.username} />
+        ) : (
+          <p>{data.username}</p>
+        )}
+        <p>{data.timestamp.toDate().toLocaleString()}</p>
+      </div>
+    </div>
+    <p>{data.content}</p>
     <div className="divider" />
   </div>
 );
