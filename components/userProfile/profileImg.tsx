@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import getSpotifyData from "../../lib/getSpotifyData";
+import { getUserByUsername } from "lib/getUser";
 
 const ProfileImg = async ({
   username,
@@ -13,17 +13,13 @@ const ProfileImg = async ({
     throw new Error("No username provided");
   }
 
-  const getUserProfile = async () =>
-    getSpotifyData<SpotifyApi.UserProfileResponse>(
-      `https://api.spotify.com/v1/users/${username}`
-    );
-  const profile = await getUserProfile();
-  const img = profile.images?.[0];
+  const profile = await getUserByUsername(username);
+  const img = profile?.image;
 
   if (img) {
     return (
       <Image
-        src={img.url}
+        src={img}
         width={300}
         height={300}
         style={

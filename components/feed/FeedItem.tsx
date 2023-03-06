@@ -5,31 +5,29 @@ import FeedCommentBox from "./FeedCommentBox";
 import FeedItemComment from "./FeedItemComment";
 import LikeButton from "./LikeButton";
 
-import type { FeedComment } from "./FeedPage";
+import type { FeedItemContent } from ".";
 import type { User } from "next-auth";
 
 const FeedItem = ({
+  data,
   currentUser,
-  docId,
-  username,
-  feedContent,
   showLink,
-  comments,
 }: {
+  data: FeedItemContent;
   currentUser: User;
-  docId: string;
-  username: string;
-  feedContent: string;
-  showLink?: boolean;
-  comments: FeedComment[];
+  showLink: boolean;
 }) => (
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row">
           {/* @ts-expect-error Server Component */}
-          <ProfileImg username={username} />
-          {showLink ? <UsernameLink username={username} /> : <p>{username}</p>}
+          <ProfileImg username={data.username} />
+          {showLink ? (
+            <UsernameLink username={data.username} />
+          ) : (
+            <p>{data.username}</p>
+          )}
         </div>
         <div>
           <svg
@@ -61,7 +59,7 @@ const FeedItem = ({
           </svg>
         </div>
       </div>
-      <div>{feedContent}</div>
+      <div>{data.content}</div>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div className="flex flex-row justify-start items-center">
           <div>
@@ -105,13 +103,13 @@ const FeedItem = ({
       </div>
     </div>
     <div className="flex flex-col justify-start">
-      <FeedCommentBox docId={docId} currentUser={currentUser} />
+      <FeedCommentBox postId={data.id} currentUser={currentUser} />
       <ul className="ml-10">
-        {comments.map((feedComment) => (
+        {data.comments.map((comment) => (
           <FeedItemComment
-            key={feedComment.id}
-            username={feedComment.username}
-            comment={feedComment.comment}
+            key={comment.id}
+            username={comment.username}
+            comment={comment.content}
             showLink={showLink}
           />
         ))}

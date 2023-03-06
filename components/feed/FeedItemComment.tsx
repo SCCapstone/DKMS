@@ -8,7 +8,7 @@ const FeedItemComment = ({
 }: {
   username: string;
   comment: string;
-  showLink?: boolean;
+  showLink: boolean;
 }) => (
   <div>
     <div className="flex flex-row">

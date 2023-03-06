@@ -1,38 +1,30 @@
 import FeedItem from "./FeedItem";
 import FeedTextBox from "./FeedTextBox";
 
+import type { FirestoreFeedItem } from "lib/firestore/types";
 import type { User } from "next-auth";
 
-export type FeedComment = {
+type FeedContent = {
   id: string;
-  username: string;
-  comment: string;
-  createTime: Date;
-};
+} & FirestoreFeedItem;
 
 export type FeedItemContent = {
-  id: string;
-  data: {
-    username: string;
-    content: string;
-    comments: FeedComment[];
-    createTime: Date;
-  };
-};
+  comments: FeedContent[];
+} & FeedContent;
 
 const FeedPage = ({
   data,
-  showLinks,
-  user,
+  currentUser,
+  showLinks = false,
 }: {
   data: FeedItemContent[];
+  currentUser: User;
   showLinks?: boolean;
-  user: User;
 }) => (
   <div>
     {showLinks && (
       <>
-        <FeedTextBox userId={user.id} />
+        <FeedTextBox user={currentUser} />
         <div className="divider" />
       </>
     )}
@@ -40,12 +32,9 @@ const FeedPage = ({
       {data.map((feedItem) => (
         <FeedItem
           key={feedItem.id}
-          currentUser={user}
-          docId={feedItem.id}
-          username={feedItem.data.username}
-          feedContent={feedItem.data.content}
+          data={feedItem}
+          currentUser={currentUser}
           showLink={showLinks}
-          comments={feedItem.data.comments}
         />
       ))}
     </ul>
