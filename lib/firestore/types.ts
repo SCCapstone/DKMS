@@ -10,3 +10,9 @@ export type FirestoreFeedItem = {
   likes: number;
   username: string;
 };
+
+export type FirestoreProfile = {
+  topTracks: SpotifyApi.TrackObjectFull[];
+  topArtists: SpotifyApi.ArtistObjectFull[];
+  updatedAt: Timestamp;
+};

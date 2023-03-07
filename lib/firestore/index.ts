@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore } from "firebase/firestore";
 
-import type { FirestoreUser, FirestoreFeedItem } from "./types";
+import type {
+  FirestoreUser,
+  FirestoreFeedItem,
+  FirestoreProfile,
+} from "./types";
 import type { DocumentData, CollectionReference } from "firebase/firestore";
 
 export const firebaseConfig = {
@@ -43,3 +47,5 @@ export const feedCol = createCollection<FirestoreFeedItem>("feed_items");
 
 export const getCommentsCol = (feedId: string) =>
   createCollection<FirestoreFeedItem>("feed_items", feedId, "comments");
+
+export const profilesCol = createCollection<FirestoreProfile>("profiles");

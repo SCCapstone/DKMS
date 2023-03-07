@@ -1,11 +1,12 @@
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { cert } from "firebase-admin/app";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
-import { firebaseConfig } from "lib/firestore";
+import { firebaseConfig, profilesCol } from "lib/firestore";
 
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, EventCallbacks } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import type { SpotifyProfile } from "next-auth/providers/spotify";
 
@@ -63,6 +64,33 @@ const refreshAccessToken = async (token: JWT) => {
   }
 };
 
+const onSignIn: EventCallbacks["signIn"] = async (message) => {
+  const { user, account } = message;
+
+  const accessToken = account?.access_token;
+  if (!accessToken) {
+    return undefined;
+  }
+
+  const artistRes = await fetch(`https://api.spotify.com/v1/me/top/artists`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  const trackRes = await fetch(`https://api.spotify.com/v1/me/top/tracks`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  const artistData =
+    (await artistRes.json()) as SpotifyApi.UsersTopArtistsResponse;
+  const trackData =
+    (await trackRes.json()) as SpotifyApi.UsersTopTracksResponse;
+
+  return setDoc(doc(profilesCol, user.id), {
+    topArtists: artistData.items,
+    topTracks: trackData.items,
+    updatedAt: serverTimestamp(),
+  });
+};
+
 export const authOptions: NextAuthOptions = {
   adapter: FirestoreAdapter({
     ...firebaseConfig,
@@ -77,8 +105,13 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     SpotifyProvider<SpotifyApi.CurrentUsersProfileResponse & SpotifyProfile>({
-      authorization:
-        "https://accounts.spotify.com/authorize?scope=ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20user-follow-modify%20playlist-read-collaborative%20user-follow-read%20user-read-currently-playing%20user-read-playback-position%20user-library-modify%20playlist-modify-private%20playlist-modify-public%20user-read-email%20user-top-read%20streaming%20user-read-recently-played%20user-read-private%20user-library-read",
+      authorization: {
+        params: {
+          scope:
+            "ugc-image-upload user-read-playback-state user-modify-playback-state playlist-read-private user-follow-modify playlist-read-collaborative user-follow-read user-read-currently-playing user-read-playback-position user-library-modify playlist-modify-private playlist-modify-public user-read-email user-top-read streaming user-read-recently-played user-read-private user-library-read",
+        },
+      },
+
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -124,6 +157,9 @@ export const authOptions: NextAuthOptions = {
       accessToken: token.accessToken,
       error: token.error,
     }),
+  },
+  events: {
+    signIn: onSignIn,
   },
 };
 
