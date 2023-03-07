@@ -1,7 +1,7 @@
 import FeedItem from "./FeedItem";
 import FeedTextBox from "./FeedTextBox";
 
-import type { FirestoreFeedItem } from "lib/firestore/types";
+import type { FirestoreFeedItem } from "@/lib/firestore/types";
 import type { User } from "next-auth";
 
 export type FeedCommentType = {

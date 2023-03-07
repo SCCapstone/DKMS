@@ -1,6 +1,6 @@
 import { addDoc, serverTimestamp } from "firebase/firestore";
 
-import { feedCol } from "lib/firestore";
+import { feedCol } from "@/lib/firestore";
 
 import type { User } from "next-auth";
 

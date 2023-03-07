@@ -1,10 +1,10 @@
-import Album from "components/music/Album";
-import Artist from "components/music/Artist";
-import Playlist from "components/music/Playlist";
-import Track from "components/music/Track";
-import UsernameLink from "components/ui/UsernameLink";
+import Album from "@/components/music/Album";
+import Artist from "@/components/music/Artist";
+import Playlist from "@/components/music/Playlist";
+import Track from "@/components/music/Track";
+import UsernameLink from "@/components/ui/UsernameLink";
 
-import type { FirestoreUser } from "lib/firestore/types";
+import type { FirestoreUser } from "@/lib/firestore/types";
 
 const LOADING_ITEMS = {
   albums: {

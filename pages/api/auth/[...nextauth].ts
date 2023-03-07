@@ -4,7 +4,7 @@ import { cert } from "firebase-admin/app";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
-import { firebaseConfig, profilesCol } from "lib/firestore";
+import { firebaseConfig, profilesCol } from "@/lib/firestore";
 
 import type { NextAuthOptions, EventCallbacks } from "next-auth";
 import type { JWT } from "next-auth/jwt";

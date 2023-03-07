@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import SidebarMenu from "../Sidebar/SidebarMenu";
+import SidebarMenu from "@/components/Sidebar/SidebarMenu";
 
 import NavbarItem from "./NavbarItem";
 

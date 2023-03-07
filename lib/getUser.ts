@@ -2,9 +2,8 @@ import { getDocs } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 import "server-only";
 
-import { authOptions } from "../pages/api/auth/[...nextauth]";
-
-import { usersCol } from "./firestore";
+import { usersCol } from "@/lib/firestore";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 /**
  * Returns the currently logged in user, according to

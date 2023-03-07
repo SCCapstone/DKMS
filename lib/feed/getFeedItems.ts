@@ -1,6 +1,6 @@
 import { getDocs } from "firebase/firestore";
 
-import { feedCol } from "lib/firestore";
+import { feedCol } from "@/lib/firestore";
 
 import getFeedComments from "./getFeedComments";
 

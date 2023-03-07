@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
 
-import FollowButton from "components/profile/FollowButton";
-import { getFeedItems } from "lib/feed";
-import isUserFollowing from "lib/followers/isUserFollowing";
-import { getCurrentUser, getUserByUsername } from "lib/getUser";
-
-import FeedPage from "../../../components/feed";
-import PageTitle from "../../../components/ui/PageTitle";
-import ProfileImg from "../../../components/userProfile/profileImg";
-import { formatFollowers } from "../../../lib/formatters";
+import FeedPage from "@/components/feed";
+import FollowButton from "@/components/profile/FollowButton";
+import PageTitle from "@/components/ui/PageTitle";
+import ProfileImg from "@/components/userProfile/profileImg";
+import { getFeedItems } from "@/lib/feed";
+import isUserFollowing from "@/lib/followers/isUserFollowing";
+import { formatFollowers } from "@/lib/formatters";
+import { getCurrentUser, getUserByUsername } from "@/lib/getUser";
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
   const currentUser = await getCurrentUser();

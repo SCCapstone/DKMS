@@ -1,5 +1,5 @@
-import UsernameLink from "components/ui/UsernameLink";
-import ProfileImg from "components/userProfile/profileImg";
+import UsernameLink from "@/components/ui/UsernameLink";
+import ProfileImg from "@/components/userProfile/profileImg";
 
 import type { FeedCommentType } from ".";
 

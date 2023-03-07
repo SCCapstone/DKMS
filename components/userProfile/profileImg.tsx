@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { getUserByUsername } from "lib/getUser";
+import { getUserByUsername } from "@/lib/getUser";
 
 const ProfileImg = async ({
   username,
