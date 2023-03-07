@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore } from "firebase/firestore";
 
-import type { FirestoreUser, FirestoreFeedContent } from "./types";
+import type { FirestoreUser, FirestoreFeedItem } from "./types";
 import type { DocumentData, CollectionReference } from "firebase/firestore";
 
 export const firebaseConfig = {
@@ -28,8 +28,18 @@ export default firestore;
  * @see https://plainenglish.io/blog/using-firestore-with-typescript-in-the-v9-sdk-cf36851bb099
  *
  */
-const createCollection = <T = DocumentData>(collectionName: string) =>
-  collection(firestore, collectionName) as CollectionReference<T>;
+const createCollection = <T = DocumentData>(
+  collectionName: string,
+  ...pathSegments: string[]
+) =>
+  collection(
+    firestore,
+    collectionName,
+    ...pathSegments
+  ) as CollectionReference<T>;
 
 export const usersCol = createCollection<FirestoreUser>("users");
-export const feedCol = createCollection<FirestoreFeedContent>("feed_content");
+export const feedCol = createCollection<FirestoreFeedItem>("feed_items");
+
+export const getCommentsCol = (feedId: string) =>
+  createCollection<FirestoreFeedItem>("feed_items", feedId, "comments");

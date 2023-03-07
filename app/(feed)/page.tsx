@@ -1,19 +1,17 @@
-import { getFeedContent } from "lib/feed";
-import getUser from "utils/getUser";
+import { getFeedItems } from "lib/feed";
+import { getCurrentUser } from "lib/getUser";
 
-import FeedPage from "../../components/feed/FeedPage";
+import FeedPage from "../../components/feed";
 import PageTitle from "../../components/ui/PageTitle";
 
-import type { FeedItemContent } from "../../components/feed/FeedPage";
-
 const Feed = async () => {
-  const data: FeedItemContent[] = await getFeedContent();
-  const user = await getUser();
+  const data = await getFeedItems();
+  const currentUser = await getCurrentUser();
 
   return (
     <div>
       <PageTitle title="Feed" />
-      <FeedPage data={data} user={user} showLinks />
+      <FeedPage data={data} currentUser={currentUser} showLinks />
     </div>
   );
 };
