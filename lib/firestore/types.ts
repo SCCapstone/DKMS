@@ -12,7 +12,7 @@ export type FirestoreFeedItem = {
 };
 
 export type FirestoreProfile = {
-  topTracks: string[];
-  topArtists: string[];
+  topTracks: SpotifyApi.TrackObjectFull[];
+  topArtists: SpotifyApi.ArtistObjectFull[];
   updatedAt: Timestamp;
 };
