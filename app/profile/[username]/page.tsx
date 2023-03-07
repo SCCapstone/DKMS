@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/profile/FollowButton";
 import ProfileHead from "@/components/profile/ProfileHead";
+import TopItems from "@/components/profile/TopItems";
 import { profilesCol } from "@/lib/firestore";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import { getCurrentUser, getUserByUsername } from "@/lib/getUser";
@@ -38,7 +39,8 @@ const Profile = async ({ params }: { params: { username: string } }) => {
         <FollowButton isFollowing={isFollowed} username={username} />
       )}
       <div className="divider" />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <TopItems artists={data.topArtists} tracks={data.topTracks} />
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </>
   );
 };
