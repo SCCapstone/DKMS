@@ -16,3 +16,7 @@ export type FirestoreProfile = {
   topArtists: SpotifyApi.ArtistObjectFull[];
   updatedAt: Timestamp;
 };
+
+export type FirestoreItemLike = {
+  userId: string;
+};

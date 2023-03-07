@@ -1,14 +1,20 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 
-import firestore from "lib/firestore";
+import { feedCol, likesCol } from "lib/firestore";
 
-const likeItem = async (postId: string, currentLikes: number) => {
+const likeItem = async (
+  userId: string,
+  postId: string,
+  currentLikes: number
+) => {
   const newLikes = currentLikes + 1;
-  const docRef = await updateDoc(doc(firestore, "feed_items", postId), {
+  await updateDoc(doc(feedCol, postId), {
     likes: newLikes,
   });
 
-  return docRef;
+  await setDoc(doc(likesCol(postId), userId), {
+    userId,
+  });
 };
 
 export default likeItem;

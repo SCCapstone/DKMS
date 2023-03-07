@@ -1,14 +1,18 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
-import firestore from "lib/firestore";
+import { feedCol, likesCol } from "lib/firestore";
 
-const unlikeItem = async (postId: string, currentLikes: number) => {
+const unlikeItem = async (
+  userId: string,
+  postId: string,
+  currentLikes: number
+) => {
   const newLikes = currentLikes - 1;
-  const docRef = await updateDoc(doc(firestore, "feed_items", postId), {
+  await updateDoc(doc(feedCol, postId), {
     likes: newLikes,
   });
 
-  return docRef;
+  await deleteDoc(doc(likesCol(postId), userId));
 };
 
 export default unlikeItem;
