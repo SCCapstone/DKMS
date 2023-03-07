@@ -1,6 +1,6 @@
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 
-import { feedCol, likesCol } from "lib/firestore";
+import { feedCol, likesCol } from "@/lib/firestore";
 
 const likeItem = async (
   userId: string,
