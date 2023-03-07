@@ -29,7 +29,10 @@ export const getCurrentUser = async () => {
  */
 export const getUserByUsername = async (username: string) => {
   const usersSnapshot = await getDocs(usersCol);
-  const usersData = usersSnapshot.docs.map((doc) => doc.data());
+  const usersData = usersSnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
 
   return usersData.find((user) =>
     user.username.toLowerCase().includes(username.toLowerCase())
@@ -44,7 +47,10 @@ export const getUserByUsername = async (username: string) => {
  */
 export const getUserById = async (id: string) => {
   const usersSnapshot = await getDocs(usersCol);
-  const usersData = usersSnapshot.docs.map((doc) => doc.data());
+  const usersData = usersSnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
 
   return usersData.find((user) => user.id === id);
 };
