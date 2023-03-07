@@ -10,3 +10,9 @@ export type FirestoreFeedItem = {
   likes: number;
   username: string;
 };
+
+export type FirestoreProfile = {
+  topTracks: string[];
+  topArtists: string[];
+  updatedAt: Timestamp;
+};
