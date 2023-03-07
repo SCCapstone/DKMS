@@ -17,3 +17,7 @@ export type FirestoreProfile = {
   updatedAt: Timestamp;
   savedItemIds: string[] | undefined;
 };
+
+export type FirestoreItemLike = {
+  userId: string;
+};
