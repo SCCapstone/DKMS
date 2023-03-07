@@ -10,10 +10,11 @@ const Page = () => {
   const router = useRouter();
 
   if (status === "authenticated") {
-    return router.replace(`/profile/${session.user.username}`);
+    router.replace(`/profile/${session.user.username}`);
+    return <Skeleton enableAnimation />;
   }
 
-  return <Skeleton />;
+  return <Skeleton enableAnimation />;
 };
 
 export default Page;

@@ -2,51 +2,33 @@ import Image from "next/image";
 
 import { getUserByUsername } from "@/lib/getUser";
 
+import type { User } from "next-auth";
+
+type ProfileImgProps =
+  | {
+      username: string;
+      user?: never;
+      isProfilePage: boolean;
+    }
+  | {
+      username?: never;
+      user: User;
+      isProfilePage: boolean;
+    };
+
 const ProfileImg = async ({
   username,
+  user,
   isProfilePage,
-}: {
-  username: string | undefined;
-  isProfilePage: boolean | undefined;
-}) => {
-  if (!username) {
-    throw new Error("No username provided");
-  }
-
-  const profile = await getUserByUsername(username);
+}: ProfileImgProps) => {
+  const profile = username ? await getUserByUsername(username) : user;
   const img = profile?.image;
-
-  if (img) {
-    return (
-      <Image
-        src={img}
-        width={300}
-        height={300}
-        style={
-          isProfilePage
-            ? {
-                width: 60,
-                height: 60,
-                borderRadius: 60 / 2,
-                marginRight: 7,
-              }
-            : {
-                width: 30,
-                height: 30,
-                borderRadius: 30 / 2,
-                marginRight: 7,
-              }
-        }
-        alt={`${username}'s profile picture`}
-      />
-    );
-  }
 
   return (
     <Image
-      src="/images/defaults/profileImage.png"
-      width={720}
-      height={720}
+      src={img ?? "/images/defaults/profileImage.png"}
+      width={300}
+      height={300}
       style={
         isProfilePage
           ? {
@@ -62,7 +44,7 @@ const ProfileImg = async ({
               marginRight: 7,
             }
       }
-      alt="default profile picture"
+      alt={`${profile?.username ?? "default"}'s profile picture`}
     />
   );
 };
