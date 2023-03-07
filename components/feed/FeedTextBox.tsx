@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { postFeedItem } from "lib/feed";
+import { postFeedItem } from "@/lib/feed";
 
 import type { User } from "next-auth";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getPlaiceholder } from "plaiceholder";
 
-import Skeleton from "../ui/Skeleton";
+import Skeleton from "@/components/ui/Skeleton";
 
 const Playlist = async ({
   playlist,

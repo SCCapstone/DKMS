@@ -1,6 +1,6 @@
 import { getDocs } from "firebase/firestore";
 
-import { getCommentsCol } from "lib/firestore";
+import { getCommentsCol } from "@/lib/firestore";
 
 const getFeedComments = async (postId: string) => {
   const feedSnapshot = await getDocs(getCommentsCol(postId));

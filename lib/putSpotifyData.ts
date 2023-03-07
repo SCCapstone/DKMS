@@ -1,6 +1,6 @@
 import "client-only";
 
-import getAccessToken from "./getAccessToken";
+import getAccessToken from "@/lib/getAccessToken";
 
 const putSpotifyData = async (
   input: RequestInfo | URL,

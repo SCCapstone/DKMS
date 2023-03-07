@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 
-import PageTitle from "../../components/ui/PageTitle";
+import PageTitle from "@/components/ui/PageTitle";
 
 const THEME_VALUES = [
   "light",

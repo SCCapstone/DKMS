@@ -1,6 +1,6 @@
 "use client";
 
-import putSpotifyData from "lib/putSpotifyData";
+import putSpotifyData from "@/lib/putSpotifyData";
 
 const toggleFollowing = async (username: string, isFollowing: boolean) =>
   putSpotifyData(

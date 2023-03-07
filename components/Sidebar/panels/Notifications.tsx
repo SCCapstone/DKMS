@@ -1,4 +1,4 @@
-import UsernameLink from "../../ui/UsernameLink";
+import UsernameLink from "@/components/ui/UsernameLink";
 
 import BasePanel from "./BasePanel";
 

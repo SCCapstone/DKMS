@@ -1,4 +1,4 @@
-import joinArtists from "lib/joinArtists";
+import joinArtists from "./joinArtists";
 
 describe("joinArtists()", () => {
   it("returns an empty string when no artists are available", () => {

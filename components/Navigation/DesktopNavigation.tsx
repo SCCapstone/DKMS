@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Vercel from "../ui/Vercel";
+import Vercel from "@/components/ui/Vercel";
 
 import NavbarItem from "./NavbarItem";
 
