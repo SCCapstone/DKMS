@@ -1,6 +1,6 @@
 import "server-only";
 
-import getServerAccessToken from "./getServerAccessToken";
+import getServerAccessToken from "@/lib/getServerAccessToken";
 
 const getSpotifyData = async <T>(
   input: RequestInfo | URL,

@@ -1,29 +1,28 @@
-import FollowButton from "components/profile/FollowButton";
-import { getFeedContent } from "lib/feed";
-import isUserFollowing from "lib/followers/isUserFollowing";
-import getUser from "utils/getUser";
+import { notFound } from "next/navigation";
 
-import FeedPage from "../../../components/feed/FeedPage";
-import PageTitle from "../../../components/ui/PageTitle";
-import ProfileImg from "../../../components/userProfile/profileImg";
-import { formatFollowers } from "../../../lib/formatters";
-import getSpotifyData from "../../../lib/getSpotifyData";
-
-const getUserProfile = async (username: string) =>
-  getSpotifyData<SpotifyApi.UserProfileResponse>(
-    `https://api.spotify.com/v1/users/${username}`
-  );
+import FeedPage from "@/components/feed";
+import FollowButton from "@/components/profile/FollowButton";
+import PageTitle from "@/components/ui/PageTitle";
+import ProfileImg from "@/components/userProfile/profileImg";
+import { getFeedItems } from "@/lib/feed";
+import isUserFollowing from "@/lib/followers/isUserFollowing";
+import { formatFollowers } from "@/lib/formatters";
+import { getCurrentUser, getUserByUsername } from "@/lib/getUser";
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
-  const currentUser = await getUser();
-  const currentUsername = currentUser.id;
+  const currentUser = await getCurrentUser();
+  const currentUsername = currentUser.username;
   const username = params.username?.[0] ?? currentUsername;
 
-  const profile = await getUserProfile(username);
-  const data = await getFeedContent(profile.id);
+  const profile = await getUserByUsername(username);
+  if (!profile) {
+    notFound();
+  }
+  const data = await getFeedItems(profile.id);
 
   const isFollowed = await isUserFollowing(profile.id);
   const showFollowButton = username !== currentUsername && params.username?.[0];
+
   return (
     <div>
       <PageTitle title="Profile" />
@@ -31,9 +30,13 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
         {/* @ts-expect-error Server Component */}
         <ProfileImg username={username} isProfilePage />
         <div className="flex flex-col">
-          <h1 className="normal-case font-bold">Profile — {username}</h1>
+          <h1 className="normal-case font-bold">
+            {!profile.displayName || username === profile.displayName
+              ? username
+              : `${profile.displayName} — ${username}`}
+          </h1>
           <h2 className="normal-case">
-            {formatFollowers(profile.followers?.total)} followers
+            {formatFollowers(profile.followers)} followers
           </h2>
         </div>
       </div>
@@ -41,7 +44,7 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
         <FollowButton isFollowing={isFollowed} username={username} />
       )}
       <div className="divider" />
-      <FeedPage user={currentUser} data={data} />
+      <FeedPage currentUser={currentUser} data={data} />
     </div>
   );
 };

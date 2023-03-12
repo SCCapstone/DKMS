@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { getPlaiceholder } from "plaiceholder";
 
-import joinArtists from "lib/joinArtists";
-
-import Skeleton from "../ui/Skeleton";
+import Skeleton from "@/components/ui/Skeleton";
+import joinArtists from "@/lib/joinArtists";
 
 const Album = async ({
   album,

@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { postFeedContent } from "lib/feed";
+import { postFeedItem } from "@/lib/feed";
 
-const FeedTextBox = ({ userId }: { userId: string }) => {
+import type { User } from "next-auth";
+
+const FeedTextBox = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -18,10 +20,10 @@ const FeedTextBox = ({ userId }: { userId: string }) => {
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    setPostText("");
-    await postFeedContent(userId, `${postText}`);
+    await postFeedItem(user, postText);
     setIsFetching(false);
     startTransition(() => {
+      setPostText("");
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.
       router.refresh();

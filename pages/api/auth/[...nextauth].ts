@@ -1,21 +1,17 @@
+import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { cert } from "firebase-admin/app";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
-import type { NextAuthOptions } from "next-auth";
+import { firebaseConfig, profilesCol } from "@/lib/firestore";
+
+import type { NextAuthOptions, EventCallbacks } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import type { SpotifyProfile } from "next-auth/providers/spotify";
 
 // hard code for now, NextAuth doesn't get the number from Spotify
 const EXPIRES_IN = 3600000;
-
-type CustomProfile = {
-  external_urls: {
-    spotify: string;
-  };
-  followers: {
-    total: number;
-  };
-} & SpotifyProfile;
 
 /**
  * Takes a token, and returns a new token with updated
@@ -68,22 +64,66 @@ const refreshAccessToken = async (token: JWT) => {
   }
 };
 
+const onSignIn: EventCallbacks["signIn"] = async (message) => {
+  const { user, account } = message;
+
+  const accessToken = account?.access_token;
+  if (!accessToken) {
+    return undefined;
+  }
+
+  const artistRes = await fetch(`https://api.spotify.com/v1/me/top/artists`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  const trackRes = await fetch(`https://api.spotify.com/v1/me/top/tracks`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  const artistData =
+    (await artistRes.json()) as SpotifyApi.UsersTopArtistsResponse;
+  const trackData =
+    (await trackRes.json()) as SpotifyApi.UsersTopTracksResponse;
+
+  return setDoc(doc(profilesCol, user.id), {
+    topArtists: artistData.items,
+    topTracks: trackData.items,
+    updatedAt: serverTimestamp(),
+  });
+};
+
 export const authOptions: NextAuthOptions = {
+  adapter: FirestoreAdapter({
+    ...firebaseConfig,
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY,
+    }),
+  }),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    SpotifyProvider<CustomProfile>({
-      authorization:
-        "https://accounts.spotify.com/authorize?scope=ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20user-follow-modify%20playlist-read-collaborative%20user-follow-read%20user-read-currently-playing%20user-read-playback-position%20user-library-modify%20playlist-modify-private%20playlist-modify-public%20user-read-email%20user-top-read%20streaming%20user-read-recently-played%20user-read-private%20user-library-read",
+    SpotifyProvider<SpotifyApi.CurrentUsersProfileResponse & SpotifyProfile>({
+      authorization: {
+        params: {
+          scope:
+            "ugc-image-upload user-read-playback-state user-modify-playback-state playlist-read-private user-follow-modify playlist-read-collaborative user-follow-read user-read-currently-playing user-read-playback-position user-library-modify playlist-modify-private playlist-modify-public user-read-email user-top-read streaming user-read-recently-played user-read-private user-library-read",
+        },
+      },
+
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
-      profile: (profile) => ({
+      profile: (profile: SpotifyApi.CurrentUsersProfileResponse) => ({
         id: profile.id,
-        name: profile.display_name,
-        email: profile.email,
+        displayName: profile.display_name ?? profile.id,
+        username: profile.id,
+        uri: profile.uri,
         url: profile.external_urls.spotify,
-        totalFollowers: profile.followers.total,
-        image: profile.images[0]?.url,
+        followers: profile.followers?.total ?? 0,
+        image: profile.images?.[0]?.url,
       }),
     }),
   ],
@@ -117,6 +157,9 @@ export const authOptions: NextAuthOptions = {
       accessToken: token.accessToken,
       error: token.error,
     }),
+  },
+  events: {
+    signIn: onSignIn,
   },
 };
 
