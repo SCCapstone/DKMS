@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { formatFollowers } from "@/lib/formatters";
+import isItemLiked from "@/lib/likeButton/isItemLiked";
 import likeItem from "@/lib/likeButton/likeItem";
 import unlikeItem from "@/lib/likeButton/unlikeItem";
 
@@ -15,10 +16,17 @@ const LikeButton = ({
   postId: string;
   likes: number;
 }) => {
-  // const liked = await isItemLiked(userId, postId);
   const [liked, setLiked] = useState(false);
 
   const [numLikes, setNumLikes] = useState(likes);
+
+  useEffect(() => {
+    async function getLikeState() {
+      const likeState = await isItemLiked(userId, postId);
+      setLiked(likeState);
+    }
+    void getLikeState();
+  }, [userId, postId]);
 
   const onClick = () => {
     if (liked) {
