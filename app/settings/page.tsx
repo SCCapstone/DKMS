@@ -6,6 +6,7 @@ import { themeChange } from "theme-change";
 import PageTitle from "@/components/ui/PageTitle";
 
 const THEME_VALUES = [
+  "dark",
   "light",
   "cupcake",
   "bumblebee",
@@ -66,9 +67,6 @@ const Settings = () => {
           }}
           value={theme}
         >
-          <option className="text-primary" value="dark">
-            Dark (default)
-          </option>
           {THEME_VALUES.map((value) => (
             <option
               className="text-primary"
