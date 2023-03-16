@@ -1,19 +1,11 @@
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, increment, updateDoc } from "firebase/firestore";
 
-import { feedCol, likesCol } from "@/lib/firestore";
+import { feedCol } from "@/lib/firestore";
 
-const likeItem = async (
-  userId: string,
-  postId: string,
-  currentLikes: number
-) => {
-  const newLikes = currentLikes + 1;
+const likeItem = async (userId: string, postId: string) => {
   await updateDoc(doc(feedCol, postId), {
-    likes: newLikes,
-  });
-
-  await setDoc(doc(likesCol(postId), userId), {
-    userId,
+    likes: increment(1),
+    likedIds: arrayUnion(userId),
   });
 };
 
