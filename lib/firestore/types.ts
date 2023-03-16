@@ -9,6 +9,7 @@ export type FirestoreFeedItem = {
   content: string;
   likes: number;
   username: string;
+  likedIds: string[];
 };
 
 export type FirestoreProfile = {
