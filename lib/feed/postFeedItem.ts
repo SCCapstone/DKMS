@@ -11,6 +11,7 @@ const postFeedItem = async (user: User, content: string) => {
     userId: user.id,
     username: user.username,
     timestamp: serverTimestamp(),
+    likedIds: [],
   });
 
   return docRef.id;
