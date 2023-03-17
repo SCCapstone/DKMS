@@ -23,6 +23,22 @@ yarn install
 
 This will also configure Husky, used to run pre-commit checks.
 
+### Environment Variables
+
+Two environment variable files are required:
+
+- `.env` — for all public environment variables
+  - `SPOTIFY_CLIENT_ID`
+  - `NEXTAUTH_URL`
+- `.env.local` — for all private env secrets
+  - `NEXTAUTH_SECRET`
+  - `SPOTIFY_CLIENT_SECRET`
+  - `FIREBASE_PROJECT_ID`
+  - `FIREBASE_CLIENT_EMAIL`
+  - `FIREBASE_PRIVATE_KEY`
+
+For more information about environment variable files, see https://nextjs.org/docs/basic-features/environment-variables.
+
 ## Running
 
 To run the repo in development mode, do:
