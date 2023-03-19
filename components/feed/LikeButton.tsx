@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import { formatFollowers } from "@/lib/formatters";
-import likeItem from "@/lib/likeButton/likeItem";
-import unlikeItem from "@/lib/likeButton/unlikeItem";
+import { likeItem, unlikeItem } from "@/lib/likeButton";
 
 const LikeButton = ({
   userId,
