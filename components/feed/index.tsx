@@ -16,10 +16,12 @@ export type FeedItemType = {
 const FeedPage = ({
   data,
   currentUser,
+  savedItemIds,
   showLinks = false,
 }: {
   data: FeedItemType[];
   currentUser: User;
+  savedItemIds: string[];
   showLinks?: boolean;
 }) => (
   <div>
@@ -35,6 +37,7 @@ const FeedPage = ({
           key={feedItem.id}
           data={feedItem}
           currentUser={currentUser}
+          savedItemIds={savedItemIds}
           showLink={showLinks}
         />
       ))}
