@@ -1,5 +1,11 @@
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { cert } from "firebase-admin/app";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
@@ -84,10 +90,19 @@ const onSignIn: EventCallbacks["signIn"] = async (message) => {
   const trackData =
     (await trackRes.json()) as SpotifyApi.UsersTopTracksResponse;
 
-  return setDoc(doc(profilesCol, user.id), {
+  const docRef = doc(profilesCol, user.id);
+  if ((await getDoc(docRef)).exists()) {
+    return updateDoc(docRef, {
+      topArtists: artistData.items,
+      topTracks: trackData.items,
+      updatedAt: serverTimestamp(),
+    });
+  }
+  return setDoc(docRef, {
     topArtists: artistData.items,
     topTracks: trackData.items,
     updatedAt: serverTimestamp(),
+    savedItemIds: [],
   });
 };
 
