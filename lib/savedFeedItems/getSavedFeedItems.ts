@@ -25,10 +25,7 @@ const getSavedFeedItems = async (userId: string) => {
     .sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis())
     .reverse();
 
-  return formattedData.filter((post) => {
-    const itemId = savedItemIds?.find((item) => item.trim() === post.id);
-    return post.id === itemId?.trim();
-  });
+  return formattedData.filter((post) => savedItemIds?.includes(post.id.trim()));
 };
 
 export default getSavedFeedItems;

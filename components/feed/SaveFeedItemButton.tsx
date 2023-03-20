@@ -14,8 +14,7 @@ const SaveFeedItemButton = ({
   postId: string;
   savedItemIds?: string[];
 }) => {
-  const itemId = savedItemIds?.find((item) => item.trim() === postId);
-  const saved = postId === itemId?.trim();
+  const saved = savedItemIds?.includes(postId.trim());
 
   const [localSavedState, setLocalSavedState] = useState(saved);
 
