@@ -1,12 +1,12 @@
-import { doc, getDoc, getDocs } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 
 import { getFeedComments } from "@/lib/feed";
-import { feedCol, profilesCol } from "@/lib/firestore";
+import { feedCol } from "@/lib/firestore";
+
+import getSavedFeedItemsList from "./getSavedFeedItemsList";
 
 const getSavedFeedItems = async (userId: string) => {
-  const docRef = doc(profilesCol, userId);
-  const profile = await getDoc(docRef);
-  const savedItemIds = profile.data()?.savedItemIds;
+  const savedItemIds = await getSavedFeedItemsList(userId);
 
   const feedSnapshot = await getDocs(feedCol);
   const baseData = await Promise.all(
