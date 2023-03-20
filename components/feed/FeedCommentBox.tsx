@@ -54,7 +54,9 @@ const FeedCommentBox = ({
             onClick={(e) => void handleSubmit(e)}
             disabled={!commentText || isMutating}
             type="submit"
-            className={`${isMutating ? "loading" : ""} btn btn-primary`}
+            className={`${
+              isMutating ? "loading" : ""
+            } btn btn-outline btn-primary`}
           >
             Comment
           </button>
