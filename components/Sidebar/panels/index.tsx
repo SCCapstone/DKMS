@@ -4,7 +4,6 @@ import { useSidebar } from "../SidebarContext";
 
 import Friends from "./Friends";
 import Notifications from "./Notifications";
-import Recommendations from "./Recommendations";
 
 const SidebarPanels = () => {
   const [currentSidebar] = useSidebar();
@@ -13,13 +12,6 @@ const SidebarPanels = () => {
       return <Friends />;
     case "notifications":
       return <Notifications />;
-    case "recommendations":
-      return (
-        <div>
-          {/* @ts-expect-error Server Component */}
-          <Recommendations />
-        </div>
-      );
     default:
       return null;
   }
