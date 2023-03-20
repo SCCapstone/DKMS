@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { formatFollowers } from "@/lib/formatters";
+import { formatNumber } from "@/lib/formatters";
 import { likeItem, unlikeItem } from "@/lib/likeButton";
 
 const LikeButton = ({
@@ -72,7 +72,7 @@ const LikeButton = ({
           />
         </svg>
       </button>
-      <p>{formatFollowers(localLikesNum)}</p>
+      <p>{formatNumber(localLikesNum)}</p>
     </div>
   );
 };
