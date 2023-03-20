@@ -4,6 +4,8 @@ import { getPlaiceholder } from "plaiceholder";
 import Skeleton from "@/components/ui/Skeleton";
 import joinArtists from "@/lib/joinArtists";
 
+import PlayButton from "./PlayButton";
+
 const Track = async ({
   track,
 }: {
@@ -57,6 +59,9 @@ const Track = async ({
           {track.album.name}
         </p>
         <p>{joinArtists(track.artists)}</p>
+      </div>
+      <div>
+        <PlayButton />
       </div>
     </a>
   );
