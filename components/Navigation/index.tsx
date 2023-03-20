@@ -17,6 +17,10 @@ const NAVBAR_ITEMS: MenuItems = [
     url: "/search",
   },
   {
+    label: "Recommended",
+    url: "/recommendations",
+  },
+  {
     label: "Settings",
     url: "/settings",
   },
