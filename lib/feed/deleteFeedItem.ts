@@ -1,17 +1,13 @@
 import { doc, deleteDoc } from "firebase/firestore";
 
-import { feedCol } from "../firestore";
+import { getCommentsCol, feedCol } from "../firestore";
 
-import type { FeedCommentType, FeedItemType } from "@/components/feed";
-
-const deleteFeedItem = async (
-  postData: FeedItemType,
-  commentData?: FeedCommentType
-) => {
-  if (typeof commentData !== "undefined") {
-    await deleteDoc(doc(feedCol, postData.id, "comments", commentData.id));
+const deleteFeedItem = async (postId: string, commentId?: string) => {
+  if (commentId) {
+    await deleteDoc(doc(getCommentsCol(postId), commentId));
   } else {
-    await deleteDoc(doc(feedCol, postData.id));
+    await deleteDoc(doc(getCommentsCol(postId)));
+    await deleteDoc(doc(feedCol, postId));
   }
 };
 
