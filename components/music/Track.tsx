@@ -7,7 +7,10 @@ import joinArtists from "@/lib/joinArtists";
 const Track = async ({
   track,
 }: {
-  track: SpotifyApi.TrackObjectFull | undefined;
+  track:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.RecommendationTrackObject
+    | undefined;
 }) => {
   if (!track) {
     return (
