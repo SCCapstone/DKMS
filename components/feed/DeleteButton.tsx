@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 import deleteFeedItem from "@/lib/feed/deleteFeedItem";
 
@@ -14,17 +15,31 @@ const DeletePostButton = ({
   commentData?: FeedCommentType;
 }) => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [isFetching, setIsFetching] = useState(false);
+
+  const isMutating = isPending || isFetching;
+
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
+    setIsFetching(true);
     if (typeof commentData !== "undefined") {
       await deleteFeedItem(postData, commentData);
     } else {
       await deleteFeedItem(postData);
     }
-    router.refresh();
+    setIsFetching(false);
+    startTransition(() => {
+      router.refresh();
+    });
   };
   return (
-    <button className="btn" type="button" onClick={(e) => void handleDelete(e)}>
+    <button
+      type="button"
+      onClick={(e) => void handleDelete(e)}
+      disabled={isMutating}
+      className={`${isMutating ? "loading" : ""} btn`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
