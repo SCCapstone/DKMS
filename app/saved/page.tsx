@@ -1,27 +1,25 @@
 import FeedPage from "@/components/feed";
 import FilterFeedButtons from "@/components/feed/FilterFeedButtons";
 import PageTitle from "@/components/ui/PageTitle";
-import { getFeedItems } from "@/lib/feed";
 import { getCurrentUser } from "@/lib/getUser";
-import { getSavedFeedItemsList } from "@/lib/savedFeedItems";
+import { getSavedFeedItems, getSavedFeedItemsList } from "@/lib/savedFeedItems";
 
-const Feed = async () => {
-  const data = await getFeedItems();
+const Saved = async () => {
   const currentUser = await getCurrentUser();
+  const data = await getSavedFeedItems(currentUser.id);
   const savedItemIds = await getSavedFeedItemsList(currentUser.id);
 
   return (
     <div>
       <PageTitle title="Feed" />
-      <FilterFeedButtons />
+      <FilterFeedButtons filterActive />
       <FeedPage
         data={data}
         currentUser={currentUser}
         savedItemIds={savedItemIds}
-        showLinks
       />
     </div>
   );
 };
 
-export default Feed;
+export default Saved;
