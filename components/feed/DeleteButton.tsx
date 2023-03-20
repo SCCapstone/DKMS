@@ -23,10 +23,10 @@ const DeletePostButton = ({
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (typeof commentData !== "undefined") {
-      await deleteFeedItem(postData, commentData);
+    if (commentData) {
+      await deleteFeedItem(postData.id, commentData.id);
     } else {
-      await deleteFeedItem(postData);
+      await deleteFeedItem(postData.id);
     }
     setIsFetching(false);
     startTransition(() => {

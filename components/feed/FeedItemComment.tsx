@@ -32,10 +32,8 @@ const FeedItemComment = ({
         </div>
       </div>
       <div>
-        {currentUser.username === commentData.username ? (
+        {currentUser.username === commentData.username && (
           <DeleteButton postData={postData} commentData={commentData} />
-        ) : (
-          <p />
         )}
       </div>
     </div>
