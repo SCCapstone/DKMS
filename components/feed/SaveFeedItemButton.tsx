@@ -12,9 +12,9 @@ const SaveFeedItemButton = ({
 }: {
   userId: string;
   postId: string;
-  savedItemIds: string[];
+  savedItemIds?: string[];
 }) => {
-  const itemId = savedItemIds.find((item) => item.trim() === postId);
+  const itemId = savedItemIds?.find((item) => item.trim() === postId);
   const saved = postId === itemId?.trim();
 
   const [localSavedState, setLocalSavedState] = useState(saved);

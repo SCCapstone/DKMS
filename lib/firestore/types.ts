@@ -15,5 +15,5 @@ export type FirestoreProfile = {
   topTracks: SpotifyApi.TrackObjectFull[];
   topArtists: SpotifyApi.ArtistObjectFull[];
   updatedAt: Timestamp;
-  savedItemIds: string[];
+  savedItemIds: string[] | undefined;
 };

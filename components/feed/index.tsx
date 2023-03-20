@@ -21,7 +21,7 @@ const FeedPage = ({
 }: {
   data: FeedItemType[];
   currentUser: User;
-  savedItemIds: string[];
+  savedItemIds?: string[];
   showLinks?: boolean;
 }) => (
   <div>

@@ -17,7 +17,7 @@ const FeedItem = ({
 }: {
   data: FeedItemType;
   currentUser: User;
-  savedItemIds: string[];
+  savedItemIds?: string[];
   showLink: boolean;
 }) => (
   <div>
