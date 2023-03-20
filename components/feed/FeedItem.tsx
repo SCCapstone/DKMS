@@ -66,7 +66,7 @@ const FeedItem = ({
             <LikeButton
               userId={currentUser.id}
               postId={data.id}
-              likes={data.likes}
+              likes={data.likedIds.length}
               likedIds={data.likedIds}
             />
           </div>

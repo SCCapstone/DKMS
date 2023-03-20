@@ -7,7 +7,6 @@ export type FirestoreFeedItem = {
   timestamp: Timestamp;
   userId: string;
   content: string;
-  likes: number;
   username: string;
   likedIds: string[];
 };
@@ -17,8 +16,4 @@ export type FirestoreProfile = {
   topArtists: SpotifyApi.ArtistObjectFull[];
   updatedAt: Timestamp;
   savedItemIds: string[] | undefined;
-};
-
-export type FirestoreItemLike = {
-  userId: string;
 };
