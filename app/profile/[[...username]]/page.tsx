@@ -6,7 +6,7 @@ import PageTitle from "@/components/ui/PageTitle";
 import ProfileImg from "@/components/userProfile/profileImg";
 import { getFeedItems } from "@/lib/feed";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
-import { formatFollowers } from "@/lib/formatters";
+import { formatNumber } from "@/lib/formatters";
 import { getCurrentUser, getUserByUsername } from "@/lib/getUser";
 
 const Profile = async ({ params }: { params: { username?: string[] } }) => {
@@ -36,7 +36,7 @@ const Profile = async ({ params }: { params: { username?: string[] } }) => {
               : `${profile.displayName} — ${username}`}
           </h1>
           <h2 className="normal-case">
-            {formatFollowers(profile.followers)} followers
+            {formatNumber(profile.followers)} followers
           </h2>
         </div>
       </div>
