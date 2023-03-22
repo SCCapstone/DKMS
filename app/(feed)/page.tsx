@@ -1,5 +1,5 @@
 import FeedPage from "@/components/feed";
-import FilterFeedButtons from "@/components/feed/FilterFeedButtons";
+import FilterSavedFeedButton from "@/components/feed/FilterSavedFeedButton";
 import PageTitle from "@/components/ui/PageTitle";
 import { getFeedItems } from "@/lib/feed";
 import { getCurrentUser } from "@/lib/getUser";
@@ -13,7 +13,7 @@ const Feed = async () => {
   return (
     <div>
       <PageTitle title="Feed" />
-      <FilterFeedButtons />
+      <FilterSavedFeedButton />
       <FeedPage
         data={data}
         currentUser={currentUser}
