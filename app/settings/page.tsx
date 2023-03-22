@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 
 import PageTitle from "@/components/ui/PageTitle";
+import { getLocalStorage } from "@/lib/localStorage";
 
 const THEME_VALUES = [
   "dark",
@@ -37,46 +38,54 @@ const THEME_VALUES = [
   "winter",
 ] as const;
 
-const validateTheme = (input: string) => {
-  const strThemes = THEME_VALUES.toString();
+type ThemeValues = typeof THEME_VALUES;
+type ThemeValue = ThemeValues[number];
 
-  if (!strThemes.includes(input)) {
-    throw new Error("Invalid theme value.");
-  }
-
-  return input as unknown as typeof THEME_VALUES;
-};
+const validateTheme = (input: unknown): input is ThemeValue =>
+  typeof input === "string" && THEME_VALUES.includes(input as ThemeValue);
 
 const Settings = () => {
-  const [theme, setTheme] = useState<typeof THEME_VALUES>();
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
+    const storedTheme = getLocalStorage("theme", true);
+    setTheme(validateTheme(storedTheme) ? storedTheme : "light");
     themeChange(false);
   }, []);
+
+  const handleChange = (selectedTheme: string) => {
+    if (validateTheme(selectedTheme)) {
+      setTheme(selectedTheme);
+    } else {
+      throw new Error(`Invalid theme: ${selectedTheme}`);
+    }
+  };
 
   return (
     <div className="flex flex-col">
       <PageTitle title="Settings" />
-      <h1 className="font-bold mr-5 mb-5">Themes</h1>
-      <div>
-        <select
-          className="text-primary select w-full max-w-xs"
-          data-choose-theme
-          onChange={(e) => {
-            setTheme(validateTheme(e.target.value));
-          }}
-          value={theme}
-        >
-          {THEME_VALUES.map((value) => (
-            <option
-              className="text-primary"
-              key={value.toLowerCase()}
-              value={value.toLowerCase()}
+      <div className="card w-96 bg-base-300 shadow-xl">
+        <div className="card-body">
+          <h1 className="font-bold mr-5 mb-5">Themes</h1>
+          <div>
+            <select
+              className="text-primary select select-bordered w-full max-w-xs"
+              data-choose-theme
+              onChange={(e) => handleChange(e.target.value)}
+              value={theme}
             >
-              {value[0].toUpperCase() + value.substring(1)}
-            </option>
-          ))}
-        </select>
+              {THEME_VALUES.map((value) => (
+                <option
+                  className="text-primary"
+                  key={value.toLowerCase()}
+                  value={value.toLowerCase()}
+                >
+                  {value[0].toUpperCase() + value.substring(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );
