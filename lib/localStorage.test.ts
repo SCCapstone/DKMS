@@ -31,6 +31,11 @@ describe("getLocalStorage()", () => {
     setLocalStorage("foo", { bar: "baz" });
     expect(getLocalStorage("foo")).to.deep.eq({ bar: "baz" });
   });
+
+  it("skips parsing when skipParsing is true", () => {
+    setLocalStorage("foo", { bar: "baz" });
+    expect(getLocalStorage("foo", true)).to.eq('{"bar":"baz"}');
+  });
 });
 
 describe("removeLocalStorage()", () => {
