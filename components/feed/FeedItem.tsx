@@ -42,10 +42,7 @@ const FeedItem = ({
       <p>{data.content}</p>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div className="flex flex-row justify-start items-center">
-          <div>
-            <LikeButton />
-          </div>
-          <div>
+          <div className="pr-2">
             <svg
               width="19"
               height="18"
@@ -61,6 +58,14 @@ const FeedItem = ({
                 strokeLinejoin="round"
               />
             </svg>
+          </div>
+          <div>
+            <LikeButton
+              userId={currentUser.id}
+              postId={data.id}
+              likes={data.likedIds.length}
+              likedIds={data.likedIds}
+            />
           </div>
         </div>
         <div>
