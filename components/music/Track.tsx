@@ -60,7 +60,7 @@ const Track = async ({
         />
       </figure>
       <div className="card-body relative">
-        <div className="absolute top-0 right-0 p-2 bg-green-200 text-green-400 stroke-green-800 fill-green-900">
+        <div className="absolute top-0 right-0 p-2">
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <h2 className="text-lg font-semibold truncate">{track.name}</h2>

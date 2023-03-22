@@ -37,7 +37,7 @@ const FavoriteIcon = ({
 
   return (
     <button
-      className="p-1 bg-red-200 text-red-400 stroke-red-800 fill-red-900"
+      className="p-1"
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}
