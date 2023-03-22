@@ -1,29 +1,43 @@
 import UsernameLink from "@/components/ui/UsernameLink";
 import ProfileImg from "@/components/userProfile/profileImg";
 
-import type { FeedCommentType } from ".";
+import DeleteButton from "./DeleteButton";
+
+import type { FeedCommentType, FeedItemType } from ".";
+import type { User } from "next-auth";
 
 const FeedItemComment = ({
-  data,
+  postData,
+  commentData,
   showLink,
+  currentUser,
 }: {
-  data: FeedCommentType;
+  postData: FeedItemType;
+  commentData: FeedCommentType;
   showLink: boolean;
+  currentUser: User;
 }) => (
   <div>
-    <div className="flex flex-row items-center pb-4">
-      {/* @ts-expect-error Server Component */}
-      <ProfileImg username={data.username} />
+    <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row items-center pb-4">
+        {/* @ts-expect-error Server Component */}
+        <ProfileImg username={commentData.username} />
+        <div>
+          {showLink ? (
+            <UsernameLink username={commentData.username} />
+          ) : (
+            <p>{commentData.username}</p>
+          )}
+          <p>{commentData.timestamp.toDate().toLocaleString()}</p>
+        </div>
+      </div>
       <div>
-        {showLink ? (
-          <UsernameLink username={data.username} />
-        ) : (
-          <p>{data.username}</p>
+        {currentUser.username === commentData.username && (
+          <DeleteButton postData={postData} commentData={commentData} />
         )}
-        <p>{data.timestamp.toDate().toLocaleString()}</p>
       </div>
     </div>
-    <p>{data.content}</p>
+    <p>{commentData.content}</p>
     <div className="divider" />
   </div>
 );
