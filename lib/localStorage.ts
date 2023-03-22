@@ -4,12 +4,16 @@ import "client-only";
  * Reads a value from local storage.
  *
  * @param key The key to read from
+ * @param parse Whether to parse the value as JSON
  * @returns They value of the key, or null if not defined
  */
-const getLocalStorage = <T>(key: string) => {
+function getLocalStorage(key: string, skipParsing: true): string | null;
+function getLocalStorage<T>(key: string, skipParsing?: false): T | null;
+function getLocalStorage<T>(key: string, skipParsing?: boolean) {
   const item = localStorage.getItem(key);
-  return item ? (JSON.parse(item) as T) : null;
-};
+  if (!item) return null;
+  return skipParsing ? item : (JSON.parse(item) as T);
+}
 
 /**
  * Writes a value to local storage.
