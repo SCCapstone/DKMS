@@ -6,9 +6,16 @@ import ProfileHead from "@/components/profile/ProfileHead";
 import TopItems from "@/components/profile/TopItems";
 import { profilesCol } from "@/lib/firestore";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
-import { getCurrentUser, getUserByUsername } from "@/lib/getUser";
+import getSpotifyData from "@/lib/getSpotifyData";
+import { getCurrentUser, getIdFromUsername } from "@/lib/getUser";
 
-const getData = async (id: string) => {
+const getProfileData = async (username: string) =>
+  getSpotifyData<SpotifyApi.UserProfileResponse>(
+    `https://api.spotify.com/v1/users/${username}`,
+    { cache: "no-cache" }
+  );
+
+const getTopItems = async (id: string) => {
   const profileDoc = await getDoc(doc(profilesCol, id));
   if (!profileDoc.exists()) {
     notFound();
@@ -18,19 +25,21 @@ const getData = async (id: string) => {
 };
 
 const Profile = async ({ params }: { params: { username: string } }) => {
-  const currentUser = await getCurrentUser();
-  const currentUsername = currentUser.username;
+  const currentUsername = (await getCurrentUser()).username;
   const { username } = params;
 
-  const profile = await getUserByUsername(username);
-  if (!profile) {
+  const profileId = await getIdFromUsername(username);
+  if (!profileId) {
     notFound();
   }
 
-  const isFollowed = await isUserFollowing(profile.id);
+  const profile = await getProfileData(username);
+
+  const isFollowed = await isUserFollowing(username);
+
   const showFollowButton = username !== currentUsername;
 
-  const data = await getData(profile.id);
+  const data = await getTopItems(profileId);
 
   return (
     <>

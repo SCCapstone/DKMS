@@ -1,8 +1,11 @@
 import Image from "next/image";
 
-import { getUserByUsername } from "@/lib/getUser";
+import getSpotifyData from "@/lib/getSpotifyData";
 
-import type { User } from "next-auth";
+const getData = async (username: string) =>
+  getSpotifyData<SpotifyApi.UserProfileResponse>(
+    `https://api.spotify.com/v1/users/${username}`
+  );
 
 type ProfileImgProps =
   | {
@@ -12,7 +15,7 @@ type ProfileImgProps =
     }
   | {
       username?: never;
-      user: User;
+      user: SpotifyApi.UserObjectPublic;
       isProfilePage: boolean;
     };
 
@@ -21,8 +24,8 @@ const ProfileImg = async ({
   user,
   isProfilePage,
 }: ProfileImgProps) => {
-  const profile = username ? await getUserByUsername(username) : user;
-  const img = profile?.image;
+  const profile = username ? await getData(username) : user;
+  const img = profile?.images?.[0]?.url;
 
   return (
     <Image
@@ -44,7 +47,7 @@ const ProfileImg = async ({
               marginRight: 7,
             }
       }
-      alt={`${profile?.username ?? "default"}'s profile picture`}
+      alt={`${profile?.id ?? "default"}'s profile picture`}
     />
   );
 };

@@ -1,7 +1,9 @@
 import type { Timestamp } from "firebase/firestore";
-import type { User } from "next-auth";
+import type { Account, User } from "next-auth";
 
 export type FirestoreUser = User;
+
+export type FirestoreAccount = Account;
 
 export type FirestoreFeedItem = {
   timestamp: Timestamp;

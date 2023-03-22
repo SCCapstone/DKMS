@@ -7,6 +7,7 @@ const toggleFollowing = async (username: string, isFollowing: boolean) =>
     `https://api.spotify.com/v1/me/following?type=user&ids=${username}`,
     {
       method: isFollowing ? "DELETE" : "PUT",
+      cache: "no-cache",
     }
   );
 
