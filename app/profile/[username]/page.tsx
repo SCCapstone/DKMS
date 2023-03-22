@@ -49,7 +49,6 @@ const Profile = async ({ params }: { params: { username: string } }) => {
       )}
       <div className="divider" />
       <TopItems artists={data.topArtists} tracks={data.topTracks} />
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </>
   );
 };
