@@ -13,7 +13,9 @@
     "test:e2e": "cypress open --e2e --browser electron"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@plaiceholder/next": "^2.5.0",
+    "@types/spotify-web-api-js": "^0.21.0",
     "client-only": "^0.0.1",
     "daisyui": "^2.50.0",
     "firebase": "^9.16.0",
@@ -24,8 +26,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.1.1",
+    "react-spotify-web-playback": "^0.13.3",
     "server-only": "^0.0.1",
     "sharp": "0.31.1",
+    "spotify-web-api-js": "^1.5.2",
     "theme-change": "^2.3.0",
     "v8": "^0.1.0"
   },
