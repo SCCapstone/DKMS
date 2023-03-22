@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import deleteFeedItem from "@/lib/feed/deleteFeedItem";
+import { unsaveFeedItem } from "@/lib/savedFeedItems";
 
 import type { FeedItemType, FeedCommentType } from ".";
 
@@ -23,6 +24,7 @@ const DeletePostButton = ({
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
+    await unsaveFeedItem(postData.userId, postData.id);
     if (commentData) {
       await deleteFeedItem(postData.id, commentData.id);
     } else {
