@@ -1,8 +1,15 @@
 import Image from "next/image";
 import { getPlaiceholder } from "plaiceholder";
 
+import FavoriteIcon from "@/components/ui/favoriteIcon";
 import Skeleton from "@/components/ui/Skeleton";
+import getSpotifyData from "@/lib/getSpotifyData";
 import joinArtists from "@/lib/joinArtists";
+
+const checkIsFavorited = (trackId: string) =>
+  getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
+    `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`
+  ).then((data) => data[0]);
 
 const Track = async ({
   track,
@@ -34,6 +41,8 @@ const Track = async ({
     size: 10,
   });
 
+  const isFavorited = await checkIsFavorited(track.id);
+
   return (
     <a
       href={track.external_urls.spotify}
@@ -50,7 +59,10 @@ const Track = async ({
           blurDataURL={base64}
         />
       </figure>
-      <div className="card-body">
+      <div className="card-body relative">
+        <div className="absolute top-0 right-0 p-2 bg-green-200 text-green-400 stroke-green-800 fill-green-900">
+          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
+        </div>
         <h2 className="text-lg font-semibold truncate">{track.name}</h2>
         <p>
           {new Date(track.album.release_date).getFullYear()} |{" "}
