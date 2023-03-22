@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import getSpotifyData from "@/lib/getSpotifyData";
 
@@ -12,22 +13,25 @@ type ProfileImgProps =
       username: string;
       user?: never;
       isProfilePage: boolean;
+      hideLink?: boolean;
     }
   | {
       username?: never;
       user: SpotifyApi.UserObjectPublic;
       isProfilePage: boolean;
+      hideLink?: boolean;
     };
 
 const ProfileImg = async ({
   username,
   user,
   isProfilePage,
+  hideLink,
 }: ProfileImgProps) => {
   const profile = username ? await getData(username) : user;
   const img = profile?.images?.[0]?.url;
 
-  return (
+  const ImageComponent = (
     <Image
       src={img ?? "/images/defaults/profileImage.png"}
       width={300}
@@ -49,6 +53,12 @@ const ProfileImg = async ({
       }
       alt={`${profile?.id ?? "default"}'s profile picture`}
     />
+  );
+
+  return hideLink || !profile ? (
+    ImageComponent
+  ) : (
+    <Link href={`/profile/${profile.id}`}>{ImageComponent}</Link>
   );
 };
 

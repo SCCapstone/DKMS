@@ -3,17 +3,19 @@ import { formatNumber } from "@/lib/formatters";
 
 const ProfileHead = ({ user }: { user: SpotifyApi.UserProfileResponse }) => (
   <div className="flex flex-row items-center pb-4">
-    {/* @ts-expect-error Server Component */}
-    <ProfileImg user={user} isProfilePage />
+    <a href={user.uri}>
+      {/* @ts-expect-error Server Component */}
+      <ProfileImg user={user} isProfilePage hideLink />
+    </a>
     <div className="flex flex-col">
-      <h1 className="normal-case font-bold">
+      <h2 className="normal-case font-bold">
         {!user.display_name || user.id === user.display_name
           ? user.id
           : `${user.display_name} — ${user.id}`}
-      </h1>
-      <h2 className="normal-case">
-        {formatNumber(user.followers?.total)} followers
       </h2>
+      <h3 className="normal-case">
+        {formatNumber(user.followers?.total)} followers
+      </h3>
     </div>
   </div>
 );
