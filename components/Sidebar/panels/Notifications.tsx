@@ -96,7 +96,7 @@ const Notification = ({
   </li>
 );
 const Notifications = () => (
-  <BasePanel title="Notifications">
+  <BasePanel title="Notifications" sidebarId="notifications">
     <ul>
       {MOCK_DATA.map((item) => (
         <Notification

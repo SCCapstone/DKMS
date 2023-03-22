@@ -1,3 +1,5 @@
+import "server-only";
+
 import UsernameLink from "@/components/ui/UsernameLink";
 
 import BasePanel from "./BasePanel";
@@ -62,7 +64,7 @@ const Friend = ({
   </li>
 );
 const Friends = () => (
-  <BasePanel title="Friends">
+  <BasePanel title="Friends" sidebarId="friends">
     <ul>
       {MOCK_DATA.map((item) => (
         <Friend
