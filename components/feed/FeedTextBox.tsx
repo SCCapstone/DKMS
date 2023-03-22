@@ -51,7 +51,7 @@ const FeedTextBox = ({ user }: { user: User }) => {
             type="submit"
             className={`${
               isMutating ? "loading" : ""
-            } btn btn-primary btn-wide`}
+            } btn btn-primary btn-outline btn-wide`}
           >
             Post
           </button>
