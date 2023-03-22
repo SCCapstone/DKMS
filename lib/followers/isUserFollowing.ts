@@ -1,4 +1,4 @@
-import getSpotifyData from "../getSpotifyData";
+import getSpotifyData from "@/lib/getSpotifyData";
 
 const isUserFollowing = async (username: string) =>
   getSpotifyData<SpotifyApi.UserFollowsUsersOrArtistsResponse>(

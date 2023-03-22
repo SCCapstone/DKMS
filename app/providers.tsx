@@ -4,7 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
-import SidebarProvider from "../components/Sidebar/SidebarProvider";
+import SidebarProvider from "@/components/Sidebar/SidebarProvider";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {

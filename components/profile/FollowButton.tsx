@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import toggleFollowing from "lib/followers/toggleFollowing";
+import toggleFollowing from "@/lib/followers/toggleFollowing";
 
 const FollowButton = ({
   isFollowing,

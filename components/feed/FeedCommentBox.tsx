@@ -3,15 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { postFeedComment } from "lib/feed";
+import { postFeedComment } from "@/lib/feed";
 
 import type { User } from "next-auth";
 
 const FeedCommentBox = ({
-  docId,
+  postId,
   currentUser,
 }: {
-  docId: string;
+  postId: string;
   currentUser: User;
 }) => {
   const router = useRouter();
@@ -26,10 +26,10 @@ const FeedCommentBox = ({
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    setCommentText("");
-    await postFeedComment(docId, currentUser.id, `${commentText}`);
+    await postFeedComment(postId, currentUser, commentText);
     setIsFetching(false);
     startTransition(() => {
+      setCommentText("");
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.
       router.refresh();

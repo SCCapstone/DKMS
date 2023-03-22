@@ -1,7 +1,7 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
-import Navbar from "../components/Navigation";
-import { DesktopSidebar, MobileSidebar } from "../components/Sidebar";
+import Navbar from "@/components/Navigation";
+import { DesktopSidebar, MobileSidebar } from "@/components/Sidebar";
 
 import "./globals.css";
 import Providers from "./providers";
