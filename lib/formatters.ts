@@ -1,4 +1,4 @@
-export const formatFollowers = (count: number | undefined) => {
+export const formatNumber = (count: number | undefined) => {
   if (!count) return "0";
 
   if (count < 1000) {
