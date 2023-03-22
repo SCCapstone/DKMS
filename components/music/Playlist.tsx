@@ -2,24 +2,20 @@ import Image from "next/image";
 import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
-import joinArtists from "@/lib/joinArtists";
 
-const Track = async ({
-  track,
+const Playlist = async ({
+  playlist,
 }: {
-  track: SpotifyApi.TrackObjectFull | undefined;
+  playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
 }) => {
-  if (!track) {
+  if (!playlist) {
     return (
       <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square" />
         <div className="card-body">
-          <h2 className="text-lg font-semibold">
+          <h2 className="text-lg font-semibold truncate">
             <Skeleton enableAnimation />
           </h2>
-          <p>
-            <Skeleton enableAnimation />
-          </p>
           <p>
             <Skeleton enableAnimation />
           </p>
@@ -28,7 +24,14 @@ const Track = async ({
     );
   }
 
-  const image = track.album.images[0] ?? { url: "/images/defaults/track.png" };
+  // Spotify blend images cause errors, display default image
+  const image = !playlist.images[0].url.startsWith(
+    "https://blend-playlist-covers.spotifycdn.com"
+  )
+    ? playlist.images[0]
+    : {
+        url: "/images/defaults/playlist.png",
+      };
 
   const { base64, img } = await getPlaiceholder(image.url, {
     size: 10,
@@ -36,7 +39,7 @@ const Track = async ({
 
   return (
     <a
-      href={track.external_urls.spotify}
+      href={playlist.external_urls.spotify}
       target="_blank"
       rel="noopener noreferrer"
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
@@ -44,22 +47,21 @@ const Track = async ({
       <figure className="relative aspect-square">
         <Image
           src={img}
-          alt={track.name}
+          alt={playlist.name}
           fill
           placeholder="blur"
           blurDataURL={base64}
         />
       </figure>
       <div className="card-body">
-        <h2 className="text-lg font-semibold truncate">{track.name}</h2>
+        <h2 className="text-lg font-semibold truncate">{playlist.name}</h2>
         <p>
-          {new Date(track.album.release_date).getFullYear()} |{" "}
-          {track.album.name}
+          {playlist.tracks.total}{" "}
+          {playlist.tracks.total === 1 ? "track" : "tracks"}
         </p>
-        <p>{joinArtists(track.artists)}</p>
       </div>
     </a>
   );
 };
 
-export default Track;
+export default Playlist;

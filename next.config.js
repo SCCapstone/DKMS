@@ -12,13 +12,11 @@ const nextConfig = withPlaiceholder({
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "i.scdn.co",
-        port: "",
-        pathname: "/image/**",
+        hostname: "**.fbcdn.net",
       },
       {
         protocol: "https",
-        hostname: "**.fbcdn.net",
+        hostname: "**.scdn.co",
       },
     ],
   },

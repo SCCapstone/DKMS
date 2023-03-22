@@ -1,6 +1,6 @@
 import getFeedComments from "./getFeedComments";
-import getFeedContent from "./getFeedContent";
+import getFeedItems from "./getFeedItems";
 import postFeedComment from "./postFeedComment";
-import postFeedContent from "./postFeedContent";
+import postFeedItem from "./postFeedItem";
 
-export { getFeedComments, getFeedContent, postFeedComment, postFeedContent };
+export { getFeedComments, getFeedItems, postFeedComment, postFeedItem };

@@ -1,7 +1,9 @@
 import DesktopNavigation from "./DesktopNavigation";
 import MobileNavbar from "./MobileNavbar";
 
-const NAVBAR_ITEMS = [
+import type { MenuItems } from "./NavbarItem";
+
+const NAVBAR_ITEMS: MenuItems = [
   {
     label: "Feed",
     url: "/",
@@ -17,6 +19,10 @@ const NAVBAR_ITEMS = [
   {
     label: "Settings",
     url: "/settings",
+  },
+  {
+    label: "Logout",
+    buttonType: "signout",
   },
 ] as const;
 

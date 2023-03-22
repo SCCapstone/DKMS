@@ -1,11 +1,11 @@
 import { addDoc, serverTimestamp } from "firebase/firestore";
 
-import { getCommentsCol } from "@/lib/firestore";
+import { feedCol } from "@/lib/firestore";
 
 import type { User } from "next-auth";
 
-const postFeedComment = async (postId: string, user: User, content: string) => {
-  const docRef = await addDoc(getCommentsCol(postId), {
+const postFeedItem = async (user: User, content: string) => {
+  const docRef = await addDoc(feedCol, {
     content,
     userId: user.id,
     username: user.username,
@@ -16,4 +16,4 @@ const postFeedComment = async (postId: string, user: User, content: string) => {
   return docRef.id;
 };
 
-export default postFeedComment;
+export default postFeedItem;

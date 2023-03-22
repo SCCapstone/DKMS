@@ -1,35 +1,36 @@
-import UsernameLink from "../ui/UsernameLink";
-import ProfileImg from "../userProfile/profileImg";
+import UsernameLink from "@/components/ui/UsernameLink";
+import ProfileImg from "@/components/userProfile/profileImg";
 
 import FeedCommentBox from "./FeedCommentBox";
 import FeedItemComment from "./FeedItemComment";
 import LikeButton from "./LikeButton";
 
-import type { FeedComment } from "./FeedPage";
+import type { FeedItemType } from ".";
 import type { User } from "next-auth";
 
 const FeedItem = ({
+  data,
   currentUser,
-  docId,
-  username,
-  feedContent,
   showLink,
-  comments,
 }: {
+  data: FeedItemType;
   currentUser: User;
-  docId: string;
-  username: string;
-  feedContent: string;
-  showLink?: boolean;
-  comments: FeedComment[];
+  showLink: boolean;
 }) => (
   <div>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-row">
+        <div className="flex flex-row items-center pb-4">
           {/* @ts-expect-error Server Component */}
-          <ProfileImg username={username} />
-          {showLink ? <UsernameLink username={username} /> : <p>{username}</p>}
+          <ProfileImg username={data.username} />
+          <div>
+            {showLink ? (
+              <UsernameLink username={data.username} />
+            ) : (
+              <p>{data.username}</p>
+            )}
+            <p>{data.timestamp.toDate().toLocaleString()}</p>
+          </div>
         </div>
         <div>
           <svg
@@ -61,13 +62,10 @@ const FeedItem = ({
           </svg>
         </div>
       </div>
-      <div>{feedContent}</div>
+      <p>{data.content}</p>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div className="flex flex-row justify-start items-center">
-          <div>
-            <LikeButton />
-          </div>
-          <div>
+          <div className="pr-2">
             <svg
               width="19"
               height="18"
@@ -83,6 +81,14 @@ const FeedItem = ({
                 strokeLinejoin="round"
               />
             </svg>
+          </div>
+          <div>
+            <LikeButton
+              userId={currentUser.id}
+              postId={data.id}
+              likes={data.likedIds.length}
+              likedIds={data.likedIds}
+            />
           </div>
         </div>
         <div>
@@ -105,13 +111,12 @@ const FeedItem = ({
       </div>
     </div>
     <div className="flex flex-col justify-start">
-      <FeedCommentBox docId={docId} currentUser={currentUser} />
+      <FeedCommentBox postId={data.id} currentUser={currentUser} />
       <ul className="ml-10">
-        {comments.map((feedComment) => (
+        {data.comments.map((comment) => (
           <FeedItemComment
-            key={feedComment.id}
-            username={feedComment.username}
-            comment={feedComment.comment}
+            key={comment.id}
+            data={comment}
             showLink={showLink}
           />
         ))}
