@@ -30,7 +30,7 @@ const FeedItem = ({
             ) : (
               <p>{data.username}</p>
             )}
-            <p>{data.timestamp.toDate().toLocaleString()}</p>
+            <p>{data.timestamp.toLocaleString()}</p>
           </div>
         </div>
         <div>

@@ -4,7 +4,7 @@ import type { User } from "next-auth";
 export type FirestoreUser = User;
 
 export type FirestoreFeedItem = {
-  timestamp: Timestamp;
+  timestamp: Date;
   userId: string;
   content: string;
   username: string;

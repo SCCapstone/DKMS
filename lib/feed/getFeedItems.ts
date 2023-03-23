@@ -4,6 +4,8 @@ import { feedCol } from "@/lib/firestore";
 
 import getFeedComments from "./getFeedComments";
 
+import type { FeedItemType } from "@/components/feed";
+
 const getFeedItems = async (userId?: string) => {
   const feedSnapshot = await getDocs(feedCol);
   const baseData = await Promise.all(
@@ -12,14 +14,20 @@ const getFeedItems = async (userId?: string) => {
       const comments = await getFeedComments(docId);
       return {
         id: doc.id,
-        ...doc.data(),
+        userId: doc.data().userId,
+        content: doc.data().content,
+        likedIds: doc.data().likedIds,
+        timestamp: doc.data().timestamp,
+        username: doc.data().username,
         comments,
       };
     })
   );
 
   const formattedData = baseData
-    .sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis())
+    .sort(
+      (a, b) => a.timestamp.getMilliseconds() - b.timestamp.getMilliseconds()
+    )
     .reverse();
 
   if (!userId) {

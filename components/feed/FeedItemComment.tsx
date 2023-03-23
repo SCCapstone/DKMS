@@ -28,7 +28,7 @@ const FeedItemComment = ({
           ) : (
             <p>{commentData.username}</p>
           )}
-          <p>{commentData.timestamp.toDate().toLocaleString()}</p>
+          <p>{commentData.timestamp.toLocaleString()}</p>
         </div>
       </div>
       <div>
