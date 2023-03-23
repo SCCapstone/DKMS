@@ -61,7 +61,7 @@ const Track = async ({
         <p>{joinArtists(track.artists)}</p>
       </div>
       <div>
-        <PlayButton />
+        <PlayButton isTrackPlaying={false} uri={track.uri} />
       </div>
     </a>
   );
