@@ -19,12 +19,6 @@ const LikeButton = ({
 }) => {
   const liked = likedIds?.includes(userId) ?? false;
 
-  // Created this "local" state to fix how long it would take between
-  //  clicking the like button and like button being updated
-  // Then still updates to current with database
-  // const [localLikesNum, setLocalLikesNum] = useState(likes);
-  // const [localLikedState, setLocalLikedState] = useState(liked);
-
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -36,12 +30,8 @@ const LikeButton = ({
     e.preventDefault();
     setIsFetching(true);
     if (liked) {
-      // setLocalLikesNum(localLikesNum - 1);
-      // setLocalLikedState(!localLikedState);
       await unlikeItem(userId, postId);
     } else {
-      // setLocalLikesNum(localLikesNum + 1);
-      // setLocalLikedState(!localLikedState);
       await likeItem(userId, postId);
     }
     setIsFetching(false);
