@@ -126,8 +126,6 @@ export const authOptions: NextAuthOptions = {
         username: profile.id,
         uri: profile.uri,
         url: profile.external_urls.spotify,
-        followers: profile.followers?.total ?? 0,
-        image: profile.images?.[0]?.url,
       }),
     }),
   ],

@@ -1,5 +1,5 @@
+import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
-import ProfileImg from "@/components/userProfile/profileImg";
 
 import DeleteButton from "./DeleteButton";
 import FeedCommentBox from "./FeedCommentBox";
@@ -26,7 +26,7 @@ const FeedItem = ({
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center pb-4">
           {/* @ts-expect-error Server Component */}
-          <ProfileImg username={data.username} />
+          <ProfileImage username={data.username} />
           <div>
             {showLink ? (
               <UsernameLink username={data.username} />
