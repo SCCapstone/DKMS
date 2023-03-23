@@ -5,14 +5,12 @@ import { useState, useTransition } from "react";
 
 import deleteFeedItem from "@/lib/feed/deleteFeedItem";
 
-import type { FeedItemType, FeedCommentType } from ".";
-
-const DeletePostButton = ({
-  postData,
-  commentData,
+const DeleteButton = ({
+  postId,
+  commentId,
 }: {
-  postData: FeedItemType;
-  commentData?: FeedCommentType;
+  postId: string;
+  commentId?: string;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -23,11 +21,7 @@ const DeletePostButton = ({
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (commentData) {
-      await deleteFeedItem(postData.id, commentData.id);
-    } else {
-      await deleteFeedItem(postData.id);
-    }
+    await deleteFeedItem(postId, commentId);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
@@ -59,4 +53,4 @@ const DeletePostButton = ({
   );
 };
 
-export default DeletePostButton;
+export default DeleteButton;
