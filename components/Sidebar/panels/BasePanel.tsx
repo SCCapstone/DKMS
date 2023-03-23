@@ -20,7 +20,7 @@ const BasePanel = ({
     <div className="w-full md:w-64 min-h-screen h-100% md:p-4 md:bg-gray-200 md:text-black">
       {title && (
         <>
-          <h1 className="normal-case font-bold">{title}</h1>
+          <h2 className="normal-case font-bold">{title}</h2>
           <div className="divider" />
         </>
       )}

@@ -11,7 +11,7 @@ import "./globals.css";
 import Providers from "./providers";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html lang="en">
+  <html lang="en" className="scroll-smooth">
     <head>
       <title>DKMS</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
