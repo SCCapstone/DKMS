@@ -3,6 +3,8 @@ import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
 
+import PlayButton from "./PlayButton";
+
 const Playlist = async ({
   playlist,
 }: {
@@ -59,6 +61,9 @@ const Playlist = async ({
           {playlist.tracks.total}{" "}
           {playlist.tracks.total === 1 ? "track" : "tracks"}
         </p>
+      </div>
+      <div>
+        <PlayButton />
       </div>
     </a>
   );

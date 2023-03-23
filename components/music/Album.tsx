@@ -4,6 +4,8 @@ import { getPlaiceholder } from "plaiceholder";
 import Skeleton from "@/components/ui/Skeleton";
 import joinArtists from "@/lib/joinArtists";
 
+import PlayButton from "./PlayButton";
+
 const Album = async ({
   album,
 }: {
@@ -55,6 +57,9 @@ const Album = async ({
           {new Date(album.release_date).getFullYear()} |{" "}
           {joinArtists(album.artists)}
         </p>
+      </div>
+      <div>
+        <PlayButton />
       </div>
     </a>
   );
