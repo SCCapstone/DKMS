@@ -1,7 +1,11 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
 import Navbar from "@/components/Navigation";
-import { DesktopSidebar, MobileSidebar } from "@/components/Sidebar";
+import {
+  DesktopSidebar,
+  MobileSidebar,
+  SidebarPanels,
+} from "@/components/Sidebar";
 
 import "./globals.css";
 import Providers from "./providers";
@@ -22,6 +26,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
             role="main"
             className="container w-100% mx-auto p-4 md:px-8 flex-grow"
           >
+            <SidebarPanels />
             <MobileSidebar>{children}</MobileSidebar>
           </main>
           <DesktopSidebar />
