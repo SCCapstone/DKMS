@@ -68,6 +68,7 @@ const FeedItem = ({
               postId={data.id}
               likes={data.likedIds.length}
               likedIds={data.likedIds}
+              username={currentUser.username}
             />
           </div>
         </div>

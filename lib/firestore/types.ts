@@ -28,6 +28,6 @@ export type FirestoreNotification = {
   /** The user who sent the notification */
   username: string;
   timestamp: Timestamp;
-  type: "comment";
+  type: "comment" | "like";
   body: string;
 };

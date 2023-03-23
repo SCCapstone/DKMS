@@ -4,14 +4,23 @@ import { notificationsCol } from "@/lib/firestore";
 
 import findFeedItem from "../feed/findFeedItem";
 
+const DISPATCH_MESSAGES = {
+  comment: (username: string) => `${username} commented on your post`,
+  like: (username: string) => `${username} liked your post`,
+} as const;
+
+type DispatchNotificationType = keyof typeof DISPATCH_MESSAGES;
+
 const dispatchNotification = async ({
   feedId,
   commentId,
   username,
+  type,
 }: {
   feedId: string;
   commentId?: string;
   username: string;
+  type: DispatchNotificationType;
 }) => {
   const item = await findFeedItem(feedId);
 
@@ -23,10 +32,10 @@ const dispatchNotification = async ({
     timestamp: serverTimestamp(),
     recipientId: item.userId,
     feedId,
-    commentId,
-    type: "comment",
+    ...(commentId ? { commentId } : {}),
+    type,
     username,
-    body: `${username} commented on your post`,
+    body: DISPATCH_MESSAGES[type](username),
   });
 
   return docRef.id;

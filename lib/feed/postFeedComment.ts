@@ -19,6 +19,7 @@ const postFeedComment = async (postId: string, user: User, content: string) => {
     feedId: postId,
     commentId: docRef.id,
     username: user.username,
+    type: "comment",
   });
   return docRef.id;
 };
