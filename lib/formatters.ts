@@ -28,3 +28,11 @@ export const formatDuration = (ms: number) => {
     ? `${hours}:${minutes.toString().padStart(2, "0")}:${seconds}`
     : `${minutes}:${seconds}`;
 };
+
+/**
+ * Capitalizes the first letter of a string.
+ * @param str The string to capitalize
+ * @returns The capitalized string
+ */
+export const capitalize = (str: string) =>
+  str.charAt(0).toLocaleUpperCase() + str.slice(1).toLocaleLowerCase();
