@@ -7,7 +7,7 @@ const SidebarPanels = ({ isDesktop }: { isDesktop?: boolean }) => (
     <Friends />
     {/* @ts-expect-error Next 13 handles async components */}
     <Notifications />
-    {/* @ts-expect-error Server Component */}
+    {/* @ts-expect-error Next 13 handles async components */}
     <Recommendations />
   </div>
 );

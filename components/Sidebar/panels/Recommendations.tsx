@@ -1,5 +1,4 @@
 import Track from "@/components/music/Track";
-import PageTitle from "@/components/ui/PageTitle";
 import { getCurrentUser } from "@/lib/getUser";
 import getRecommendations from "@/lib/recommendations/getRecommendations";
 
@@ -12,7 +11,7 @@ const Recommendations = async () => {
   return (
     <BasePanel title="Recommendations" sidebarId="recommendations">
       {recsData.tracks.map((rec) => (
-        // @ts-expect-error Next 13 handles async components
+        /* @ts-expect-error Next 13 handles async components */
         <Track key={rec.id} track={rec} />
       ))}
     </BasePanel>
