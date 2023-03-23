@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import MusicButtons from "./MusicButtons";
 import MusicImage from "./MusicImage";
 
@@ -25,14 +27,25 @@ const HeaderCard = ({
   isCircle,
 }: CardProps) => (
   <>
-    <a href={uri} className="w-full">
-      {/* @ts-expect-error TODO: fix this */}
-      <MusicImage
-        src={imageUrl ?? defaultImage}
-        alt={title}
-        isCircle={isCircle}
-      />
-    </a>
+    {path ? (
+      <Link href={path} className="w-full">
+        {/* @ts-expect-error TODO: fix this */}
+        <MusicImage
+          src={imageUrl ?? defaultImage}
+          alt={title}
+          isCircle={isCircle}
+        />
+      </Link>
+    ) : (
+      <a href={uri} className="w-full">
+        {/* @ts-expect-error TODO: fix this */}
+        <MusicImage
+          src={imageUrl ?? defaultImage}
+          alt={title}
+          isCircle={isCircle}
+        />
+      </a>
+    )}
     <div className="flex flex-col justify-between">
       <div>
         <h2 className="normal-case font-black text-2xl">{title}</h2>

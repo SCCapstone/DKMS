@@ -17,9 +17,9 @@ const AlbumView = ({
         defaultImage: "/images/defaults/album.png",
         uri: album.uri,
         title: album.name,
-        subtitle: `Released ${album.release_date} | ${capitalize(
-          album.album_type
-        )}`,
+        subtitle: `Released ${new Date(
+          album.release_date
+        ).toLocaleDateString()} | ${capitalize(album.album_type)}`,
         content:
           album.artists.length > 1
             ? `Featuring ${joinArtists(album.artists.slice(1))}`

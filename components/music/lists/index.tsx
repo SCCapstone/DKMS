@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
+export { default as AlbumList } from "./AlbumList";
 export { default as TrackList } from "./TrackList";
