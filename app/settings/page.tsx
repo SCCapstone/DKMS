@@ -1,6 +1,6 @@
 import PageTitle from "@/components/ui/PageTitle";
 
-import ThemeSettingCard from "./ThemeSettingCard";
+import { ThemeSettingCard } from "./cards";
 
 const Settings = () => (
   <>
