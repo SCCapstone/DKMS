@@ -11,11 +11,13 @@ const LikeButton = ({
   postId,
   likes,
   likedIds,
+  username,
 }: {
   userId: string;
   postId: string;
   likes: number;
   likedIds: string[] | undefined;
+  username: string;
 }) => {
   const liked = likedIds?.includes(userId) ?? false;
 
@@ -32,7 +34,7 @@ const LikeButton = ({
     if (liked) {
       await unlikeItem(userId, postId);
     } else {
-      await likeItem(userId, postId);
+      await likeItem(userId, postId, username);
     }
     setIsFetching(false);
     startTransition(() => {
