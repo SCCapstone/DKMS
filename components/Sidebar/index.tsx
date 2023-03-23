@@ -1,4 +1,5 @@
 import DesktopSidebar from "./DesktopSidebar";
 import MobileSidebar from "./MobileSidebar";
+import SidebarPanels from "./panels";
 
-export { MobileSidebar, DesktopSidebar };
+export { DesktopSidebar, MobileSidebar, SidebarPanels };
