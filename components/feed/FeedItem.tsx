@@ -21,7 +21,7 @@ const FeedItem = ({
   savedItemIds?: string[];
   showLink: boolean;
 }) => (
-  <>
+  <div id={data.id}>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center pb-4">
@@ -93,7 +93,7 @@ const FeedItem = ({
       </ul>
     </div>
     <div className="divider" />
-  </>
+  </div>
 );
 
 export default FeedItem;

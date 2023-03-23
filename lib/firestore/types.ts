@@ -23,9 +23,10 @@ export type FirestoreProfile = {
 export type FirestoreNotification = {
   feedId: string;
   /** The user to notify */
-  userId: string;
+  recipientId: string;
   /** The user who sent the notification */
   username: string;
   timestamp: Timestamp;
   type: "comment";
+  body: string;
 };

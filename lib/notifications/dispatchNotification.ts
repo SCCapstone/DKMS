@@ -19,10 +19,11 @@ const dispatchNotification = async ({
 
   const docRef = await addDoc(notificationsCol, {
     timestamp: serverTimestamp(),
-    userId: item.userId,
+    recipientId: item.userId,
     feedId,
     type: "comment",
     username,
+    body: `${username} commented on your post`,
   });
 
   return docRef.id;
