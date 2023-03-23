@@ -1,8 +1,14 @@
+import { getDoc, doc } from "firebase/firestore";
 import "server-only";
 
 import UsernameLink from "@/components/ui/UsernameLink";
+import { profilesCol } from "@/lib/firestore";
+import getUserFollowing from "@/lib/followers/getUserFollowing";
 
 import BasePanel from "./BasePanel";
+
+import type { FirestoreProfile } from "@/lib/firestore/types";
+import type { DocumentSnapshot } from "firebase-admin/firestore";
 
 const MOCK_DATA = [
   {
@@ -36,47 +42,69 @@ const MOCK_DATA = [
 ];
 
 const Friend = ({
-  title,
-  timestamp,
   username,
-  body,
+  userId,
+  profile,
 }: {
-  title: string;
-  timestamp: string;
-  username: string | undefined;
-  body: string;
-}) => (
-  <li>
-    <div className="h-fit">
-      <div className="flex flex-row justify-between items-center">
-        <h4 className="normal-case font-bold">
-          {username ? (
-            <UsernameLink username={username}>{title}</UsernameLink>
-          ) : (
-            title
-          )}
-        </h4>
-        <h5 className="normal-case font-bold">{timestamp}</h5>
+  username: string;
+  userId: string;
+  profile: FirestoreProfile | undefined;
+}) => {
+  const topTracks = profile?.topTracks;
+  return (
+    <li>
+      <div className="h-fit">
+        <div className="flex flex-row justify-between items-center">
+          <h4 className="normal-case font-bold">
+            {username ? (
+              <UsernameLink username={username}>{username}</UsernameLink>
+            ) : (
+              username
+            )}
+          </h4>
+          <ul>
+            {topTracks?.map((track) => (
+              <div>
+                <h5>{track.track_number}</h5>
+                <h5>{track.name}</h5>
+                <ul>
+                  {track.artists.map((artist) => (
+                    <h6>{artist.name}</h6>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </ul>
+        </div>
+        <div />
       </div>
-      <div>{body}</div>
-    </div>
-    <div className="divider" />
-  </li>
-);
-const Friends = () => (
-  <BasePanel title="Friends" sidebarId="friends">
-    <ul>
-      {MOCK_DATA.map((item) => (
-        <Friend
-          key={item.id}
-          title={item.title}
-          timestamp={item.timestamp}
-          username={item.username}
-          body={item.body}
-        />
-      ))}
-    </ul>
-  </BasePanel>
-);
+      <div className="divider" />
+    </li>
+  );
+};
+
+const Friends = async () => {
+  const following = await getUserFollowing();
+  return (
+    <BasePanel title="Friends" sidebarId="friends">
+      <ul>
+        {await Promise.all(
+          following.map(async (item) => (
+            <div>
+              {item.id && (
+                <Friend
+                  key={item.id}
+                  username={item.username}
+                  userId={item.id}
+                  profile={(await getDoc(doc(profilesCol, item.id))).data()}
+                />
+              )}
+            </div>
+          ))
+        )}
+      </ul>
+    </BasePanel>
+  );
+};
 
 export default Friends;
