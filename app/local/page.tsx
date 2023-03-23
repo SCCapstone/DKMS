@@ -1,4 +1,4 @@
-import FeedPage from "@/components/feed";
+import FeedPage from "@/components/feed/localindex";
 import PageTitle from "@/components/ui/PageTitle";
 import { getFeedItems } from "@/lib/feed";
 import { getCurrentUser } from "@/lib/getUser";
@@ -10,6 +10,7 @@ const Feed = async () => {
   return (
     <div>
       <PageTitle title="Feed" />
+      <FeedPage data={data} currentUser={currentUser} showLinks />
     </div>
   );
 };
