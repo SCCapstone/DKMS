@@ -9,6 +9,10 @@ const NAVBAR_ITEMS: MenuItems = [
     url: "/",
   },
   {
+    label: "local",
+    url: "/local",
+  },
+  {
     label: "Profile",
     url: "/profile",
   },
