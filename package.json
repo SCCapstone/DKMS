@@ -22,13 +22,13 @@
     "husky": "^8.0.3",
     "next": "^13.2.4",
     "next-auth": "^4.20.1",
+    "next-themes": "^0.2.1",
     "plaiceholder": "^2.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loading-skeleton": "^3.1.1",
     "server-only": "^0.0.1",
     "sharp": "0.31.1",
-    "theme-change": "^2.3.0",
     "v8": "^0.1.0"
   },
   "devDependencies": {

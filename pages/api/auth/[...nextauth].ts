@@ -84,11 +84,15 @@ const onSignIn: EventCallbacks["signIn"] = async (message) => {
   const trackData =
     (await trackRes.json()) as SpotifyApi.UsersTopTracksResponse;
 
-  return setDoc(doc(profilesCol, user.id), {
-    topArtists: artistData.items,
-    topTracks: trackData.items,
-    updatedAt: serverTimestamp(),
-  });
+  return setDoc(
+    doc(profilesCol, user.id),
+    {
+      topArtists: artistData.items,
+      topTracks: trackData.items,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
 };
 
 export const authOptions: NextAuthOptions = {
