@@ -1,3 +1,5 @@
+"use client";
+
 import {
   StepBackwardOutlined,
   StepForwardOutlined,
@@ -103,7 +105,7 @@ const PlaybackBar = (): JSX.Element => {
       <center>
         <Image
           src={albumImageUrl}
-          alt={`${trackName} album cover`}
+          alt={`${trackName}`}
           width={200}
           height={200}
         />
