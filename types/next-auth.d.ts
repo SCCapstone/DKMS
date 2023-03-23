@@ -26,8 +26,6 @@ declare module "next-auth" {
     username: string;
     uri: string;
     url: string;
-    followers: number;
-    image: string | undefined;
   }
 
   interface Session extends DefaultSession {
