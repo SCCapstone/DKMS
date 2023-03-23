@@ -30,6 +30,7 @@ const AlbumView = ({
         defaultImage: "/images/defaults/artist.png",
         uri: artist.uri,
         title: artist.name,
+        isCircle: true,
       }}
     />
     <div className="divider" />

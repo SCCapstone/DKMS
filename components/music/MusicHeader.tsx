@@ -8,6 +8,7 @@ type CardProps = {
   title: string;
   subtitle?: string;
   content?: string;
+  isCircle?: boolean;
 };
 
 const HeaderCard = ({
@@ -17,11 +18,16 @@ const HeaderCard = ({
   title,
   subtitle,
   content,
+  isCircle,
 }: CardProps) => (
   <>
     <a href={uri} className="w-full">
       {/* @ts-expect-error TODO: fix this */}
-      <MusicImage src={imageUrl ?? defaultImage} alt={title} />
+      <MusicImage
+        src={imageUrl ?? defaultImage}
+        alt={title}
+        isCircle={isCircle}
+      />
     </a>
     <div className="flex flex-col justify-between">
       <div>
@@ -50,6 +56,8 @@ const MusicHeader = ({
       uri={primary.uri}
       title={primary.title}
       subtitle={primary.subtitle}
+      content={primary.content}
+      isCircle={primary.isCircle}
     />
     {secondary && (
       <HeaderCard
@@ -58,6 +66,8 @@ const MusicHeader = ({
         uri={secondary.uri}
         title={secondary.title}
         subtitle={secondary.subtitle}
+        content={secondary.content}
+        isCircle={secondary.isCircle}
       />
     )}
   </header>
