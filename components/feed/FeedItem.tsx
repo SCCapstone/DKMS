@@ -5,6 +5,7 @@ import DeleteButton from "./DeleteButton";
 import FeedCommentBox from "./FeedCommentBox";
 import FeedItemComment from "./FeedItemComment";
 import LikeButton from "./LikeButton";
+import SaveFeedItemButton from "./SaveFeedItemButton";
 
 import type { FeedItemType } from ".";
 import type { User } from "next-auth";
@@ -12,13 +13,15 @@ import type { User } from "next-auth";
 const FeedItem = ({
   data,
   currentUser,
+  savedItemIds,
   showLink,
 }: {
   data: FeedItemType;
   currentUser: User;
+  savedItemIds?: string[];
   showLink: boolean;
 }) => (
-  <div>
+  <>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center pb-4">
@@ -35,7 +38,7 @@ const FeedItem = ({
         </div>
         <div>
           {currentUser.username === data.username && (
-            <DeleteButton postId={data.id} />
+            <DeleteButton userId={data.userId} postId={data.id} />
           )}
         </div>
       </div>
@@ -68,23 +71,11 @@ const FeedItem = ({
             />
           </div>
         </div>
-        <div>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="white"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z"
-              stroke="#090909"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+        <SaveFeedItemButton
+          userId={currentUser.id}
+          postId={data.id}
+          savedItemIds={savedItemIds}
+        />
       </div>
     </div>
     <div className="flex flex-col justify-start">
@@ -102,7 +93,7 @@ const FeedItem = ({
       </ul>
     </div>
     <div className="divider" />
-  </div>
+  </>
 );
 
 export default FeedItem;
