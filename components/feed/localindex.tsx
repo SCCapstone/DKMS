@@ -1,3 +1,5 @@
+import React from "react";
+
 import getSpotifyData from "@/lib/getSpotifyData";
 
 import FeedItem from "./FeedItem";
@@ -15,28 +17,52 @@ export type FeedCommentType = {
   id: string;
 } & FirestoreFeedItem;
 
+export type FirestoreFeedItemWithComments = FirestoreFeedItem & {
+  comments: FeedCommentType[];
+};
+
 export type FeedItemType = {
   id: string;
-  creatorId: string;
   comments: FeedCommentType[];
-} & FirestoreFeedItem;
+} & FirestoreFeedItemWithComments;
 
-const FeedPage = async ({
+type FilteredFeedItemType = FeedItemType;
+
+const FeedPage = ({
   data,
   currentUser,
   showLinks = false,
 }: {
-  data: FeedItemType[];
+  data: (FeedItemType | null)[];
   currentUser: User;
   showLinks?: boolean;
 }) => {
-  const filteredData = await Promise.all(
-    data.map(async (feedItem) => {
-      const isFollowing = await isUserFollowing(feedItem.creatorId);
-      return isFollowing ? feedItem : null;
-    })
-  ).then((filteredItems) => filteredItems.filter(Boolean));
+  const [filteredData, setFilteredData] = React.useState<
+    FilteredFeedItemType[]
+  >([]);
+  const [loading, setLoading] = React.useState(true);
 
+  React.useEffect(() => {
+    const loadFilteredData = async () => {
+      const filteredItemsResult = (await Promise.all(
+        data.map(async (feedItem) => {
+          const isFollowing = feedItem
+            ? await isUserFollowing(feedItem.userId)
+            : false;
+          return isFollowing ? feedItem : null;
+        })
+      ).then((filteredItems) =>
+        filteredItems.filter(Boolean)
+      )) as FeedItemType[];
+      setFilteredData(filteredItemsResult);
+      setLoading(false);
+    };
+    void loadFilteredData();
+  }, [data]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       {showLinks && (
@@ -46,19 +72,14 @@ const FeedPage = async ({
         </>
       )}
       <ul>
-        {filteredData.map((feedItem) => {
-          if (feedItem) {
-            return (
-              <FeedItem
-                key={feedItem.id}
-                data={feedItem}
-                currentUser={currentUser}
-                showLink={showLinks}
-              />
-            );
-          }
-          return null;
-        })}
+        {filteredData.map((feedItem) => (
+          <FeedItem
+            key={feedItem.id}
+            data={feedItem}
+            currentUser={currentUser}
+            showLink={showLinks}
+          />
+        ))}
       </ul>
     </div>
   );
