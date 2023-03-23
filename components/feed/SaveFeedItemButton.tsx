@@ -14,9 +14,7 @@ const SaveFeedItemButton = ({
   postId: string;
   savedItemIds?: string[];
 }) => {
-  const saved = savedItemIds?.includes(postId.trim());
-
-  const [localSavedState, setLocalSavedState] = useState(saved);
+  const saved = savedItemIds?.includes(postId.trim()) ?? false;
 
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -28,11 +26,9 @@ const SaveFeedItemButton = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (localSavedState) {
-      setLocalSavedState(!localSavedState);
+    if (saved) {
       await unsaveFeedItem(userId, postId);
     } else {
-      setLocalSavedState(!localSavedState);
       await saveFeedItem(userId, postId);
     }
     setIsFetching(false);
@@ -45,7 +41,7 @@ const SaveFeedItemButton = ({
 
   return (
     <button
-      className="btn btn-ghost"
+      className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
       type="button"
       onClick={(e) => void handleClick(e)}
     >
@@ -53,7 +49,7 @@ const SaveFeedItemButton = ({
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        className={localSavedState ? "fill-white" : "fill-base-100"}
+        className={saved ? "fill-white" : "fill-base-100"}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
