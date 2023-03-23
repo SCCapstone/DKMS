@@ -82,6 +82,30 @@ const getSvg = (type: SidebarOptions, params: IconOptions) => {
           />
         </svg>
       );
+    case "recommendations":
+      return (
+        <svg
+          width={width}
+          height={height}
+          viewBox="0 0 64 64"
+          fill="none"
+          className={`stroke-black${selected ? "fill-current" : ""}`}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 0C114.615 0 0 114.619 0 256.004C0 397.389 114.615 512 256 512s256-114.611 256-255.996 C512 114.619 397.384 0 256 0z M256 351.674c-52.843 0-95.678-42.835-95.678-95.671c0-52.843 42.835-95.686 95.678-95.686 c52.844 0 95.678 42.843 95.678 95.686C351.678 308.839 308.844 351.674 256 351.674z"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M256 224.109c-17.614 0-31.891 14.273-31.891 31.895c0 17.607 14.277 31.888 31.891 31.888 s31.892-14.281 31.892-31.888C287.892 238.382 273.614 224.109 256 224.109z"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
     case "playback":
       return (
         <svg
