@@ -25,18 +25,21 @@ const FilterSavedFeedButton = ({
   };
 
   return (
-    <div className="flex flex-row">
-      <h2 className="font-semibold mr-4">Filters: </h2>
-      <button
-        className={`btn ${isMutating ? "loading" : ""} btn-sm ${
-          filterActive ? "" : "btn-outline"
-        } btn-primary rounded-full mb-5`}
-        type="button"
-        onClick={(e) => handleClick(e)}
-      >
-        Saved Posts
-      </button>
-    </div>
+    <>
+      <div className="flex flex-row gap-4 items-center">
+        <h2 className="font-semibold">Filters: </h2>
+        <button
+          className={`btn ${isMutating ? "loading" : ""} btn-sm ${
+            filterActive ? "" : "btn-outline"
+          } btn-primary rounded-full`}
+          type="button"
+          onClick={(e) => handleClick(e)}
+        >
+          Saved Posts
+        </button>
+      </div>
+      <div className="divider" />
+    </>
   );
 };
 
