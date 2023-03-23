@@ -8,7 +8,7 @@ const getData = async (username: string) =>
     `https://api.spotify.com/v1/users/${username}`
   );
 
-type ProfileImgProps =
+type ProfileImageProps =
   | {
       username: string;
       user?: never;
@@ -22,12 +22,12 @@ type ProfileImgProps =
       hideLink?: boolean;
     };
 
-const ProfileImg = async ({
+const ProfileImage = async ({
   username,
   user,
   isProfilePage,
   hideLink,
-}: ProfileImgProps) => {
+}: ProfileImageProps) => {
   const profile = username ? await getData(username) : user;
   const img = profile?.images?.[0]?.url;
 
@@ -62,4 +62,4 @@ const ProfileImg = async ({
   );
 };
 
-export default ProfileImg;
+export default ProfileImage;
