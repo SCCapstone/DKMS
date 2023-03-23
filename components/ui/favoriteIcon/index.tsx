@@ -18,15 +18,12 @@ const FavoriteIcon = ({
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
 
-  const [localFavorited, setLocalFavorited] = useState(isFavorited);
-
   // Create inline loading UI
   const isMutating = isFetching || isPending;
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    await toggleFavorite(trackId, localFavorited);
-    setLocalFavorited(!localFavorited);
+    await toggleFavorite(trackId, isFavorited);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
@@ -42,7 +39,7 @@ const FavoriteIcon = ({
       type="button"
       disabled={isMutating}
     >
-      {localFavorited ? <HeartSolid /> : <HeartRegular />}
+      {isFavorited ? <HeartSolid /> : <HeartRegular />}
     </button>
   );
 };
