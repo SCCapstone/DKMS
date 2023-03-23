@@ -2,6 +2,8 @@ import { addDoc, serverTimestamp } from "firebase/firestore";
 
 import { getCommentsCol } from "@/lib/firestore";
 
+import dispatchNotification from "../notifications/dispatchNotification";
+
 import type { User } from "next-auth";
 
 const postFeedComment = async (postId: string, user: User, content: string) => {
@@ -13,6 +15,7 @@ const postFeedComment = async (postId: string, user: User, content: string) => {
     likedIds: [],
   });
 
+  await dispatchNotification({ feedId: postId, username: user.username });
   return docRef.id;
 };
 

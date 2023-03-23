@@ -19,3 +19,13 @@ export type FirestoreProfile = {
   updatedAt: Timestamp;
   savedItemIds: string[] | undefined;
 };
+
+export type FirestoreNotification = {
+  feedId: string;
+  /** The user to notify */
+  userId: string;
+  /** The user who sent the notification */
+  username: string;
+  timestamp: Timestamp;
+  type: "comment";
+};
