@@ -4,11 +4,14 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import deleteFeedItem from "@/lib/feed/deleteFeedItem";
+import { unsaveFeedItem } from "@/lib/savedFeedItems";
 
 const DeleteButton = ({
+  userId,
   postId,
   commentId,
 }: {
+  userId: string;
   postId: string;
   commentId?: string;
 }) => {
@@ -21,6 +24,7 @@ const DeleteButton = ({
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
+    await unsaveFeedItem(userId, postId);
     await deleteFeedItem(postId, commentId);
     setIsFetching(false);
     startTransition(() => {

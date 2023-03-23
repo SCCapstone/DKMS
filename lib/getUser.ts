@@ -1,9 +1,41 @@
-import { getDocs } from "firebase/firestore";
+import { getDocs, query, where } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 import "server-only";
 
-import { usersCol } from "@/lib/firestore";
+import { accountsCol } from "@/lib/firestore";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+
+/**
+ * Matches a Firestore user ID to a Spotify username.
+ *
+ * @param userId the Firestore user ID to search for
+ * @returns the Spotify username of the user with the given ID, or undefined if no user is found
+ */
+export const getUsernameFromId = async (userId: string) => {
+  const q = query(accountsCol, where("userId", "==", userId));
+
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) {
+    return undefined;
+  }
+  return snapshot.docs[0].data().username;
+};
+
+/**
+ * Matches a Spotify username to a Firestore user ID.
+ *
+ * @param username the Spotify username to search for
+ * @returns the Firestore user ID of the user with the given username, or undefined if no user is found
+ */
+export const getIdFromUsername = async (username: string) => {
+  const q = query(accountsCol, where("providerAccountId", "==", username));
+
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) {
+    return undefined;
+  }
+  return snapshot.docs[0].data().userId;
+};
 
 /**
  * Returns the currently logged in user, according to
@@ -19,32 +51,4 @@ export const getCurrentUser = async () => {
     throw new Error("No session");
   }
   return session.user;
-};
-
-/**
- * Returns the user with the given username from firestore.
- *
- * @param username The username to search for
- * @returns The user with the given username, or undefined if no user is found
- */
-export const getUserByUsername = async (username: string) => {
-  const usersSnapshot = await getDocs(usersCol);
-  const usersData = usersSnapshot.docs.map((doc) => doc.data());
-
-  return usersData.find((user) =>
-    user.username.toLowerCase().includes(username.toLowerCase())
-  );
-};
-
-/**
- * Returns the user with the given id from firestore.
- *
- * @param id The id to search for
- * @returns The user with the given id, or undefined if no user is found
- */
-export const getUserById = async (id: string) => {
-  const usersSnapshot = await getDocs(usersCol);
-  const usersData = usersSnapshot.docs.map((doc) => doc.data());
-
-  return usersData.find((user) => user.id === id);
 };
