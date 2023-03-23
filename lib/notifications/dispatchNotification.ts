@@ -6,9 +6,11 @@ import findFeedItem from "../feed/findFeedItem";
 
 const dispatchNotification = async ({
   feedId,
+  commentId,
   username,
 }: {
   feedId: string;
+  commentId?: string;
   username: string;
 }) => {
   const item = await findFeedItem(feedId);
@@ -21,6 +23,7 @@ const dispatchNotification = async ({
     timestamp: serverTimestamp(),
     recipientId: item.userId,
     feedId,
+    commentId,
     type: "comment",
     username,
     body: `${username} commented on your post`,

@@ -15,7 +15,11 @@ const postFeedComment = async (postId: string, user: User, content: string) => {
     likedIds: [],
   });
 
-  await dispatchNotification({ feedId: postId, username: user.username });
+  await dispatchNotification({
+    feedId: postId,
+    commentId: docRef.id,
+    username: user.username,
+  });
   return docRef.id;
 };
 
