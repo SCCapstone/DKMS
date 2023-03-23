@@ -14,9 +14,9 @@ const TrackList = ({
       </tr>
     </thead>
     <tbody>
-      {tracks.map((track) => (
+      {tracks.map((track, index) => (
         <tr className="hover" key={track.id}>
-          <td>{track.track_number}</td>
+          <td>{index + 1}</td>
           <td>
             <a className="font-bold text-primary" href={track.uri}>
               {track.name}

@@ -1,4 +1,4 @@
-import TrackList from "@/components/music/lists/TrackList";
+import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { capitalize } from "@/lib/formatters";
 import joinArtists from "@/lib/joinArtists";
