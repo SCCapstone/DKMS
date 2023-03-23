@@ -1,10 +1,13 @@
+import MusicButtons from "./MusicButtons";
 import MusicImage from "./MusicImage";
-import OpenSpotifyButton from "./OpenSpotifyButton";
 
 type CardProps = {
   imageUrl: string | undefined;
   defaultImage: string;
+  /** The Spotify URI */
   uri: string;
+  /** The path to the DKMS page */
+  path?: string;
   title: string;
   subtitle?: string;
   content?: string;
@@ -15,6 +18,7 @@ const HeaderCard = ({
   imageUrl,
   defaultImage,
   uri,
+  path,
   title,
   subtitle,
   content,
@@ -37,7 +41,7 @@ const HeaderCard = ({
         )}
         {content && <p>{content}</p>}
       </div>
-      <OpenSpotifyButton uri={uri} />
+      <MusicButtons spotifyUri={uri} path={path} />
     </div>
   </>
 );
@@ -54,6 +58,7 @@ const MusicHeader = ({
       imageUrl={primary.imageUrl}
       defaultImage={primary.defaultImage}
       uri={primary.uri}
+      path={primary.path}
       title={primary.title}
       subtitle={primary.subtitle}
       content={primary.content}
@@ -64,6 +69,7 @@ const MusicHeader = ({
         imageUrl={secondary.imageUrl}
         defaultImage={secondary.defaultImage}
         uri={secondary.uri}
+        path={secondary.path}
         title={secondary.title}
         subtitle={secondary.subtitle}
         content={secondary.content}

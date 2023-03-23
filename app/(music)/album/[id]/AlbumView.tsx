@@ -29,6 +29,7 @@ const AlbumView = ({
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
         uri: artist.uri,
+        path: `/artist/${artist.id}`,
         title: artist.name,
         isCircle: true,
       }}
