@@ -33,6 +33,7 @@ const Notifications = async () => {
           {data.map((item) => (
             <Notification
               key={item.id}
+              notificationId={item.id}
               feedId={item.feedId}
               title={item.username}
               timestamp={item.timestamp.toDate().toLocaleString()}

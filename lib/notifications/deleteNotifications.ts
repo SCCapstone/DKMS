@@ -4,16 +4,26 @@ import firestore, { notificationsCol } from "@/lib/firestore";
 
 import findNotifications from "./findNotifications";
 
+type DeleteNotificationsType =
+  | {
+      postId: string;
+      commentId?: string;
+      notificationIds?: undefined;
+    }
+  | {
+      postId?: undefined;
+      commentId?: undefined;
+      notificationIds: string[];
+    };
 const deleteNotifications = async ({
   postId,
   commentId,
-}: {
-  postId: string;
-  commentId?: string;
-}) => {
+  notificationIds,
+}: DeleteNotificationsType) => {
   const batch = writeBatch(firestore);
 
-  const idsToDelete = await findNotifications(postId, commentId);
+  const idsToDelete =
+    notificationIds ?? (await findNotifications(postId, commentId));
   if (!idsToDelete) {
     return null;
   }
