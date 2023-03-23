@@ -17,7 +17,7 @@ const FeedItemComment = ({
   showLink: boolean;
   currentUser: User;
 }) => (
-  <div>
+  <div id={commentData.id}>
     <div className="flex flex-row justify-between items-center">
       <div className="flex flex-row items-center pb-4">
         {/* @ts-expect-error Server Component */}
