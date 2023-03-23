@@ -33,7 +33,11 @@ const FeedItemComment = ({
       </div>
       <div>
         {currentUser.username === commentData.username && (
-          <DeleteButton postData={postData} commentData={commentData} />
+          <DeleteButton
+            userId={postData.userId}
+            postId={postData.id}
+            commentId={commentData.id}
+          />
         )}
       </div>
     </div>

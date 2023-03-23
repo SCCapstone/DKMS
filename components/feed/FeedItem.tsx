@@ -38,7 +38,7 @@ const FeedItem = ({
         </div>
         <div>
           {currentUser.username === data.username && (
-            <DeleteButton postData={data} />
+            <DeleteButton userId={data.userId} postId={data.id} />
           )}
         </div>
       </div>
