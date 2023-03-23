@@ -6,13 +6,14 @@ import isUserFollowing from "./isUserFollowing";
 
 const getUserFollowing = async () => {
   const users = await getDocs(usersCol);
-  const baseData = users.docs.map((docData) => ({
-    ...docData.data(),
-  }));
+  const baseData = users.docs
+    // eslint-disable-next-line no-return-await
+    .filter(async (user) => await isUserFollowing(user.data().username))
+    .map((user) => ({
+      ...user.data(),
+    }));
 
-  const following = baseData.filter((user) => isUserFollowing(user.username));
-
-  return following;
+  return baseData;
 };
 
 export default getUserFollowing;

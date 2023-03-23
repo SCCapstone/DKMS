@@ -1,9 +1,10 @@
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, getDocs } from "firebase/firestore";
 import "server-only";
 
 import UsernameLink from "@/components/ui/UsernameLink";
-import { profilesCol } from "@/lib/firestore";
+import { profilesCol, usersCol } from "@/lib/firestore";
 import getUserFollowing from "@/lib/followers/getUserFollowing";
+import isUserFollowing from "@/lib/followers/isUserFollowing";
 
 import BasePanel from "./BasePanel";
 
@@ -62,19 +63,19 @@ const Friend = ({
               username
             )}
           </h4>
-          <ul>
+          <div>
             {topTracks?.map((track) => (
               <div>
                 <h5>{track.track_number}</h5>
                 <h5>{track.name}</h5>
-                <ul>
+                <div>
                   {track.artists.map((artist) => (
                     <h6>{artist.name}</h6>
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
-          </ul>
+          </div>
         </div>
         <div />
       </div>
@@ -92,12 +93,20 @@ const Friends = async () => {
           following.map(async (item) => (
             <div>
               {item.id && (
-                <Friend
-                  key={item.id}
-                  username={item.username}
-                  userId={item.id}
-                  profile={(await getDoc(doc(profilesCol, item.id))).data()}
-                />
+                <div>
+                  <Friend
+                    key={item.id}
+                    username={item.username}
+                    userId={item.id}
+                    profile={(await getDoc(doc(profilesCol, item.id))).data()}
+                  />
+                  <h5>
+                    {
+                      (await getDoc(doc(profilesCol, item.id))).data()
+                        ?.topTracks[0].name
+                    }
+                  </h5>
+                </div>
               )}
             </div>
           ))
