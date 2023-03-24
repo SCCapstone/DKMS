@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import addToQueue from "@/lib/music/addToQueue";
-import getArtistTracks from "@/lib/music/getArtistTracks";
+import getArtistTracks from "@/lib/music/getTracks/getArtistTracks";
+import addToQueue from "@/lib/music/queue/addToQueue";
 import startPlaying from "@/lib/music/startPlaying";
 
 const PlayArtist = ({
@@ -26,7 +26,7 @@ const PlayArtist = ({
     setIsFetching(true);
     await getArtistTracks(uri);
     await addToQueue(uri);
-    await startPlaying(uri, isArtistPlaying);
+    await startPlaying(uri);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
