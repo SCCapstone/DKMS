@@ -5,13 +5,7 @@ import { useState, useTransition } from "react";
 
 import startPlaying from "@/lib/music/startPlaying";
 
-const PlayTrack = ({
-  isTrackPlaying,
-  uri,
-}: {
-  isTrackPlaying: boolean;
-  uri: string;
-}) => {
+const PlayTrack = ({ uri }: { uri: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -22,7 +16,7 @@ const PlayTrack = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await startPlaying(uri, isTrackPlaying);
+    await startPlaying(uri);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
@@ -35,7 +29,7 @@ const PlayTrack = ({
     <div className="flex flex-row">
       <button type="button" onClick={(e) => void handleClick(e)}>
         <svg
-          fill={isTrackPlaying ? "black" : "#1ED760"}
+          fill="#1ED760"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -44,7 +38,7 @@ const PlayTrack = ({
         >
           <path
             d="M3 5.49686C3 3.17662 5.52116 1.73465 7.52106 2.91106L18.5764 9.41423C20.5484 10.5742 20.5484 13.4259 18.5764 14.5858L7.52106 21.089C5.52116 22.2654 3 20.8234 3 18.5032V5.49686Z"
-            stroke={isTrackPlaying ? "black" : "#1ED760"}
+            stroke="#1ED760"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"

@@ -59,7 +59,7 @@ const Album = async ({
         </p>
       </div>
       <div>
-        <PlayButton isTrackPlaying={false} uri={album.uri} />
+        <PlayButton uri={album.uri} />
       </div>
     </a>
   );

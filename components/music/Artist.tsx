@@ -55,7 +55,7 @@ const Artist = async ({
         <h2 className="card-title">{artist.name}</h2>
       </div>
       <div>
-        <PlayButton isTrackPlaying={false} uri={artist.uri} />
+        <PlayButton uri={artist.uri} />
       </div>
     </a>
   );
