@@ -5,8 +5,12 @@ import type { MenuItems } from "./NavbarItem";
 
 const NAVBAR_ITEMS: MenuItems = [
   {
-    label: "Feed",
+    label: "Discovery",
     url: "/",
+  },
+  {
+    label: "Followers",
+    url: "/Followers",
   },
   {
     label: "Profile",
