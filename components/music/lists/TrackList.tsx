@@ -1,13 +1,16 @@
 import { formatDuration } from "@/lib/formatters";
+import joinArtists from "@/lib/joinArtists";
 
 const TrackList = ({
   tracks,
   showNumber,
   showArtist,
+  showAlbum,
 }: {
-  tracks: SpotifyApi.TrackObjectSimplified[];
+  tracks: SpotifyApi.TrackObjectSimplified[] | SpotifyApi.TrackObjectFull[];
   showNumber?: boolean;
   showArtist?: boolean;
+  showAlbum?: boolean;
 }) => (
   <div className="overflow-x-auto">
     <table className="table table-compact w-full">
@@ -16,6 +19,7 @@ const TrackList = ({
           {showNumber && <th>#</th>}
           <th>Title</th>
           {showArtist && <th>Artist</th>}
+          {showAlbum && <th>Album</th>}
           <th className="text-right">Duration</th>
         </tr>
       </thead>
@@ -31,10 +35,17 @@ const TrackList = ({
             {showArtist && (
               <td>
                 <a
-                  className="font-bold text-secondary"
+                  className="font-bold"
                   href={`/artist/${track.artists[0].id}`}
                 >
-                  {track.artists[0].name}
+                  {joinArtists(track.artists)}
+                </a>
+              </td>
+            )}
+            {showAlbum && "album" in track && (
+              <td>
+                <a className="font-bold" href={`/album/${track.album.id}`}>
+                  {track.album.name}
                 </a>
               </td>
             )}
