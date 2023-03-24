@@ -15,7 +15,10 @@ const getRecommendations = async (userId: string) => {
 
   return getSpotifyData<SpotifyApi.RecommendationsFromSeedsResponse>(
     `https://api.spotify.com/v1/recommendations?seed_artists=${artist1},${artist2}&
-    seed_tracks=${track1},${track2},${track3}`
+    seed_tracks=${track1},${track2},${track3}`,
+    {
+      cache: "no-cache",
+    }
   );
 };
 
