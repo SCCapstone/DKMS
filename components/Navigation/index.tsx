@@ -21,6 +21,10 @@ const NAVBAR_ITEMS: MenuItems = [
     url: "/settings",
   },
   {
+    label: "Tracks For You",
+    url: "/recommendations",
+  },
+  {
     label: "Logout",
     buttonType: "signout",
   },
