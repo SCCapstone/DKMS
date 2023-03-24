@@ -63,7 +63,7 @@ const Playlist = async ({
         </p>
       </div>
       <div>
-        <PlayButton isTrackPlaying={false} uri={playlist.uri} />
+        <PlayButton uri={playlist.uri} />
       </div>
     </a>
   );
