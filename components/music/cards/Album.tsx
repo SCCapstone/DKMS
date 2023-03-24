@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
@@ -34,10 +35,8 @@ const Album = async ({
   });
 
   return (
-    <a
-      href={album.external_urls.spotify}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/album/${album.id}`}
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">
@@ -56,7 +55,7 @@ const Album = async ({
           {joinArtists(album.artists)}
         </p>
       </div>
-    </a>
+    </Link>
   );
 };
 

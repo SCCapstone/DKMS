@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
@@ -38,10 +39,8 @@ const Playlist = async ({
   });
 
   return (
-    <a
-      href={playlist.external_urls.spotify}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/playlist/${playlist.id}`}
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">
@@ -60,7 +59,7 @@ const Playlist = async ({
           {playlist.tracks.total === 1 ? "track" : "tracks"}
         </p>
       </div>
-    </a>
+    </Link>
   );
 };
 

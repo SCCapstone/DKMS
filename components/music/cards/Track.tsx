@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import FavoriteIcon from "@/components/ui/favoriteIcon";
@@ -50,10 +51,8 @@ const Track = async ({
   const isFavorited = await checkIsFavorited(track.id);
 
   return (
-    <a
-      href={track.external_urls.spotify}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/track/${track.id}`}
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">
@@ -76,7 +75,7 @@ const Track = async ({
         </p>
         <p>{joinArtists(track.artists)}</p>
       </div>
-    </a>
+    </Link>
   );
 };
 
