@@ -1,8 +1,8 @@
-import putSpotifyData from "@/lib/putSpotifyData";
+import postSpotifyData from "@/lib/postSpotifyData";
 
-const addToQueue = async (uri: string, isTrackPlaying: boolean) =>
-  putSpotifyData(`https://api.spotify.com/v1/me/player/play`, {
-    method: isTrackPlaying ? "DELETE" : "PUT",
+const addToQueue = async (uri: string) =>
+  postSpotifyData(`https://api.spotify.com/v1/me/player/queue`, {
+    method: "PUT",
     body: JSON.stringify({
       uris: [uri],
     }),
