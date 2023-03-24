@@ -2,13 +2,12 @@ import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 import "server-only";
 
+import Track from "@/components/music/Track";
 import UsernameLink from "@/components/ui/UsernameLink";
 import { profilesCol } from "@/lib/firestore";
 import getUsersFollowing from "@/lib/followers/getUsersFollowing";
 
 import BasePanel from "../BasePanel";
-
-import TopTrack from "./TopTrack";
 
 const getTopItems = async (id: string) => {
   const profileDoc = await getDoc(doc(profilesCol, id));
@@ -27,6 +26,7 @@ const Friend = async ({
   userId: string;
 }) => {
   const data = await getTopItems(userId);
+  const tracks = data.topTracks.slice(0, 2);
   return (
     <div>
       <div className="h-fit">
@@ -40,14 +40,9 @@ const Friend = async ({
           </h4>
         </div>
         <div>
-          <ul>
-            {data.topTracks.map((topTrack) => (
-              <TopTrack
-                key={topTrack.id}
-                trackNumber={topTrack.track_number}
-                artists={topTrack.artists}
-                track={topTrack.name}
-              />
+          <ul className="flex-row">
+            {tracks.map((topTrack) => (
+              <Track key={topTrack.id} track={topTrack} />
             ))}
           </ul>
         </div>
