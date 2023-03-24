@@ -12,7 +12,8 @@ type CardProps = {
   path?: string;
   title: string;
   subtitle?: string;
-  content?: string;
+  content?: React.ReactNode;
+  /** If the image is a circle */
   isCircle?: boolean;
 };
 
@@ -50,7 +51,11 @@ const HeaderCard = ({
       <div>
         <h2 className="font-black text-2xl">{title}</h2>
         {subtitle && <h3 className="font-extralight">{subtitle}</h3>}
-        {content && <p className="font-extralight">{content}</p>}
+        {typeof content === "string" ? (
+          <p className="font-extralight">{content}</p>
+        ) : (
+          content
+        )}
       </div>
       <MusicButtons spotifyUri={uri} path={path} />
     </div>

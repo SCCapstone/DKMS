@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import TrackFeatures from "@/components/music/TrackFeatures";
@@ -27,9 +29,13 @@ const TrackView = ({
           formatDuration(track.duration_ms)
         )}`,
         content:
-          track.album.album_type === "single"
-            ? "Single"
-            : `Album: ${track.album.name}`,
+          track.album.album_type === "single" ? (
+            "Single"
+          ) : (
+            <p className="font-black text-primary">
+              <Link href={`/album/${track.album.id}`}>{track.album.name}</Link>
+            </p>
+          ),
       }}
       secondary={{
         imageUrl: artist.images[0].url,
