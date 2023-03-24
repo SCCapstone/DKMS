@@ -1,3 +1,4 @@
+import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getSpotifyData from "@/lib/getSpotifyData";
 
 import ArtistView from "./ArtistView";
@@ -15,7 +16,9 @@ const getData = async (id: string) => {
     `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album,single&market=US&limit=10`
   );
 
-  return { artist, topTracks, albums };
+  const isFollowing = await isUserFollowing(id, "artist");
+
+  return { artist, topTracks, albums, isFollowing };
 };
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -27,6 +30,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       artist={data.artist}
       topTracks={data.topTracks}
       albums={data.albums}
+      isFollowing={data.isFollowing}
     />
   );
 };

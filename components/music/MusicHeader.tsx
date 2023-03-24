@@ -13,6 +13,7 @@ type CardProps = {
   title: string;
   subtitle?: string;
   content?: React.ReactNode;
+  buttons?: React.ReactNode;
   /** If the image is a circle */
   isCircle?: boolean;
 };
@@ -25,6 +26,7 @@ const HeaderCard = ({
   title,
   subtitle,
   content,
+  buttons,
   isCircle,
 }: CardProps) => (
   <>
@@ -57,7 +59,7 @@ const HeaderCard = ({
           content
         )}
       </div>
-      <MusicButtons spotifyUri={uri} path={path} />
+      <MusicButtons spotifyUri={uri} path={path} extraButtons={buttons} />
     </div>
   </>
 );
@@ -79,6 +81,7 @@ const MusicHeader = ({
       subtitle={primary.subtitle}
       content={primary.content}
       isCircle={primary.isCircle}
+      buttons={primary.buttons}
     />
     {secondary && (
       <HeaderCard
@@ -90,6 +93,7 @@ const MusicHeader = ({
         subtitle={secondary.subtitle}
         content={secondary.content}
         isCircle={secondary.isCircle}
+        buttons={secondary.buttons}
       />
     )}
   </header>

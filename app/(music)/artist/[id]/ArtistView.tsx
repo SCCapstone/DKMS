@@ -1,3 +1,4 @@
+import FollowButton from "@/components/FollowButton";
 import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { formatNumber } from "@/lib/formatters";
@@ -6,10 +7,12 @@ const ArtistView = ({
   artist,
   topTracks,
   albums,
+  isFollowing,
 }: {
   artist: SpotifyApi.ArtistObjectFull;
   topTracks: SpotifyApi.ArtistsTopTracksResponse;
   albums: SpotifyApi.ArtistsAlbumsResponse;
+  isFollowing: boolean;
 }) => (
   <>
     <MusicHeader
@@ -21,6 +24,13 @@ const ArtistView = ({
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         content: `${formatNumber(albums.total)} Releases`,
         isCircle: true,
+        buttons: (
+          <FollowButton
+            id={artist.id}
+            followType="artist"
+            isFollowing={isFollowing}
+          />
+        ),
       }}
     />
     <div className="divider" />

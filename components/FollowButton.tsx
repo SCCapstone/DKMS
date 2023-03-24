@@ -46,7 +46,7 @@ const FollowButton = ({
 
   return (
     <button
-      className={`btn btn-primary btn-sm ${isFollowing ? "btn-outline" : ""}`}
+      className={`btn btn-primary ${isFollowing ? "btn-outline" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}

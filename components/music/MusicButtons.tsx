@@ -5,11 +5,14 @@ import SpotifyIcon from "@/components/ui/SpotifyIcon";
 const MusicButtons = ({
   spotifyUri,
   path,
+  extraButtons,
 }: {
   spotifyUri: string;
   path: string | undefined;
+  extraButtons?: React.ReactNode;
 }) => (
   <div className="btn-group btn-group-vertical">
+    {extraButtons}
     {path && (
       <Link className="btn btn-primary btn-outline w-full" href={path}>
         Open in DKMS
