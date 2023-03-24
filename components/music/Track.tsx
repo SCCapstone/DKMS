@@ -8,7 +8,10 @@ import joinArtists from "@/lib/joinArtists";
 
 const checkIsFavorited = (trackId: string) =>
   getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
-    `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`
+    `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`,
+    {
+      cache: "no-cache",
+    }
   ).then((data) => data[0]);
 
 const Track = async ({
@@ -63,7 +66,7 @@ const Track = async ({
         <div className="absolute top-0 right-0 p-2">
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
-        <h2 className="text-lg font-semibold truncate">{track.name}</h2>
+        <h2 className="text-lg font-semibold truncate mt-10">{track.name}</h2>
         <p>
           {new Date(track.album.release_date).getFullYear()} |{" "}
           {track.album.name}
