@@ -45,17 +45,6 @@ const NotificationsIcon = ({
   </IconButton>
 );
 
-const RecommendationsIcon = ({
-  selected,
-  width = DEFAULT_SIZE,
-  height = DEFAULT_SIZE,
-  onClick,
-}: IconProps) => (
-  <IconButton onClick={onClick}>
-    {getSvg("recommendations", { width, height, selected })}
-  </IconButton>
-);
-
 const PlaybackIcon = ({
   selected,
   width = DEFAULT_SIZE,
@@ -82,10 +71,6 @@ const SidebarIcons = ({
     <FriendsIcon
       selected={currentSelection === "friends"}
       onClick={() => onChange("friends")}
-    />
-    <RecommendationsIcon
-      selected={currentSelection === "recommendations"}
-      onClick={() => onChange("recommendations")}
     />
   </>
 );
