@@ -4,7 +4,7 @@ import { getPlaiceholder } from "plaiceholder";
 import Skeleton from "@/components/ui/Skeleton";
 import joinArtists from "@/lib/joinArtists";
 
-import PlayButton from "./PlayButton";
+import PlayTrack from "./PlayTrack";
 
 const Track = async ({
   track,
@@ -61,7 +61,7 @@ const Track = async ({
         <p>{joinArtists(track.artists)}</p>
       </div>
       <div>
-        <PlayButton isTrackPlaying={false} uri={track.uri} />
+        <PlayTrack isTrackPlaying={false} uri={track.uri} />
       </div>
     </a>
   );

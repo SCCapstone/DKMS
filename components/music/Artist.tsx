@@ -3,7 +3,7 @@ import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
 
-import PlayButton from "./PlayButton";
+import PlayButton from "./PlayTrack";
 
 const Artist = async ({
   artist,

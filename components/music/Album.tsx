@@ -4,7 +4,7 @@ import { getPlaiceholder } from "plaiceholder";
 import Skeleton from "@/components/ui/Skeleton";
 import joinArtists from "@/lib/joinArtists";
 
-import PlayButton from "./PlayButton";
+import PlayButton from "./PlayTrack";
 
 const Album = async ({
   album,

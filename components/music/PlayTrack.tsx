@@ -5,7 +5,7 @@ import { useState, useTransition } from "react";
 
 import startPlaying from "@/lib/music/startPlaying";
 
-const PlayButton = ({
+const PlayTrack = ({
   isTrackPlaying,
   uri,
 }: {
@@ -55,7 +55,7 @@ const PlayButton = ({
   );
 };
 
-export default PlayButton;
+export default PlayTrack;
 
 /* "use client";
 
