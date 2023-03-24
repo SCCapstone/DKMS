@@ -46,7 +46,7 @@ const TrackView = ({
     <TrackFeatures audioFeatures={audioFeatures} />
     <div className="divider" />
     <h4 className="font-black uppercase">Similar Tracks</h4>
-    <TrackList tracks={recommendations.tracks} showArtist />
+    <TrackList tracks={recommendations.tracks} showAlbum />
 
     <details>
       <pre>{JSON.stringify(audioFeatures, null, 2)}</pre>

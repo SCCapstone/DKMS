@@ -28,7 +28,7 @@ const AlbumView = ({
       }}
     />
     <div className="divider" />
-    <TrackList tracks={tracks} showNumber showArtist showAlbum />
+    <TrackList tracks={tracks} showNumber showAlbum />
     <div className="divider" />
 
     <details>

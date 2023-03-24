@@ -29,7 +29,7 @@ const HeaderCard = ({
   <>
     {path ? (
       <Link href={path} className="w-full">
-        {/* @ts-expect-error TODO: fix this */}
+        {/* @ts-expect-error Next 13 Server Component */}
         <MusicImage
           src={imageUrl ?? defaultImage}
           alt={title}
@@ -38,7 +38,7 @@ const HeaderCard = ({
       </Link>
     ) : (
       <a href={uri} className="w-full">
-        {/* @ts-expect-error TODO: fix this */}
+        {/* @ts-expect-error Next 13 Server Component */}
         <MusicImage
           src={imageUrl ?? defaultImage}
           alt={title}

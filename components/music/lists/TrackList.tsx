@@ -4,12 +4,10 @@ import joinArtists from "@/lib/joinArtists";
 const TrackList = ({
   tracks,
   showNumber,
-  showArtist,
   showAlbum,
 }: {
   tracks: SpotifyApi.TrackObjectSimplified[] | SpotifyApi.TrackObjectFull[];
   showNumber?: boolean;
-  showArtist?: boolean;
   showAlbum?: boolean;
 }) => (
   <div className="overflow-x-auto">
@@ -18,8 +16,8 @@ const TrackList = ({
         <tr>
           {showNumber && <th>#</th>}
           <th>Title</th>
-          {showArtist && <th>Artist</th>}
-          {showAlbum && <th>Album</th>}
+          <th>Artist</th>
+          {showAlbum && "album" in tracks[0] && <th>Album</th>}
           <th className="text-right">Duration</th>
         </tr>
       </thead>
@@ -32,16 +30,14 @@ const TrackList = ({
                 {track.name}
               </a>
             </td>
-            {showArtist && (
-              <td>
-                <a
-                  className="font-bold"
-                  href={`/artist/${track.artists[0].id}`}
-                >
-                  {joinArtists(track.artists)}
-                </a>
-              </td>
-            )}
+            <td>
+              <a
+                className="font-bold text-secondary"
+                href={`/artist/${track.artists[0].id}`}
+              >
+                {joinArtists(track.artists)}
+              </a>
+            </td>
             {showAlbum && "album" in track && (
               <td>
                 <a className="font-bold" href={`/album/${track.album.id}`}>

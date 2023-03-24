@@ -25,7 +25,7 @@ const ArtistView = ({
     />
     <div className="divider" />
     <h4 className="font-black uppercase">Top Tracks</h4>
-    <TrackList tracks={topTracks.tracks} />
+    <TrackList tracks={topTracks.tracks} showAlbum />
     <h4 className="font-black uppercase">Recent Albums</h4>
     <AlbumList albums={albums.items} />
     <div className="divider" />
