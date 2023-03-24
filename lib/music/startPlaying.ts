@@ -1,7 +1,5 @@
 import putSpotifyData from "@/lib/putSpotifyData";
 
-import getAccessToken from "../getAccessToken";
-
 const startPlaying = async (uri: string, isTrackPlaying: boolean) =>
   putSpotifyData(`https://api.spotify.com/v1/me/player/play`, {
     method: isTrackPlaying ? "DELETE" : "PUT",
