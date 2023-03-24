@@ -1,14 +1,14 @@
 const TopTrack = ({
   track,
   artists,
-  number,
+  trackNumber,
 }: {
   track: string;
   artists: SpotifyApi.ArtistObjectSimplified[];
-  number: string;
+  trackNumber: number;
 }) => (
   <div className="flex-row">
-    <h5>{number}</h5>
+    <h5>{trackNumber.toLocaleString()}</h5>
     <h5>{track}</h5>
     {artists.map((artist) => (
       <h5 key={artist.id}>{artist.name}</h5>
