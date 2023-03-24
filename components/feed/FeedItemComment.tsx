@@ -1,5 +1,5 @@
+import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
-import ProfileImg from "@/components/userProfile/profileImg";
 
 import DeleteButton from "./DeleteButton";
 
@@ -17,11 +17,11 @@ const FeedItemComment = ({
   showLink: boolean;
   currentUser: User;
 }) => (
-  <div>
+  <div id={commentData.id}>
     <div className="flex flex-row justify-between items-center">
       <div className="flex flex-row items-center pb-4">
         {/* @ts-expect-error Server Component */}
-        <ProfileImg username={commentData.username} />
+        <ProfileImage username={commentData.username} />
         <div>
           {showLink ? (
             <UsernameLink username={commentData.username} />
@@ -33,7 +33,11 @@ const FeedItemComment = ({
       </div>
       <div>
         {currentUser.username === commentData.username && (
-          <DeleteButton postId={postData.id} commentId={commentData.id} />
+          <DeleteButton
+            userId={postData.userId}
+            postId={postData.id}
+            commentId={commentData.id}
+          />
         )}
       </div>
     </div>
