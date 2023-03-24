@@ -44,33 +44,14 @@ const FeedItem = ({
       </div>
       <p>{data.content}</p>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
-        <div className="flex flex-row justify-start items-center">
-          <div className="pr-2">
-            <svg
-              width="19"
-              height="18"
-              viewBox="0 0 19 18"
-              fill="white"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.99988 9L1.39577 3.56299C1.22284 2.0067 2.82456 0.864325 4.2397 1.53465L16.1841 7.19252C17.7092 7.91494 17.7092 10.0851 16.1841 10.8075L4.23971 16.4653C2.82457 17.1357 1.22284 15.9933 1.39577 14.437L1.99988 9ZM1.99988 9H8.99988"
-                stroke="#090909"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div>
-            <LikeButton
-              userId={currentUser.id}
-              postId={data.id}
-              likes={data.likedIds.length}
-              likedIds={data.likedIds}
-              username={currentUser.username}
-            />
-          </div>
+        <div>
+          <LikeButton
+            userId={currentUser.id}
+            postId={data.id}
+            likes={data.likedIds.length}
+            likedIds={data.likedIds}
+            username={currentUser.username}
+          />
         </div>
         <SaveFeedItemButton
           userId={currentUser.id}
