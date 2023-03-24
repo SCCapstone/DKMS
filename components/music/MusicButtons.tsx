@@ -15,7 +15,7 @@ const MusicButtons = ({
     {extraButtons}
     {path && (
       <Link className="btn btn-primary btn-outline w-full" href={path}>
-        Open in DKMS
+        View
       </Link>
     )}
     <a
