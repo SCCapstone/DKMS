@@ -7,7 +7,7 @@ import UsernameLink from "@/components/ui/UsernameLink";
 import { profilesCol } from "@/lib/firestore";
 import getUsersFollowing from "@/lib/followers/getUsersFollowing";
 
-import BasePanel from "../BasePanel";
+import BasePanel from "./BasePanel";
 
 const getTopItems = async (id: string) => {
   const profileDoc = await getDoc(doc(profilesCol, id));
@@ -42,11 +42,11 @@ const Friend = async ({
         <div>
           <ul className="flex-row">
             {tracks.map((topTrack) => (
+              // @ts-expect-error Next 13 Server Comonent
               <Track key={topTrack.id} track={topTrack} />
             ))}
           </ul>
         </div>
-        <div />
       </div>
       <div className="divider" />
     </div>
@@ -59,6 +59,7 @@ const Friends = async () => {
     <BasePanel title="Friends" sidebarId="friends">
       <ul>
         {users.map((user) => (
+          // @ts-expect-error Next 13 Server Comonent
           <Friend key={user.id} username={user.username} userId={user.id} />
         ))}
       </ul>
