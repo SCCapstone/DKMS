@@ -53,16 +53,6 @@ const TrackView = ({
     <div className="divider" />
     <h4 className="font-black uppercase">Similar Tracks</h4>
     <TrackList tracks={recommendations.tracks} showAlbum />
-
-    <details>
-      <pre>{JSON.stringify(audioFeatures, null, 2)}</pre>
-    </details>
-    <details>
-      <pre>{JSON.stringify(recommendations, null, 2)}</pre>
-    </details>
-    <details>
-      <pre>{JSON.stringify(track, null, 2)}</pre>
-    </details>
   </>
 );
 

@@ -37,11 +37,6 @@ const AlbumView = ({
     />
     <div className="divider" />
     <TrackList tracks={album.tracks.items} />
-    <div className="divider" />
-
-    <details>
-      <pre>{JSON.stringify(album, null, 2)}</pre>
-    </details>
   </>
 );
 

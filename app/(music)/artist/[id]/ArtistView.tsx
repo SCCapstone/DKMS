@@ -38,11 +38,6 @@ const ArtistView = ({
     <TrackList tracks={topTracks.tracks} showAlbum />
     <h4 className="font-black uppercase">Recent Albums</h4>
     <AlbumList albums={albums.items} />
-    <div className="divider" />
-
-    <details>
-      <pre>{JSON.stringify(artist, null, 2)}</pre>
-    </details>
   </>
 );
 

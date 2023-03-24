@@ -29,11 +29,6 @@ const AlbumView = ({
     />
     <div className="divider" />
     <TrackList tracks={tracks} showNumber showAlbum />
-    <div className="divider" />
-
-    <details>
-      <pre>{JSON.stringify(playlist, null, 2)}</pre>
-    </details>
   </>
 );
 
