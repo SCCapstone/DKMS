@@ -1,6 +1,6 @@
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
-import { capitalize } from "@/lib/formatters";
+import { capitalize, formatNumber } from "@/lib/formatters";
 import joinArtists from "@/lib/joinArtists";
 
 const AlbumView = ({
@@ -31,6 +31,7 @@ const AlbumView = ({
         uri: artist.uri,
         path: `/artist/${artist.id}`,
         title: artist.name,
+        subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
       }}
     />

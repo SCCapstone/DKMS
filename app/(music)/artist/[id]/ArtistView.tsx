@@ -18,9 +18,8 @@ const ArtistView = ({
         defaultImage: "/images/defaults/artist.png",
         uri: artist.uri,
         title: artist.name,
-        subtitle: `${formatNumber(
-          artist.followers.total
-        )} followers | ${formatNumber(albums.total)} releases`,
+        subtitle: `${formatNumber(artist.followers.total)} Followers`,
+        content: `${formatNumber(albums.total)} Releases`,
         isCircle: true,
       }}
     />

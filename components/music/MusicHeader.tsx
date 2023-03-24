@@ -48,11 +48,9 @@ const HeaderCard = ({
     )}
     <div className="flex flex-col justify-between">
       <div>
-        <h2 className="normal-case font-black text-2xl">{title}</h2>
-        {subtitle && (
-          <h3 className="normal-case font-extralight">{subtitle}</h3>
-        )}
-        {content && <p>{content}</p>}
+        <h2 className="font-black text-2xl">{title}</h2>
+        {subtitle && <h3 className="font-extralight">{subtitle}</h3>}
+        {content && <p className="font-extralight">{content}</p>}
       </div>
       <MusicButtons spotifyUri={uri} path={path} />
     </div>

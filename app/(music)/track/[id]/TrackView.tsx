@@ -1,7 +1,7 @@
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import TrackFeatures from "@/components/music/TrackFeatures";
-import { capitalize, formatDuration } from "@/lib/formatters";
+import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({
   track,
@@ -26,7 +26,10 @@ const TrackView = ({
         ).toLocaleDateString()} | ${capitalize(
           formatDuration(track.duration_ms)
         )}`,
-        content: track.album.name,
+        content:
+          track.album.album_type === "single"
+            ? "Single"
+            : `Album: ${track.album.name}`,
       }}
       secondary={{
         imageUrl: artist.images[0].url,
@@ -34,6 +37,7 @@ const TrackView = ({
         uri: artist.uri,
         path: `/artist/${artist.id}`,
         title: artist.name,
+        subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
       }}
     />
