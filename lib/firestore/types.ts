@@ -6,7 +6,10 @@ export type FirestoreUser = User;
 export type FirestoreAccount = Account;
 
 export type FirestoreFeedItem = {
-  track: SpotifyApi.TrackObjectFull | undefined;
+  track:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.RecommendationTrackObject
+    | undefined;
   timestamp: Timestamp;
   userId: string;
   content: string;

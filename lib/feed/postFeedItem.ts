@@ -7,7 +7,10 @@ import type { User } from "next-auth";
 const postFeedItem = async (
   user: User,
   content: string,
-  track?: SpotifyApi.TrackObjectFull
+  track:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.RecommendationTrackObject
+    | undefined
 ) => {
   const docRef = await addDoc(feedCol, {
     track,
