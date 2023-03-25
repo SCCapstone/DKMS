@@ -8,6 +8,7 @@ import type { User } from "next-auth";
 
 const postFeedComment = async (postId: string, user: User, content: string) => {
   const docRef = await addDoc(getCommentsCol(postId), {
+    track: undefined,
     content,
     userId: user.id,
     username: user.username,
