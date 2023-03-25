@@ -56,7 +56,11 @@ const SearchResults = ({ currentUser, results }: SearchResultsProps) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {playlists?.items.map((playlist, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Playlist key={playlist?.id ?? index} playlist={playlist} />
+          <Playlist
+            key={playlist?.id ?? index}
+            user={currentUser ?? ({ id: "", name: "" } as User)}
+            playlist={playlist}
+          />
         ))}
       </div>
       {users && (

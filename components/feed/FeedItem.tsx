@@ -1,7 +1,7 @@
 import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
 
-import { Track } from "../music/cards";
+import { Playlist, Track } from "../music/cards";
 
 import DeleteButton from "./DeleteButton";
 import FeedCommentBox from "./FeedCommentBox";
@@ -45,9 +45,23 @@ const FeedItem = ({
         </div>
       </div>
       <p>{data.content}</p>
-      <div className={data.track ? "grid" : "hidden"}>
-        {/* @ts-expect-error Server Component */}
-        <Track user={currentUser} track={data.track} isCompact />
+      <div className={data.item ? "grid" : "hidden"}>
+        {typeof data.item === "object" &&
+          Object.prototype.hasOwnProperty.call(data.item, "id") &&
+          data.item.type === "track" && (
+            <>
+              {/* @ts-expect-error Server Component */}
+              <Track user={currentUser} track={data.item} isCompact />
+            </>
+          )}
+        {typeof data.item === "object" &&
+          Object.prototype.hasOwnProperty.call(data.item, "id") &&
+          data.item.type === "playlist" && (
+            <>
+              {/* @ts-expect-error Server Component */}
+              <Playlist user={currentUser} track={data.item} isCompact />
+            </>
+          )}
       </div>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div>
