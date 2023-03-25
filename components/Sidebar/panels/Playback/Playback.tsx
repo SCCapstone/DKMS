@@ -3,9 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import getCurrentTrackUri from "@/lib/playback/gettrackrui";
+
 import play from "../../../../lib/playback/play";
 import prev from "../../../../lib/playback/skipprev";
 import BasePanel from "../BasePanel";
+
+let currentIsTrackPlaying = false;
 
 const Playback = ({
   isTrackPlaying,
@@ -17,7 +21,6 @@ const Playback = ({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
-
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
@@ -31,15 +34,20 @@ const Playback = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (isTrackPlaying) {
-      await play(uri, false);
-    } else {
-      await play(uri, true);
-    }
+    console.log(`Before Click ${currentIsTrackPlaying.toString()}`);
+    // TODO unsafe access on any value
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const tmp_uri = await getCurrentTrackUri();
+    console.log(tmp_uri);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    currentIsTrackPlaying = await play(tmp_uri.item.uri, currentIsTrackPlaying);
+    
+    console.log(`After Click ${currentIsTrackPlaying.toString()}`);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
     });
+    return currentIsTrackPlaying;
   };
 
   // Determine which icon to show based on the current state of the track

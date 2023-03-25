@@ -17,7 +17,7 @@ const play = async (uri: string, isTrackPlaying: boolean) => {
       uris: [uri],
     }),
   });
-  return response;
+  return !isTrackPlaying;
 };
 
 export default play;
