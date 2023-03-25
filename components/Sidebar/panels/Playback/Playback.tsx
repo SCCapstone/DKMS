@@ -41,7 +41,7 @@ const Playback = ({
     console.log(tmp_uri);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     currentIsTrackPlaying = await play(tmp_uri.item.uri, currentIsTrackPlaying);
-    
+
     console.log(`After Click ${currentIsTrackPlaying.toString()}`);
     setIsFetching(false);
     startTransition(() => {
