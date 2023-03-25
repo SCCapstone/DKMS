@@ -4,7 +4,7 @@ import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
 
-const AlbumView = ({
+const PlaylistView = ({
   playlist,
   tracks,
   averageAudioFeatures,
@@ -36,8 +36,14 @@ const AlbumView = ({
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList tracks={tracks} showNumber showAlbum />
+    <TrackList
+      tracks={tracks}
+      showNumber
+      showAlbum
+      showDateAdded
+      showUserAdded
+    />
   </>
 );
 
-export default AlbumView;
+export default PlaylistView;
