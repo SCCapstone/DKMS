@@ -21,7 +21,7 @@ const LOADING_ITEMS = {
 } as const;
 
 type SearchResultsProps = {
-  currentUser: User;
+  currentUser?: User;
   results: (SpotifyApi.SearchResponse & { users: FirestoreUser[] }) | undefined;
 };
 
