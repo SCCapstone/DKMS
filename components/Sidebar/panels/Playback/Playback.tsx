@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import getCurrentTrackUri from "@/lib/playback/gettrackrui";
 
 import play from "../../../../lib/playback/play";
+import next from "../../../../lib/playback/skipnext";
 import prev from "../../../../lib/playback/skipprev";
 import BasePanel from "../BasePanel";
 
@@ -25,6 +26,15 @@ const Playback = ({
     e.preventDefault();
     setIsFetching(true);
     await prev(uri, isTrackPlaying, true);
+    setIsFetching(false);
+    startTransition(() => {
+      router.refresh();
+    });
+  };
+  const handleNextClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsFetching(true);
+    await next(uri, isTrackPlaying, true);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
@@ -117,7 +127,11 @@ const Playback = ({
               <path d="M10 8l6 4-6 4V8z" />
             </svg>
           </button>
-          <button type="button" className="focus:outline-none">
+          <button
+            type="button"
+            className="focus:outline-none"
+            onClick={(e) => void handleNextClick(e)}
+          >
             <svg
               width="35"
               height="35"
