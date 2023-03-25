@@ -28,7 +28,7 @@ const Track = async ({
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | undefined;
-  isCompact: boolean | undefined;
+  isCompact?: boolean;
 }) => {
   if (!track) {
     return (
