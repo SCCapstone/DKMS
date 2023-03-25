@@ -38,6 +38,7 @@ const FavoriteIcon = ({
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}
+      title="Favorite song on Spotify"
     >
       {isFavorited ? <HeartSolid /> : <HeartRegular />}
     </button>

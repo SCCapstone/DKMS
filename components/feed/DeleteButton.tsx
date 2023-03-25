@@ -37,6 +37,7 @@ const DeleteButton = ({
       onClick={(e) => void handleDelete(e)}
       disabled={isMutating}
       className={`${isMutating ? "loading" : ""} btn`}
+      title="Delete feed item"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

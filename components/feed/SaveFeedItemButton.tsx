@@ -44,6 +44,7 @@ const SaveFeedItemButton = ({
       className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
       type="button"
       onClick={(e) => void handleClick(e)}
+      title="Save feed item"
     >
       <svg
         width="24"

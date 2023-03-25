@@ -50,6 +50,7 @@ const LikeButton = ({
         className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
         type="button"
         onClick={(e) => void handleClick(e)}
+        title="Like feed item"
       >
         <svg
           className={liked ? "fill-white" : "fill-base-100"}
