@@ -20,7 +20,7 @@ const nextConfig = withPlaiceholder({
       },
       {
         protocol: "https",
-        hostname: "**.spotifycdn.com"
+        hostname: "**.spotifycdn.com",
       },
     ],
   },
