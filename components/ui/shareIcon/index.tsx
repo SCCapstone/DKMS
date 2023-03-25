@@ -9,14 +9,15 @@ import Share from "./icon";
 
 import type { User } from "next-auth";
 
-const ShareTrackIcon = ({
+const ShareIcon = ({
   user,
-  track,
+  sharedItem,
 }: {
   user: User;
-  track:
+  sharedItem:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
+    | SpotifyApi.PlaylistObjectSimplified
     | undefined;
 }) => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const ShareTrackIcon = ({
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    await postFeedItem(user, "", track);
+    await postFeedItem(user, "", sharedItem);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
@@ -48,4 +49,4 @@ const ShareTrackIcon = ({
   );
 };
 
-export default ShareTrackIcon;
+export default ShareIcon;
