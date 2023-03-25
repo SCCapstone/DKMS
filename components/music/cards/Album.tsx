@@ -1,14 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
+import joinArtists from "@/lib/joinArtists";
 
-const Playlist = async ({
-  playlist,
+const Album = async ({
+  album,
 }: {
-  playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
+  album: SpotifyApi.AlbumObjectSimplified | undefined;
 }) => {
-  if (!playlist) {
+  if (!album) {
     return (
       <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square" />
@@ -24,44 +26,37 @@ const Playlist = async ({
     );
   }
 
-  // Spotify blend images cause errors, display default image
-  const image = !playlist.images[0].url.startsWith(
-    "https://blend-playlist-covers.spotifycdn.com"
-  )
-    ? playlist.images[0]
-    : {
-        url: "/images/defaults/playlist.png",
-      };
+  const image = album.images[0] ?? {
+    url: "/images/defaults/album.png",
+  };
 
   const { base64, img } = await getPlaiceholder(image.url, {
     size: 10,
   });
 
   return (
-    <a
-      href={playlist.external_urls.spotify}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/album/${album.id}`}
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">
         <Image
           src={img}
-          alt={playlist.name}
+          alt={album.name}
           fill
           placeholder="blur"
           blurDataURL={base64}
         />
       </figure>
       <div className="card-body">
-        <h2 className="text-lg font-semibold truncate">{playlist.name}</h2>
+        <h2 className="text-lg font-semibold truncate">{album.name}</h2>
         <p>
-          {playlist.tracks.total}{" "}
-          {playlist.tracks.total === 1 ? "track" : "tracks"}
+          {new Date(album.release_date).getFullYear()} |{" "}
+          {joinArtists(album.artists)}
         </p>
       </div>
-    </a>
+    </Link>
   );
 };
 
-export default Playlist;
+export default Album;

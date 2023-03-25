@@ -1,4 +1,4 @@
-import Track from "@/components/music/Track";
+import { Track } from "@/components/music/cards";
 import PageTitle from "@/components/ui/PageTitle";
 import { getCurrentUser } from "@/lib/getUser";
 import getRecommendations from "@/lib/recommendations/getRecommendations";

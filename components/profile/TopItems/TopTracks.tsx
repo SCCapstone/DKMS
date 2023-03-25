@@ -1,4 +1,4 @@
-import Track from "@/components/music/Track";
+import { Track } from "@/components/music/cards";
 
 const TopTracks = ({ tracks }: { tracks: SpotifyApi.TrackObjectFull[] }) => (
   <div>
