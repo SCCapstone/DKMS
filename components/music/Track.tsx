@@ -17,7 +17,10 @@ const checkIsFavorited = (trackId: string) =>
 const Track = async ({
   track,
 }: {
-  track: SpotifyApi.TrackObjectFull | undefined;
+  track:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.RecommendationTrackObject
+    | undefined;
 }) => {
   if (!track) {
     return (
