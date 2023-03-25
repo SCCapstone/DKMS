@@ -17,15 +17,21 @@ const checkIsFavorited = (trackId: string) =>
 
 const Track = async ({
   track,
+  isCompact,
 }: {
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | undefined;
+  isCompact: boolean | undefined;
 }) => {
   if (!track) {
     return (
-      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+      <div
+        className={`card ${
+          isCompact ? "card-side" : "card-compact"
+        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
+      >
         <figure className="relative aspect-square" />
         <div className="card-body">
           <h2 className="text-lg font-semibold">
@@ -53,7 +59,9 @@ const Track = async ({
   return (
     <Link
       href={`/track/${track.id}`}
-      className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
+      className={`card ${
+        isCompact ? "card-side" : "card-compact"
+      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
       <figure className="relative aspect-square">
         <Image
@@ -65,11 +73,21 @@ const Track = async ({
         />
       </figure>
       <div className="card-body relative">
-        <div className="absolute top-0 right-0 p-2">
+        <div
+          className={`absolute 
+            ${isCompact ? "bottom-0" : "top-0"}
+          right-0 p-2`}
+        >
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
-        <h2 className="text-lg font-semibold truncate mt-10">{track.name}</h2>
-        <p>
+        <h2
+          className={`${
+            isCompact ? "text-lg" : "text-lg mt-10"
+          } font-semibold truncate`}
+        >
+          {track.name}
+        </h2>
+        <p className={isCompact ? "truncate" : ""}>
           {new Date(track.album.release_date).getFullYear()} |{" "}
           {track.album.name}
         </p>
