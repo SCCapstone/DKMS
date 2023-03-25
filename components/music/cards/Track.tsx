@@ -3,9 +3,12 @@ import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import FavoriteIcon from "@/components/ui/favoriteIcon";
+import ShareTrackIcon from "@/components/ui/shareTrackIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import getSpotifyData from "@/lib/getSpotifyData";
 import joinArtists from "@/lib/joinArtists";
+
+import type { User } from "next-auth";
 
 const checkIsFavorited = (trackId: string) =>
   getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
@@ -16,9 +19,11 @@ const checkIsFavorited = (trackId: string) =>
   ).then((data) => data[0]);
 
 const Track = async ({
+  user,
   track,
   isCompact,
 }: {
+  user: User;
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
@@ -74,10 +79,11 @@ const Track = async ({
       </figure>
       <div className="card-body relative">
         <div
-          className={`absolute 
+          className={`flex flex-row absolute 
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
         >
+          <ShareTrackIcon user={user} track={track} />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <h2
