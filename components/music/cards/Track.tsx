@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import FavoriteIcon from "@/components/ui/favoriteIcon";
-import ShareTrackIcon from "@/components/ui/shareTrackIcon";
+import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import getSpotifyData from "@/lib/getSpotifyData";
 import joinArtists from "@/lib/joinArtists";
@@ -83,7 +83,7 @@ const Track = async ({
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
         >
-          <ShareTrackIcon user={user} track={track} />
+          <ShareIcon user={user} sharedItem={track} />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <h2
