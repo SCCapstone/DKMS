@@ -15,7 +15,7 @@ const AlbumView = ({
       primary={{
         imageUrl: playlist.images[0].url,
         defaultImage: "/images/defaults/playlist.png",
-        uri: playlist.uri,
+        url: playlist.external_urls.spotify,
         title: playlist.name,
         subtitle: `${formatNumber(playlist.followers.total)} Followers | ${
           playlist.tracks.total

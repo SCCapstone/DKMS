@@ -19,7 +19,7 @@ const ArtistView = ({
       primary={{
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
-        uri: artist.uri,
+        url: artist.external_urls.spotify,
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         content: `${formatNumber(albums.total)} Releases`,

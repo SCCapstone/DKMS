@@ -6,8 +6,8 @@ import MusicImage from "./MusicImage";
 type CardProps = {
   imageUrl: string | undefined;
   defaultImage: string;
-  /** The Spotify URI */
-  uri: string;
+  /** The Spotify URL */
+  url: string;
   /** The path to the DKMS page */
   path?: string;
   title: string;
@@ -21,7 +21,7 @@ type CardProps = {
 const HeaderCard = ({
   imageUrl,
   defaultImage,
-  uri,
+  url,
   path,
   title,
   subtitle,
@@ -40,7 +40,7 @@ const HeaderCard = ({
         />
       </Link>
     ) : (
-      <a href={uri} className="w-full">
+      <a href={url} className="w-full">
         {/* @ts-expect-error Next 13 Server Component */}
         <MusicImage
           src={imageUrl ?? defaultImage}
@@ -59,7 +59,7 @@ const HeaderCard = ({
           content
         )}
       </div>
-      <MusicButtons spotifyUri={uri} path={path} extraButtons={buttons} />
+      <MusicButtons spotifyUri={url} path={path} extraButtons={buttons} />
     </div>
   </>
 );
@@ -75,7 +75,7 @@ const MusicHeader = ({
     <HeaderCard
       imageUrl={primary.imageUrl}
       defaultImage={primary.defaultImage}
-      uri={primary.uri}
+      url={primary.url}
       path={primary.path}
       title={primary.title}
       subtitle={primary.subtitle}
@@ -87,7 +87,7 @@ const MusicHeader = ({
       <HeaderCard
         imageUrl={secondary.imageUrl}
         defaultImage={secondary.defaultImage}
-        uri={secondary.uri}
+        url={secondary.url}
         path={secondary.path}
         title={secondary.title}
         subtitle={secondary.subtitle}

@@ -15,7 +15,7 @@ const AlbumView = ({
       primary={{
         imageUrl: album.images[0].url,
         defaultImage: "/images/defaults/album.png",
-        uri: album.uri,
+        url: album.external_urls.spotify,
         title: album.name,
         subtitle: `Released ${new Date(
           album.release_date
@@ -28,7 +28,7 @@ const AlbumView = ({
       secondary={{
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
-        uri: artist.uri,
+        url: artist.external_urls.spotify,
         path: `/artist/${artist.id}`,
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
