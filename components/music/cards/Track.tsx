@@ -87,17 +87,19 @@ const Track = async ({
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <h2
-          className={`${
-            isCompact ? "text-lg" : "text-lg mt-10"
-          } font-semibold truncate`}
+          className={`text-lg truncate font-semibold  ${
+            isCompact ? "" : "mt-10"
+          }`}
         >
           {track.name}
         </h2>
-        <p className={isCompact ? "truncate" : ""}>
+        <p className={isCompact ? "text-sm truncate" : ""}>
           {new Date(track.album.release_date).getFullYear()} |{" "}
           {track.album.name}
         </p>
-        <p>{joinArtists(track.artists)}</p>
+        <p className={isCompact ? "text-sm truncate" : ""}>
+          {joinArtists(track.artists)}
+        </p>
       </div>
     </Link>
   );

@@ -1,6 +1,8 @@
 import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
 
+import { Track } from "../music/cards";
+
 import DeleteButton from "./DeleteButton";
 import FeedCommentBox from "./FeedCommentBox";
 import FeedItemComment from "./FeedItemComment";
@@ -43,6 +45,10 @@ const FeedItem = ({
         </div>
       </div>
       <p>{data.content}</p>
+      <div className={data.track ? "grid" : "hidden"}>
+        {/* @ts-expect-error Server Component */}
+        <Track user={currentUser} track={data.track} isCompact />
+      </div>
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div>
           <LikeButton
