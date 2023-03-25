@@ -2,6 +2,7 @@ import { Album, Artist, Playlist, Track } from "@/components/music/cards";
 import UsernameLink from "@/components/ui/UsernameLink";
 
 import type { FirestoreUser } from "@/lib/firestore/types";
+import type { User } from "next-auth";
 
 const LOADING_ITEMS = {
   albums: {
@@ -20,10 +21,11 @@ const LOADING_ITEMS = {
 } as const;
 
 type SearchResultsProps = {
+  currentUser: User;
   results: (SpotifyApi.SearchResponse & { users: FirestoreUser[] }) | undefined;
 };
 
-const SearchResults = ({ results }: SearchResultsProps) => {
+const SearchResults = ({ currentUser, results }: SearchResultsProps) => {
   const { albums, tracks, artists, playlists, users } =
     results ?? LOADING_ITEMS;
 
@@ -47,7 +49,7 @@ const SearchResults = ({ results }: SearchResultsProps) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {tracks?.items.map((track, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Track key={track?.id ?? index} track={track} />
+          <Track key={track?.id ?? index} user={currentUser} track={track} />
         ))}
       </div>
       <h2 className="font-black">Playlists</h2>
