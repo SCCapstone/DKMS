@@ -7,7 +7,7 @@ import { postFeedItem } from "@/lib/feed";
 
 import Share from "./icon";
 
-import type { sharedItemType } from "@/lib/firestore/types";
+import type { SharedItemType } from "@/lib/firestore/types";
 import type { User } from "next-auth";
 
 const IconButton = ({
@@ -15,7 +15,7 @@ const IconButton = ({
   sharedItem,
 }: {
   user: User;
-  sharedItem: sharedItemType;
+  sharedItem: SharedItemType;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
