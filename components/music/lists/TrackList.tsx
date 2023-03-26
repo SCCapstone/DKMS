@@ -1,5 +1,5 @@
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDuration } from "@/lib/formatters";
-import joinArtists from "@/lib/joinArtists";
 
 const TrackList = ({
   tracks,
@@ -31,12 +31,7 @@ const TrackList = ({
               </a>
             </td>
             <td>
-              <a
-                className="font-bold text-secondary"
-                href={`/artist/${track.artists[0].id}`}
-              >
-                {joinArtists(track.artists)}
-              </a>
+              <ArtistLinks artists={track.artists} />
             </td>
             {showAlbum && "album" in track && (
               <td>
