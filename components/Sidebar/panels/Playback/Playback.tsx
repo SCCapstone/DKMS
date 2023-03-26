@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 
 import getCurrentTrackUri from "@/lib/playback/gettrackrui";
 
+import getTrackName from "../../../../lib/playback/gettrackname";
 import play from "../../../../lib/playback/play";
 import next from "../../../../lib/playback/skipnext";
 import prev from "../../../../lib/playback/skipprev";
@@ -23,7 +24,14 @@ const Playback = ({
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false); // new state variable for player state
-
+  const [trackName, setTrackName] = useState<string | null>(null); // new state variable for track name
+  useEffect(() => {
+    const fetchTrackName = async () => {
+      const name = await getTrackName();
+      setTrackName(name);
+    };
+    void fetchTrackName();
+  }, []); // run only once on mount
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
@@ -89,6 +97,7 @@ const Playback = ({
   return (
     <BasePanel title="Playback" sidebarId="playback">
       <div className="flex justify-center items-center">
+        {/* {trackName && <div className="text-center">{trackName}</div>} */}
         <div className="flex space-x-4">
           <button
             type="button"
