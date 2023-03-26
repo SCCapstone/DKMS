@@ -59,7 +59,7 @@ const FeedItem = ({
           data.item.type === "playlist" && (
             <>
               {/* @ts-expect-error Server Component */}
-              <Playlist user={currentUser} track={data.item} isCompact />
+              <Playlist user={currentUser} playlist={data.item} isCompact />
             </>
           )}
       </div>

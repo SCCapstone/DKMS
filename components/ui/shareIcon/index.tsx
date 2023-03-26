@@ -42,7 +42,7 @@ const ShareIcon = ({
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}
-      title="Share track to feed"
+      title="Share to feed"
     >
       <Share />
     </button>
