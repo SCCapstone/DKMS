@@ -36,13 +36,7 @@ const PlaylistView = ({
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList
-      tracks={tracks}
-      showNumber
-      showAlbum
-      showDateAdded
-      showUserAdded
-    />
+    <TrackList tracks={tracks} showNumber showAlbum />
   </>
 );
 
