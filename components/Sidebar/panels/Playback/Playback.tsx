@@ -11,8 +11,6 @@ import prev from "@/lib/playback/skipprev";
 
 import BasePanel from "../BasePanel";
 
-let currentIsTrackPlaying = false;
-
 const Playback = ({
   isTrackPlaying,
   uri,
@@ -27,6 +25,8 @@ const Playback = ({
   const [isFetching, setIsFetching] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false); // new state variable for player state
   const [trackName, setTrackName] = useState<string | null>(null); // new state variable for track name
+  const [currentIsTrackPlaying, setCurrentIsTrackPlaying] = useState(false);
+
   useEffect(() => {
     const fetchTrackName = async () => {
       const name = await getTrackName();
@@ -36,51 +36,38 @@ const Playback = ({
   }, []); // run only once on mount
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isPremiumUser) {
-      setIsFetching(true);
-      await prev(uri, isTrackPlaying, true);
-      setIsFetching(false);
-      startTransition(() => {
-        router.refresh();
-      });
-    } else {
-      console.log("Function only works for Premium users");
-    }
+    setIsFetching(true);
+    await prev(uri, isTrackPlaying, true);
+    setIsFetching(false);
+    startTransition(() => {
+      router.refresh();
+    });
   };
   const handleNextClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isPremiumUser) {
-      setIsFetching(true);
-      await next(uri, isTrackPlaying, true);
-      setIsFetching(false);
-      startTransition(() => {
-        router.refresh();
-      });
-    } else {
-      console.log("Function only works for Premium users");
-    }
+    setIsFetching(true);
+    await next(uri, isTrackPlaying, true);
+    setIsFetching(false);
+    startTransition(() => {
+      router.refresh();
+    });
   };
 
-  // eslint-disable-next-line consistent-return
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isPremiumUser) {
-      setIsFetching(true);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const tmp_uri = await getCurrentTrackUri();
-      currentIsTrackPlaying = await play(
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        tmp_uri.item.uri,
-        currentIsTrackPlaying
-      );
-      setIsPlaying(!isPlaying); // toggle player state
-      setIsFetching(false);
-      startTransition(() => {
-        router.refresh();
-      });
-      return currentIsTrackPlaying;
-    }
-    console.log("Function only works for Premium users");
+    setIsFetching(true);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const tmp_uri = await getCurrentTrackUri();
+    const isTrackPlayingNow = await play(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+      tmp_uri.item.uri,
+      isPlaying // use the current state of isPlaying instead of currentIsTrackPlaying
+    );
+    setIsPlaying(isTrackPlayingNow); // update isPlaying state variable
+    setIsFetching(false);
+    startTransition(() => {
+      router.refresh();
+    });
   };
 
   // Determine which icon to show based on the current state of the track
