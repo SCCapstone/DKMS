@@ -8,8 +8,6 @@ import Skeleton from "@/components/ui/Skeleton";
 import getSpotifyData from "@/lib/getSpotifyData";
 import joinArtists from "@/lib/joinArtists";
 
-import type { User } from "next-auth";
-
 const checkIsFavorited = (trackId: string) =>
   getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
     `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`,
@@ -19,11 +17,9 @@ const checkIsFavorited = (trackId: string) =>
   ).then((data) => data[0]);
 
 const Track = async ({
-  user,
   track,
   isCompact,
 }: {
-  user: User;
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
@@ -83,7 +79,8 @@ const Track = async ({
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
         >
-          <ShareIcon user={user} sharedItem={track} />
+          {/* @ts-expect-error Server Component */}
+          <ShareIcon sharedItem={track} />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <h2

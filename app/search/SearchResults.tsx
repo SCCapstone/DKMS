@@ -2,7 +2,6 @@ import { Album, Artist, Playlist, Track } from "@/components/music/cards";
 import UsernameLink from "@/components/ui/UsernameLink";
 
 import type { FirestoreUser } from "@/lib/firestore/types";
-import type { User } from "next-auth";
 
 const LOADING_ITEMS = {
   albums: {
@@ -21,11 +20,10 @@ const LOADING_ITEMS = {
 } as const;
 
 type SearchResultsProps = {
-  currentUser?: User;
   results: (SpotifyApi.SearchResponse & { users: FirestoreUser[] }) | undefined;
 };
 
-const SearchResults = ({ currentUser, results }: SearchResultsProps) => {
+const SearchResults = ({ results }: SearchResultsProps) => {
   const { albums, tracks, artists, playlists, users } =
     results ?? LOADING_ITEMS;
 
@@ -35,36 +33,28 @@ const SearchResults = ({ currentUser, results }: SearchResultsProps) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {albums?.items.map((album, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Album key={album?.id ?? index} user={currentUser} album={album} />
+          <Album key={album?.id ?? index} album={album} />
         ))}
       </div>
       <h2 className="font-black">Artists</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {artists?.items.map((artist, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Artist
-            key={artist?.id ?? index}
-            user={currentUser ?? ({ id: "", name: "" } as User)}
-            artist={artist}
-          />
+          <Artist key={artist?.id ?? index} artist={artist} />
         ))}
       </div>
       <h2 className="font-black">Tracks</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {tracks?.items.map((track, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Track key={track?.id ?? index} user={currentUser} track={track} />
+          <Track key={track?.id ?? index} track={track} />
         ))}
       </div>
       <h2 className="font-black">Playlists</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {playlists?.items.map((playlist, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Playlist
-            key={playlist?.id ?? index}
-            user={currentUser ?? ({ id: "", name: "" } as User)}
-            playlist={playlist}
-          />
+          <Playlist key={playlist?.id ?? index} playlist={playlist} />
         ))}
       </div>
       {users && (

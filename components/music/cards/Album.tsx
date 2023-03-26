@@ -6,14 +6,10 @@ import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import joinArtists from "@/lib/joinArtists";
 
-import type { User } from "next-auth";
-
 const Album = async ({
-  user,
   album,
   isCompact,
 }: {
-  user: User;
   album: SpotifyApi.AlbumObjectSimplified | undefined;
   isCompact?: boolean;
 }) => {
@@ -67,7 +63,8 @@ const Album = async ({
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
         >
-          <ShareIcon user={user} sharedItem={album} />
+          {/* @ts-expect-error Server Component */}
+          <ShareIcon sharedItem={album} />
         </div>
         <h2
           className={`text-lg truncate font-semibold  ${

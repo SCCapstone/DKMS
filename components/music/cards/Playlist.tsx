@@ -5,14 +5,10 @@ import { getPlaiceholder } from "plaiceholder";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
-import type { User } from "next-auth";
-
 const Playlist = async ({
-  user,
   playlist,
   isCompact,
 }: {
-  user: User;
   playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
   isCompact?: boolean;
 }) => {
@@ -71,7 +67,8 @@ const Playlist = async ({
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
         >
-          <ShareIcon user={user} sharedItem={playlist} />
+          {/* @ts-expect-error Server Component */}
+          <ShareIcon sharedItem={playlist} />
         </div>
         <h2
           className={`text-lg truncate font-semibold  ${
