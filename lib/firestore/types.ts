@@ -23,6 +23,13 @@ export type FirestoreFeedItem = {
   likedIds: string[];
 };
 
+export type FirestoreFeedCommentItem = {
+  timestamp: Timestamp;
+  userId: string;
+  content: string;
+  username: string;
+};
+
 export type FirestoreProfile = {
   topTracks: SpotifyApi.TrackObjectFull[];
   topArtists: SpotifyApi.ArtistObjectFull[];
