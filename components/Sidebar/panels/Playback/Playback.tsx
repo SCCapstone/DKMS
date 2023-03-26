@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition, useEffect } from "react";
 
+import getTrackName from "@/lib/playback/gettrackname";
 import getCurrentTrackUri from "@/lib/playback/gettrackrui";
+import play from "@/lib/playback/play";
+import next from "@/lib/playback/skipnext";
+import prev from "@/lib/playback/skipprev";
 
-import getTrackName from "../../../../lib/playback/gettrackname";
-import play from "../../../../lib/playback/play";
-import next from "../../../../lib/playback/skipnext";
-import prev from "../../../../lib/playback/skipprev";
 import BasePanel from "../BasePanel";
 
 let currentIsTrackPlaying = false;
