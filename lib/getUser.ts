@@ -47,7 +47,7 @@ export const getUserFromId = async (userId: string) => {
   const userData = await getDoc(doc(usersCol, userId));
 
   if (!userData.exists()) {
-    throw new Error("No user data");
+    throw new Error(`No user data for user ${userId}`);
   }
 
   return { ...userData.data(), id: userData.id };

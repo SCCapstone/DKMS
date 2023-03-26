@@ -51,7 +51,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
   return (
     <>
       <ProfileHead
-        displayName={dkmsProfile.displayName}
+        displayName={dkmsProfile.name}
         username={username}
         followers={spotifyData.followers?.total}
         link={spotifyData.external_urls.spotify}

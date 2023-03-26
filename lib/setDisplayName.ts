@@ -2,9 +2,9 @@ import { doc, updateDoc } from "firebase/firestore";
 
 import { usersCol } from "@/lib/firestore";
 
-const setDisplayName = async (userId: string, displayName: string) =>
+const setDisplayName = async (userId: string, name: string) =>
   updateDoc(doc(usersCol, userId), {
-    displayName,
+    name,
   });
 
 export default setDisplayName;

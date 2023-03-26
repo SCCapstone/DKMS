@@ -12,7 +12,7 @@ const Settings = async () => {
         <ThemeSettingCard />
         <DisplayNameCard
           userId={currentUser.id}
-          displayName={currentUser.displayName}
+          displayName={currentUser.name}
         />
       </div>
     </>
