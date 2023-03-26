@@ -35,7 +35,7 @@ const SearchResults = ({ currentUser, results }: SearchResultsProps) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {albums?.items.map((album, index) => (
           // @ts-expect-error Next 13 handles async components
-          <Album key={album?.id ?? index} album={album} />
+          <Album key={album?.id ?? index} user={currentUser} album={album} />
         ))}
       </div>
       <h2 className="font-black">Artists</h2>
