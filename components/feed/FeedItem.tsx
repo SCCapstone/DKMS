@@ -1,7 +1,7 @@
 import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
 
-import { Album, Playlist, Track } from "../music/cards";
+import { Album, Artist, Playlist, Track } from "../music/cards";
 
 import DeleteButton from "./DeleteButton";
 import FeedCommentBox from "./FeedCommentBox";
@@ -68,6 +68,14 @@ const FeedItem = ({
             <>
               {/* @ts-expect-error Server Component */}
               <Album user={currentUser} album={data.item} isCompact />
+            </>
+          )}
+        {typeof data.item === "object" &&
+          Object.prototype.hasOwnProperty.call(data.item, "id") &&
+          data.item.type === "artist" && (
+            <>
+              {/* @ts-expect-error Server Component */}
+              <Artist user={currentUser} artist={data.item} isCompact />
             </>
           )}
       </div>
