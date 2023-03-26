@@ -14,6 +14,12 @@ export type FeedCommentType = {
 export type FeedItemType = {
   id: string;
   comments: FeedCommentType[];
+  musicItem:
+    | SpotifyApi.TrackObjectFull
+    | SpotifyApi.PlaylistObjectSimplified
+    | SpotifyApi.ArtistObjectFull
+    | SpotifyApi.AlbumObjectSimplified
+    | undefined;
 } & FirestoreFeedItem;
 
 const FeedPage = ({

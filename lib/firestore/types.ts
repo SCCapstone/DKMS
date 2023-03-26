@@ -5,17 +5,11 @@ export type FirestoreUser = User;
 
 export type FirestoreAccount = Account;
 
-export type SharedItemType = {
-  item:
-    | SpotifyApi.TrackObjectFull
-    | SpotifyApi.RecommendationTrackObject
-    | SpotifyApi.PlaylistObjectSimplified
-    | SpotifyApi.AlbumObjectSimplified
-    | SpotifyApi.ArtistObjectFull;
-};
-
 export type FirestoreFeedItem = {
-  item?: SharedItemType;
+  trackId?: string;
+  playlistId?: string;
+  artistId?: string;
+  albumId?: string;
   timestamp: Timestamp;
   userId: string;
   content: string;

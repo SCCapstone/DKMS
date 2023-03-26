@@ -64,7 +64,7 @@ const Album = async ({
           right-0 p-2`}
         >
           {/* @ts-expect-error Server Component */}
-          <ShareIcon sharedItem={album} />
+          <ShareIcon albumId={album.id} />
         </div>
         <h2
           className={`text-lg truncate font-semibold  ${

@@ -7,15 +7,20 @@ import { postFeedItem } from "@/lib/feed";
 
 import Share from "./icon";
 
-import type { SharedItemType } from "@/lib/firestore/types";
 import type { User } from "next-auth";
 
 const IconButton = ({
   user,
-  sharedItem,
+  trackId,
+  playlistId,
+  artistId,
+  albumId,
 }: {
   user: User;
-  sharedItem: SharedItemType;
+  trackId?: string;
+  playlistId?: string;
+  artistId?: string;
+  albumId?: string;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -26,7 +31,7 @@ const IconButton = ({
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    await postFeedItem(user, "", sharedItem);
+    await postFeedItem(user, "", trackId, playlistId, artistId, albumId);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
