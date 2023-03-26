@@ -1,7 +1,4 @@
-import Album from "@/components/music/Album";
-import Artist from "@/components/music/Artist";
-import Playlist from "@/components/music/Playlist";
-import Track from "@/components/music/Track";
+import { Album, Artist, Playlist, Track } from "@/components/music/cards";
 import UsernameLink from "@/components/ui/UsernameLink";
 
 import type { FirestoreUser } from "@/lib/firestore/types";
