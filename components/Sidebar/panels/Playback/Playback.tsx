@@ -22,6 +22,8 @@ const Playback = ({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // new state variable for player state
+
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
@@ -44,15 +46,12 @@ const Playback = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    console.log(`Before Click ${currentIsTrackPlaying.toString()}`);
     // TODO unsafe access on any value
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const tmp_uri = await getCurrentTrackUri();
-    console.log(tmp_uri);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     currentIsTrackPlaying = await play(tmp_uri.item.uri, currentIsTrackPlaying);
-
-    console.log(`After Click ${currentIsTrackPlaying.toString()}`);
+    setIsPlaying(!isPlaying); // toggle player state
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
@@ -61,7 +60,7 @@ const Playback = ({
   };
 
   // Determine which icon to show based on the current state of the track
-  const playPauseIcon = isTrackPlaying ? (
+  const playPauseIcon = isPlaying ? ( // use isPlaying state variable instead of isTrackPlaying
     <svg
       width="48"
       height="48"
@@ -70,7 +69,8 @@ const Playback = ({
       className="stroke-current"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M6 4l15 8-15 8V4z" />
+      <circle cx="12" cy="12" r="10" />
+      <path d="M8 7h3v10H8zm5 0h3v10h-3z" />
     </svg>
   ) : (
     <svg
@@ -81,7 +81,8 @@ const Playback = ({
       className="stroke-current"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M8 5v14l11-7z" />
+      <circle cx="12" cy="12" r="10" />
+      <path d="M10 8l6 4-6 4V8z" />
     </svg>
   );
 
@@ -115,17 +116,7 @@ const Playback = ({
             className="focus:outline-none"
             onClick={(e) => void handleClick(e)}
           >
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="stroke-current"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M10 8l6 4-6 4V8z" />
-            </svg>
+            {playPauseIcon}
           </button>
           <button
             type="button"
