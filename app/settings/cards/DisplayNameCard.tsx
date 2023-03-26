@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { toast } from "react-hot-toast";
 
 import setDisplayName from "@/lib/setDisplayName";
 
@@ -30,6 +31,7 @@ const DisplayNameCard = ({
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.
       router.refresh();
+      toast.success("Display name updated!");
     });
   };
   return (
