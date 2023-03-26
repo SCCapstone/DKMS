@@ -37,11 +37,7 @@ const Page = async ({
 }) => {
   const results = await getData(searchParams.q);
 
-  return searchParams.q ? (
-    <SearchResults results={results} />
-  ) : (
-    <div>{JSON.stringify(searchParams)}</div>
-  );
+  return searchParams.q ? <SearchResults results={results} /> : null;
 };
 
 export default Page;
