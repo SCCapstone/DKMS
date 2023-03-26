@@ -7,7 +7,12 @@ type CurrentlyPlayingResponse = {
 };
 
 const getCurrentTrackUri = async () => {
-  const token = await getAccessToken();
+  let token;
+  try {
+    token = await getAccessToken();
+  } catch (error) {
+    throw new Error("Feature works for only Premium Users");
+  }
   const response = await fetch("https://api.spotify.com/v1/me/player/", {
     headers: {
       Authorization: `Bearer ${token}`,
