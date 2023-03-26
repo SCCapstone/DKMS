@@ -1,4 +1,5 @@
 export const THEME_VALUES = [
+  "system",
   "dark",
   "light",
   "cupcake",

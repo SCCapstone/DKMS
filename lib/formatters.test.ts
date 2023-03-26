@@ -1,4 +1,4 @@
-import { formatNumber } from "./formatters";
+import { formatNumber, formatDuration } from "./formatters";
 
 describe("formatFollowers()", () => {
   it("does not return a number", () => {
@@ -37,5 +37,28 @@ describe("formatFollowers()", () => {
     expect(formatNumber(1001000000)).to.eq("1.0b");
     expect(formatNumber(1300000000)).to.eq("1.3b");
     expect(formatNumber(1999000000)).to.eq("2.0b");
+  });
+});
+
+describe("formatDuration()", () => {
+  it("does not return a number", () => {
+    expect(formatDuration(1000)).to.not.be.a("number");
+  });
+
+  it("returns a string", () => {
+    expect(formatDuration(1000)).to.be.a("string");
+  });
+
+  it("returns a duration in minutes:seconds", () => {
+    expect(formatDuration(1000)).to.eq("0:01");
+    expect(formatDuration(60000)).to.eq("1:00");
+    expect(formatDuration(61000)).to.eq("1:01");
+  });
+
+  it("returns a duration over 1 hour in hours:minutes:seconds", () => {
+    expect(formatDuration(3600000)).to.eq("1:00:00");
+    expect(formatDuration(3660000)).to.eq("1:01:00");
+    expect(formatDuration(3661000)).to.eq("1:01:01");
+    expect(formatDuration(36610000)).to.eq("10:10:10");
   });
 });

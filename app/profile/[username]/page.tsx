@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 
-import FollowButton from "@/components/profile/FollowButton";
+import FollowButton from "@/components/FollowButton";
 import ProfileHead from "@/components/profile/ProfileHead";
 import TopItems from "@/components/profile/TopItems";
 import { profilesCol } from "@/lib/firestore";
@@ -35,7 +35,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
 
   const profile = await getProfileData(username);
 
-  const isFollowed = await isUserFollowing(username);
+  const isFollowed = await isUserFollowing(username, "user");
 
   const showFollowButton = username !== currentUsername;
 
@@ -45,7 +45,11 @@ const Profile = async ({ params }: { params: { username: string } }) => {
     <>
       <ProfileHead user={profile} />
       {showFollowButton && (
-        <FollowButton isFollowing={isFollowed} username={username} />
+        <FollowButton
+          isFollowing={isFollowed}
+          username={username}
+          followType="user"
+        />
       )}
       <div className="divider" />
       <TopItems artists={data.topArtists} tracks={data.topTracks} />
