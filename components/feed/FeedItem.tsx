@@ -48,28 +48,20 @@ const FeedItem = ({
       {data.item && (
         <div className="grid">
           {data.item.item.type === "track" && (
-            <>
-              {/* @ts-expect-error Server Component */}
-              <Track user={currentUser} track={data.item} isCompact />
-            </>
+            // @ts-expect-error Server Component
+            <Track user={currentUser} track={data.item} isCompact />
           )}
           {data.item.item.type === "playlist" && (
-            <>
-              {/* @ts-expect-error Server Component */}
-              <Playlist user={currentUser} playlist={data.item} isCompact />
-            </>
+            // @ts-expect-error Server Component
+            <Playlist user={currentUser} playlist={data.item} isCompact />
           )}
           {data.item.item.type === "album" && (
-            <>
-              {/* @ts-expect-error Server Component */}
-              <Album user={currentUser} album={data.item} isCompact />
-            </>
+            // @ts-expect-error Server Component
+            <Album user={currentUser} album={data.item} isCompact />
           )}
           {data.item.item.type === "artist" && (
-            <>
-              {/* @ts-expect-error Server Component */}
-              <Artist user={currentUser} artist={data.item} isCompact />
-            </>
+            // @ts-expect-error Server Component
+            <Artist user={currentUser} artist={data.item} isCompact />
           )}
         </div>
       )}
