@@ -11,6 +11,7 @@ const postFeedItem = async (
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | SpotifyApi.PlaylistObjectSimplified
+    | SpotifyApi.AlbumObjectSimplified
     | undefined
 ) => {
   const docRef = await addDoc(feedCol, {
