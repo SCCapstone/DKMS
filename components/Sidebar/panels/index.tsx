@@ -12,7 +12,11 @@ const SidebarPanels = ({ isDesktop }: { isDesktop?: boolean }) => {
       <Friends />
       {/* @ts-expect-error Next 13 handles async components */}
       <Notifications />
-      <Playback isTrackPlaying={isTrackPlaying} uri={uri} />
+      <Playback
+        isTrackPlaying={isTrackPlaying}
+        uri={uri}
+        isPremiumUser={false}
+      />
     </div>
   );
 };
