@@ -7,6 +7,7 @@ import { postFeedItem } from "@/lib/feed";
 
 import Share from "./icon";
 
+import type { sharedItemType } from "@/lib/firestore/types";
 import type { User } from "next-auth";
 
 const IconButton = ({
@@ -14,13 +15,7 @@ const IconButton = ({
   sharedItem,
 }: {
   user: User;
-  sharedItem:
-    | SpotifyApi.TrackObjectFull
-    | SpotifyApi.RecommendationTrackObject
-    | SpotifyApi.PlaylistObjectSimplified
-    | SpotifyApi.AlbumObjectSimplified
-    | SpotifyApi.ArtistObjectFull
-    | undefined;
+  sharedItem: sharedItemType;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();

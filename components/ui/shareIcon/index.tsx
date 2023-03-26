@@ -2,17 +2,9 @@ import { getCurrentUser } from "@/lib/getUser";
 
 import IconButton from "./IconButton";
 
-const ShareIcon = async ({
-  sharedItem,
-}: {
-  sharedItem:
-    | SpotifyApi.TrackObjectFull
-    | SpotifyApi.RecommendationTrackObject
-    | SpotifyApi.PlaylistObjectSimplified
-    | SpotifyApi.AlbumObjectSimplified
-    | SpotifyApi.ArtistObjectFull
-    | undefined;
-}) => {
+import type { sharedItemType } from "@/lib/firestore/types";
+
+const ShareIcon = async ({ sharedItem }: { sharedItem: sharedItemType }) => {
   const user = await getCurrentUser();
 
   return <IconButton user={user} sharedItem={sharedItem} />;

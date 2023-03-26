@@ -2,7 +2,6 @@ import { getDocs } from "firebase/firestore";
 
 import { usersCol } from "@/lib/firestore";
 import getSpotifyData from "@/lib/getSpotifyData";
-import { getCurrentUser } from "@/lib/getUser";
 
 import SearchResults from "./SearchResults";
 
@@ -37,11 +36,8 @@ const Page = async ({
   searchParams: { q: undefined | string };
 }) => {
   const results = await getData(searchParams.q);
-  const currentUser = await getCurrentUser();
 
-  return searchParams.q ? (
-    <SearchResults currentUser={currentUser} results={results} />
-  ) : null;
+  return searchParams.q ? <SearchResults results={results} /> : null;
 };
 
 export default Page;

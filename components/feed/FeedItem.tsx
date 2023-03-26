@@ -45,40 +45,34 @@ const FeedItem = ({
         </div>
       </div>
       <p>{data.content}</p>
-      <div className={data.item ? "grid" : "hidden"}>
-        {typeof data.item === "object" &&
-          Object.prototype.hasOwnProperty.call(data.item, "id") &&
-          data.item.type === "track" && (
+      {data.item && (
+        <div className="grid">
+          {data.item.item.type === "track" && (
             <>
               {/* @ts-expect-error Server Component */}
               <Track user={currentUser} track={data.item} isCompact />
             </>
           )}
-        {typeof data.item === "object" &&
-          Object.prototype.hasOwnProperty.call(data.item, "id") &&
-          data.item.type === "playlist" && (
+          {data.item.item.type === "playlist" && (
             <>
               {/* @ts-expect-error Server Component */}
               <Playlist user={currentUser} playlist={data.item} isCompact />
             </>
           )}
-        {typeof data.item === "object" &&
-          Object.prototype.hasOwnProperty.call(data.item, "id") &&
-          data.item.type === "album" && (
+          {data.item.item.type === "album" && (
             <>
               {/* @ts-expect-error Server Component */}
               <Album user={currentUser} album={data.item} isCompact />
             </>
           )}
-        {typeof data.item === "object" &&
-          Object.prototype.hasOwnProperty.call(data.item, "id") &&
-          data.item.type === "artist" && (
+          {data.item.item.type === "artist" && (
             <>
               {/* @ts-expect-error Server Component */}
               <Artist user={currentUser} artist={data.item} isCompact />
             </>
           )}
-      </div>
+        </div>
+      )}
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div>
           <LikeButton
