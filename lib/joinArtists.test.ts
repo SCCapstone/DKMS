@@ -33,4 +33,26 @@ describe("joinArtists()", () => {
       ])
     ).to.eq("RAYE & 3 more");
   });
+
+  it("removes duplicate artists", () => {
+    expect(
+      joinArtists([
+        { name: "RAYE" },
+        { name: "RAYE" },
+        { name: "070 Shake" },
+        { name: "Ari Lennox" },
+        { name: "Ari Lennox" },
+      ])
+    ).to.eq("RAYE & 2 more");
+
+    expect(
+      joinArtists([
+        { name: "RAYE" },
+        { name: "RAYE" },
+        { name: "RAYE" },
+        { name: "RAYE" },
+        { name: "RAYE" },
+      ])
+    ).to.eq("RAYE");
+  });
 });
