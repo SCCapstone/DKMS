@@ -1,14 +1,22 @@
 import PageTitle from "@/components/ui/PageTitle";
+import { getCurrentUser } from "@/lib/getUser";
 
-import { ThemeSettingCard } from "./cards";
+import { ThemeSettingCard, DisplayNameCard } from "./cards";
 
-const Settings = () => (
-  <>
-    <PageTitle title="Settings" />
-    <div className="grid grid-cols-3 gap-2">
-      <ThemeSettingCard />
-    </div>
-  </>
-);
+const Settings = async () => {
+  const currentUser = await getCurrentUser();
+  return (
+    <>
+      <PageTitle title="Settings" />
+      <div className="grid grid-cols-3 gap-2">
+        <ThemeSettingCard />
+        <DisplayNameCard
+          userId={currentUser.id}
+          displayName={currentUser.displayName}
+        />
+      </div>
+    </>
+  );
+};
 
 export default Settings;
