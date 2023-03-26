@@ -1,7 +1,6 @@
+import { Album, Artist, Playlist, Track } from "@/components/music/cards";
 import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
-
-import { Album, Artist, Playlist, Track } from "../music/cards";
 
 import DeleteButton from "./DeleteButton";
 import FeedCommentBox from "./FeedCommentBox";
