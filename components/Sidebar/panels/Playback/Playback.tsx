@@ -6,8 +6,8 @@ import { useState, useTransition, useEffect } from "react";
 import getTrackName from "@/lib/playback/gettrackname";
 import getCurrentTrackUri from "@/lib/playback/gettrackrui";
 import play from "@/lib/playback/play";
-import next from "@/lib/playback/skipnext";
-import prev from "@/lib/playback/skipprev";
+import skipNext from "@/lib/playback/skipNext";
+import skipPrev from "@/lib/playback/skipPrev";
 
 import BasePanel from "../BasePanel";
 
@@ -37,7 +37,7 @@ const Playback = ({
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await prev(uri, isTrackPlaying, true);
+    await skipPrev(uri, isTrackPlaying, true);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
@@ -46,7 +46,7 @@ const Playback = ({
   const handleNextClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await next(uri, isTrackPlaying, true);
+    await skipNext(uri, isTrackPlaying, true);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
