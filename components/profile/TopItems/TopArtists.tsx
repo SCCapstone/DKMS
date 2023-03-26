@@ -1,4 +1,4 @@
-import Artist from "@/components/music/Artist";
+import { Artist } from "@/components/music/cards";
 
 const TopArtists = ({
   artists,

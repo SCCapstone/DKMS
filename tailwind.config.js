@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./app/**/*.tsx", "./components/**/*.tsx"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        spotify: "#1DB954",
+      },
+    },
   },
   // eslint-disable-next-line global-require
   plugins: [require("daisyui")],
