@@ -11,6 +11,7 @@ export type FirestoreFeedItem = {
     | SpotifyApi.RecommendationTrackObject
     | SpotifyApi.PlaylistObjectSimplified
     | SpotifyApi.AlbumObjectSimplified
+    | SpotifyApi.ArtistObjectFull
     | undefined;
   timestamp: Timestamp;
   userId: string;

@@ -19,6 +19,7 @@ const ShareIcon = ({
     | SpotifyApi.RecommendationTrackObject
     | SpotifyApi.PlaylistObjectSimplified
     | SpotifyApi.AlbumObjectSimplified
+    | SpotifyApi.ArtistObjectFull
     | undefined;
 }) => {
   const router = useRouter();
