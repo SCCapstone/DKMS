@@ -12,9 +12,11 @@ import BasePanel from "../BasePanel";
 const Playback = ({
   isTrackPlaying,
   uri,
+  isPremiumUser,
 }: {
   isTrackPlaying: boolean;
   uri: string;
+  isPremiumUser: boolean;
 }) => {
   const router = useRouter();
   const [, startTransition] = useTransition();
@@ -34,6 +36,10 @@ const Playback = ({
     setIsFetching(true);
     await skipPrev(uri, isTrackPlaying, true);
     setIsFetching(false);
+    if (!isPremiumUser) {
+      console.error("Error: Premium subscription required.");
+      return;
+    }
     startTransition(() => {
       router.refresh();
     });
@@ -43,6 +49,10 @@ const Playback = ({
     setIsFetching(true);
     await skipNext(uri, isTrackPlaying, true);
     setIsFetching(false);
+    if (!isPremiumUser) {
+      console.error("Error: Premium subscription required.");
+      return;
+    }
     startTransition(() => {
       router.refresh();
     });
@@ -63,6 +73,15 @@ const Playback = ({
       isPlaying,
       isPlaying
     );
+    setIsPlaying(isTrackPlayingNow);
+    setIsFetching(false);
+    if (!isPremiumUser) {
+      console.error("Error: Premium subscription required.");
+      return;
+    }
+    startTransition(() => {
+      router.refresh();
+    });
     setIsPlaying(isTrackPlayingNow);
     setIsFetching(false);
     startTransition(() => {
