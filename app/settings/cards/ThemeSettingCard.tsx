@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { toast } from "react-hot-toast";
 
 import { THEME_VALUES, validateTheme } from "@/lib/theme";
 
@@ -10,6 +11,7 @@ const ThemeSettingCard = () => {
   const handleChange = (selectedTheme: string) => {
     if (validateTheme(selectedTheme)) {
       setTheme(selectedTheme);
+      toast.success("Theme selected!");
     } else {
       throw new Error(`Invalid theme: ${selectedTheme}`);
     }
