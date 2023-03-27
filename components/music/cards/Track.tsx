@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import FavoriteIcon from "@/components/ui/favoriteIcon";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import getSpotifyData from "@/lib/getSpotifyData";
-import joinArtists from "@/lib/joinArtists";
 
 const checkIsFavorited = (trackId: string) =>
   getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
@@ -95,7 +95,7 @@ const Track = async ({
           {track.album.name}
         </p>
         <p className={isCompact ? "text-sm truncate" : ""}>
-          {joinArtists(track.artists)}
+          <ArtistLinks artists={track.artists} />
         </p>
       </div>
     </Link>
