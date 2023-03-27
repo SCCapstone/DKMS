@@ -1,29 +1,23 @@
+import Image from "next/image";
 import Link from "next/link";
 
+import ArtistLinks from "@/components/ui/ArtistLinks";
+
 const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectFull }) => (
-  <div>
-    <div className="flex flex-wrap">
-      <h4 className="text-xs">
+  <li>
+    <div className="flex flex-row justify-start max-w-[224px]">
+      <h5 className="text-xs truncate">
         <Link
-          className="link link-hover link-secondary truncate"
+          className="link link-hover link-secondary max-w-[100px]"
           href={track.external_urls.spotify}
         >
           {track.name}
         </Link>
-      </h4>
-      <h4 className="text-xs">&nbsp;•&nbsp;</h4>
-      {track.artists.map((artist) => (
-        <h4 key={artist.id} className="text-xs">
-          <Link
-            href={artist.external_urls.spotify}
-            className="link link-hover link-neutral"
-          >
-            {artist.name}&nbsp;
-          </Link>
-        </h4>
-      ))}
+        &nbsp;•&nbsp;
+        <ArtistLinks artists={track.artists} />
+      </h5>
     </div>
-  </div>
+  </li>
 );
 
 export default FriendItem;

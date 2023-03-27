@@ -9,7 +9,7 @@ import FriendItem from "./FriendItem";
 const getTopItems = async (id: string) => {
   const profileDoc = await getDoc(doc(profilesCol, id));
   if (!profileDoc.exists()) {
-    notFound();
+    return undefined;
   }
 
   return profileDoc.data();
@@ -23,29 +23,26 @@ const Friend = async ({
   userId: string;
 }) => {
   const data = await getTopItems(userId);
+  if (!data) {
+    return null;
+  }
   const tracks = data.topTracks.slice(0, 2);
   return (
-    <div>
+    <li>
       <div className="h-fit">
         <div className="flex flex-row justify-between items-center">
-          <h4 className="normal-case font-bold text-sm">
-            {username ? (
-              <UsernameLink username={username}>{username}</UsernameLink>
-            ) : (
-              username
-            )}{" "}
+          <h4 className="normal-case font-bold text-sm truncate">
+            <UsernameLink username={username}>{username}</UsernameLink>
           </h4>
         </div>
-        <div className="flex flex-column">
-          <ul>
-            {tracks.map((track) => (
-              <FriendItem key={track.id} track={track} />
-            ))}
-          </ul>
-        </div>
+        <ul>
+          {tracks.map((track) => (
+            <FriendItem key={track.id} track={track} />
+          ))}
+        </ul>
         <div className="divider" />
       </div>
-    </div>
+    </li>
   );
 };
 
