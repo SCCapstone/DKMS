@@ -1,9 +1,10 @@
 import { getDoc, doc } from "firebase/firestore";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import UsernameLink from "@/components/ui/UsernameLink";
 import { profilesCol } from "@/lib/firestore";
+
+import FriendItem from "./FriendItem";
 
 const getTopItems = async (id: string) => {
   const profileDoc = await getDoc(doc(profilesCol, id));
@@ -27,41 +28,23 @@ const Friend = async ({
     <div>
       <div className="h-fit">
         <div className="flex flex-row justify-between items-center">
-          <h4 className="normal-case font-bold">
+          <h4 className="normal-case font-bold text-sm">
             {username ? (
               <UsernameLink username={username}>{username}</UsernameLink>
             ) : (
               username
             )}{" "}
-            is listening to
           </h4>
         </div>
-        <div>
-          <ul className="flex-column">
-            {tracks.map((topTrack) => (
-              <div className="flex-row" key={topTrack.id}>
-                <Link
-                  className="link link-hover link-secondary break-all"
-                  href={topTrack.external_urls.spotify}
-                >
-                  {topTrack.name}
-                </Link>
-                <h5> by </h5>
-                {topTrack.artists.map((artist) => (
-                  <Link
-                    key={artist.id}
-                    href={artist.external_urls.spotify}
-                    className="link link-hover link-neutral"
-                  >
-                    {artist.name}&nbsp;
-                  </Link>
-                ))}
-              </div>
+        <div className="flex flex-column">
+          <ul>
+            {tracks.map((track) => (
+              <FriendItem key={track.id} track={track} />
             ))}
           </ul>
         </div>
+        <div className="divider" />
       </div>
-      <div className="divider" />
     </div>
   );
 };
