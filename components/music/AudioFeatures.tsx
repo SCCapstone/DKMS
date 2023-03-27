@@ -29,20 +29,22 @@ const AudioFeatures = ({
       max: 65,
     },
   ];
+
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-primary text-primary-content">
       {data.map((feature) => (
-        <div key={feature.name}>
-          <p className="font-bold uppercase text-sm">
-            {`${feature.name} — ${Math.round(
-              (feature.value / feature.max) * 100
-            )}%`}
-          </p>
-          <progress
-            className="progress"
-            value={feature.value}
-            max={feature.max}
-          />
+        <div key={feature.name} className="stat">
+          <div className="stat-title">{feature.name}</div>
+          <div className="stat-value">
+            {`${Math.round((feature.value / feature.max) * 100)}%`}
+          </div>
+          <div className="stat-desc">
+            <progress
+              className="progress progress-secondary"
+              value={feature.value}
+              max={feature.max}
+            />
+          </div>
         </div>
       ))}
     </div>
