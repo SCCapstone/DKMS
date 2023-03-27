@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
+import RecommendationsGrid from "@/components/music/RecommendationsGrid";
 import ProfileHead from "@/components/profile/ProfileHead";
 import TopItems from "@/components/profile/TopItems";
 import fetchServer from "@/lib/fetch/fetchServer";
@@ -57,7 +58,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
 
   const isFollowed = await isUserFollowing(username, "user");
 
-  const showFollowButton = username !== currentUsername;
+  const isCurrentUser = username === currentUsername;
 
   const { data, averageAudioFeatures } = await getTopItems(profileId);
 
@@ -69,7 +70,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
         followers={spotifyData.followers?.total}
         link={spotifyData.external_urls.spotify}
       />
-      {showFollowButton && (
+      {!isCurrentUser && (
         <FollowButton
           isFollowing={isFollowed}
           username={username}
@@ -81,6 +82,14 @@ const Profile = async ({ params }: { params: { username: string } }) => {
       <AudioFeatures audioFeatures={averageAudioFeatures} />
       <div className="divider" />
       <TopItems artists={data.topArtists} tracks={data.topTracks} />
+      {!isCurrentUser && (
+        <>
+          <div className="divider" />
+          <h4 className="font-black uppercase pb-2">Similar Music</h4>
+          {/* @ts-expect-error Next 13 handles async components */}
+          <RecommendationsGrid userId={profileId} amount={8} />
+        </>
+      )}
     </>
   );
 };
