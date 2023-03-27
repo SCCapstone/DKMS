@@ -95,6 +95,27 @@ const onSignIn: EventCallbacks["signIn"] = async (message) => {
   );
 };
 
+const SCOPES = [
+  // "ugc-image-upload",
+  "user-read-playback-state",
+  "user-modify-playback-state",
+  "user-read-currently-playing",
+  "streaming",
+  "playlist-read-private",
+  "playlist-read-collaborative",
+  // "playlist-modify-private",
+  // "playlist-modify-public",
+  "user-follow-modify",
+  "user-follow-read",
+  // "user-read-playback-position",
+  "user-top-read",
+  "user-read-recently-played",
+  "user-library-modify",
+  "user-library-read",
+  // "user-read-email",
+  // "user-read-private",
+] as const;
+
 export const authOptions: NextAuthOptions = {
   adapter: FirestoreAdapter({
     ...firebaseConfig,
@@ -111,11 +132,9 @@ export const authOptions: NextAuthOptions = {
     SpotifyProvider<SpotifyApi.CurrentUsersProfileResponse & SpotifyProfile>({
       authorization: {
         params: {
-          scope:
-            "ugc-image-upload user-read-playback-state user-modify-playback-state playlist-read-private user-follow-modify playlist-read-collaborative user-follow-read user-read-currently-playing user-read-playback-position user-library-modify playlist-modify-private playlist-modify-public user-read-email user-top-read streaming user-read-recently-played user-read-private user-library-read",
+          scope: SCOPES.join(" "),
         },
       },
-
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
