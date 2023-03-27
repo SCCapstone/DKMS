@@ -14,7 +14,7 @@ export type FeedCommentType = {
 export type FeedItemType = {
   id: string;
   comments: FeedCommentType[];
-  musicItem:
+  musicItem?:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.PlaylistObjectSimplified
     | SpotifyApi.ArtistObjectFull

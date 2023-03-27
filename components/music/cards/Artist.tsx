@@ -71,7 +71,7 @@ const Artist = async ({
           right-0 p-2`}
         >
           {/* @ts-expect-error Server Component */}
-          <ShareIcon artistId={artist.id} />
+          <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
         <h2 className="card-title">{artist.name}</h2>
       </div>

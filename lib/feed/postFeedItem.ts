@@ -7,16 +7,12 @@ import type { User } from "next-auth";
 const postFeedItem = async (
   user: User,
   content: string,
-  trackId?: string,
-  playlistId?: string,
-  artistId?: string,
-  albumId?: string
+  musicItemId?: string | undefined,
+  musicItemType?: "track" | "playlist" | "artist" | "album" | undefined
 ) => {
   const docRef = await addDoc(feedCol, {
-    trackId,
-    playlistId,
-    artistId,
-    albumId,
+    musicItemId,
+    musicItemType,
     content,
     userId: user.id,
     username: user.username,

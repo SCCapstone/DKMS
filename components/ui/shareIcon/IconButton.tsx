@@ -11,16 +11,12 @@ import type { User } from "next-auth";
 
 const IconButton = ({
   user,
-  trackId,
-  playlistId,
-  artistId,
-  albumId,
+  musicItemId,
+  musicItemType,
 }: {
   user: User;
-  trackId?: string;
-  playlistId?: string;
-  artistId?: string;
-  albumId?: string;
+  musicItemId?: string;
+  musicItemType?: "track" | "playlist" | "artist" | "album";
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -31,7 +27,7 @@ const IconButton = ({
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    await postFeedItem(user, "", trackId, playlistId, artistId, albumId);
+    await postFeedItem(user, "", musicItemId, musicItemType);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();

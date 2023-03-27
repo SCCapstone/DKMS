@@ -6,10 +6,8 @@ export type FirestoreUser = User;
 export type FirestoreAccount = Account;
 
 export type FirestoreFeedItem = {
-  trackId?: string;
-  playlistId?: string;
-  artistId?: string;
-  albumId?: string;
+  musicItemId?: string | undefined;
+  musicItemType?: "track" | "playlist" | "artist" | "album" | undefined;
   timestamp: Timestamp;
   userId: string;
   content: string;

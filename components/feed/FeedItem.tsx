@@ -46,28 +46,28 @@ const FeedItem = ({
       <p>{data.content}</p>
       {data.musicItem && (
         <div className="grid">
-          {data.trackId && (
+          {data.musicItemType === "track" && (
             // @ts-expect-error Server Component
             <Track
               track={data.musicItem as SpotifyApi.TrackObjectFull}
               isCompact
             />
           )}
-          {data.playlistId && (
+          {data.musicItemType === "playlist" && (
             // @ts-expect-error Server Component
             <Playlist
               playlist={data.musicItem as SpotifyApi.PlaylistObjectSimplified}
               isCompact
             />
           )}
-          {data.albumId && (
+          {data.musicItemType === "album" && (
             // @ts-expect-error Server Component
             <Album
               album={data.musicItem as SpotifyApi.AlbumObjectSimplified}
               isCompact
             />
           )}
-          {data.artistId && (
+          {data.musicItemType === "artist" && (
             // @ts-expect-error Server Component
             <Artist
               artist={data.musicItem as SpotifyApi.ArtistObjectFull}

@@ -80,7 +80,7 @@ const Track = async ({
           right-0 p-2`}
         >
           {/* @ts-expect-error Server Component */}
-          <ShareIcon trackId={track.id} />
+          <ShareIcon musicItemId={track.id} musicItemType="track" />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <h2

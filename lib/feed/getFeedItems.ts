@@ -11,16 +11,9 @@ const getFeedItems = async (userId?: string) => {
     feedSnapshot.docs.map(async (doc) => {
       const docId = doc.id;
       const comments = await getFeedComments(docId);
-      const { trackId } = doc.data();
-      const { playlistId } = doc.data();
-      const { albumId } = doc.data();
-      const { artistId } = doc.data();
-      const musicItem = await getSpotifyFeedItem(
-        trackId,
-        playlistId,
-        artistId,
-        albumId
-      );
+      const { musicItemId } = doc.data();
+      const { musicItemType } = doc.data();
+      const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
       return {
         id: doc.id,
         ...doc.data(),

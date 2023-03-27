@@ -68,7 +68,7 @@ const Playlist = async ({
           right-0 p-2`}
         >
           {/* @ts-expect-error Server Component */}
-          <ShareIcon playlistId={playlist.id} />
+          <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
         </div>
         <h2
           className={`text-lg truncate font-semibold  ${

@@ -3,25 +3,19 @@ import { getCurrentUser } from "@/lib/getUser";
 import IconButton from "./IconButton";
 
 const ShareIcon = async ({
-  trackId,
-  playlistId,
-  artistId,
-  albumId,
+  musicItemId,
+  musicItemType,
 }: {
-  trackId?: string;
-  playlistId?: string;
-  artistId?: string;
-  albumId?: string;
+  musicItemId?: string;
+  musicItemType?: "track" | "playlist" | "artist" | "album";
 }) => {
   const user = await getCurrentUser();
 
   return (
     <IconButton
       user={user}
-      trackId={trackId}
-      playlistId={playlistId}
-      artistId={artistId}
-      albumId={albumId}
+      musicItemId={musicItemId}
+      musicItemType={musicItemType}
     />
   );
 };
