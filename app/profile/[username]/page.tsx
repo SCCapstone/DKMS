@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
-import RecommendationsGrid from "@/components/music/RecommendationsGrid";
+import { TracksGrid } from "@/components/music/grids";
 import ProfileHead from "@/components/profile/ProfileHead";
 import TopItems from "@/components/profile/TopItems";
 import fetchServer from "@/lib/fetch/fetchServer";
@@ -15,6 +15,7 @@ import {
   getIdFromUsername,
   getUserFromId,
 } from "@/lib/getUser";
+import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 
 const getDkmsProfile = async (profileId: string) => getUserFromId(profileId);
 
@@ -24,7 +25,7 @@ const getSpotifyProfile = async (username: string) =>
     { cache: "no-cache" }
   );
 
-const getTopItems = async (id: string) => {
+const getData = async (id: string) => {
   const profileDoc = await getDoc(doc(profilesCol, id));
   if (!profileDoc.exists()) {
     notFound();
@@ -39,9 +40,11 @@ const getTopItems = async (id: string) => {
         .join(",")}`
     );
 
+  const recommendations = await getRecommendationsForUser(id, 8);
+
   const averageAudioFeatures = getAverageAudioFeatures(audioFeatures);
 
-  return { data, averageAudioFeatures };
+  return { data, averageAudioFeatures, recommendations };
 };
 
 const Profile = async ({ params }: { params: { username: string } }) => {
@@ -60,7 +63,9 @@ const Profile = async ({ params }: { params: { username: string } }) => {
 
   const isCurrentUser = username === currentUsername;
 
-  const { data, averageAudioFeatures } = await getTopItems(profileId);
+  const { data, averageAudioFeatures, recommendations } = await getData(
+    profileId
+  );
 
   return (
     <>
@@ -86,8 +91,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
         <>
           <div className="divider" />
           <h4 className="font-black uppercase pb-2">Similar Music</h4>
-          {/* @ts-expect-error Next 13 handles async components */}
-          <RecommendationsGrid userId={profileId} amount={8} />
+          <TracksGrid tracks={recommendations.tracks} />
         </>
       )}
     </>

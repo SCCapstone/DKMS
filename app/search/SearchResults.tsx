@@ -1,4 +1,5 @@
-import { Album, Artist, Playlist, Track } from "@/components/music/cards";
+import { Album, Artist, Playlist } from "@/components/music/cards";
+import { TracksGrid } from "@/components/music/grids";
 import UsernameLink from "@/components/ui/UsernameLink";
 
 import type { FirestoreUser } from "@/lib/firestore/types";
@@ -43,13 +44,12 @@ const SearchResults = ({ results }: SearchResultsProps) => {
           <Artist key={artist?.id ?? index} artist={artist} />
         ))}
       </div>
-      <h2 className="font-black">Tracks</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {tracks?.items.map((track, index) => (
-          // @ts-expect-error Next 13 handles async components
-          <Track key={track?.id ?? index} track={track} />
-        ))}
-      </div>
+      {tracks?.items && (
+        <>
+          <h2 className="font-black">Tracks</h2>
+          <TracksGrid tracks={tracks.items} />
+        </>
+      )}
       <h2 className="font-black">Playlists</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
         {playlists?.items.map((playlist, index) => (
