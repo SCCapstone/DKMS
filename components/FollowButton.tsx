@@ -5,13 +5,26 @@ import { useState, useTransition } from "react";
 
 import toggleFollowing from "@/lib/followers/toggleFollowing";
 
+type FollowButtonProps =
+  | {
+      isFollowing: boolean;
+      username: string;
+      id?: undefined;
+      followType: "user";
+    }
+  | {
+      isFollowing: boolean;
+      username?: undefined;
+      id: string;
+      followType: "artist";
+    };
+
 const FollowButton = ({
   isFollowing,
   username,
-}: {
-  isFollowing: boolean;
-  username: string;
-}) => {
+  id,
+  followType,
+}: FollowButtonProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -22,7 +35,7 @@ const FollowButton = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await toggleFollowing(username, isFollowing);
+    await toggleFollowing(username ?? id, isFollowing, followType);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
@@ -33,7 +46,7 @@ const FollowButton = ({
 
   return (
     <button
-      className={`btn btn-primary btn-sm ${isFollowing ? "btn-outline" : ""}`}
+      className={`btn btn-primary ${isFollowing ? "btn-outline" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}

@@ -1,17 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
-import joinArtists from "@/lib/joinArtists";
 
-import PlayButton from "./PlayTrack";
-
-const Album = async ({
-  album,
+const Playlist = async ({
+  playlist,
 }: {
-  album: SpotifyApi.AlbumObjectSimplified | undefined;
+  playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
 }) => {
-  if (!album) {
+  if (!playlist) {
     return (
       <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square" />
@@ -27,42 +25,42 @@ const Album = async ({
     );
   }
 
-  const image = album.images[0] ?? {
-    url: "/images/defaults/album.png",
-  };
+  // Spotify blend images cause errors, display default image
+  const image = !playlist.images[0].url.startsWith(
+    "https://blend-playlist-covers.spotifycdn.com"
+  )
+    ? playlist.images[0]
+    : {
+        url: "/images/defaults/playlist.png",
+      };
 
   const { base64, img } = await getPlaiceholder(image.url, {
     size: 10,
   });
 
   return (
-    <a
-      href={album.external_urls.spotify}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/playlist/${playlist.id}`}
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
     >
       <figure className="relative aspect-square">
         <Image
           src={img}
-          alt={album.name}
+          alt={playlist.name}
           fill
           placeholder="blur"
           blurDataURL={base64}
         />
       </figure>
       <div className="card-body">
-        <h2 className="text-lg font-semibold truncate">{album.name}</h2>
+        <h2 className="text-lg font-semibold truncate">{playlist.name}</h2>
         <p>
-          {new Date(album.release_date).getFullYear()} |{" "}
-          {joinArtists(album.artists)}
+          {playlist.tracks.total}{" "}
+          {playlist.tracks.total === 1 ? "track" : "tracks"}
         </p>
       </div>
-      <div>
-        <PlayButton uri={album.uri} />
-      </div>
-    </a>
+    </Link>
   );
 };
 
-export default Album;
+export default Playlist;

@@ -11,7 +11,7 @@ const searchFirebase = async (searchQuery: string) => {
 
   return usersData.filter(
     (user) =>
-      user.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
@@ -37,11 +37,7 @@ const Page = async ({
 }) => {
   const results = await getData(searchParams.q);
 
-  return searchParams.q ? (
-    <SearchResults results={results} />
-  ) : (
-    <div>{JSON.stringify(searchParams)}</div>
-  );
+  return searchParams.q ? <SearchResults results={results} /> : null;
 };
 
 export default Page;

@@ -1,9 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
-
-import PlayButton from "./PlayTrack";
 
 const Artist = async ({
   artist,
@@ -34,10 +33,8 @@ const Artist = async ({
   });
 
   return (
-    <a
-      href={artist.external_urls.spotify}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={`/artist/${artist.id}`}
       className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl"
     >
       <div className="pt-8 px-8">
@@ -54,10 +51,7 @@ const Artist = async ({
       <div className="card-body items-center text-center">
         <h2 className="card-title">{artist.name}</h2>
       </div>
-      <div>
-        <PlayButton uri={artist.uri} />
-      </div>
-    </a>
+    </Link>
   );
 };
 
