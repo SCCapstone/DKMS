@@ -12,18 +12,15 @@ import BasePanel from "../BasePanel";
 const Playback = ({
   isTrackPlaying,
   uri,
-  isPremiumUser,
 }: {
   isTrackPlaying: boolean;
   uri: string;
-  isPremiumUser: boolean;
 }) => {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const [isFetching, setIsFetching] = useState(false);
+  const [, startTransition] = useTransition();
+  const [, setIsFetching] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false); // new state variable for player state
-  const [trackName, setTrackName] = useState<string | null>(null); // new state variable for track name
-  const [currentIsTrackPlaying, setCurrentIsTrackPlaying] = useState(false);
+  const [, setTrackName] = useState<string | null>(null); // new state variable for track name
 
   useEffect(() => {
     const fetchTrackName = async () => {
@@ -60,7 +57,6 @@ const Playback = ({
       setIsFetching(false);
       return;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     const isTrackPlayingNow = await play(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       currentTrackUri?.item?.uri,

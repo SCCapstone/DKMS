@@ -1,11 +1,5 @@
 import getAccessToken from "../getAccessToken";
 
-type CurrentlyPlayingResponse = {
-  item: {
-    uri: string;
-  };
-};
-
 const getCurrentTrackUri = async () => {
   let token;
   try {

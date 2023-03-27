@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import putSpotifyData from "@/lib/putSpotifyData";
 
 import getAccessToken from "../getAccessToken";
