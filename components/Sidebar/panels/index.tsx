@@ -5,7 +5,6 @@ import Playback from "./Playback/Playback";
 const SidebarPanels = ({ isDesktop }: { isDesktop?: boolean }) => {
   // Assume you have the following values for isTrackPlaying and uri
   const isTrackPlaying = false;
-  console.log("SidebarPanels init");
   const uri = "spotify:track:6y0igZArWVi6Iz0rj35c1Y";
   return (
     <div className={isDesktop ? "hidden md:block" : "md:hidden"}>

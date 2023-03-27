@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition, useEffect } from "react";
 
 import { play, skipNext, skipPrev } from "@/lib/playback";
+import getCurrentTrackUri from "@/lib/playback/getCurrentTrackUri";
 import getTrackName from "@/lib/playback/gettrackname";
-import getCurrentTrackUri from "@/lib/playback/gettrackrui";
 
 import BasePanel from "../BasePanel";
 
