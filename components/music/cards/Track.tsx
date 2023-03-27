@@ -7,6 +7,9 @@ import FavoriteIcon from "@/components/ui/favoriteIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import getSpotifyData from "@/lib/getSpotifyData";
 
+import PlayArtist from "../PlayArtist";
+import PlayTrack from "../PlayTrack";
+
 const checkIsFavorited = (trackId: string) =>
   getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
     `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`,
@@ -76,6 +79,9 @@ const Track = async ({
         <p>
           <ArtistLinks artists={track.artists} />
         </p>
+      </div>
+      <div>
+        <PlayTrack uri={track.uri} />
       </div>
     </Link>
   );
