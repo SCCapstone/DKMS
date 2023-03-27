@@ -2,7 +2,7 @@ import FeedPage from "@/components/feed";
 import PageTitle from "@/components/ui/PageTitle";
 import getFeedItems from "@/lib/feed/getFeedItems";
 import { getCurrentUser } from "@/lib/getUser";
-import { getSavedFeedItemsList } from "@/lib/savedFeedItems";
+import { getSavedItemIds } from "@/lib/savedFeedItems";
 
 const DiscoverFeed = async ({
   searchParams,
@@ -16,7 +16,7 @@ const DiscoverFeed = async ({
     filterBySaved: !!s,
   });
   const currentUser = await getCurrentUser();
-  const savedItemIds = await getSavedFeedItemsList(currentUser.id);
+  const savedItemIds = await getSavedItemIds(currentUser.id);
 
   return (
     <div>

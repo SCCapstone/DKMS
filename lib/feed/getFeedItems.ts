@@ -3,8 +3,7 @@ import { getDocs, orderBy, query } from "firebase/firestore";
 import { feedCol } from "@/lib/firestore";
 import getUsersFollowing from "@/lib/followers/getUsersFollowing";
 import { getCurrentUser } from "@/lib/getUser";
-
-import { getSavedFeedItemsList } from "../savedFeedItems";
+import { getSavedItemIds } from "@/lib/savedFeedItems";
 
 import getFeedComments from "./getFeedComments";
 
@@ -42,9 +41,9 @@ const getFeedItems = async (params?: {
 
   if (!filterBySaved) return baseData;
 
-  const savedItemIds = await getSavedFeedItemsList(currentUserId);
+  const savedItemIds = await getSavedItemIds(currentUserId);
 
-  return baseData.filter((post) => savedItemIds?.includes(post.id.trim()));
+  return baseData.filter((post) => savedItemIds.includes(post.id.trim()));
 
   // return baseData;
 };
