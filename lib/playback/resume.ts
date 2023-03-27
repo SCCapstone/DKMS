@@ -2,13 +2,9 @@ import putSpotifyData from "@/lib/putSpotifyData";
 
 import getAccessToken from "../getAccessToken";
 
-const pause = async (
-  uri: string,
-  isTrackPlaying: boolean,
-  shouldResume: boolean
-) => {
-  const method = isTrackPlaying ? "PUT" : "POST";
-  const endpoint = isTrackPlaying ? "pause" : "play";
+const resume = async () => {
+  const method = "PUT";
+  const endpoint = "play";
   const url = `https://api.spotify.com/v1/me/player/${endpoint}`;
   const token = await getAccessToken();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,11 +15,10 @@ const pause = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      uris: [uri],
-      position_ms: shouldResume ? null : undefined, // Set position_ms to null if resuming, undefined otherwise
+      position_ms: null,
     }),
   });
-  return !isTrackPlaying;
+  return true;
 };
 
-export default pause;
+export default resume;

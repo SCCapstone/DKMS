@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition, useEffect } from "react";
 
-import { play, skipNext, skipPrev } from "@/lib/playback";
+import { skipNext, skipPrev, resume, pause } from "@/lib/playback";
 import getCurrentTrackUri from "@/lib/playback/getCurrentTrackUri";
 import getTrackName from "@/lib/playback/gettrackname";
 
@@ -37,6 +37,7 @@ const Playback = ({
     await skipPrev(uri, isTrackPlaying, true);
     setIsFetching(false);
     if (!isPremiumUser) {
+      // eslint-disable-next-line no-console
       console.error("Error: Premium subscription required.");
       return;
     }
@@ -50,6 +51,7 @@ const Playback = ({
     await skipNext(uri, isTrackPlaying, true);
     setIsFetching(false);
     if (!isPremiumUser) {
+      // eslint-disable-next-line no-console
       console.error("Error: Premium subscription required.");
       return;
     }
@@ -61,29 +63,40 @@ const Playback = ({
   const handlePlayPauseClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
+
+    // Get current track info
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const currentTrackUri = await getCurrentTrackUri();
-    if (!currentTrackUri && !isPlaying) {
+    if (!currentTrackUri) {
       setIsFetching(false);
       return;
     }
-    const isTrackPlayingNow = await play(
+
+    if (isPlaying) {
+      // Pause the track
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-      currentTrackUri?.item?.uri,
-      isPlaying,
-      isPlaying
-    );
-    setIsPlaying(isTrackPlayingNow);
+      await pause(currentTrackUri.item.uri, true, false);
+      setIsPlaying(false);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    } else if (currentTrackUri.is_playing) {
+      // If the track is currently playing, pause it
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+      await pause(currentTrackUri.item.uri, true, true);
+      setIsPlaying(false);
+    } else {
+      // If the track is paused, resume playback
+      await resume();
+      setIsPlaying(true);
+    }
+
     setIsFetching(false);
+
     if (!isPremiumUser) {
+      // eslint-disable-next-line no-console
       console.error("Error: Premium subscription required.");
       return;
     }
-    startTransition(() => {
-      router.refresh();
-    });
-    setIsPlaying(isTrackPlayingNow);
-    setIsFetching(false);
+
     startTransition(() => {
       router.refresh();
     });
