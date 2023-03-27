@@ -4,6 +4,7 @@ import { cert } from "firebase-admin/app";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
+import baseFetch from "@/lib/fetch/baseFetch";
 import { firebaseConfig, profilesCol } from "@/lib/firestore";
 
 import type { NextAuthOptions, EventCallbacks } from "next-auth";
@@ -29,7 +30,7 @@ const refreshAccessToken = async (token: JWT) => {
       refresh_token: token.refreshToken,
     }).toString()}`;
 
-    const response = await fetch(url, {
+    const response = await baseFetch(url, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Basic ${Buffer.from(
@@ -72,10 +73,13 @@ const onSignIn: EventCallbacks["signIn"] = async (message) => {
     return undefined;
   }
 
-  const artistRes = await fetch(`https://api.spotify.com/v1/me/top/artists`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-  const trackRes = await fetch(`https://api.spotify.com/v1/me/top/tracks`, {
+  const artistRes = await baseFetch(
+    `https://api.spotify.com/v1/me/top/artists`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }
+  );
+  const trackRes = await baseFetch(`https://api.spotify.com/v1/me/top/tracks`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
 

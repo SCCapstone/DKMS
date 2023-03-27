@@ -1,14 +1,16 @@
 const baseFetch = async (
   input: RequestInfo | URL,
   init: RequestInit | undefined,
-  accessToken: string
+  accessToken?: string
 ) => {
   const res = await fetch(input, {
     ...init,
-    headers: {
-      ...init?.headers,
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: accessToken
+      ? {
+          ...init?.headers,
+          Authorization: `Bearer ${accessToken}`,
+        }
+      : init?.headers,
   });
 
   if (!res.ok) {
