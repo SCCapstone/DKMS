@@ -1,7 +1,7 @@
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
-import joinArtists from "@/lib/joinArtists";
 
 const AlbumView = ({
   playlist,
@@ -20,11 +20,14 @@ const AlbumView = ({
         subtitle: `${formatNumber(playlist.followers.total)} Followers | ${
           playlist.tracks.total
         } Tracks`,
-        content: playlist.description
-          ? playlist.description
-          : `Featuring ${joinArtists(
-              tracks.flatMap((track) => track.artists)
-            )}`,
+        content: playlist.description ? (
+          playlist.description
+        ) : (
+          <p>
+            Featuring{" "}
+            <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
+          </p>
+        ),
       }}
     />
     <div className="divider" />
