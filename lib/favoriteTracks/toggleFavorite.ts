@@ -1,9 +1,9 @@
 "use client";
 
-import putSpotifyData from "@/lib/putSpotifyData";
+import fetchClient from "@/lib/fetch/fetchClient";
 
 const toggleFavorite = (trackId: string, isFavorited: boolean) =>
-  putSpotifyData(`https://api.spotify.com/v1/me/tracks?ids=${trackId}`, {
+  fetchClient(`https://api.spotify.com/v1/me/tracks?ids=${trackId}`, {
     method: isFavorited ? "DELETE" : "PUT",
     cache: "no-cache",
   });

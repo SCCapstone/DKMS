@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 import { profilesCol } from "../firestore";
 
@@ -16,7 +16,7 @@ const getRecommendations = async (userId: string) => {
   const track2 = topTracks[1]?.id ?? "0c6xIDDpzE81m2q797ordA";
   const track3 = topTracks[2]?.id ?? "0c6xIDDpzE81m2q797ordA";
 
-  return getSpotifyData<SpotifyApi.RecommendationsFromSeedsResponse>(
+  return fetchServer<SpotifyApi.RecommendationsFromSeedsResponse>(
     `https://api.spotify.com/v1/recommendations?seed_artists=${artist1},${artist2}&
     seed_tracks=${track1},${track2},${track3}`,
     {
