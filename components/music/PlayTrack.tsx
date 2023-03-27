@@ -27,23 +27,13 @@ const PlayTrack = ({ uri }: { uri: string }) => {
 
   return (
     <div className="flex flex-row">
-      <button type="button" onClick={(e) => void handleClick(e)}>
-        <svg
-          fill="#1ED760"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-disabled={isMutating}
-        >
-          <path
-            d="M3 5.49686C3 3.17662 5.52116 1.73465 7.52106 2.91106L18.5764 9.41423C20.5484 10.5742 20.5484 13.4259 18.5764 14.5858L7.52106 21.089C5.52116 22.2654 3 20.8234 3 18.5032V5.49686Z"
-            stroke="#1ED760"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+      <button
+        className="btn btn-primary btn-outline w-full"
+        onClick={(e) => void handleClick(e)}
+        type="button"
+        disabled={isMutating}
+      >
+        Play
       </button>
     </div>
   );

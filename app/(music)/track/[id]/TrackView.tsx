@@ -3,6 +3,7 @@ import Link from "next/link";
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import PlayTrack from "@/components/music/PlayTrack";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({
@@ -37,12 +38,17 @@ const TrackView = ({
             </p>
           ),
         buttons: (
-          <Link
-            className="btn btn-primary btn-outline w-full"
-            href={`/album/${track.album.id}`}
-          >
-            View Album
-          </Link>
+          <>
+            <div>
+              <PlayTrack uri={track.uri} />
+            </div>
+            <Link
+              className="btn btn-primary btn-outline w-full"
+              href={`/album/${track.album.id}`}
+            >
+              View Album
+            </Link>
+          </>
         ),
       }}
       secondary={{
