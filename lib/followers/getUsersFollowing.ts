@@ -11,7 +11,9 @@ const getUsersFollowing = async () => {
     id: user.id,
   }));
 
-  const usersFollowing = users.filter((user) => isUserFollowing(user.username));
+  const usersFollowing = users.filter((user) =>
+    isUserFollowing(user.username, "user")
+  );
 
   return usersFollowing;
 };
