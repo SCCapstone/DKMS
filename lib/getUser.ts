@@ -1,8 +1,8 @@
-import { getDocs, query, where } from "firebase/firestore";
+import { doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 import "server-only";
 
-import { accountsCol } from "@/lib/firestore";
+import { accountsCol, usersCol } from "@/lib/firestore";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 /**
@@ -38,6 +38,22 @@ export const getIdFromUsername = async (username: string) => {
 };
 
 /**
+ * Returns the user data for the given DKMS user ID.
+ *
+ * @param userId The DKMS user ID to get data for
+ * @returns The user data for the given ID
+ */
+export const getUserFromId = async (userId: string) => {
+  const userData = await getDoc(doc(usersCol, userId));
+
+  if (!userData.exists()) {
+    throw new Error(`No user data for user ${userId}`);
+  }
+
+  return { ...userData.data(), id: userData.id };
+};
+
+/**
  * Returns the currently logged in user, according to
  * next-auth's session.
  *
@@ -50,5 +66,6 @@ export const getCurrentUser = async () => {
   if (!session) {
     throw new Error("No session");
   }
-  return session.user;
+
+  return getUserFromId(session.user.id);
 };

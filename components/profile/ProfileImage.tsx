@@ -8,28 +8,17 @@ const getData = async (username: string) =>
     `https://api.spotify.com/v1/users/${username}`
   );
 
-type ProfileImageProps =
-  | {
-      username: string;
-      user?: never;
-      isProfilePage: boolean;
-      hideLink?: boolean;
-    }
-  | {
-      username?: never;
-      user: SpotifyApi.UserObjectPublic;
-      isProfilePage: boolean;
-      hideLink?: boolean;
-    };
-
 const ProfileImage = async ({
   username,
-  user,
   isProfilePage,
   hideLink,
-}: ProfileImageProps) => {
-  const profile = username ? await getData(username) : user;
-  const img = profile?.images?.[0]?.url;
+}: {
+  username: string;
+  isProfilePage: boolean;
+  hideLink?: boolean;
+}) => {
+  const profile = await getData(username);
+  const img = profile.images?.[0]?.url;
 
   const ImageComponent = (
     <Image
@@ -51,11 +40,11 @@ const ProfileImage = async ({
               marginRight: 7,
             }
       }
-      alt={`${profile?.id ?? "default"}'s profile picture`}
+      alt={`${profile.id}'s profile picture`}
     />
   );
 
-  return hideLink || !profile ? (
+  return hideLink ? (
     ImageComponent
   ) : (
     <Link href={`/profile/${profile.id}`}>{ImageComponent}</Link>
