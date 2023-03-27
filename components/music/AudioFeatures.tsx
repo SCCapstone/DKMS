@@ -1,7 +1,10 @@
-const TrackFeatures = ({
+const AudioFeatures = ({
   audioFeatures,
 }: {
-  audioFeatures: SpotifyApi.AudioFeaturesResponse;
+  audioFeatures: Pick<
+    SpotifyApi.AudioFeaturesResponse,
+    "danceability" | "energy" | "valence" | "loudness"
+  >;
 }) => {
   const data = [
     {
@@ -46,4 +49,4 @@ const TrackFeatures = ({
   );
 };
 
-export default TrackFeatures;
+export default AudioFeatures;

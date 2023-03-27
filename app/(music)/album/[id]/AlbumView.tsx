@@ -1,3 +1,4 @@
+import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { capitalize, formatNumber } from "@/lib/formatters";
@@ -6,9 +7,11 @@ import joinArtists from "@/lib/joinArtists";
 const AlbumView = ({
   album,
   artist,
+  averageAudioFeatures,
 }: {
   album: SpotifyApi.AlbumObjectFull;
   artist: SpotifyApi.ArtistObjectFull;
+  averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
     <MusicHeader
@@ -35,6 +38,9 @@ const AlbumView = ({
         isCircle: true,
       }}
     />
+    <div className="divider" />
+    <h4 className="font-black uppercase pb-2">Average Album Statistics</h4>
+    <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
     <TrackList tracks={album.tracks.items} />
   </>

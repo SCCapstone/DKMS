@@ -1,8 +1,8 @@
 import Link from "next/link";
 
+import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
-import TrackFeatures from "@/components/music/TrackFeatures";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({
@@ -57,7 +57,7 @@ const TrackView = ({
     />
     <div className="divider" />
     <h4 className="font-black uppercase pb-2">Track Statistics</h4>
-    <TrackFeatures audioFeatures={audioFeatures} />
+    <AudioFeatures audioFeatures={audioFeatures} />
     <div className="divider" />
     <h4 className="font-black uppercase">Similar Tracks</h4>
     <TrackList tracks={recommendations.tracks} showAlbum />
