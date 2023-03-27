@@ -3,11 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition, useEffect } from "react";
 
+import { play, skipNext, skipPrev } from "@/lib/playback";
 import getTrackName from "@/lib/playback/gettrackname";
 import getCurrentTrackUri from "@/lib/playback/gettrackrui";
-import play from "@/lib/playback/play";
-import skipNext from "@/lib/playback/skipNext";
-import skipPrev from "@/lib/playback/skipPrev";
 
 import BasePanel from "../BasePanel";
 
@@ -53,14 +51,24 @@ const Playback = ({
     });
   };
 
-  const handleClick = async (e: React.MouseEvent) => {
+  const handlePlayPauseClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const tmp_uri = await getCurrentTrackUri();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const currentTrackUri = await getCurrentTrackUri();
+    if (!currentTrackUri && !isPlaying) {
+      setIsFetching(false);
+      return;
+    }
+    if (!currentTrackUri && !isPlaying) {
+      setIsFetching(false);
+      return;
+    }
     const isTrackPlayingNow = await play(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-      tmp_uri.item.uri,
+      currentTrackUri?.item?.uri,
       isPlaying // use the current state of isPlaying instead of currentIsTrackPlaying
     );
     setIsPlaying(isTrackPlayingNow); // update isPlaying state variable
@@ -104,7 +112,7 @@ const Playback = ({
         <div className="flex space-x-4">
           <button
             type="button"
-            className="focus:outline-none"
+            className="btn btn-square btn-ghost"
             onClick={(e) => void handlePrevClick(e)}
           >
             <svg
@@ -125,14 +133,14 @@ const Playback = ({
           </button>
           <button
             type="button"
-            className="focus:outline-none"
-            onClick={(e) => void handleClick(e)}
+            className="btn btn-square btn-ghost"
+            onClick={(e) => void handlePlayPauseClick(e)}
           >
             {playPauseIcon}
           </button>
           <button
             type="button"
-            className="focus:outline-none"
+            className="btn btn-square btn-ghost"
             onClick={(e) => void handleNextClick(e)}
           >
             <svg
