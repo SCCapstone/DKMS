@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import Skeleton from "@/components/ui/Skeleton";
-import joinArtists from "@/lib/joinArtists";
 
 const Album = async ({
   album,
@@ -52,7 +52,7 @@ const Album = async ({
         <h2 className="text-lg font-semibold truncate">{album.name}</h2>
         <p>
           {new Date(album.release_date).getFullYear()} |{" "}
-          {joinArtists(album.artists)}
+          <ArtistLinks artists={album.artists} />
         </p>
       </div>
     </Link>
