@@ -40,7 +40,7 @@ const TrackView = ({
         buttons: (
           <>
             <div>
-              <PlayTrack uri={track.uri} />
+              <PlayTrack uri={track.uri} isActive />
             </div>
             <Link
               className="btn btn-primary btn-outline w-full"

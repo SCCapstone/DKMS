@@ -3,9 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import getDevices from "@/lib/music/getDevices";
 import startPlaying from "@/lib/music/startPlaying";
 
-const PlayTrack = ({ uri }: { uri: string }) => {
+const PlayTrack = ({ uri, isActive }: { uri: string; isActive: boolean }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -16,7 +17,9 @@ const PlayTrack = ({ uri }: { uri: string }) => {
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await startPlaying(uri);
+    if (isActive) {
+      await startPlaying(uri);
+    }
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
