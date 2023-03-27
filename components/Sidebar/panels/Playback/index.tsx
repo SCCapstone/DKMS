@@ -21,8 +21,8 @@ const Playback = ({
   const router = useRouter();
   const [, startTransition] = useTransition();
   const [, setIsFetching] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false); // new state variable for player state
-  const [, setTrackName] = useState<string | null>(null); // new state variable for track name
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [trackName, setTrackName] = useState<string | null>(null); // add state for track name
 
   useEffect(() => {
     const fetchTrackName = async () => {
@@ -30,7 +30,18 @@ const Playback = ({
       setTrackName(name);
     };
     void fetchTrackName();
-  }, []); // run only once on mount
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    const interval = setInterval(async () => {
+      const name = await getTrackName();
+      setTrackName(name);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []); // update track name every second
+
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
@@ -64,7 +75,6 @@ const Playback = ({
     e.preventDefault();
     setIsFetching(true);
 
-    // Get current track info
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const currentTrackUri = await getCurrentTrackUri();
     if (!currentTrackUri) {
@@ -73,18 +83,15 @@ const Playback = ({
     }
 
     if (isPlaying) {
-      // Pause the track
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       await pause(currentTrackUri.item.uri, true, false);
       setIsPlaying(false);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     } else if (currentTrackUri.is_playing) {
-      // If the track is currently playing, pause it
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       await pause(currentTrackUri.item.uri, true, true);
       setIsPlaying(false);
     } else {
-      // If the track is paused, resume playback
       await resume();
       setIsPlaying(true);
     }
@@ -131,8 +138,8 @@ const Playback = ({
 
   return (
     <BasePanel title="Playback" sidebarId="playback">
-      <div className="flex justify-center items-center">
-        {/* {trackName && <div className="text-center">{trackName}</div>} */}
+      <div className="flex flex-col justify-center items-center">
+        {trackName && <div className="text-center mb-4">{trackName}</div>}
         <div className="flex space-x-4">
           <button
             type="button"
