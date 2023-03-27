@@ -1,7 +1,7 @@
 import { getDocs, orderBy, query } from "firebase/firestore";
 
 import { feedCol } from "@/lib/firestore";
-import getUsersFollowing from "@/lib/followers/getUsersFollowing";
+import getFollowedUsers from "@/lib/followers/getFollowedUsers";
 import { getCurrentUser } from "@/lib/getUser";
 import { getSavedItemIds } from "@/lib/savedFeedItems";
 
@@ -15,7 +15,7 @@ const getFeedItems = async (params?: {
   const filterByFollowing = params?.filterByFollowing ?? false;
   const filterBySaved = params?.filterBySaved ?? false;
   const currentUserId = await getCurrentUser().then((user) => user.id);
-  const followingIds = await getUsersFollowing().then((users) =>
+  const followingIds = await getFollowedUsers().then((users) =>
     users.map((user) => user.id)
   );
   const q = query(feedCol, orderBy("timestamp", "desc"));
