@@ -1,13 +1,13 @@
-import { TracksGrid } from "@/components/music/grids";
+import { PlaylistsGrid, TracksGrid } from "@/components/music/grids";
 import PageTitle from "@/components/ui/PageTitle";
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 import { getCurrentUser } from "@/lib/getUser";
 import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 
 const getData = async (userId: string) => {
   const recommendations = await getRecommendationsForUser(userId, 8);
   const featuredPlaylists =
-    await getSpotifyData<SpotifyApi.ListOfFeaturedPlaylistsResponse>(
+    await fetchServer<SpotifyApi.ListOfFeaturedPlaylistsResponse>(
       `https://api.spotify.com/v1/browse/featured-playlists?limit=8`
     );
 
@@ -19,9 +19,12 @@ const Recommendations = async () => {
 
   return (
     <>
-      <PageTitle title="Tracks For You" />
+      <PageTitle title="Recommendations" />
+      <h4 className="font-black uppercase pb-2">Recommended Songs</h4>
       <TracksGrid tracks={data.recommendations.tracks} />
-      {/* <TopPlaylists userId={user.id} amount={8} /> */}
+      <div className="divider" />
+      <h4 className="font-black uppercase pb-2">Featured Playlists</h4>
+      <PlaylistsGrid playlists={data.featuredPlaylists.playlists.items} />
     </>
   );
 };

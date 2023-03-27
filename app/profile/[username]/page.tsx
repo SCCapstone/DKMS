@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { TracksGrid } from "@/components/music/grids";
+import { ArtistsGrid, TracksGrid } from "@/components/music/grids";
 import ProfileHead from "@/components/profile/ProfileHead";
-import TopItems from "@/components/profile/TopItems";
 import fetchServer from "@/lib/fetch/fetchServer";
 import { profilesCol } from "@/lib/firestore";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
@@ -86,7 +85,16 @@ const Profile = async ({ params }: { params: { username: string } }) => {
       <h4 className="font-black uppercase pb-2">Top Songs Statistics</h4>
       <AudioFeatures audioFeatures={averageAudioFeatures} />
       <div className="divider" />
-      <TopItems artists={data.topArtists} tracks={data.topTracks} />
+      <div className="grid md:grid-cols-2 gap-4 pb-5">
+        <div>
+          <h4 className="font-black uppercase pb-2">Top Songs</h4>
+          <TracksGrid tracks={data.topTracks.splice(0, 6)} isHalf />
+        </div>
+        <div>
+          <h4 className="font-black uppercase pb-2">Top Artists</h4>
+          <ArtistsGrid artists={data.topArtists.splice(0, 8)} isHalf />
+        </div>
+      </div>
       {!isCurrentUser && (
         <>
           <div className="divider" />
