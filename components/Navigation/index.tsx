@@ -9,6 +9,10 @@ const NAVBAR_ITEMS: MenuItems = [
     url: "/",
   },
   {
+    label: "Following",
+    url: "/following",
+  },
+  {
     label: "Profile",
     url: "/profile",
   },
