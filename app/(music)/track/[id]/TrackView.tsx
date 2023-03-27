@@ -36,6 +36,14 @@ const TrackView = ({
               <Link href={`/album/${track.album.id}`}>{track.album.name}</Link>
             </p>
           ),
+        buttons: (
+          <Link
+            className="btn btn-primary btn-outline w-full"
+            href={`/album/${track.album.id}`}
+          >
+            View Album
+          </Link>
+        ),
       }}
       secondary={{
         imageUrl: artist.images[0].url,
