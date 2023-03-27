@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { toast } from "react-hot-toast";
 
 import postFeedItem from "@/lib/feed/postFeedItem";
 
@@ -31,6 +32,7 @@ const IconButton = ({
     setIsFetching(false);
     startTransition(() => {
       router.refresh();
+      toast.success("Item Shared to Feed!");
     });
   };
 
