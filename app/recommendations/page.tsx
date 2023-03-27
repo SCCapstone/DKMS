@@ -1,11 +1,11 @@
 import { Track } from "@/components/music/cards";
 import PageTitle from "@/components/ui/PageTitle";
 import { getCurrentUser } from "@/lib/getUser";
-import getRecommendations from "@/lib/recommendations/getRecommendations";
+import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 
 const Recommendations = async () => {
   const user = await getCurrentUser();
-  const recsData = await getRecommendations(user.id);
+  const recsData = await getRecommendationsForUser(user.id, 8);
 
   return (
     <>
