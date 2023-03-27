@@ -122,10 +122,8 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
       profile: (profile: SpotifyApi.CurrentUsersProfileResponse) => ({
         id: profile.id,
-        displayName: profile.display_name ?? profile.id,
+        name: profile.display_name ?? profile.id,
         username: profile.id,
-        uri: profile.uri,
-        url: profile.external_urls.spotify,
       }),
     }),
   ],

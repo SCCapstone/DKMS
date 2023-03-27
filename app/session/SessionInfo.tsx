@@ -7,7 +7,7 @@ const Home = ({ session }: { session: Session }) => (
     <main>
       <h1>
         Welcome to <a href="https://nextjs.org">Next.js 13</a>,{" "}
-        {session.user.displayName}!
+        {session.user.name}!
       </h1>
 
       <p>

@@ -1,14 +1,17 @@
+import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import { capitalize, formatNumber } from "@/lib/formatters";
-import joinArtists from "@/lib/joinArtists";
 
 const AlbumView = ({
   album,
   artist,
+  averageAudioFeatures,
 }: {
   album: SpotifyApi.AlbumObjectFull;
   artist: SpotifyApi.ArtistObjectFull;
+  averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
     <MusicHeader
@@ -21,9 +24,11 @@ const AlbumView = ({
           album.release_date
         ).toLocaleDateString()} | ${capitalize(album.album_type)}`,
         content:
-          album.artists.length > 1
-            ? `Featuring ${joinArtists(album.artists.slice(1))}`
-            : undefined,
+          album.artists.length > 1 ? (
+            <p>
+              Featuring <ArtistLinks artists={album.artists.slice(1)} />
+            </p>
+          ) : undefined,
       }}
       secondary={{
         imageUrl: artist.images[0].url,
@@ -35,6 +40,9 @@ const AlbumView = ({
         isCircle: true,
       }}
     />
+    <div className="divider" />
+    <h4 className="font-black uppercase pb-2">Average Album Statistics</h4>
+    <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
     <TrackList tracks={album.tracks.items} />
   </>

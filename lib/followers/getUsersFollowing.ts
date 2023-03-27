@@ -1,11 +1,13 @@
-/* eslint-disable no-await-in-loop */
 import { getDocs } from "firebase/firestore";
 
 import { usersCol } from "../firestore";
 
 import isUserFollowing from "./isUserFollowing";
-import isUserFollowingMultiple from "./isUserFollowingMultiple";
 
+/**
+ * Gets a list of DKMS users that the current user is following.
+ * @returns A list of users that the current user is following.
+ */
 const getUsersFollowing = async () => {
   const baseData = await getDocs(usersCol);
   const users = baseData.docs.map((user) => ({
@@ -13,18 +15,12 @@ const getUsersFollowing = async () => {
     id: user.id,
   }));
 
-  const usersFollowing = [];
+  const followingUsers = await isUserFollowing(
+    users.map((user) => user.username),
+    "user"
+  );
 
-  for (let i = 0; i < users.length; i += 1) {
-    const value = users[i].username;
-    const follow = await isUserFollowing(value, "user");
-
-    if (follow) {
-      usersFollowing.push(users[i]);
-    }
-  }
-
-  return usersFollowing;
+  return users.filter((_user, index) => followingUsers[index]);
 };
 
 export default getUsersFollowing;
