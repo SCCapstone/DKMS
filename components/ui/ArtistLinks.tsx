@@ -27,7 +27,7 @@ const ArtistLinks = ({
     case 2:
       return (
         <>
-          {getLink(uniqueArtists[0])} & {getLink(uniqueArtists[1])}
+          {getLink(uniqueArtists[0])}&nbsp;& {getLink(uniqueArtists[1])}
         </>
       );
     case 3:
@@ -40,8 +40,18 @@ const ArtistLinks = ({
     default:
       return (
         <>
-          {getLink(uniqueArtists[0])}{" "}
-          <span>& {uniqueArtists.length - 1} more</span>
+          {getLink(uniqueArtists[0])}
+          &nbsp;&{" "}
+          <div className="dropdown dropdown-hover relative overflow-visible">
+            <button type="button" className="font-bold text-secondary">
+              {uniqueArtists.length - 1} more
+            </button>
+            <ul className="dropdown-content menu menu-compact p-2 shadow bg-base-100 rounded-box w-52 static">
+              {uniqueArtists.slice(1).map((artist) => (
+                <li key={artist.id}>{getLink(artist)}</li>
+              ))}
+            </ul>
+          </div>
         </>
       );
   }
