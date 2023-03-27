@@ -1,4 +1,5 @@
 import FollowButton from "@/components/FollowButton";
+import AudioFeatures from "@/components/music/AudioFeatures";
 import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { formatNumber } from "@/lib/formatters";
@@ -8,11 +9,13 @@ const ArtistView = ({
   topTracks,
   albums,
   isFollowing,
+  averageAudioFeatures,
 }: {
   artist: SpotifyApi.ArtistObjectFull;
   topTracks: SpotifyApi.ArtistsTopTracksResponse;
   albums: SpotifyApi.ArtistsAlbumsResponse;
   isFollowing: boolean;
+  averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
     <MusicHeader
@@ -33,6 +36,9 @@ const ArtistView = ({
         ),
       }}
     />
+    <div className="divider" />
+    <h4 className="font-black uppercase pb-2">Average Artist Statistics</h4>
+    <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
     <h4 className="font-black uppercase">Top Tracks</h4>
     <TrackList tracks={topTracks.tracks} showAlbum />
