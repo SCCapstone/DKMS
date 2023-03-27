@@ -1,7 +1,7 @@
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import { capitalize, formatNumber } from "@/lib/formatters";
-import joinArtists from "@/lib/joinArtists";
 
 const AlbumView = ({
   album,
@@ -21,9 +21,11 @@ const AlbumView = ({
           album.release_date
         ).toLocaleDateString()} | ${capitalize(album.album_type)}`,
         content:
-          album.artists.length > 1
-            ? `Featuring ${joinArtists(album.artists.slice(1))}`
-            : undefined,
+          album.artists.length > 1 ? (
+            <p>
+              Featuring <ArtistLinks artists={album.artists.slice(1)} />
+            </p>
+          ) : undefined,
       }}
       secondary={{
         imageUrl: artist.images[0].url,

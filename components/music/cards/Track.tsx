@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import ArtistLinks from "@/components/ui/ArtistLinks";
 import FavoriteIcon from "@/components/ui/favoriteIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import getSpotifyData from "@/lib/getSpotifyData";
-import joinArtists from "@/lib/joinArtists";
 
 const checkIsFavorited = (trackId: string) =>
   getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
@@ -73,7 +73,9 @@ const Track = async ({
           {new Date(track.album.release_date).getFullYear()} |{" "}
           {track.album.name}
         </p>
-        <p>{joinArtists(track.artists)}</p>
+        <p>
+          <ArtistLinks artists={track.artists} />
+        </p>
       </div>
     </Link>
   );
