@@ -4,19 +4,24 @@ import { feedCol } from "@/lib/firestore";
 import getUsersFollowing from "@/lib/followers/getUsersFollowing";
 import { getCurrentUser } from "@/lib/getUser";
 
+import { getSavedFeedItemsList } from "../savedFeedItems";
+
 import getFeedComments from "./getFeedComments";
 
-const getFeedItems = async (params?: { filterByFollowing?: boolean }) => {
-  const currentUserId = await getCurrentUser().then((user) => user.id);
+const getFeedItems = async (params?: {
+  filterByFollowing?: boolean;
+  filterBySaved?: boolean;
+}) => {
   const filterByFollowing = params?.filterByFollowing ?? false;
+  const filterBySaved = params?.filterBySaved ?? false;
+  const currentUserId = await getCurrentUser().then((user) => user.id);
   const followingIds = await getUsersFollowing().then((users) =>
     users.map((user) => user.id)
   );
-
   const q = query(feedCol, orderBy("timestamp", "desc"));
   const feedSnapshot = await getDocs(q);
 
-  return Promise.all(
+  const baseData = await Promise.all(
     feedSnapshot.docs
       .filter(
         (doc) =>
@@ -34,6 +39,14 @@ const getFeedItems = async (params?: { filterByFollowing?: boolean }) => {
         };
       })
   );
+
+  if (!filterBySaved) return baseData;
+
+  const savedItemIds = await getSavedFeedItemsList(currentUserId);
+
+  return baseData.filter((post) => savedItemIds?.includes(post.id.trim()));
+
+  // return baseData;
 };
 
 export default getFeedItems;
