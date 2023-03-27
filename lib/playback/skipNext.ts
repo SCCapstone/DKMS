@@ -7,19 +7,14 @@ const skipNext = async (
   isTrackPlaying: boolean,
   isSkipToNext = false
 ) => {
-  let endpoint = "https://api.spotify.com/v1/me/player/play";
-  let method = "PUT";
-  let body: string | null = JSON.stringify({
-    uris: [uri],
-  });
-  // Skip to next song
-  if (isSkipToNext) {
-    endpoint = "https://api.spotify.com/v1/me/player/next";
-    method = "POST";
-    body = null;
-  } else if (isTrackPlaying) {
-    method = "DELETE";
-  }
+  const endpoint = isSkipToNext
+    ? "https://api.spotify.com/v1/me/player/next"
+    : "https://api.spotify.com/v1/me/player/play";
+  // eslint-disable-next-line no-nested-ternary
+  const method = isSkipToNext ? "POST" : isTrackPlaying ? "DELETE" : "PUT";
+  const body: string | null = !isSkipToNext
+    ? JSON.stringify({ uris: [uri] })
+    : null;
 
   const accessToken = await getAccessToken();
 

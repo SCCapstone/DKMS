@@ -55,23 +55,19 @@ const Playback = ({
     e.preventDefault();
     setIsFetching(true);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const tmp_uri = await getCurrentTrackUri();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const currentTrackUri = await getCurrentTrackUri();
     if (!currentTrackUri && !isPlaying) {
       setIsFetching(false);
       return;
     }
-    if (!currentTrackUri && !isPlaying) {
-      setIsFetching(false);
-      return;
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
     const isTrackPlayingNow = await play(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       currentTrackUri?.item?.uri,
-      isPlaying // use the current state of isPlaying instead of currentIsTrackPlaying
+      isPlaying,
+      isPlaying
     );
-    setIsPlaying(isTrackPlayingNow); // update isPlaying state variable
+    setIsPlaying(isTrackPlayingNow);
     setIsFetching(false);
     startTransition(() => {
       router.refresh();

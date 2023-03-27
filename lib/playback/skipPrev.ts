@@ -2,33 +2,34 @@ import putSpotifyData from "@/lib/putSpotifyData";
 
 import getAccessToken from "../getAccessToken";
 
-const skipPrev = async (
+const skipNext = async (
   uri: string,
   isTrackPlaying: boolean,
-  isSkipToPrevious = false
+  isSkipToNext = false
 ) => {
-  let endpoint = "https://api.spotify.com/v1/me/player/play";
-  let method = "PUT";
-  let body: string | null = JSON.stringify({
-    uris: [uri],
+  const endpoint = isSkipToNext
+    ? "https://api.spotify.com/v1/me/player/previous"
+    : "https://api.spotify.com/v1/me/player/play";
+  // eslint-disable-next-line no-nested-ternary
+  const method = isSkipToNext ? "POST" : isTrackPlaying ? "DELETE" : "PUT";
+  const body: string | null = !isSkipToNext
+    ? JSON.stringify({ uris: [uri] })
+    : null;
+
+  const accessToken = await getAccessToken();
+
+  const response = await fetch(endpoint, {
+    method,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body,
   });
 
-  if (isSkipToPrevious) {
-    endpoint = "https://api.spotify.com/v1/me/player/previous";
-    method = "POST";
-    body = null;
-  } else if (isTrackPlaying) {
-    method = "DELETE";
+  if (!response.ok) {
+    throw new Error(`Failed to skip track: ${response.statusText}`);
   }
-
-  const headers = {
-    Authorization: JSON.stringify({
-      getAccessToken,
-    }),
-    "Content-Type": "application/json",
-  };
-
-  await putSpotifyData(endpoint, { method, headers, body });
 };
 
-export default skipPrev;
+export default skipNext;
