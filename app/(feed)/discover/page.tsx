@@ -5,14 +5,14 @@ import getFeedItems from "@/lib/feed/getFeedItems";
 import { getCurrentUser } from "@/lib/getUser";
 import { getSavedFeedItemsList } from "@/lib/savedFeedItems";
 
-const Feed = async () => {
-  const data = await getFeedItems({ filterByFollowing: true });
+const DiscoverFeed = async () => {
+  const data = await getFeedItems();
   const currentUser = await getCurrentUser();
   const savedItemIds = await getSavedFeedItemsList(currentUser.id);
 
   return (
     <div>
-      <PageTitle title="Friends" />
+      <PageTitle title="Discover" />
       <FilterSavedFeedButton />
       <FeedPage
         data={data}
@@ -24,4 +24,4 @@ const Feed = async () => {
   );
 };
 
-export default Feed;
+export default DiscoverFeed;

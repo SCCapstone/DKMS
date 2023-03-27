@@ -1,32 +1,34 @@
-import { getDocs } from "firebase/firestore";
+import { getDocs, orderBy, query } from "firebase/firestore";
 
 import { feedCol } from "@/lib/firestore";
+import getUsersFollowing from "@/lib/followers/getUsersFollowing";
 
 import getFeedComments from "./getFeedComments";
 
-const getFeedItems = async (userId?: string) => {
-  const feedSnapshot = await getDocs(feedCol);
-  const baseData = await Promise.all(
-    feedSnapshot.docs.map(async (doc) => {
-      const docId = doc.id;
-      const comments = await getFeedComments(docId);
-      return {
-        id: doc.id,
-        ...doc.data(),
-        comments,
-      };
-    })
+const getFeedItems = async (params?: { filterByFollowing?: boolean }) => {
+  const filterByFollowing = params?.filterByFollowing ?? false;
+  const followingIds = await getUsersFollowing().then((users) =>
+    users.map((user) => user.id)
   );
 
-  const formattedData = baseData
-    .sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis())
-    .reverse();
+  const q = query(feedCol, orderBy("timestamp", "desc"));
+  const feedSnapshot = await getDocs(q);
 
-  if (!userId) {
-    return formattedData;
-  }
-
-  return formattedData.filter((post) => post.userId === userId);
+  return Promise.all(
+    feedSnapshot.docs
+      .filter(
+        (doc) => !filterByFollowing || followingIds.includes(doc.data().userId)
+      )
+      .map(async (doc) => {
+        const docId = doc.id;
+        const comments = await getFeedComments(docId);
+        return {
+          id: doc.id,
+          ...doc.data(),
+          comments,
+        };
+      })
+  );
 };
 
 export default getFeedItems;
