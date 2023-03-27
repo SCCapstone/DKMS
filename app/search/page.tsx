@@ -11,7 +11,7 @@ const searchFirebase = async (searchQuery: string) => {
 
   return usersData.filter(
     (user) =>
-      user.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
