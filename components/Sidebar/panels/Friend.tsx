@@ -1,5 +1,4 @@
 import { getDoc, doc } from "firebase/firestore";
-import { notFound } from "next/navigation";
 
 import UsernameLink from "@/components/ui/UsernameLink";
 import { profilesCol } from "@/lib/firestore";
