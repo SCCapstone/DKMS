@@ -2,15 +2,13 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { profilesCol } from "@/lib/firestore";
 
-const getSavedFeedItemsList = async (userId: string) => {
+const getSavedItemIds = async (userId: string) => {
   const docRef = doc(profilesCol, userId);
   const profile = await getDoc(docRef);
 
   const data = profile.data();
-  if (data) {
-    return data.savedItemIds;
-  }
-  return [];
+
+  return data?.savedItemIds ?? [];
 };
 
-export default getSavedFeedItemsList;
+export default getSavedItemIds;

@@ -1,6 +1,6 @@
 import { getDocs } from "firebase/firestore";
 
-import { usersCol } from "../firestore";
+import { usersCol } from "@/lib/firestore";
 
 import isUserFollowing from "./isUserFollowing";
 

@@ -1,6 +1,6 @@
 import { arrayRemove, doc, updateDoc } from "firebase/firestore";
 
-import { profilesCol } from "../firestore";
+import { profilesCol } from "@/lib/firestore";
 
 const unsaveFeedItem = async (userId: string, postId: string) =>
   updateDoc(doc(profilesCol, userId), {
