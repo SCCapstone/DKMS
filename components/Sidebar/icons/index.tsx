@@ -82,6 +82,10 @@ const SidebarIcons = ({
       selected={currentSelection === "friends"}
       onClick={() => onChange("friends")}
     />
+    <PlaybackIcon
+      selected={currentSelection === "playback"}
+      onClick={() => onChange("playback")}
+    />
   </>
 );
 

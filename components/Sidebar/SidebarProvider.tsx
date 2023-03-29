@@ -7,7 +7,8 @@ import SidebarContext from "./SidebarContext";
 import type { SidebarOptions } from "./types";
 
 const SidebarProvider = ({ children }: { children: React.ReactNode }) => {
-  const sidebarContextValue = useState<SidebarOptions>("none");
+  // TODO: This should be set back to "none"
+  const sidebarContextValue = useState<SidebarOptions>("playback");
 
   return (
     <SidebarContext.Provider value={sidebarContextValue}>
