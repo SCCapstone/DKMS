@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import ArtistLinks from "@/components/ui/ArtistLinks";
 
-const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectFull }) => (
+const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectSimplified }) => (
   <li>
     <div className="flex flex-row justify-start content-center max-w-[224px]">
       <h5 className="text-xs truncate max-w-[112px]">
