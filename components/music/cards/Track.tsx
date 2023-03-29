@@ -74,8 +74,8 @@ const Track = async ({
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
-      <Link href={`/track/${track.id}`}>
-        <figure className="relative aspect-square">
+      <figure className="relative aspect-square">
+        <Link href={`/track/${track.id}`}>
           <Image
             src={img}
             alt={track.name}
@@ -86,8 +86,8 @@ const Track = async ({
               (max-width: 1200px) 50vw,
               25vw"
           />
-        </figure>
-      </Link>
+        </Link>
+      </figure>
       <div className="card-body relative">
         <div className="card-actions justify-end">
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />

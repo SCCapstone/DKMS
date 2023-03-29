@@ -58,8 +58,8 @@ const Album = async ({
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
-      <Link href={`/album/${album.id}`}>
-        <figure className="relative aspect-square">
+      <figure className="relative aspect-square">
+        <Link href={`/album/${album.id}`}>
           <Image
             src={img}
             alt={album.name}
@@ -70,8 +70,9 @@ const Album = async ({
               (max-width: 1200px) 50vw,
               25vw"
           />
-        </figure>
-      </Link>
+        </Link>
+      </figure>
+
       <div className="card-body relative">
         <Link href={`/album/${album.id}`}>
           <div className="card-actions justify-end">
