@@ -89,23 +89,13 @@ const Track = async ({
         </figure>
       </Link>
       <div className="card-body relative">
-        <div
-          className={`flex flex-row absolute 
-            ${isCompact ? "bottom-0" : "top-0"}
-          right-0 p-2`}
-        >
+        <div className="card-actions justify-end">
+          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={track.id} musicItemType="track" />
-          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
         </div>
         <Link href={`/track/${track.id}`}>
-          <h2
-            className={`text-lg truncate font-semibold  ${
-              isCompact ? "" : "mt-10"
-            }`}
-          >
-            {track.name}
-          </h2>
+          <h2 className="text-lg truncate font-semibold">{track.name}</h2>
           <p className={isCompact ? "text-sm truncate" : ""}>
             {new Date(track.album.release_date).getFullYear()} |{" "}
             {track.album.name}

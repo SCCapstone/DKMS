@@ -74,21 +74,11 @@ const Album = async ({
       </Link>
       <div className="card-body relative">
         <Link href={`/album/${album.id}`}>
-          <div
-            className={`flex flex-row absolute 
-            ${isCompact ? "bottom-0" : "top-0"}
-          right-0 p-2`}
-          >
+          <div className="card-actions justify-end">
             {/* @ts-expect-error Server Component */}
             <ShareIcon musicItemId={album.id} musicItemType="album" />
           </div>
-          <h2
-            className={`text-lg truncate font-semibold  ${
-              isCompact ? "" : "mt-10"
-            }`}
-          >
-            {album.name}
-          </h2>
+          <h2 className="text-lg truncate font-semibold">{album.name}</h2>
           <p className={isCompact ? "text-sm truncate" : ""}>
             {new Date(album.release_date).getFullYear()}
           </p>

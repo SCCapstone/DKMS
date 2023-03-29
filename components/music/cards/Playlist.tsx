@@ -62,21 +62,11 @@ const Playlist = async ({
         />
       </figure>
       <div className="card-body relative">
-        <div
-          className={`flex flex-row absolute 
-            ${isCompact ? "bottom-0" : "top-0"}
-          right-0 p-2`}
-        >
+        <div className="card-actions justify-end">
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
         </div>
-        <h2
-          className={`text-lg truncate font-semibold  ${
-            isCompact ? "" : "mt-10"
-          }`}
-        >
-          {playlist.name}
-        </h2>
+        <h2 className="text-lg truncate font-semibold">{playlist.name}</h2>
         <p className={isCompact ? "text-sm truncate" : ""}>
           {playlist.tracks.total}{" "}
           {playlist.tracks.total === 1 ? "track" : "tracks"}
