@@ -4,6 +4,8 @@ import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
 
+import PlayButton from "../PlayButton";
+
 const Artist = async ({
   artist,
 }: {
@@ -50,6 +52,9 @@ const Artist = async ({
       </div>
       <div className="card-body items-center text-center">
         <h2 className="card-title">{artist.name}</h2>
+      </div>
+      <div>
+        <PlayButton uri={artist.uri} />
       </div>
     </Link>
   );
