@@ -5,11 +5,11 @@ import { useState, useTransition, useEffect } from "react";
 
 import { skipNext, skipPrev, resume, pause } from "@/lib/playback";
 import getCurrentTrackUri from "@/lib/playback/getCurrentTrackUri";
-import getTrackName from "@/lib/playback/gettrackname";
+import getTrackName from "@/lib/playback/getTrackName";
 
 import BasePanel from "../BasePanel";
 
-const Playback = ({
+const PlaybackView = ({
   isTrackPlaying,
   uri,
   isPremiumUser,
@@ -22,25 +22,23 @@ const Playback = ({
   const [, startTransition] = useTransition();
   const [, setIsFetching] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [trackName, setTrackName] = useState<string | null>(null); // add state for track name
+  const [trackName, setTrackName] = useState<string | null>(null);
+  const [artistName, setArtistName] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTrackName = async () => {
-      const name = await getTrackName();
-      setTrackName(name);
+      // eslint-disable-next-line no-shadow
+      const { trackName, artistName } = await getTrackName();
+      setTrackName(trackName);
+      setArtistName(artistName);
     };
     void fetchTrackName();
-  }, []);
 
-  useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    const interval = setInterval(async () => {
-      const name = await getTrackName();
-      setTrackName(name);
-    }, 1000);
+    const intervalId = setInterval(fetchTrackName, 1000); // fetch track name every 1 seconds
 
-    return () => clearInterval(interval);
-  }, []); // update track name every second
+    return () => clearInterval(intervalId); // cleanup function to clear the interval when the component unmounts
+  }, []);
 
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -139,7 +137,17 @@ const Playback = ({
   return (
     <BasePanel title="Playback" sidebarId="playback">
       <div className="flex flex-col justify-center items-center">
-        {trackName && <div className="text-center mb-4">{trackName}</div>}
+        {trackName && (
+          <a
+            href={`spotify:track:${uri}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-center mb-2"
+          >
+            {trackName}
+          </a>
+        )}
+        {artistName && <p className="text-center text-sm">{artistName}</p>}
         <div className="flex space-x-4">
           <button
             type="button"
@@ -196,4 +204,4 @@ const Playback = ({
   );
 };
 
-export default Playback;
+export default PlaybackView;
