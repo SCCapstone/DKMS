@@ -1,4 +1,4 @@
-import getAccessToken from "../getAccessToken";
+import putSpotifyData from "../putSpotifyData";
 
 type CurrentlyPlayingResponse = {
   item: {
@@ -10,12 +10,10 @@ type CurrentlyPlayingResponse = {
 };
 
 const getTrackName = async () => {
-  const token = await getAccessToken();
-  const response = await fetch(
+  const response = await putSpotifyData(
     "https://api.spotify.com/v1/me/player/currently-playing",
     {
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }
@@ -23,7 +21,7 @@ const getTrackName = async () => {
   const data: CurrentlyPlayingResponse =
     (await response.json()) as CurrentlyPlayingResponse;
   const trackName = data.item.name || null;
-  const artistName = data.item.artists?.[0]?.name || null;
+  const artistName = data.item.artists[0]?.name || null;
   return { trackName, artistName }; // return the track name and artist name, or null if none is playing
 };
 

@@ -1,18 +1,10 @@
-import getAccessToken from "../getAccessToken";
+import putSpotifyData from "../putSpotifyData";
 
 const getCurrentTrackUri = async () => {
-  let token;
-  try {
-    token = await getAccessToken();
-  } catch (error) {
-    throw new Error("Feature works for only Premium Users");
-  }
-  const response = await fetch("https://api.spotify.com/v1/me/player/", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await putSpotifyData(
+    "https://api.spotify.com/v1/me/player/"
+  );
+
   // todo if not empty.... etc
   return response.json();
 

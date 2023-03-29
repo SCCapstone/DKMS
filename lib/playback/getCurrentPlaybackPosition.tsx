@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import getAccessToken from "../getAccessToken";
+import putSpotifyData from "../putSpotifyData";
 
 const getCurrentPlaybackPosition = async () => {
-  const token = await getAccessToken();
-  const response = await fetch("https://api.spotify.com/v1/me/player", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await putSpotifyData(
+    "https://api.spotify.com/v1/me/player",
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(
@@ -19,7 +19,7 @@ const getCurrentPlaybackPosition = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const data = await response.json();
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
   return data.is_playing && data.item && data.item.uri ? data.progress_ms : 0;
 };
 
