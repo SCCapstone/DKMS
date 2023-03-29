@@ -5,10 +5,10 @@ import { getPlaiceholder } from "plaiceholder";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import FavoriteIcon from "@/components/ui/favoriteIcon";
 import Skeleton from "@/components/ui/Skeleton";
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 const checkIsFavorited = (trackId: string) =>
-  getSpotifyData<SpotifyApi.CheckUsersSavedTracksResponse>(
+  fetchServer<SpotifyApi.CheckUsersSavedTracksResponse>(
     `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`,
     {
       cache: "no-cache",

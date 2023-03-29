@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 const getData = async (username: string) =>
-  getSpotifyData<SpotifyApi.UserProfileResponse>(
+  fetchServer<SpotifyApi.UserProfileResponse>(
     `https://api.spotify.com/v1/users/${username}`
   );
 

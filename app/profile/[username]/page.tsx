@@ -5,10 +5,10 @@ import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
 import ProfileHead from "@/components/profile/ProfileHead";
 import TopItems from "@/components/profile/TopItems";
+import fetchServer from "@/lib/fetch/fetchServer";
 import { profilesCol } from "@/lib/firestore";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
-import getSpotifyData from "@/lib/getSpotifyData";
 import {
   getCurrentUser,
   getIdFromUsername,
@@ -18,7 +18,7 @@ import {
 const getDkmsProfile = async (profileId: string) => getUserFromId(profileId);
 
 const getSpotifyProfile = async (username: string) =>
-  getSpotifyData<SpotifyApi.UserProfileResponse>(
+  fetchServer<SpotifyApi.UserProfileResponse>(
     `https://api.spotify.com/v1/users/${username}`,
     { cache: "no-cache" }
   );
@@ -32,7 +32,7 @@ const getTopItems = async (id: string) => {
   const data = profileDoc.data();
 
   const audioFeatures =
-    await getSpotifyData<SpotifyApi.MultipleAudioFeaturesResponse>(
+    await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
       `https://api.spotify.com/v1/audio-features?ids=${data.topTracks
         .map((track) => track.id)
         .join(",")}`

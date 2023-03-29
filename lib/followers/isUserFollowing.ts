@@ -1,4 +1,4 @@
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 /**
  * Checks if the current user is following a user or artist.
@@ -27,7 +27,7 @@ async function isUserFollowing(
   followType: "user" | "artist"
 ) {
   if (typeof usernameOrId === "string") {
-    return getSpotifyData<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
+    return fetchServer<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
       `https://api.spotify.com/v1/me/following/contains?type=${followType}&ids=${usernameOrId}`,
       {
         cache: "no-cache",
@@ -35,7 +35,7 @@ async function isUserFollowing(
     ).then((data) => data[0]);
   }
 
-  return getSpotifyData<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
+  return fetchServer<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
     `https://api.spotify.com/v1/me/following/contains?type=${followType}&ids=${usernameOrId.join(
       ","
     )}`,

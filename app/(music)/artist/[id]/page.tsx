@@ -1,24 +1,24 @@
+import fetchServer from "@/lib/fetch/fetchServer";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
-import getSpotifyData from "@/lib/getSpotifyData";
 
 import ArtistView from "./ArtistView";
 
 const getData = async (id: string) => {
-  const artist = await getSpotifyData<SpotifyApi.ArtistObjectFull>(
+  const artist = await fetchServer<SpotifyApi.ArtistObjectFull>(
     `https://api.spotify.com/v1/artists/${id}`
   );
 
-  const topTracks = await getSpotifyData<SpotifyApi.ArtistsTopTracksResponse>(
+  const topTracks = await fetchServer<SpotifyApi.ArtistsTopTracksResponse>(
     `https://api.spotify.com/v1/artists/${id}/top-tracks?market=US`
   );
 
-  const albums = await getSpotifyData<SpotifyApi.ArtistsAlbumsResponse>(
+  const albums = await fetchServer<SpotifyApi.ArtistsAlbumsResponse>(
     `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album,single&market=US&limit=10`
   );
 
   const audioFeatures =
-    await getSpotifyData<SpotifyApi.MultipleAudioFeaturesResponse>(
+    await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
       `https://api.spotify.com/v1/audio-features?ids=${topTracks.tracks
         .map((track) => track.id)
         .join(",")}`
