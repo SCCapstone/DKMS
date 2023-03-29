@@ -10,12 +10,6 @@ const getCurrentPlaybackPosition = async () => {
     }
   );
 
-  if (!response.ok) {
-    throw new Error(
-      `Failed to get current playback position: ${response.status} ${response.statusText}`
-    );
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const data = await response.json();
 
