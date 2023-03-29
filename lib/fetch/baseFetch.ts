@@ -21,7 +21,7 @@ const baseFetch = async (
       try {
         data = await res.text();
       } catch (subError) {
-        data = e;
+        data = e ?? subError;
       }
     }
 
