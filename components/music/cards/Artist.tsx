@@ -4,6 +4,7 @@ import { getPlaiceholder } from "plaiceholder";
 
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
+import { formatNumber } from "@/lib/formatters";
 
 const Artist = async ({
   artist,
@@ -74,6 +75,7 @@ const Artist = async ({
           <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
         <h2 className="card-title">{artist.name}</h2>
+        {isCompact && `${formatNumber(artist.followers.total)} Followers`}
       </div>
     </Link>
   );
