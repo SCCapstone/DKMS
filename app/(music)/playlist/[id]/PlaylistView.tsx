@@ -4,13 +4,15 @@ import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
 
+import type { extraDataTrack } from "./page";
+
 const PlaylistView = ({
   playlist,
   tracks,
   averageAudioFeatures,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
-  tracks: SpotifyApi.TrackObjectFull[];
+  tracks: extraDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
