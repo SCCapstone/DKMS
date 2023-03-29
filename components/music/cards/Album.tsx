@@ -20,7 +20,18 @@ const Album = async ({
           isCompact ? "card-side" : "card-compact"
         } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
       >
-        <figure className="relative aspect-square" />
+        <figure className="relative aspect-square">
+          <Image
+            src="/images/defaults/album.png"
+            alt="Loading..."
+            fill
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAp0lEQVR4nF2PIQ6GMAyFq5A7zcwE54LMcgdwJDgSBJIEsRtgJrkAAoct3SNkhH8/dX1fX9tH+K8QAjOLSGwpBSGEzzSlGMC+73Vdz/MMQERuHFet65rneZZlRFQUBQBmvvF5ngDGcdRaT9PknKuqKuo/d9u2Xdcdx2GMKcvycTMzgKZpiGgYBu+9Uqrv+8cdrcuyWGu3bXtvfT9P470JHywizBzVNP0FPFwFIjVg8fAAAAAASUVORK5CYII="
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              25vw"
+          />
+        </figure>
         <div className="card-body">
           <h2 className="text-lg font-semibold truncate">
             <Skeleton enableAnimation />
@@ -42,43 +53,51 @@ const Album = async ({
   });
 
   return (
-    <Link
-      href={`/album/${album.id}`}
+    <div
       className={`card ${
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
-      <figure className="relative aspect-square">
-        <Image
-          src={img}
-          alt={album.name}
-          fill
-          placeholder="blur"
-          blurDataURL={base64}
-        />
-      </figure>
+      <Link href={`/album/${album.id}`}>
+        <figure className="relative aspect-square">
+          <Image
+            src={img}
+            alt={album.name}
+            fill
+            placeholder="blur"
+            blurDataURL={base64}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              25vw"
+          />
+        </figure>
+      </Link>
       <div className="card-body relative">
-        <div
-          className={`flex flex-row absolute 
+        <Link href={`/album/${album.id}`}>
+          <div
+            className={`flex flex-row absolute 
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
-        >
-          {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={album.id} musicItemType="album" />
-        </div>
-        <h2
-          className={`text-lg truncate font-semibold  ${
-            isCompact ? "" : "mt-10"
-          }`}
-        >
-          {album.name}
-        </h2>
-        <p className={isCompact ? "text-sm truncate" : ""}>
-          {new Date(album.release_date).getFullYear()} |{" "}
+          >
+            {/* @ts-expect-error Server Component */}
+            <ShareIcon musicItemId={album.id} musicItemType="album" />
+          </div>
+          <h2
+            className={`text-lg truncate font-semibold  ${
+              isCompact ? "" : "mt-10"
+            }`}
+          >
+            {album.name}
+          </h2>
+          <p className={isCompact ? "text-sm truncate" : ""}>
+            {new Date(album.release_date).getFullYear()}
+          </p>
+        </Link>
+        <p className="pb-0">
           <ArtistLinks artists={album.artists} />
         </p>
       </div>
-    </Link>
+    </div>
   );
 };
 
