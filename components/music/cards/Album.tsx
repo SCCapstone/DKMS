@@ -5,7 +5,7 @@ import { getPlaiceholder } from "plaiceholder";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import Skeleton from "@/components/ui/Skeleton";
 
-import PlayTrack from "../PlayTrack";
+import PlayButton from "../PlayButton";
 
 const Album = async ({
   album,
@@ -73,7 +73,7 @@ const Album = async ({
         </p>
       </div>
       <div>
-        <PlayTrack uri={album.uri} />
+        <PlayButton uri={album.uri} />
       </div>
     </div>
   );
