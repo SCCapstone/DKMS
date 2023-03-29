@@ -5,7 +5,7 @@ import getAccessToken from "@/lib/getAccessToken";
 const putSpotifyData = async (
   input: RequestInfo | URL,
   init?: RequestInit | undefined
-) => {
+): Promise<Response> => {
   const accessToken = await getAccessToken();
 
   const res = await fetch(input, {
@@ -20,6 +20,8 @@ const putSpotifyData = async (
     const { error } = (await res.json()) as { error: SpotifyApi.ErrorObject };
     throw new Error(`${error.status}: ${error.message}`);
   }
+
+  return res;
 };
 
 export default putSpotifyData;
