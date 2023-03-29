@@ -4,9 +4,13 @@ import getAccessToken from "@/lib/getAccessToken";
 
 import baseFetch from "./baseFetch";
 
+type ClientRequestInit = RequestInit & {
+  method: "PUT" | "PATCH" | "DELETE";
+};
+
 const fetchClient = async <T>(
   input: RequestInfo | URL,
-  init?: RequestInit | undefined
+  init: ClientRequestInit
 ) => {
   const accessToken = await getAccessToken();
 
