@@ -46,7 +46,7 @@ const Artist = async ({
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl`}
     >
-      <div className="pt-8 px-8">
+      <div className={isCompact ? "p-2" : "pt-8 px-8"}>
         <figure
           className={`${
             isCompact ? "w-32 h-32" : ""
