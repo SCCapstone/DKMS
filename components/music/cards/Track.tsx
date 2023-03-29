@@ -7,7 +7,7 @@ import FavoriteIcon from "@/components/ui/favoriteIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
 
-import PlayButton from "../PlayContext";
+import PlayTrack from "../PlayTrack";
 
 const checkIsFavorited = (trackId: string) =>
   fetchServer<SpotifyApi.CheckUsersSavedTracksResponse>(
@@ -95,7 +95,7 @@ const Track = async ({
         </div>
       </div>
       <div>
-        <PlayButton uri={track.uri} />
+        <PlayTrack uri={track.uri} />
       </div>
     </div>
   );
