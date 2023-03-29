@@ -1,11 +1,14 @@
-import putSpotifyData from "@/lib/putSpotifyData";
+"use client";
+
+import fetchClient from "@/lib/fetch/fetchClient";
 
 const startPlaying = async (uri: string) =>
-  putSpotifyData(`https://api.spotify.com/v1/me/player/play`, {
+  fetchClient(`https://api.spotify.com/v1/me/player/play`, {
     method: "PUT",
     body: JSON.stringify({
       uris: [uri],
     }),
+    cache: "no-cache",
   });
 
 export default startPlaying;

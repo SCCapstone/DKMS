@@ -1,7 +1,7 @@
 import { getDocs } from "firebase/firestore";
 
+import fetchServer from "@/lib/fetch/fetchServer";
 import { usersCol } from "@/lib/firestore";
-import getSpotifyData from "@/lib/getSpotifyData";
 
 import SearchResults from "./SearchResults";
 
@@ -16,7 +16,7 @@ const searchFirebase = async (searchQuery: string) => {
   );
 };
 const searchSpotify = async (searchQuery: string) =>
-  getSpotifyData<SpotifyApi.SearchResponse>(
+  fetchServer<SpotifyApi.SearchResponse>(
     `https://api.spotify.com/v1/search?q=${searchQuery}&type=album,track,artist,playlist&limit=4`
   );
 

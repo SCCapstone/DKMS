@@ -1,21 +1,21 @@
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 import TrackView from "./TrackView";
 
 const getData = async (id: string) => {
-  const track = await getSpotifyData<SpotifyApi.TrackObjectFull>(
+  const track = await fetchServer<SpotifyApi.TrackObjectFull>(
     `https://api.spotify.com/v1/tracks/${id}`
   );
-  const artist = await getSpotifyData<SpotifyApi.ArtistObjectFull>(
+  const artist = await fetchServer<SpotifyApi.ArtistObjectFull>(
     `https://api.spotify.com/v1/artists/${track.artists[0].id}`
   );
 
-  const audioFeatures = await getSpotifyData<SpotifyApi.AudioFeaturesResponse>(
+  const audioFeatures = await fetchServer<SpotifyApi.AudioFeaturesResponse>(
     `https://api.spotify.com/v1/audio-features/${id}`
   );
 
   const recommendations =
-    await getSpotifyData<SpotifyApi.RecommendationsFromSeedsResponse>(
+    await fetchServer<SpotifyApi.RecommendationsFromSeedsResponse>(
       `https://api.spotify.com/v1/recommendations?seed_tracks=${id}&limit=10`
     );
 

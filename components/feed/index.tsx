@@ -1,3 +1,4 @@
+import FeedFilterButtons from "./FeedFilterButtons";
 import FeedItem from "./FeedItem";
 import FeedTextBox from "./FeedTextBox";
 
@@ -25,6 +26,7 @@ const FeedPage = ({
   showLinks?: boolean;
 }) => (
   <div>
+    <FeedFilterButtons />
     {showLinks && (
       <>
         <FeedTextBox user={currentUser} />

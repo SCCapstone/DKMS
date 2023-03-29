@@ -1,11 +1,11 @@
-import putSpotifyData from "@/lib/putSpotifyData";
+"use client";
 
-const clearQueue = async (uri: string) =>
-  putSpotifyData(`https://api.spotify.com/v1/me/player/queue`, {
-    method: "PUT",
-    body: JSON.stringify({
-      uris: [uri],
-    }),
+import fetchClient from "@/lib/fetch/fetchClient";
+
+const clearQueue = async () =>
+  fetchClient(`https://api.spotify.com/v1/me/player/queue`, {
+    method: "DELETE",
+    cache: "no-cache",
   });
 
 export default clearQueue;

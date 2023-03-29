@@ -1,6 +1,6 @@
-import { formatNumber, formatDuration } from "./formatters";
+import { formatNumber, formatDuration, capitalize } from "./formatters";
 
-describe("formatFollowers()", () => {
+describe("formatNumber()", () => {
   it("does not return a number", () => {
     expect(formatNumber(1000)).to.not.be.a("number");
   });
@@ -60,5 +60,23 @@ describe("formatDuration()", () => {
     expect(formatDuration(3660000)).to.eq("1:01:00");
     expect(formatDuration(3661000)).to.eq("1:01:01");
     expect(formatDuration(36610000)).to.eq("10:10:10");
+  });
+});
+
+describe("capitalize()", () => {
+  it("returns a string", () => {
+    expect(capitalize("hello")).to.be.a("string");
+  });
+
+  it("capitalizes the first letter of a string", () => {
+    expect(capitalize("hello")).to.eq("Hello");
+  });
+
+  it("does not change the first letter of a string if it is already capitalized", () => {
+    expect(capitalize("Hello")).to.eq("Hello");
+  });
+
+  it("does not change the rest of the string", () => {
+    expect(capitalize("hello world")).to.eq("Hello world");
   });
 });
