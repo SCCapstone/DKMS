@@ -1,21 +1,21 @@
-import getSpotifyData from "@/lib/getSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 const getData = (id: string, type: string) => {
   switch (type) {
     case "track":
-      return getSpotifyData<SpotifyApi.TrackObjectFull>(
+      return fetchServer<SpotifyApi.TrackObjectFull>(
         `https://api.spotify.com/v1/tracks/${id}`
       );
     case "playlist":
-      return getSpotifyData<SpotifyApi.PlaylistObjectSimplified>(
+      return fetchServer<SpotifyApi.PlaylistObjectSimplified>(
         `https://api.spotify.com/v1/playlists/${id}`
       );
     case "artist":
-      return getSpotifyData<SpotifyApi.ArtistObjectFull>(
+      return fetchServer<SpotifyApi.ArtistObjectFull>(
         `https://api.spotify.com/v1/artists/${id}`
       );
     case "album":
-      return getSpotifyData<SpotifyApi.AlbumObjectSimplified>(
+      return fetchServer<SpotifyApi.AlbumObjectSimplified>(
         `https://api.spotify.com/v1/albums/${id}`
       );
     default:
