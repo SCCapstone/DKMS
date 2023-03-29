@@ -26,22 +26,12 @@ async function isUserFollowing(
   usernameOrId: string | string[],
   followType: "user" | "artist"
 ) {
-  if (typeof usernameOrId === "string") {
-    return fetchServer<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
-      `https://api.spotify.com/v1/me/following/contains?type=${followType}&ids=${usernameOrId}`,
-      {
-        cache: "no-cache",
-      }
-    ).then((data) => data[0]);
-  }
-
-  return fetchServer<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
-    `https://api.spotify.com/v1/me/following/contains?type=${followType}&ids=${usernameOrId.join(
-      ","
-    )}`,
+  const data = await fetchServer<SpotifyApi.UserFollowsUsersOrArtistsResponse>(
+    `https://api.spotify.com/v1/me/following/contains?type=${followType}&ids=${usernameOrId.toString()}`,
     {
       cache: "no-cache",
     }
   );
+  return typeof usernameOrId === "string" ? data[0] : data;
 }
 export default isUserFollowing;
