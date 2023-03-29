@@ -1,37 +1,60 @@
-import { getDocs } from "firebase/firestore";
+import { getDocs, orderBy, query } from "firebase/firestore";
 
 import { feedCol } from "@/lib/firestore";
+import getUsersFollowing from "@/lib/followers/getUsersFollowing";
+import { getCurrentUser } from "@/lib/getUser";
+import { getSavedItemIds } from "@/lib/savedFeedItems";
 
 import getFeedComments from "./getFeedComments";
 import getSpotifyFeedItem from "./getSpotifyFeedItem";
 
-const getFeedItems = async (userId?: string) => {
-  const feedSnapshot = await getDocs(feedCol);
+const getFeedItems = async (params?: {
+  filterByFollowing?: boolean;
+  filterBySaved?: boolean;
+}) => {
+  const filterByFollowing = params?.filterByFollowing ?? false;
+  const filterBySaved = params?.filterBySaved ?? false;
+  const currentUserId = await getCurrentUser().then((user) => user.id);
+  const followingIds = await getUsersFollowing().then((users) =>
+    users.map((user) => user.id)
+  );
+  const q = query(feedCol, orderBy("timestamp", "desc"));
+  const feedSnapshot = await getDocs(q);
+
   const baseData = await Promise.all(
-    feedSnapshot.docs.map(async (doc) => {
-      const docId = doc.id;
-      const comments = await getFeedComments(docId);
-      const { musicItemId } = doc.data();
-      const { musicItemType } = doc.data();
-      const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
-      return {
-        id: doc.id,
-        ...doc.data(),
-        comments,
-        musicItem,
-      };
-    })
+    feedSnapshot.docs
+      .filter(
+        (doc) =>
+          !filterByFollowing ||
+          doc.data().userId === currentUserId ||
+          followingIds.includes(doc.data().userId)
+      )
+      .map(async (doc) => {
+        const docId = doc.id;
+        const comments = await getFeedComments(docId);
+        const musicItemId = doc.data().musicItemId as string;
+        const musicItemType = doc.data().musicItemType as
+          | "track"
+          | "playlist"
+          | "artist"
+          | "album";
+        const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
+        return {
+          id: doc.id,
+          ...doc.data(),
+          comments,
+          musicItem,
+        };
+      })
   );
 
-  const formattedData = baseData
-    .sort((a, b) => a.timestamp.toMillis() - b.timestamp.toMillis())
-    .reverse();
+  if (!filterBySaved) return baseData;
 
-  if (!userId) {
-    return formattedData;
-  }
+  const savedItemIds = await getSavedItemIds(currentUserId);
 
-  return formattedData.filter((post) => post.userId === userId);
+  return baseData.filter((post) => savedItemIds.includes(post.id.trim()));
+
+  // return baseData;
 };
 
 export default getFeedItems;
