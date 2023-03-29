@@ -1,13 +1,13 @@
 "use client";
 
-import putSpotifyData from "@/lib/putSpotifyData";
+import fetchClient from "@/lib/fetch/fetchClient";
 
 const toggleFollowing = async (
   username: string,
   isFollowing: boolean,
   followType: "user" | "artist"
 ) =>
-  putSpotifyData(
+  fetchClient(
     `https://api.spotify.com/v1/me/following?type=${followType}&ids=${username}`,
     {
       method: isFollowing ? "DELETE" : "PUT",
