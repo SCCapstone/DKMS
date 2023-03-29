@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import startPlaying from "@/lib/music/startPlaying";
+import startPlayingContext from "@/lib/music/startPlayingContext";
 
 const PlayContext = ({ uri }: { uri: string }) => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const PlayContext = ({ uri }: { uri: string }) => {
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await startPlaying(uri);
+    await startPlayingContext(uri);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without

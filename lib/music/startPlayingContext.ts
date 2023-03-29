@@ -2,7 +2,7 @@
 
 import fetchClient from "@/lib/fetch/fetchClient";
 
-const startPlaying = async (uri: string) =>
+const startPlayingContext = async (uri: string) =>
   fetchClient(`https://api.spotify.com/v1/me/player/play`, {
     method: "PUT",
     body: JSON.stringify({
@@ -11,4 +11,4 @@ const startPlaying = async (uri: string) =>
     cache: "no-cache",
   });
 
-export default startPlaying;
+export default startPlayingContext;
