@@ -24,6 +24,8 @@ const PlaybackView = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackName, setTrackName] = useState<string | null>(null);
   const [artistName, setArtistName] = useState<string | null>(null);
+  const [playbackProgress, setPlaybackProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
 
   useEffect(() => {
     const fetchTrackName = async () => {
@@ -38,6 +40,20 @@ const PlaybackView = ({
     const intervalId = setInterval(fetchTrackName, 1000); // fetch track name every 1 seconds
 
     return () => clearInterval(intervalId); // cleanup function to clear the interval when the component unmounts
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      void (async () => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const { progress_ms, item } = await getCurrentTrackUri();
+        setPlaybackProgress(progress_ms / 1000);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        setDuration(item.duration_ms / 1000);
+      })();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const handlePrevClick = async (e: React.MouseEvent) => {
@@ -198,6 +214,17 @@ const PlaybackView = ({
               />
             </svg>
           </button>
+        </div>
+        <div className="text-center mt-2">
+          {`${Math.floor(playbackProgress / 60)
+            .toString()
+            .padStart(2, "0")}:${Math.floor(playbackProgress % 60)
+            .toString()
+            .padStart(2, "0")} / ${Math.floor(duration / 60)
+            .toString()
+            .padStart(2, "0")}:${Math.floor(duration % 60)
+            .toString()
+            .padStart(2, "0")}`}
         </div>
       </div>
     </BasePanel>
