@@ -26,7 +26,18 @@ const Track = async ({
   if (!track) {
     return (
       <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
-        <figure className="relative aspect-square" />
+        <figure className="relative aspect-square">
+          <Image
+            src="/images/defaults/track.png"
+            alt="Loading..."
+            fill
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAp0lEQVR4nF2PIQ6GMAyFq5A7zcwE54LMcgdwJDgSBJIEsRtgJrkAAoct3SNkhH8/dX1fX9tH+K8QAjOLSGwpBSGEzzSlGMC+73Vdz/MMQERuHFet65rneZZlRFQUBQBmvvF5ngDGcdRaT9PknKuqKuo/d9u2Xdcdx2GMKcvycTMzgKZpiGgYBu+9Uqrv+8cdrcuyWGu3bXtvfT9P470JHywizBzVNP0FPFwFIjVg8fAAAAAASUVORK5CYII="
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              25vw"
+          />
+        </figure>
         <div className="card-body">
           <h2 className="text-lg font-semibold">
             <Skeleton enableAnimation />
@@ -51,33 +62,37 @@ const Track = async ({
   const isFavorited = await checkIsFavorited(track.id);
 
   return (
-    <Link
-      href={`/track/${track.id}`}
-      className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip"
-    >
-      <figure className="relative aspect-square">
-        <Image
-          src={img}
-          alt={track.name}
-          fill
-          placeholder="blur"
-          blurDataURL={base64}
-        />
-      </figure>
+    <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+      <Link href={`/track/${track.id}`}>
+        <figure className="relative aspect-square">
+          <Image
+            src={img}
+            alt={track.name}
+            fill
+            placeholder="blur"
+            blurDataURL={base64}
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              25vw"
+          />
+        </figure>
+      </Link>
       <div className="card-body relative">
-        <div className="absolute top-0 right-0 p-2">
-          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
-        </div>
-        <h2 className="text-lg font-semibold truncate mt-10">{track.name}</h2>
-        <p>
-          {new Date(track.album.release_date).getFullYear()} |{" "}
-          {track.album.name}
-        </p>
-        <p>
+        <Link href={`/track/${track.id}`}>
+          <h2 className="text-lg font-semibold truncate">{track.name}</h2>
+          <p>
+            {new Date(track.album.release_date).getFullYear()} |{" "}
+            {track.album.name}
+          </p>
+        </Link>
+        <p className="pb-0">
           <ArtistLinks artists={track.artists} />
         </p>
+        <div className="card-actions justify-end">
+          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
+        </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
