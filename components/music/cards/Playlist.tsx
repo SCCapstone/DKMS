@@ -4,6 +4,8 @@ import { getPlaiceholder } from "plaiceholder";
 
 import Skeleton from "@/components/ui/Skeleton";
 
+import PlayContext from "../PlayContext";
+
 const Playlist = async ({
   playlist,
 }: {
@@ -58,6 +60,9 @@ const Playlist = async ({
           {playlist.tracks.total}{" "}
           {playlist.tracks.total === 1 ? "track" : "tracks"}
         </p>
+      </div>
+      <div>
+        <PlayContext uri={playlist.uri} />
       </div>
     </Link>
   );
