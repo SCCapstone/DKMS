@@ -40,9 +40,7 @@ const TrackView = ({
           ),
         buttons: (
           <>
-            <div>
-              <PlayTrack uri={track.uri} />
-            </div>
+            <PlayTrack uri={track.uri} />
             <Link
               className="btn btn-primary btn-outline w-full"
               href={`/album/${track.album.id}`}
@@ -60,11 +58,7 @@ const TrackView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
-        buttons: (
-          <div>
-            <PlayContext uri={artist.uri} />
-          </div>
-        ),
+        buttons: <PlayContext uri={artist.uri} />,
       }}
     />
     <div className="divider" />
