@@ -3,7 +3,8 @@ import Link from "next/link";
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
-import PlayTrack from "@/components/music/PlayContext";
+import PlayContext from "@/components/music/PlayContext";
+import PlayTrack from "@/components/music/PlayTrack";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({
@@ -59,6 +60,11 @@ const TrackView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
+        buttons: (
+          <div>
+            <PlayContext uri={artist.uri} />
+          </div>
+        ),
       }}
     />
     <div className="divider" />
