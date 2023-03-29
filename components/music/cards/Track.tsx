@@ -7,7 +7,7 @@ import FavoriteIcon from "@/components/ui/favoriteIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
 
-import PlayButton from "../PlayButton";
+import PlayButton from "../PlayContext";
 
 const checkIsFavorited = (trackId: string) =>
   fetchServer<SpotifyApi.CheckUsersSavedTracksResponse>(

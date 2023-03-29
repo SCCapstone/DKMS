@@ -5,7 +5,7 @@ import { useState, useTransition } from "react";
 
 import startPlaying from "@/lib/music/startPlaying";
 
-const PlayButton = ({ uri }: { uri: string }) => {
+const PlayContext = ({ uri }: { uri: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -39,4 +39,4 @@ const PlayButton = ({ uri }: { uri: string }) => {
   );
 };
 
-export default PlayButton;
+export default PlayContext;
