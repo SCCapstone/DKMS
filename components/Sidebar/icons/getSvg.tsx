@@ -116,7 +116,7 @@ const getSvg = (type: SidebarOptions, params: IconOptions) => {
             height={height}
             viewBox="0 0 128 512"
             fill="none"
-            className="absolute p-1 top-0 right-0 stroke-current fill-current"
+            className="absolute p-1 top-0 right-0 stroke-secondary fill-secondary"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path

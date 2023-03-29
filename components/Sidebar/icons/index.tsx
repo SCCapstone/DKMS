@@ -1,30 +1,15 @@
-import { getDocs, query, where } from "firebase/firestore";
-
-import { notificationsCol } from "@/lib/firestore";
-import { getCurrentUser } from "@/lib/getUser";
-
 import getSvg from "./getSvg";
 
 import type { SidebarOptions } from "../types";
 
 const DEFAULT_SIZE = 28;
 
-const getData = async () => {
-  const currentUser = await getCurrentUser();
-  const q = query(notificationsCol, where("recipientId", "==", currentUser.id));
-  return (await getDocs(q)).docs
-    .map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }))
-    .reverse();
-};
-
 type IconProps = {
   width?: number;
   height?: number;
   selected?: boolean;
   onClick: () => void;
+  notificationAlert?: boolean;
 };
 
 const IconButton = ({
@@ -43,6 +28,7 @@ const FriendsIcon = ({
   selected,
   width = DEFAULT_SIZE,
   height = DEFAULT_SIZE,
+  notificationAlert = undefined,
   onClick,
 }: IconProps) => (
   <IconButton onClick={onClick}>
@@ -50,27 +36,26 @@ const FriendsIcon = ({
   </IconButton>
 );
 
-const NotificationsIcon = async ({
+const NotificationsIcon = ({
   selected,
   width = DEFAULT_SIZE,
   height = DEFAULT_SIZE,
   onClick,
-}: IconProps) => {
-  const data = await getData();
-  return (
-    <IconButton onClick={onClick}>
-      {data.length === 0
-        ? getSvg("notifications", { width, height, selected })
-        : getSvg("notificationsAlert", { width, height, selected })}
-    </IconButton>
-  );
-};
+  notificationAlert,
+}: IconProps) => (
+  <IconButton onClick={onClick}>
+    {notificationAlert
+      ? getSvg("notifications", { width, height, selected })
+      : getSvg("notificationsAlert", { width, height, selected })}
+  </IconButton>
+);
 
 const PlaybackIcon = ({
   selected,
   width = DEFAULT_SIZE,
   height = DEFAULT_SIZE,
   onClick,
+  notificationAlert = undefined,
 }: IconProps) => (
   <IconButton onClick={onClick}>
     {getSvg("playback", { width, height, selected })}
@@ -80,15 +65,17 @@ const PlaybackIcon = ({
 const SidebarIcons = ({
   onChange,
   currentSelection,
+  notificationAlert,
 }: {
   onChange: (selection: SidebarOptions) => void;
   currentSelection: SidebarOptions;
+  notificationAlert?: boolean;
 }) => (
   <>
-    {/* @ts-expect-error Server Component */}
     <NotificationsIcon
       selected={currentSelection === "notifications"}
       onClick={() => onChange("notifications")}
+      notificationAlert={notificationAlert}
     />
     <FriendsIcon
       selected={currentSelection === "friends"}
