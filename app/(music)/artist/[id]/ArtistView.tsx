@@ -1,6 +1,7 @@
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { AlbumList, TrackList } from "@/components/music/lists";
+import { AlbumList } from "@/components/music/lists";
+import ArtistTrackList from "@/components/music/lists/ArtistTrackList";
 import MusicHeader from "@/components/music/MusicHeader";
 import PlayContext from "@/components/music/PlayContext";
 import { formatNumber } from "@/lib/formatters";
@@ -45,7 +46,7 @@ const ArtistView = ({
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
     <h4 className="font-black uppercase">Top Tracks</h4>
-    <TrackList contextUri={artist.uri} tracks={topTracks.tracks} showAlbum />
+    <ArtistTrackList tracks={topTracks.tracks} showAlbum />
     <h4 className="font-black uppercase">Recent Albums</h4>
     <AlbumList albums={albums.items} />
   </>

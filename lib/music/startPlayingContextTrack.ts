@@ -7,7 +7,7 @@ const startPlayingContextTrack = async (contextUri: string, trackUri: string) =>
     method: "PUT",
     body: JSON.stringify({
       context_uri: contextUri,
-      offset: trackUri,
+      offset: { uri: trackUri },
     }),
     cache: "no-cache",
   });
