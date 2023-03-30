@@ -17,7 +17,7 @@ const BasePanel = ({
 
   if (sidebar !== sidebarId) return null;
   return (
-    <div className="w-full md:w-64 min-h-screen h-100% md:p-4 md:bg-gray-200 md:text-black">
+    <div className="w-full md:w-64 min-h-screen h-100% md:p-4 md:bg-base-300 md:text-base-content">
       {title && (
         <>
           <h2 className="normal-case font-bold">{title}</h2>

@@ -27,7 +27,7 @@ const Notification = ({
             title
           )}
         </h4>
-        <h5 className="text-xs">{timestamp}</h5>
+        <h5 className="text-xs text-primary">{timestamp}</h5>
       </header>
       <p>{body}</p>
       <div className="card-actions justify-end">
