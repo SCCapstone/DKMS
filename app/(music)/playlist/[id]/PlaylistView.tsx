@@ -38,7 +38,7 @@ const AlbumView = ({
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList tracks={tracks} showNumber showAlbum />
+    <TrackList contextUri={playlist.uri} tracks={tracks} showNumber showAlbum />
   </>
 );
 
