@@ -55,7 +55,6 @@ const PlaybackView = ({
 
     return () => clearInterval(intervalId);
   }, []);
-
   const handlePrevClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
