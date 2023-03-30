@@ -36,7 +36,7 @@ const FeedTextBox = ({ user }: { user: User }) => {
         <div className="rounded-t-lg">
           <textarea
             id="comment"
-            className="textarea w-full rounded-none border-none rounded-t-lg"
+            className="textarea w-full rounded-none input-bordered rounded-t-lg"
             placeholder="Write your musical thoughts..."
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
