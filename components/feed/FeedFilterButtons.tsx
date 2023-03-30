@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
+import { toast } from "react-hot-toast";
 
 const FeedFilterButtons = () => {
   const router = useRouter();
@@ -15,6 +16,8 @@ const FeedFilterButtons = () => {
     e.preventDefault();
     startTransition(() => {
       router.replace(filterActive ? `${pathname}` : `${pathname}?s=true`);
+      if (filterActive) toast.success("Switched to save posts.");
+      else toast.success("Switched to all posts.");
     });
   };
 
