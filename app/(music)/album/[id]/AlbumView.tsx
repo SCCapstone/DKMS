@@ -1,5 +1,5 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { TrackList } from "@/components/music/lists";
+import ContextTrackList from "@/components/music/lists/ContextTrackList";
 import MusicHeader from "@/components/music/MusicHeader";
 import PlayContext from "@/components/music/PlayContext";
 import ArtistLinks from "@/components/ui/ArtistLinks";
@@ -47,7 +47,7 @@ const AlbumView = ({
     <h4 className="font-black uppercase pb-2">Average Album Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList contextUri={album.uri} tracks={album.tracks.items} />
+    <ContextTrackList contextUri={album.uri} tracks={album.tracks.items} />
   </>
 );
 

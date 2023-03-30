@@ -3,7 +3,7 @@ import { formatDuration } from "@/lib/formatters";
 
 import PlayContextTrack from "../PlayContextTrack";
 
-const TrackList = ({
+const ContextTrackList = ({
   contextUri,
   tracks,
   showNumber,
@@ -53,4 +53,4 @@ const TrackList = ({
   </div>
 );
 
-export default TrackList;
+export default ContextTrackList;
