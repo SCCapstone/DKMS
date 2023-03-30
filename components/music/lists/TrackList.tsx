@@ -4,12 +4,12 @@ import { formatDuration } from "@/lib/formatters";
 import PlayContextTrack from "../PlayContextTrack";
 
 const TrackList = ({
-  album,
+  contextUri,
   tracks,
   showNumber,
   showAlbum,
 }: {
-  album: SpotifyApi.AlbumObjectFull;
+  contextUri: string;
   tracks: SpotifyApi.TrackObjectSimplified[] | SpotifyApi.TrackObjectFull[];
   showNumber?: boolean;
   showAlbum?: boolean;
@@ -45,7 +45,7 @@ const TrackList = ({
               </td>
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
-            <PlayContextTrack contextUri={album.uri} trackUri={track.uri} />
+            <PlayContextTrack contextUri={contextUri} trackUri={track.uri} />
           </tr>
         ))}
       </tbody>
