@@ -33,27 +33,44 @@ const FeedPage = ({
   currentUser: User;
   savedItemIds?: string[];
   showLinks?: boolean;
-}) => (
-  <div>
-    <FeedFilterButtons />
-    {showLinks && (
-      <>
-        <FeedTextBox user={currentUser} />
-        <div className="divider" />
-      </>
-    )}
-    <ul>
-      {data.map((feedItem) => (
-        <FeedItem
-          key={feedItem.id}
-          data={feedItem}
-          currentUser={currentUser}
-          savedItemIds={savedItemIds}
-          showLink={showLinks}
-        />
-      ))}
-    </ul>
-  </div>
-);
+}) => {
+  if (data.length === 0) {
+    return (
+      <div>
+        <FeedFilterButtons />
+        {showLinks && (
+          <>
+            <FeedTextBox user={currentUser} />
+            <div className="divider" />
+          </>
+        )}
+        <p>No feed items.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <FeedFilterButtons />
+      {showLinks && (
+        <>
+          <FeedTextBox user={currentUser} />
+          <div className="divider" />
+        </>
+      )}
+      <ul>
+        {data.map((feedItem) => (
+          <FeedItem
+            key={feedItem.id}
+            data={feedItem}
+            currentUser={currentUser}
+            savedItemIds={savedItemIds}
+            showLink={showLinks}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default FeedPage;
