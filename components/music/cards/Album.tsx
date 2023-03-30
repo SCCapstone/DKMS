@@ -3,18 +3,25 @@ import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
 import ArtistLinks from "@/components/ui/ArtistLinks";
+import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
 import PlayContext from "../PlayContext";
 
 const Album = async ({
   album,
+  isCompact,
 }: {
   album: SpotifyApi.AlbumObjectSimplified | undefined;
+  isCompact?: boolean;
 }) => {
   if (!album) {
     return (
-      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+      <div
+        className={`card ${
+          isCompact ? "card-side" : "card-compact"
+        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
+      >
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/album.png"
@@ -48,9 +55,13 @@ const Album = async ({
   });
 
   return (
-    <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
-      <Link href={`/album/${album.id}`}>
-        <figure className="relative aspect-square">
+    <div
+      className={`card ${
+        isCompact ? "card-side" : "card-compact"
+      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
+    >
+      <figure className="relative aspect-square">
+        <Link href={`/album/${album.id}`}>
           <Image
             src={img}
             alt={album.name}
@@ -61,12 +72,19 @@ const Album = async ({
               (max-width: 1200px) 50vw,
               25vw"
           />
-        </figure>
-      </Link>
-      <div className="card-body">
+        </Link>
+      </figure>
+
+      <div className="card-body relative">
         <Link href={`/album/${album.id}`}>
-          <h2 className="text-lg font-semibold truncate">{album.name}</h2>
-          <p>{new Date(album.release_date).getFullYear()}</p>
+          <div className="card-actions justify-end">
+            {/* @ts-expect-error Server Component */}
+            <ShareIcon musicItemId={album.id} musicItemType="album" />
+          </div>
+          <h2 className="text-lg truncate font-semibold">{album.name}</h2>
+          <p className={isCompact ? "text-sm truncate" : ""}>
+            {new Date(album.release_date).getFullYear()}
+          </p>
         </Link>
         <p className="pb-0">
           <ArtistLinks artists={album.artists} />

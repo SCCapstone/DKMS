@@ -7,6 +7,7 @@ import type {
   FirestoreProfile,
   FirestoreAccount,
   FirestoreNotification,
+  FirestoreFeedCommentItem,
 } from "./types";
 import type { DocumentData, CollectionReference } from "firebase/firestore";
 
@@ -49,7 +50,7 @@ export const accountsCol = createCollection<FirestoreAccount>("accounts");
 export const feedCol = createCollection<FirestoreFeedItem>("feed_items");
 
 export const getCommentsCol = (feedId: string) =>
-  createCollection<FirestoreFeedItem>("feed_items", feedId, "comments");
+  createCollection<FirestoreFeedCommentItem>("feed_items", feedId, "comments");
 
 export const profilesCol = createCollection<FirestoreProfile>("profiles");
 

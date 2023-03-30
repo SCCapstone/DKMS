@@ -12,7 +12,7 @@ import type { JWT } from "next-auth/jwt";
 import type { SpotifyProfile } from "next-auth/providers/spotify";
 
 // hard code for now, NextAuth doesn't get the number from Spotify
-const EXPIRES_IN = 3600000;
+const EXPIRES_IN = 3000000;
 
 /**
  * Takes a token, and returns a new token with updated
@@ -38,6 +38,7 @@ const refreshAccessToken = async (token: JWT) => {
         ).toString("base64")}`,
       },
       method: "POST",
+      cache: "no-cache",
     });
 
     const refreshedTokens = (await response.json()) as {
@@ -55,7 +56,6 @@ const refreshAccessToken = async (token: JWT) => {
       ...token,
       accessToken: refreshedTokens.access_token,
       accessTokenExpires: Date.now() + EXPIRES_IN,
-      refreshToken: token.refreshToken,
     };
   } catch (error) {
     return {
