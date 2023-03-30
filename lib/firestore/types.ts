@@ -6,11 +6,20 @@ export type FirestoreUser = User;
 export type FirestoreAccount = Account;
 
 export type FirestoreFeedItem = {
+  musicItemId?: string | undefined;
+  musicItemType?: "track" | "playlist" | "artist" | "album" | undefined;
   timestamp: Timestamp;
   userId: string;
   content: string;
   username: string;
   likedIds: string[];
+};
+
+export type FirestoreFeedCommentItem = {
+  timestamp: Timestamp;
+  userId: string;
+  content: string;
+  username: string;
 };
 
 export type FirestoreProfile = {

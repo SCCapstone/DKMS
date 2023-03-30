@@ -6,6 +6,7 @@ import { getCurrentUser } from "@/lib/getUser";
 import { getSavedItemIds } from "@/lib/savedFeedItems";
 
 import getFeedComments from "./getFeedComments";
+import getSpotifyFeedItem from "./getSpotifyFeedItem";
 
 const getFeedItems = async (params?: {
   filterByFollowing?: boolean;
@@ -31,10 +32,18 @@ const getFeedItems = async (params?: {
       .map(async (doc) => {
         const docId = doc.id;
         const comments = await getFeedComments(docId);
+        const musicItemId = doc.data().musicItemId as string;
+        const musicItemType = doc.data().musicItemType as
+          | "track"
+          | "playlist"
+          | "artist"
+          | "album";
+        const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
         return {
           id: doc.id,
           ...doc.data(),
           comments,
+          musicItem,
         };
       })
   );

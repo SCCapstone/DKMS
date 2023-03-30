@@ -2,17 +2,22 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { toast } from "react-hot-toast";
 
-import toggleFavorite from "@/lib/favoriteTracks/toggleFavorite";
+import postFeedItem from "@/lib/feed/postFeedItem";
 
-import { HeartRegular, HeartSolid } from "./icons";
+import Share from "./icon";
 
-const FavoriteIcon = ({
-  isFavorited,
-  trackId,
+import type { User } from "next-auth";
+
+const IconButton = ({
+  user,
+  musicItemId,
+  musicItemType,
 }: {
-  isFavorited: boolean;
-  trackId: string;
+  user: User;
+  musicItemId?: string;
+  musicItemType?: "track" | "playlist" | "artist" | "album";
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -23,12 +28,11 @@ const FavoriteIcon = ({
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    await toggleFavorite(trackId, isFavorited);
+    await postFeedItem(user, "", musicItemId, musicItemType);
     setIsFetching(false);
     startTransition(() => {
-      // Refresh the current route and fetch new data from the server without
-      // losing client-side browser or React state.
       router.refresh();
+      toast.success("Item Shared to Feed!");
     });
   };
 
@@ -38,11 +42,11 @@ const FavoriteIcon = ({
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}
-      title="Favorite song on Spotify"
+      title="Share to feed"
     >
-      {isFavorited ? <HeartSolid /> : <HeartRegular />}
+      <Share />
     </button>
   );
 };
 
-export default FavoriteIcon;
+export default IconButton;

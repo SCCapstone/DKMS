@@ -4,6 +4,7 @@ import { getPlaiceholder } from "plaiceholder";
 
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import FavoriteIcon from "@/components/ui/favoriteIcon";
+import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
 
@@ -17,15 +18,21 @@ const checkIsFavorited = (trackId: string) =>
 
 const Track = async ({
   track,
+  isCompact,
 }: {
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | undefined;
+  isCompact?: boolean;
 }) => {
   if (!track) {
     return (
-      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+      <div
+        className={`card ${
+          isCompact ? "card-side" : "card-compact"
+        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
+      >
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/track.png"
@@ -62,9 +69,13 @@ const Track = async ({
   const isFavorited = await checkIsFavorited(track.id);
 
   return (
-    <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
-      <Link href={`/track/${track.id}`}>
-        <figure className="relative aspect-square">
+    <div
+      className={`card ${
+        isCompact ? "card-side" : "card-compact"
+      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
+    >
+      <figure className="relative aspect-square">
+        <Link href={`/track/${track.id}`}>
           <Image
             src={img}
             alt={track.name}
@@ -75,22 +86,24 @@ const Track = async ({
               (max-width: 1200px) 50vw,
               25vw"
           />
-        </figure>
-      </Link>
+        </Link>
+      </figure>
       <div className="card-body relative">
+        <div className="card-actions justify-end">
+          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
+          {/* @ts-expect-error Server Component */}
+          <ShareIcon musicItemId={track.id} musicItemType="track" />
+        </div>
         <Link href={`/track/${track.id}`}>
-          <h2 className="text-lg font-semibold truncate">{track.name}</h2>
-          <p>
+          <h2 className="text-lg truncate font-semibold">{track.name}</h2>
+          <p className={isCompact ? "text-sm truncate" : ""}>
             {new Date(track.album.release_date).getFullYear()} |{" "}
             {track.album.name}
           </p>
         </Link>
-        <p className="pb-0">
+        <p className={isCompact ? "text-sm truncate" : "pb-0"}>
           <ArtistLinks artists={track.artists} />
         </p>
-        <div className="card-actions justify-end">
-          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
-        </div>
       </div>
     </div>
   );

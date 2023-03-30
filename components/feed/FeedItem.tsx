@@ -1,3 +1,4 @@
+import { Album, Artist, Playlist, Track } from "@/components/music/cards";
 import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
 
@@ -43,6 +44,38 @@ const FeedItem = ({
         </div>
       </div>
       <p>{data.content}</p>
+      {data.musicItem && (
+        <div className="grid">
+          {data.musicItemType === "track" && (
+            // @ts-expect-error Server Component
+            <Track
+              track={data.musicItem as SpotifyApi.TrackObjectFull}
+              isCompact
+            />
+          )}
+          {data.musicItemType === "playlist" && (
+            // @ts-expect-error Server Component
+            <Playlist
+              playlist={data.musicItem as SpotifyApi.PlaylistObjectSimplified}
+              isCompact
+            />
+          )}
+          {data.musicItemType === "album" && (
+            // @ts-expect-error Server Component
+            <Album
+              album={data.musicItem as SpotifyApi.AlbumObjectSimplified}
+              isCompact
+            />
+          )}
+          {data.musicItemType === "artist" && (
+            // @ts-expect-error Server Component
+            <Artist
+              artist={data.musicItem as SpotifyApi.ArtistObjectFull}
+              isCompact
+            />
+          )}
+        </div>
+      )}
       <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
         <div>
           <LikeButton
