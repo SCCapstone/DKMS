@@ -7,9 +7,11 @@ import startPlayingContextTrack from "@/lib/music/startPlayingContextTrack";
 
 const PlayContextTrack = ({
   contextUri,
+  offset,
   trackUri,
 }: {
   contextUri: string;
+  offset: string;
   trackUri: string;
 }) => {
   const router = useRouter();
@@ -22,7 +24,7 @@ const PlayContextTrack = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await startPlayingContextTrack(contextUri, trackUri);
+    await startPlayingContextTrack(contextUri, offset, trackUri);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
