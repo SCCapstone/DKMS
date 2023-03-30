@@ -1,5 +1,5 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import ContextTrackList from "@/components/music/lists/ContextTrackList";
+import { ContextTrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import PlayContext from "@/components/music/PlayContext";
 import ArtistLinks from "@/components/ui/ArtistLinks";
