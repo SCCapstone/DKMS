@@ -47,7 +47,7 @@ const AlbumView = ({
     <h4 className="font-black uppercase pb-2">Average Album Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList tracks={album.tracks.items} />
+    <TrackList album={album} tracks={album.tracks.items} />
   </>
 );
 

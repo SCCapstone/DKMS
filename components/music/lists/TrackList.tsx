@@ -1,11 +1,15 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDuration } from "@/lib/formatters";
 
+import PlayContextTrack from "../PlayContextTrack";
+
 const TrackList = ({
+  album,
   tracks,
   showNumber,
   showAlbum,
 }: {
+  album: SpotifyApi.AlbumObjectFull;
   tracks: SpotifyApi.TrackObjectSimplified[] | SpotifyApi.TrackObjectFull[];
   showNumber?: boolean;
   showAlbum?: boolean;
@@ -41,6 +45,7 @@ const TrackList = ({
               </td>
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
+            <PlayContextTrack contextUri={album.uri} trackUri={track.uri} />
           </tr>
         ))}
       </tbody>
