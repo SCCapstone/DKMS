@@ -3,12 +3,17 @@ import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { ArtistsGrid, TracksGrid } from "@/components/music/grids";
+import {
+  ArtistsGrid,
+  PlaylistsGrid,
+  TracksGrid,
+} from "@/components/music/grids";
 import ProfileHead from "@/components/profile/ProfileHead";
 import fetchServer from "@/lib/fetch/fetchServer";
 import { profilesCol } from "@/lib/firestore";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
+import getPlaylistsForUser from "@/lib/getPlaylistsForUser";
 import {
   getCurrentUser,
   getIdFromUsername,
@@ -62,6 +67,8 @@ const Profile = async ({ params }: { params: { username: string } }) => {
 
   const isCurrentUser = username === currentUsername;
 
+  const usersPlaylists = await getPlaylistsForUser(username, 8);
+
   const { data, averageAudioFeatures, recommendations } = await getData(
     profileId
   );
@@ -85,7 +92,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
       <h4 className="font-black uppercase pb-2">Top Songs Statistics</h4>
       <AudioFeatures audioFeatures={averageAudioFeatures} />
       <div className="divider" />
-      <div className="grid md:grid-cols-2 gap-4 pb-5">
+      <div className="grid md:grid-cols-3 gap-4 pb-5">
         <div>
           <h4 className="font-black uppercase pb-2">Top Songs</h4>
           <TracksGrid tracks={data.topTracks.splice(0, 6)} isHalf />
@@ -93,6 +100,10 @@ const Profile = async ({ params }: { params: { username: string } }) => {
         <div>
           <h4 className="font-black uppercase pb-2">Top Artists</h4>
           <ArtistsGrid artists={data.topArtists.splice(0, 8)} isHalf />
+        </div>
+        <div>
+          <h4 className="font-black uppercase pb-2">User&apos;s Playlist</h4>
+          <PlaylistsGrid playlists={usersPlaylists.items} isHalf />
         </div>
       </div>
       {!isCurrentUser && (
