@@ -18,11 +18,20 @@ const getTrackName = async () => {
       },
     }
   );
-  const data: CurrentlyPlayingResponse =
-    (await response.json()) as CurrentlyPlayingResponse;
-  const trackName = data.item.name || null;
-  const artistName = data.item.artists[0]?.name || null;
-  return { trackName, artistName }; // return the track name and artist name, or null if none is playing
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data: CurrentlyPlayingResponse = await response.json();
+    const trackName = data.item.name || null;
+    const artistName = data.item.artists[0]?.name || null;
+    return { trackName, artistName };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Error parsing JSON response:", error);
+    return { trackName: null, artistName: null };
+  }
 };
 
 export default getTrackName;

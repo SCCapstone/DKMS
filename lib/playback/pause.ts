@@ -1,10 +1,6 @@
 import putSpotifyData from "@/lib/putSpotifyData";
 
-const pause = async (
-  uri: string,
-  isTrackPlaying: boolean,
-  shouldResume: boolean
-) => {
+const pause = async (isTrackPlaying: boolean, shouldResume: boolean) => {
   const method = isTrackPlaying ? "PUT" : "POST";
   const endpoint = isTrackPlaying ? "pause" : "play";
   const url = `https://api.spotify.com/v1/me/player/${endpoint}`;
@@ -15,7 +11,6 @@ const pause = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      uris: [uri],
       position_ms: shouldResume ? null : undefined, // Set position_ms to null if resuming, undefined otherwise
     }),
   });
