@@ -9,9 +9,11 @@ type IconProps = {
   height?: number;
   selected?: boolean;
   onClick: () => void;
-  // eslint-disable-next-line react/no-unused-prop-types
-  notificationAlert?: boolean;
 };
+
+type NotificationsIconProps = {
+  notificationAlert?: boolean;
+} & IconProps;
 
 const IconButton = ({
   children,
@@ -42,7 +44,7 @@ const NotificationsIcon = ({
   height = DEFAULT_SIZE,
   onClick,
   notificationAlert,
-}: IconProps) => (
+}: NotificationsIconProps) => (
   <IconButton onClick={onClick}>
     {notificationAlert
       ? getSvg("notifications", { width, height, selected })
