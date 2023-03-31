@@ -25,7 +25,7 @@ const FeedItem = ({
   <div id={data.id}>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-row items-center pb-4 pt-4">
+        <div className="flex flex-row items-top pb-4 pt-4">
           {/* @ts-expect-error Server Component */}
           <ProfileImage username={data.username} />
           <div>
@@ -35,6 +35,11 @@ const FeedItem = ({
               <p>{data.username}</p>
             )}
             <p>{data.timestamp.toDate().toLocaleString()}</p>
+            {data.likedIds.length === 1 ? (
+              <p className="text-xs">Like: 1</p>
+            ) : (
+              <p className="text-xs">Likes: {data.likedIds.length}</p>
+            )}
           </div>
         </div>
       </div>
