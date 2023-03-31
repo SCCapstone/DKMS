@@ -114,17 +114,12 @@ const getSvg = (type: SidebarOptions, params: IconOptions) => {
           <svg
             width={width}
             height={height}
-            viewBox="0 0 128 512"
+            viewBox="0 0 512 512"
             fill="none"
-            className="absolute p-1 top-0 right-0 stroke-secondary fill-secondary"
+            className="absolute p-2 top-0 right-0 stroke-secondary fill-secondary"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              d="M72 64c0-17.7-14.3-32-32-32S8 46.3 8 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM40 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"
-              strokeWidth="20"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
           </svg>
         </>
       );
