@@ -5,6 +5,8 @@ import { useState, useTransition } from "react";
 
 import startPlayingTrack from "@/lib/music/startPlayingTrack";
 
+import PlayIcon from "./PlayIcon";
+
 const PlayTrack = ({ uri }: { uri: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -26,16 +28,15 @@ const PlayTrack = ({ uri }: { uri: string }) => {
   };
 
   return (
-    <div className="flex flex-row">
-      <button
-        className="btn btn-primary btn-outline w-full"
-        onClick={(e) => void handleClick(e)}
-        type="button"
-        disabled={isMutating}
-      >
-        Play
-      </button>
-    </div>
+    <button
+      className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
+      onClick={(e) => void handleClick(e)}
+      type="button"
+      disabled={isMutating}
+      title="Play"
+    >
+      <PlayIcon />
+    </button>
   );
 };
 

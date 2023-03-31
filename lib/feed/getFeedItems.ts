@@ -32,12 +32,10 @@ const getFeedItems = async (params?: {
       .map(async (doc) => {
         const docId = doc.id;
         const comments = await getFeedComments(docId);
-        const musicItemId = doc.data().musicItemId as string;
-        const musicItemType = doc.data().musicItemType as
-          | "track"
-          | "playlist"
-          | "artist"
-          | "album";
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const musicItemId = doc.data().musicItemId!;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const musicItemType = doc.data().musicItemType!;
         const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
         return {
           id: doc.id,

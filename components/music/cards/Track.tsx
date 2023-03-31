@@ -92,6 +92,7 @@ const Track = async ({
       </figure>
       <div className="card-body relative">
         <div className="card-actions justify-end">
+          <PlayTrack uri={track.uri} />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={track.id} musicItemType="track" />
@@ -106,9 +107,6 @@ const Track = async ({
         <p className={isCompact ? "text-sm truncate" : "pb-0"}>
           <ArtistLinks artists={track.artists} />
         </p>
-      </div>
-      <div>
-        <PlayTrack uri={track.uri} />
       </div>
     </div>
   );
