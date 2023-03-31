@@ -18,7 +18,11 @@ const PlayTrack = ({ uri }: { uri: string }) => {
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await startPlayingTrack(uri);
+    try {
+      await startPlayingTrack(uri);
+    } catch (error) {
+      // Button will not do anything if there is no active device
+    }
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
