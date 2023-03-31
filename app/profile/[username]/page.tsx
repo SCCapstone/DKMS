@@ -102,7 +102,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
           <ArtistsGrid artists={data.topArtists.splice(0, 8)} isHalf />
         </div>
         <div>
-          <h4 className="font-black uppercase pb-2">User&apos;s Playlist</h4>
+          <h4 className="font-black uppercase pb-2">Playlists</h4>
           <PlaylistsGrid playlists={usersPlaylists.items} isHalf />
         </div>
       </div>
