@@ -6,10 +6,8 @@ import {
 import PageTitle from "@/components/ui/PageTitle";
 import fetchServer from "@/lib/fetch/fetchServer";
 import { getCurrentUser } from "@/lib/getUser";
-import {
-  getRecommendationsForUser,
-  getRecommendedArtists,
-} from "@/lib/recommendations/getRecommendationsForUser";
+import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
+import getRecommendedArtists from "@/lib/recommendations/getRecommendedArtists";
 
 const getData = async (userId: string) => {
   const recommendations = await getRecommendationsForUser(userId, 8);
