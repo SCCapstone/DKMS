@@ -1,7 +1,7 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDuration } from "@/lib/formatters";
 
-import PlayTrack from "../PlayTrack";
+import PlayButton from "../PlayButton";
 
 const TrackList = ({
   tracks,
@@ -44,7 +44,7 @@ const TrackList = ({
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td>
-              <PlayTrack uri={track.uri} />
+              <PlayButton uris={[track.uri]} />
             </td>
           </tr>
         ))}
