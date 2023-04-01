@@ -42,8 +42,8 @@ const TrackList = ({
                 </a>
               </td>
             )}
-            <td className="text-right">
-              {formatDuration(track.duration_ms)}
+            <td className="text-right">{formatDuration(track.duration_ms)}</td>
+            <td>
               <PlayTrack uri={track.uri} />
             </td>
           </tr>

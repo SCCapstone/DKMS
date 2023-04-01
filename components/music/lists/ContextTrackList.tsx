@@ -44,8 +44,8 @@ const ContextTrackList = ({
                 </a>
               </td>
             )}
-            <td className="text-right">
-              {formatDuration(track.duration_ms)}
+            <td className="text-right">{formatDuration(track.duration_ms)}</td>
+            <td>
               <PlayContextTrack contextUri={contextUri} trackUri={track.uri} />
             </td>
           </tr>

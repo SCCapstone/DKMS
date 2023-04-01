@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { capitalize } from "@/lib/formatters";
 
+import PlayContext from "../PlayContext";
+
 const AlbumList = ({
   albums,
 }: {
@@ -31,7 +33,10 @@ const AlbumList = ({
             <td>{album.total_tracks}</td>
             <td>{capitalize(album.album_type)}</td>
             <td className="text-right">
-              {new Date(album.release_date).getUTCFullYear()}
+              {new Date(album.release_date).getUTCFullYear()},
+            </td>
+            <td>
+              <PlayContext uri={album.uri} />
             </td>
           </tr>
         ))}
