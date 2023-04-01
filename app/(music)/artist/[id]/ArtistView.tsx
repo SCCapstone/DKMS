@@ -1,5 +1,6 @@
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
+import { ArtistsGrid } from "@/components/music/grids";
 import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { formatNumber } from "@/lib/formatters";
@@ -10,12 +11,14 @@ const ArtistView = ({
   albums,
   isFollowing,
   averageAudioFeatures,
+  similarArtists,
 }: {
   artist: SpotifyApi.ArtistObjectFull;
   topTracks: SpotifyApi.ArtistsTopTracksResponse;
   albums: SpotifyApi.ArtistsAlbumsResponse;
   isFollowing: boolean;
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
+  similarArtists: SpotifyApi.ArtistObjectFull[];
 }) => (
   <>
     <MusicHeader
@@ -44,6 +47,9 @@ const ArtistView = ({
     <TrackList tracks={topTracks.tracks} showAlbum />
     <h4 className="font-black uppercase">Recent Albums</h4>
     <AlbumList albums={albums.items} />
+    <div className="divider" />
+    <h4 className="font-black uppercase">Similar Artists</h4>
+    <ArtistsGrid artists={similarArtists} />
   </>
 );
 
