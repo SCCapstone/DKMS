@@ -7,7 +7,7 @@ async function startPlayingOffset(contextUri: string, uriOffset: string) {
     method: "PUT",
     body: JSON.stringify({
       context_uri: contextUri,
-      offset: uriOffset,
+      offset: { uri: uriOffset },
     }),
     cache: "no-cache",
   });

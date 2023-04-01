@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import startPlaying from "@/lib/music/startPlaying";
 import startPlayingOffset from "@/lib/music/startPlayingOffset";
 
 import PlayIcon from "./PlayIcon";
