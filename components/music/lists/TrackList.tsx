@@ -1,5 +1,5 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
-import { formatDuration } from "@/lib/formatters";
+import { formatDate, formatDuration } from "@/lib/formatters";
 
 import type { extraDataTrack } from "@/app/(music)/playlist/[id]/page";
 
@@ -47,8 +47,8 @@ const TrackList = ({
                 </a>
               </td>
             )}
-            {"added_at" in track && <td>{track.added_at}</td>}
-            {"added_by" in track && <td>{track.added_by.display_name}</td>}
+            {"added_at" in track && <td>{formatDate(track.added_at)}</td>}
+            {"added_by" in track && <td>{track.added_by.id}</td>}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
           </tr>
         ))}
