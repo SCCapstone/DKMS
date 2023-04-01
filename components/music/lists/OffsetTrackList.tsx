@@ -3,7 +3,7 @@ import { formatDuration } from "@/lib/formatters";
 
 import PlayButton from "../PlayButton";
 
-const ContextTrackList = ({
+const OffsetTrackList = ({
   contextUri,
   tracks,
   showNumber,
@@ -46,7 +46,7 @@ const ContextTrackList = ({
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td>
-              <PlayButton uris={[track.uri]} contextUri={contextUri} />
+              <PlayButton contextUri={contextUri} />
             </td>
           </tr>
         ))}
@@ -55,4 +55,4 @@ const ContextTrackList = ({
   </div>
 );
 
-export default ContextTrackList;
+export default OffsetTrackList;
