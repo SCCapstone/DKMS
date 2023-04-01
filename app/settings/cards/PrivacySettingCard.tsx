@@ -24,7 +24,7 @@ const PrivacySettingCard = ({
   const isMutating = isFetching || isPending;
 
   const otherVisibility = toggleVisibility(visibility);
-  const handleToggle = async (e: React.MouseEvent) => {
+  const handleToggle = async (e: React.ChangeEvent) => {
     e.preventDefault();
     setIsFetching(true);
     await setVisibility(userId, otherVisibility);
@@ -48,7 +48,7 @@ const PrivacySettingCard = ({
         <div className="flex flex-col">
           <div className="form-control w-52">
             <label htmlFor="visibility" className="cursor-pointer label">
-              <span className="label-text">Set {otherVisibility}</span>
+              <span className="label-text">Currently {visibility}</span>
               <input
                 type="checkbox"
                 name="visibility"
@@ -56,7 +56,7 @@ const PrivacySettingCard = ({
                 className="toggle toggle-primary"
                 disabled={isMutating}
                 checked={visibility === "public"}
-                onClick={(e) => void handleToggle(e)}
+                onChange={(e) => void handleToggle(e)}
               />
             </label>
           </div>
