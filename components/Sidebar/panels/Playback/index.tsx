@@ -1,19 +1,18 @@
 /* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition, useEffect } from "react";
 
+import getAvailableDevices from "@/lib/device/getAvaliableDevices";
+import setActiveDevice from "@/lib/device/setActiveDevice";
+import transferPlayback from "@/lib/device/transferPlayback";
 import { skipNext, skipPrev, resume, pause } from "@/lib/playback";
-import getAvailableDevices from "@/lib/playback/getAvaliableDevices";
 import getCurrentTrackUri from "@/lib/playback/getCurrentTrackUri";
 import getTrackName from "@/lib/playback/getTrackName";
-import setActiveDevice from "@/lib/playback/setActiveDevice";
-import transferPlayback from "@/lib/playback/transferPlayback";
 
 import BasePanel from "../BasePanel";
 
