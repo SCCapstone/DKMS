@@ -4,8 +4,6 @@ import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import PlayButton from "@/components/music/PlayButton";
-import PlayContext from "@/components/music/PlayContext";
-import PlayTrack from "@/components/music/PlayTrack";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({

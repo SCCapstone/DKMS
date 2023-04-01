@@ -1,7 +1,7 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDuration } from "@/lib/formatters";
 
-import PlayContextTrack from "../PlayContextTrack";
+import PlayButton from "../PlayButton";
 
 const ContextTrackList = ({
   contextUri,
@@ -46,7 +46,7 @@ const ContextTrackList = ({
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td>
-              <PlayContextTrack contextUri={contextUri} trackUri={track.uri} />
+              <PlayButton uris={[track.uri]} contextUri={contextUri} />
             </td>
           </tr>
         ))}
