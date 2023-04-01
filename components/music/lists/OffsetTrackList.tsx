@@ -1,7 +1,7 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDuration } from "@/lib/formatters";
 
-import PlayOffset from "../PlayOffset";
+import PlayButton from "../PlayButton";
 
 const OffsetTrackList = ({
   contextUri,
@@ -46,7 +46,7 @@ const OffsetTrackList = ({
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td>
-              <PlayOffset contextUri={contextUri} uriOffset={track.uri} />
+              <PlayButton contextUri={contextUri} offset={track.uri} />
             </td>
           </tr>
         ))}
