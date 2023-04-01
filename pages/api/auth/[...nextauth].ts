@@ -147,6 +147,7 @@ export const authOptions: NextAuthOptions = {
         id: profile.id,
         name: profile.display_name ?? profile.id,
         username: profile.id,
+        visibility: "public",
       }),
     }),
   ],
