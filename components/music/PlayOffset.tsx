@@ -4,12 +4,17 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import startPlaying from "@/lib/music/startPlaying";
+import startPlayingOffset from "@/lib/music/startPlayingOffset";
 
 import PlayIcon from "./PlayIcon";
 
-import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
-
-const PlayOffset = ({ uris, contextUri }: StartPlayingContextParams) => {
+const PlayOffset = ({
+  contextUri,
+  uriOffset,
+}: {
+  contextUri: string;
+  uriOffset: string;
+}) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -20,13 +25,7 @@ const PlayOffset = ({ uris, contextUri }: StartPlayingContextParams) => {
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (uris && contextUri) {
-      await startPlaying({ uris, contextUri });
-    } else if (uris) {
-      await startPlaying({ uris });
-    } else if (contextUri) {
-      await startPlaying({ contextUri });
-    }
+    await startPlayingOffset(contextUri, uriOffset);
     /*
     try {
       if (uris && contextUri) {
