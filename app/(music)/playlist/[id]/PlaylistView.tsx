@@ -32,7 +32,7 @@ const AlbumView = ({
             <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
           </p>
         ),
-        buttons: <PlayButton uris={[playlist.uri]} />,
+        buttons: <PlayButton contextUri={playlist.uri} />,
       }}
     />
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>

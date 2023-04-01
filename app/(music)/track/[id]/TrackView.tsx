@@ -3,6 +3,7 @@ import Link from "next/link";
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import PlayButton from "@/components/music/PlayButton";
 import PlayContext from "@/components/music/PlayContext";
 import PlayTrack from "@/components/music/PlayTrack";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
@@ -40,7 +41,7 @@ const TrackView = ({
           ),
         buttons: (
           <>
-            <PlayTrack uri={track.uri} />
+            <PlayButton uris={[track.uri]} />
             <Link
               className="btn btn-primary btn-outline w-full"
               href={`/album/${track.album.id}`}
@@ -58,7 +59,7 @@ const TrackView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
-        buttons: <PlayContext uri={artist.uri} />,
+        buttons: <PlayButton contextUri={artist.uri} />,
       }}
     />
     <div className="divider" />
