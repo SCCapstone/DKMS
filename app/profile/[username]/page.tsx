@@ -14,7 +14,7 @@ import {
   getIdFromUsername,
   getUserFromId,
 } from "@/lib/getUser";
-import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
+import { getRecommendationsForUser } from "@/lib/recommendations/getRecommendationsForUser";
 
 const getDkmsProfile = async (profileId: string) => getUserFromId(profileId);
 
