@@ -73,14 +73,12 @@ const Artist = async ({
             ${isCompact ? "bottom-0" : "top-0"}
           right-0 p-2`}
         >
+          <PlayContext uri={artist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
         <h2 className="card-title">{artist.name}</h2>
         {isCompact && `${formatNumber(artist.followers.total)} Followers`}
-      </div>
-      <div>
-        <PlayContext uri={artist.uri} />
       </div>
     </Link>
   );
