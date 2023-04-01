@@ -22,14 +22,12 @@ const getTrackName = async () => {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const data: CurrentlyPlayingResponse = await response.json();
-    const trackName = data.item.name || null;
-    const artistName = data.item.artists[0]?.name || null;
+    const data: unknown = await response.json();
+    const currentPlaying = data as CurrentlyPlayingResponse;
+    const trackName = currentPlaying.item.name || null;
+    const artistName = currentPlaying.item.artists[0]?.name || null;
     return { trackName, artistName };
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Error parsing JSON response:", error);
     return { trackName: null, artistName: null };
   }
 };

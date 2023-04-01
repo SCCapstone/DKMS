@@ -4,15 +4,4 @@ import resume from "@/lib/playback/resume";
 import skipNext from "@/lib/playback/skipNext";
 import skipPrev from "@/lib/playback/skipPrev";
 
-import getAvaliableDevices from "../device/getAvaliableDevices";
-import setActveDevice from "../device/setActiveDevice";
-
-export {
-  play,
-  skipNext,
-  skipPrev,
-  pause,
-  resume,
-  getAvaliableDevices,
-  setActveDevice,
-};
+export { play, skipNext, skipPrev, pause, resume };

@@ -22,8 +22,7 @@ const skipNext = async (
     ? JSON.stringify({ uris: [uri] })
     : null;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const response = await putSpotifyData(endpoint, {
+  await putSpotifyData(endpoint, {
     method,
     body,
   });
