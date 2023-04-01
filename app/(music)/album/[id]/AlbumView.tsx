@@ -1,7 +1,7 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { ContextTrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
-import PlayContext from "@/components/music/PlayContext";
+import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { capitalize, formatNumber } from "@/lib/formatters";
 
@@ -30,7 +30,7 @@ const AlbumView = ({
               Featuring <ArtistLinks artists={album.artists.slice(1)} />
             </p>
           ) : undefined,
-        buttons: <PlayContext uri={album.uri} />,
+        buttons: <PlayButton uris={[artist.uri]} />,
       }}
       secondary={{
         imageUrl: artist.images[0].url,
@@ -40,7 +40,7 @@ const AlbumView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
-        buttons: <PlayContext uri={artist.uri} />,
+        buttons: <PlayButton uris={[artist.uri]} />,
       }}
     />
     <div className="divider" />
