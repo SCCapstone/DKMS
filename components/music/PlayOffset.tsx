@@ -24,20 +24,12 @@ const PlayOffset = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    await startPlayingOffset(contextUri, uriOffset);
-    /*
     try {
-      if (uris && contextUri) {
-        await startPlaying({ uris, contextUri });
-      } else if (uris) {
-        await startPlaying({ uris });
-      } else if (contextUri) {
-        await startPlaying({ contextUri });
-      }
+      await startPlayingOffset(contextUri, uriOffset);
     } catch (error) {
       //   Button will not do anything if there is no active device
     }
-    */
+
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
