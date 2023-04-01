@@ -49,7 +49,7 @@ const Artist = async ({
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl`}
     >
-      <div className={isCompact ? "p-2" : "pt-8 px-8"}>
+      <div className={isCompact ? "p-2" : "pt-8 px-8 mt-5"}>
         <figure
           className={`${
             isCompact ? "w-32 h-32" : ""
@@ -69,9 +69,9 @@ const Artist = async ({
         className={`card-body ${isCompact ? "" : "items-center text-center"}`}
       >
         <div
-          className={`flex flex-row absolute 
-            ${isCompact ? "bottom-0" : "top-0"}
-          right-0 p-2`}
+          className={`card-actions ${
+            isCompact ? "justify-end" : " absolute top-0 right-0 p-2"
+          }`}
         >
           <PlayContext uri={artist.uri} />
           {/* @ts-expect-error Server Component */}
