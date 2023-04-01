@@ -6,14 +6,17 @@ type StartPlayingContextParams =
   | {
       uris: string[];
       contextUri?: undefined;
+      offset?: undefined;
     }
   | {
       uris?: undefined;
       contextUri: string;
+      offset?: string;
     }
   | {
       uris: string[];
       contextUri: string;
+      offset?: undefined;
     };
 
 async function startPlaying(params: StartPlayingContextParams) {
@@ -22,6 +25,7 @@ async function startPlaying(params: StartPlayingContextParams) {
     body: JSON.stringify({
       context_uri: params.contextUri,
       uris: params.uris,
+      offset: params,
     }),
     cache: "no-cache",
   });
