@@ -5,7 +5,7 @@ import { getPlaiceholder } from "plaiceholder";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
-import PlayContext from "../PlayContext";
+import PlayButton from "../PlayButton";
 
 const Playlist = async ({
   playlist,
@@ -65,7 +65,7 @@ const Playlist = async ({
       </figure>
       <div className="card-body relative">
         <div className="card-actions justify-end">
-          <PlayContext uri={playlist.uri} />
+          <PlayButton uris={undefined} contextUri={playlist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
         </div>

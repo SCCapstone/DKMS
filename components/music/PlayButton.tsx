@@ -7,13 +7,9 @@ import startPlaying from "@/lib/music/startPlaying";
 
 import PlayIcon from "./PlayIcon";
 
-const PlayButton = ({
-  uris,
-  contextUri,
-}: {
-  uris: string[] | undefined;
-  contextUri: string | undefined;
-}) => {
+import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
+
+const PlayButton = ({ uris, contextUri }: StartPlayingContextParams) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -25,12 +21,15 @@ const PlayButton = ({
     e.preventDefault();
     setIsFetching(true);
     try {
-      await startPlaying({
-        uris: uris ?? [],
-        contextUri: contextUri ?? "",
-      });
+      if (uris && contextUri) {
+        await startPlaying({ uris, contextUri });
+      } else if (uris) {
+        await startPlaying({ uris });
+      } else if (contextUri) {
+        await startPlaying({ contextUri });
+      }
     } catch (error) {
-      // Button will not do anything if there is no active device
+      //   Button will not do anything if there is no active device
     }
     setIsFetching(false);
     startTransition(() => {

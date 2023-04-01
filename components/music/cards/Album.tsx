@@ -6,7 +6,7 @@ import ArtistLinks from "@/components/ui/ArtistLinks";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
-import PlayContext from "../PlayContext";
+import PlayButton from "../PlayButton";
 
 const Album = async ({
   album,
@@ -78,7 +78,7 @@ const Album = async ({
       <div className="card-body relative">
         <Link href={`/album/${album.id}`}>
           <div className="card-actions justify-end">
-            <PlayContext uri={album.uri} />
+            <PlayButton uris={undefined} contextUri={album.uri} />
             {/* @ts-expect-error Server Component */}
             <ShareIcon musicItemId={album.id} musicItemType="album" />
           </div>

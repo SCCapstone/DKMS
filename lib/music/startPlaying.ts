@@ -27,3 +27,4 @@ async function startPlaying(params: StartPlayingContextParams) {
   });
 }
 export default startPlaying;
+export type { StartPlayingContextParams };

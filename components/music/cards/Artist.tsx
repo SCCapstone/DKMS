@@ -6,7 +6,7 @@ import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import { formatNumber } from "@/lib/formatters";
 
-import PlayContext from "../PlayContext";
+import PlayButton from "../PlayButton";
 
 const Artist = async ({
   artist,
@@ -73,7 +73,7 @@ const Artist = async ({
             isCompact ? "justify-end" : " absolute top-0 right-0 p-2"
           }`}
         >
-          <PlayContext uri={artist.uri} />
+          <PlayButton uris={undefined} contextUri={artist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
