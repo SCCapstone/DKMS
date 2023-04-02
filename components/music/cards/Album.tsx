@@ -78,7 +78,7 @@ const Album = async ({
       <div className="card-body relative">
         <Link href={`/album/${album.id}`}>
           <div className="card-actions justify-end">
-            <PlayButton uris={undefined} contextUri={album.uri} />
+            <PlayButton contextUri={album.uri} />
             {/* @ts-expect-error Server Component */}
             <ShareIcon musicItemId={album.id} musicItemType="album" />
           </div>
