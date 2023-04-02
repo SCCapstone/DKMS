@@ -21,7 +21,7 @@ export type FeedItemType = {
     | SpotifyApi.ArtistObjectFull
     | SpotifyApi.AlbumObjectSimplified
     | undefined;
-} & FirestoreFeedItem;
+} & Omit<FirestoreFeedItem, "musicItemId" | "musicItemType">;
 
 const FeedPage = ({
   data,

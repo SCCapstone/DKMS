@@ -24,6 +24,11 @@ declare module "next-auth" {
      * The Spotify username of the user — use for API calls
      */
     username: string;
+    /**
+     * The privacy settings of the user — should they
+     * be hidden from search + global feed?
+     */
+    visibility: "public" | "private";
   }
 
   interface Session extends DefaultSession {
