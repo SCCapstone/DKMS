@@ -129,9 +129,9 @@ Cypress.Commands.add("login", (email, pw) => {
     const args = { username: email, password: pw };
     cy.origin("accounts.spotify.com", { args }, ({ username, password }) => {
       cy.get("input#login-username").click();
-      cy.type(username);
+      cy.get("input#login-username").type(username);
       cy.get("input#login-password").click();
-      cy.type(password);
+      cy.get("input#login-password").type(password);
       cy.get("#login-button").click();
     });
     cy.getCookie("next-auth.session-token").should("exist");
