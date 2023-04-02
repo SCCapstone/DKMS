@@ -1,4 +1,9 @@
 /// <reference types="cypress" />
+
+import { encode } from "next-auth/jwt";
+
+import type { User } from "next-auth";
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -36,28 +41,92 @@
 //   }
 // }
 
-Cypress.Commands.add("envLogin", () => {
-  const username: unknown = Cypress.env("CYPRESS_SPOTIFY_USER");
-  const password: unknown = Cypress.env("CYPRESS_SPOTIFY_PW");
+Cypress.Commands.add("auth", () => {
+  cy.session("user.json", () => {
+    const session = Cypress.env("session") as
+      | {
+          refreshToken: string | undefined;
+          accessToken: string | undefined;
+          secret: string | undefined;
+        }
+      | undefined;
 
-  if (typeof username !== "string") {
-    assert.fail("CYPRESS_SPOTIFY_USER is not set");
-  }
+    if (!session) {
+      assert.fail("session env is not set");
+    }
+    const { refreshToken, accessToken, secret } = session;
+    if (!accessToken) {
+      assert.fail("session.accessToken is not set");
+    }
+    if (!refreshToken) {
+      assert.fail("session.refreshToken is not set");
+    }
+    if (!secret) {
+      assert.fail("session.secret is not set");
+    }
 
-  if (typeof password !== "string") {
-    assert.fail("CYPRESS_SPOTIFY_PW is not set");
-  }
+    const accessTokenExpires = new Date().getTime() + 1000 * 60 * 60;
+    cy.fixture("user.json")
+      .then((user: User) =>
+        encode({
+          token: { user, accessToken, accessTokenExpires, refreshToken },
+          secret,
+        })
+      )
+      .then((encryptedToken) =>
+        cy.setCookie("next-auth.session-token", encryptedToken)
+      );
+  });
+  // cy.intercept("/api/auth/session", { fixture: "session.json" }).as("session");
 
-  cy.login(username, password);
+  // // Set the cookie for cypress.
+  // // It has to be a valid cookie so next-auth can decrypt it and confirm its validity.
+  // // This step can probably/hopefully be improved.
+  // // We are currently unsure about this part.
+  // // We need to refresh this cookie once in a while.
+  // // We are unsure if this is true and if true, when it needs to be refreshed.
+
+  // cy.setCookie(
+  //   "next-auth.session-token",
+  //   "BQBUmkei5cHEJoAsQn-xOGPL81MY-fiRzDrXut0wPf4sn_Jec5t8UuHqiOA6GInaAZDSu_ivGJHm4mSJPRdP_hIgtgiLc6vKLG02fzKZlz0uZBIoVCksANw0Uneq671j0m326L1MFJMfFaFhwuGWmWCpNisTU6BEuubVVJ29KeRSFugYKUFPBfF_5jVuL5aP8tjEl0tb817H5iFlIhoorHrJQu5gjzeox8lOUKn85LOoihY9L7M6CbeRJlm27IPaY_Nr8w",
+  //   {
+  //     domain: "localhost",
+  //     path: "/",
+  //     httpOnly: true,
+  //     sameSite: "lax",
+  //     expiry: 3000000000,
+  //   }
+  // );
 });
 
-Cypress.Commands.add("login", (user, pw) => {
-  cy.session([user, pw], () => {
+Cypress.Commands.add("envLogin", () => {
+  const credentials = Cypress.env("credentials") as
+    | {
+        email: string | undefined;
+        password: string | undefined;
+      }
+    | undefined;
+  if (!credentials) {
+    assert.fail("credentials env is not set");
+  }
+  const { email, password } = credentials;
+  if (!email) {
+    assert.fail("credentials.email is not set");
+  }
+  if (!password) {
+    assert.fail("credentials.password is not set");
+  }
+
+  cy.login(email, password);
+});
+
+Cypress.Commands.add("login", (email, pw) => {
+  cy.session([email, pw], () => {
     cy.visit("/api/auth/signin/spotify");
 
     cy.get("button").click();
 
-    const args = { username: user, password: pw };
+    const args = { username: email, password: pw };
     cy.origin("accounts.spotify.com", { args }, ({ username, password }) => {
       cy.get("input#login-username").click();
       cy.type(username);
@@ -109,9 +178,11 @@ declare global {
        * @example cy.navbarClick('Profile');
        */
       navbarClick(page: string): Chainable<JQuery>;
+
+      /**
+       * Custom command to create a mock session.
+       */
+      auth(): Chainable<JQuery>;
     }
   }
 }
-
-// Prevent TypeScript from reading file as legacy script
-export {};
