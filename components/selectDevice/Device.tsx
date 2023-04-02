@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 import transferPlayback from "@/lib/device/transferPlayback";
 
@@ -15,11 +16,10 @@ const Device = ({
   isPlaying: boolean;
 }) => {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
 
   // Create inline loading UI
-  const isMutating = isFetching || isPending;
+  const isMutating = isFetching;
 
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -33,9 +33,8 @@ const Device = ({
       await transferPlayback(device.id, false);
     }
     setIsFetching(false);
-    startTransition(() => {
-      router.refresh();
-    });
+    toast.success("Device Selected");
+    router.refresh();
   };
 
   return (
