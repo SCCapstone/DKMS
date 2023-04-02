@@ -38,7 +38,7 @@ const DeleteButton = ({
       type="button"
       onClick={(e) => void handleDelete(e)}
       disabled={isMutating}
-      className={`${isMutating ? "loading" : ""} btn btn-ghost items-center`}
+      className={`${isMutating ? "loading" : ""} btn btn-ghost btn-secondary`}
       title="Delete feed item"
     >
       <TrashSolid />

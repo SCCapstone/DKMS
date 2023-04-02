@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { formatNumber } from "@/lib/formatters";
 import { likeItem, unlikeItem } from "@/lib/likeButton";
 
 const LikeButton = ({
@@ -46,7 +45,7 @@ const LikeButton = ({
 
   return (
     <button
-      className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
+      className={`btn btn-ghost btn-secondary ${isMutating ? "loading" : ""}`}
       type="button"
       onClick={(e) => void handleClick(e)}
       title="Like feed item"
