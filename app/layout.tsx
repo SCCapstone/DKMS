@@ -27,6 +27,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
             <SidebarPanels />
             <MobileSidebar>{children}</MobileSidebar>
           </main>
+          {/* @ts-expect-error Server Component */}
           <DesktopSidebar />
         </div>
       </Providers>

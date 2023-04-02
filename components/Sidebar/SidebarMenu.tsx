@@ -7,8 +7,10 @@ import type { SidebarOptions } from "./types";
 
 const SidebarMenu = ({
   onChange,
+  notificationAlert,
 }: {
   onChange?: (newSidebar: SidebarOptions) => void;
+  notificationAlert?: boolean;
 }) => {
   const [currentSidebar, setCurrentSidebar] = useSidebar();
 
@@ -22,6 +24,7 @@ const SidebarMenu = ({
     <SidebarIcons
       onChange={handleSidebarChange}
       currentSelection={currentSidebar}
+      notificationAlert={notificationAlert}
     />
   );
 };
