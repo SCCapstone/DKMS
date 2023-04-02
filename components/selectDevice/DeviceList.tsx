@@ -9,7 +9,7 @@ const DeviceList = ({
 }) => (
   <>
     <h3 className="text-lg font-bold">Select a device</h3>
-    <div className="flex flex-col space-y-2">
+    <div className="btn-group btn-group-vertical space-y-2">
       {deviceList.map((device) => (
         <Device
           key={device.id}

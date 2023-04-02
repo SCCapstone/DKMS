@@ -40,7 +40,7 @@ const Device = ({
 
   return (
     <button
-      className={isMutating ? "btn loading" : "btn"}
+      className={`btn normal-case ${isMutating ? "loading" : ""}`}
       type="button"
       disabled={isMutating}
       onClick={(e) => void handleClick(e)}
