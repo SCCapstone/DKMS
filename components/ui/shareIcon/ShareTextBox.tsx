@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { toast } from "react-hot-toast";
 
 import postFeedItem from "@/lib/feed/postFeedItem";
 
@@ -31,6 +32,7 @@ const ShareTextBox = ({
     e.preventDefault();
     setIsFetching(true);
     await postFeedItem(user, postText, musicItemId, musicItemType);
+    toast.success("Shared to Feed!");
     setIsFetching(false);
     startTransition(() => {
       setPostText("");
