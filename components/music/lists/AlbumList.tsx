@@ -14,9 +14,10 @@ const AlbumList = ({
       <thead>
         <tr>
           <th>Title</th>
-          <th>Tracks</th>
-          <th>Type</th>
-          <th className="text-right">Released</th>
+          <th className="text-center">Tracks</th>
+          <th className="text-center">Type</th>
+          <th className="text-center">Released</th>
+          <th className="text-center">Play</th>
         </tr>
       </thead>
       <tbody>
@@ -30,12 +31,12 @@ const AlbumList = ({
                 {album.name} {album.restrictions?.reason}
               </Link>
             </td>
-            <td>{album.total_tracks}</td>
-            <td>{capitalize(album.album_type)}</td>
-            <td className="text-right">
+            <td className="text-center">{album.total_tracks}</td>
+            <td className="text-center">{capitalize(album.album_type)}</td>
+            <td className="text-center">
               {new Date(album.release_date).getUTCFullYear()},
             </td>
-            <td>
+            <td className="text-center">
               <PlayButton contextUri={album.uri} />
             </td>
           </tr>
