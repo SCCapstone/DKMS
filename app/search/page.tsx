@@ -1,13 +1,10 @@
-import { getDocs } from "firebase/firestore";
-
 import fetchServer from "@/lib/fetch/fetchServer";
-import { usersCol } from "@/lib/firestore";
+import getPublicUsers from "@/lib/getPublicUsers";
 
 import SearchResults from "./SearchResults";
 
 const searchFirebase = async (searchQuery: string) => {
-  const usersSnapshot = await getDocs(usersCol);
-  const usersData = usersSnapshot.docs.map((doc) => doc.data());
+  const usersData = await getPublicUsers();
 
   return usersData.filter(
     (user) =>

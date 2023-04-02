@@ -1,53 +1,82 @@
 import { getDocs, orderBy, query } from "firebase/firestore";
 
 import { feedCol } from "@/lib/firestore";
-import getUsersFollowing from "@/lib/followers/getUsersFollowing";
+import getFollowedUsers from "@/lib/followers/getFollowedUsers";
+import getPublicUsers from "@/lib/getPublicUsers";
 import { getCurrentUser } from "@/lib/getUser";
 import { getSavedItemIds } from "@/lib/savedFeedItems";
 
 import getFeedComments from "./getFeedComments";
 import getSpotifyFeedItem from "./getSpotifyFeedItem";
 
+import type { FirestoreFeedItem } from "@/lib/firestore/types";
+import type { QueryDocumentSnapshot } from "firebase/firestore";
+
+const filterFeedDocs = async (
+  docs: QueryDocumentSnapshot<FirestoreFeedItem>[],
+  currentUserId: string,
+  isPrivate: boolean
+) => {
+  if (isPrivate) {
+    const followingIds = await getFollowedUsers().then((users) =>
+      users.map((user) => user.id)
+    );
+
+    return docs.filter(
+      (doc) =>
+        doc.data().userId === currentUserId ||
+        followingIds.includes(doc.data().userId)
+    );
+  }
+
+  const publicIds = await getPublicUsers().then((users) =>
+    users.map((user) => user.id)
+  );
+  return docs.filter(
+    (doc) =>
+      doc.data().userId === currentUserId ||
+      publicIds.includes(doc.data().userId)
+  );
+};
 const getFeedItems = async (params?: {
   filterByFollowing?: boolean;
   filterBySaved?: boolean;
 }) => {
-  const filterByFollowing = params?.filterByFollowing ?? false;
+  const isPrivateFeed = params?.filterByFollowing ?? false;
   const filterBySaved = params?.filterBySaved ?? false;
+
   const currentUserId = await getCurrentUser().then((user) => user.id);
-  const followingIds = await getUsersFollowing().then((users) =>
-    users.map((user) => user.id)
-  );
   const q = query(feedCol, orderBy("timestamp", "desc"));
   const feedSnapshot = await getDocs(q);
 
-  const baseData = await Promise.all(
-    feedSnapshot.docs
-      .filter(
-        (doc) =>
-          !filterByFollowing ||
-          doc.data().userId === currentUserId ||
-          followingIds.includes(doc.data().userId)
-      )
-      .map(async (doc) => {
-        const docId = doc.id;
-        const comments = await getFeedComments(docId);
-        const { musicItemId, musicItemType } = doc.data();
-        const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
-        return {
-          id: doc.id,
-          ...doc.data(),
-          comments,
-          musicItem,
-        };
-      })
+  const baseData = await filterFeedDocs(
+    feedSnapshot.docs,
+    currentUserId,
+    isPrivateFeed
   );
 
-  if (!filterBySaved) return baseData;
+  const dataWithComments = await Promise.all(
+    baseData.map(async (doc) => {
+      const docId = doc.id;
+      const comments = await getFeedComments(docId);
+      const { musicItemId, musicItemType, ...data } = doc.data();
+      const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
+      return {
+        id: doc.id,
+        ...data,
+        comments,
+        musicItem,
+      };
+    })
+  );
+
+  if (!filterBySaved) return dataWithComments;
 
   const savedItemIds = await getSavedItemIds(currentUserId);
 
-  return baseData.filter((post) => savedItemIds.includes(post.id.trim()));
+  return dataWithComments.filter((post) =>
+    savedItemIds.includes(post.id.trim())
+  );
 
   // return baseData;
 };
