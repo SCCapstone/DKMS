@@ -45,7 +45,7 @@ const Device = ({
       disabled={isMutating}
       onClick={(e) => void handleClick(e)}
     >
-      {device.name}
+      {`${device.name} ${currentDevice.id === device.id ? "[Current]" : ""}`}
     </button>
   );
 };
