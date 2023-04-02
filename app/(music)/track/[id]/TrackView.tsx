@@ -3,8 +3,6 @@ import Link from "next/link";
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
-import PlayButton from "@/components/music/PlayButton";
-import ShareIcon from "@/components/ui/shareIcon";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({
@@ -38,19 +36,11 @@ const TrackView = ({
               <Link href={`/album/${track.album.id}`}>{track.album.name}</Link>
             </p>
           ),
-        buttons: (
-          <>
-            <PlayButton contextUri={track.album.uri} offset={track.uri} />
-            {/* @ts-expect-error Server Component */}
-            <ShareIcon musicItemId={track.id} musicItemType="track" />
-            <Link
-              className="btn btn-primary btn-outline w-full"
-              href={`/album/${track.album.id}`}
-            >
-              View Album
-            </Link>
-          </>
-        ),
+        musicItemId: track.id,
+        musicItemType: "track",
+        playbuttonContext: track.uri,
+        viewAlbum: true,
+        albumId: track.album.id,
       }}
       secondary={{
         imageUrl: artist.images[0].url,
@@ -60,7 +50,9 @@ const TrackView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
-        buttons: <PlayButton contextUri={artist.uri} />,
+        musicItemId: track.artists[0].id,
+        musicItemType: "artist",
+        playbuttonContext: track.artists[0].uri,
       }}
     />
     <div className="divider" />
