@@ -1,4 +1,4 @@
-import fetchServer from "./fetch/fetchServer";
+import fetchServer from "@/lib/fetch/fetchServer";
 
 const getPlaylistsForUser = async (userId: string, limit: number) =>
   fetchServer<SpotifyApi.ListOfCurrentUsersPlaylistsResponse>(
