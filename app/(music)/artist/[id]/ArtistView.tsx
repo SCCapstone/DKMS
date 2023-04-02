@@ -3,6 +3,7 @@ import AudioFeatures from "@/components/music/AudioFeatures";
 import { ArtistsGrid } from "@/components/music/grids";
 import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import PlayButton from "@/components/music/PlayButton";
 import ShareIcon from "@/components/ui/shareIcon";
 import { formatNumber } from "@/lib/formatters";
 
@@ -33,6 +34,7 @@ const ArtistView = ({
         isCircle: true,
         buttons: (
           <>
+            <PlayButton contextUri={artist.uri} />
             {/* @ts-expect-error Server Component */}
             <ShareIcon musicItemId={artist.id} musicItemType="artist" />
             <FollowButton

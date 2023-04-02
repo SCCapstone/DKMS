@@ -1,17 +1,20 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { TrackList } from "@/components/music/lists";
+import { OffsetTrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import ShareIcon from "@/components/ui/shareIcon";
 import { formatNumber } from "@/lib/formatters";
 
-const AlbumView = ({
+import type { FilteredDataTrack } from "./page";
+
+const PlaylistView = ({
   playlist,
   tracks,
   averageAudioFeatures,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
-  tracks: SpotifyApi.TrackObjectFull[];
+  tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
@@ -34,6 +37,7 @@ const AlbumView = ({
         ),
         buttons: (
           <>
+            <PlayButton contextUri={playlist.uri} />
             {/* @ts-expect-error Server Component */}
             <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
           </>
@@ -43,8 +47,13 @@ const AlbumView = ({
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList tracks={tracks} showNumber showAlbum />
+    <OffsetTrackList
+      contextUri={playlist.uri}
+      tracks={tracks}
+      showNumber
+      showAlbum
+    />
   </>
 );
 
-export default AlbumView;
+export default PlaylistView;
