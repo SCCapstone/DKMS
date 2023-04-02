@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import AddContent from "./addContent";
+import AddContent from "./AddContent";
 import Share from "./icon";
 
 import type { User } from "next-auth";
