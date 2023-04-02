@@ -1,25 +1,26 @@
 describe("Navigation", () => {
   beforeEach(() => {
-    cy.envLogin();
+    // Log in before each test
+    cy.auth();
   });
 
-  it("should navigate to the Profile page", () => {
+  it("should navigate to the Settings page", () => {
     // Start from the index page
     cy.visit("/");
 
-    // Find a link with an href attribute containing "profile" and click it
-    cy.navbarClick("Profile");
+    // Find a link with an href attribute containing "settings" and click it
+    cy.navbarClick("Settings");
 
-    // The new url should include "/profile"
-    cy.url().should("include", "/");
+    // The new url should include "/settings"
+    cy.url().should("include", "/settings");
 
-    // The new page should contain an h1 with "About page"
-    cy.get("h1").contains("Profile");
+    // The new page should contain an h1 with "Settings"
+    cy.get("h1").contains("Settings");
   });
 
   it("should navigate back to the feed when starting on a different page", () => {
-    // Start from the profile page
-    cy.visit("/profile");
+    // Start from the settings page
+    cy.visit("/settings");
 
     // Find a link with an href attribute containing "feed" and click it
     cy.navbarClick("Feed");
@@ -27,13 +28,13 @@ describe("Navigation", () => {
     // The new url should include "/"
     cy.url().should("include", "/");
 
-    // The new page should contain an h1 with "Feed"
-    cy.get("h1").contains("Feed");
+    // The new page should contain an h1 with "Friends"
+    cy.get("h1").contains("Friends");
   });
 
   it("should navigate to the feed when clicking on the logo", () => {
-    // Start from the profile page
-    cy.visit("/profile");
+    // Start from the settings page
+    cy.visit("/settings");
 
     // Find the logo and click it
     cy.navbarClick("DKMS");
@@ -42,7 +43,7 @@ describe("Navigation", () => {
     cy.url().should("include", "/");
 
     // The new page should contain an h1 with "Feed"
-    cy.get("h1").contains("Feed");
+    cy.get("h1").contains("Friends");
   });
 });
 
