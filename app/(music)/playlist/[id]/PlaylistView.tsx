@@ -1,7 +1,6 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { OffsetTrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
-import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
 
@@ -34,7 +33,9 @@ const PlaylistView = ({
             <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
           </p>
         ),
-        buttons: <PlayButton contextUri={playlist.uri} />,
+        musicItemId: playlist.id,
+        musicItemType: "playlist",
+        playbuttonContext: playlist.uri,
       }}
     />
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>

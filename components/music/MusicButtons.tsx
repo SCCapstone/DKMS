@@ -2,17 +2,41 @@ import Link from "next/link";
 
 import SpotifyIcon from "@/components/ui/SpotifyIcon";
 
+import FollowButton from "../FollowButton";
+
 const MusicButtons = ({
   spotifyUri,
   path,
-  extraButtons,
+  viewAlbum,
+  albumId,
+  viewFollow,
+  artistId,
+  isFollowing,
 }: {
   spotifyUri: string;
   path: string | undefined;
-  extraButtons?: React.ReactNode;
+  viewAlbum: boolean | undefined;
+  albumId: string | undefined;
+  viewFollow: boolean | undefined;
+  artistId: string | undefined;
+  isFollowing: boolean | undefined;
 }) => (
   <div className="btn-group btn-group-vertical">
-    {extraButtons}
+    {viewAlbum && albumId && (
+      <Link
+        className="btn btn-primary btn-outline w-full"
+        href={`/album/${albumId}`}
+      >
+        View Album
+      </Link>
+    )}
+    {viewFollow && artistId && (
+      <FollowButton
+        id={artistId}
+        followType="artist"
+        isFollowing={isFollowing ?? false}
+      />
+    )}
     {path && (
       <Link className="btn btn-primary btn-outline w-full" href={path}>
         View
