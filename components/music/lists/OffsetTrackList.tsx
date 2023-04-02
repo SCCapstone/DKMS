@@ -3,11 +3,13 @@ import { formatDuration } from "@/lib/formatters";
 
 import PlayButton from "../PlayButton";
 
-const TrackList = ({
+const OffsetTrackList = ({
+  contextUri,
   tracks,
   showNumber,
   showAlbum,
 }: {
+  contextUri: string;
   tracks: SpotifyApi.TrackObjectSimplified[] | SpotifyApi.TrackObjectFull[];
   showNumber?: boolean;
   showAlbum?: boolean;
@@ -45,7 +47,7 @@ const TrackList = ({
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td className="text-center">
-              <PlayButton uris={[track.uri]} />
+              <PlayButton contextUri={contextUri} offset={track.uri} />
             </td>
           </tr>
         ))}
@@ -54,4 +56,4 @@ const TrackList = ({
   </div>
 );
 
-export default TrackList;
+export default OffsetTrackList;
