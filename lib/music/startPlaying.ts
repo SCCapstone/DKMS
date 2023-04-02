@@ -7,16 +7,19 @@ export type StartPlayingContextParams =
       uris: string[];
       contextUri?: undefined;
       offset?: undefined;
+      type: string;
     }
   | {
       uris?: undefined;
       contextUri: string;
       offset?: string;
+      type: string;
     }
   | {
       uris: string[];
       contextUri: string;
       offset?: undefined;
+      type: string;
     };
 
 async function startPlaying(params: StartPlayingContextParams) {

@@ -30,7 +30,7 @@ const ArtistView = ({
         isCircle: true,
         buttons: (
           <>
-            <PlayButton contextUri={artist.uri} />
+            <PlayButton contextUri={artist.uri} type="rect" />
             <FollowButton
               id={artist.id}
               followType="artist"

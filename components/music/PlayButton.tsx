@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import startPlaying from "@/lib/music/startPlaying";
 
 import PlayIcon from "./PlayIcon";
+import PlayRect from "./PlayRect";
 
 import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
 
@@ -13,6 +14,7 @@ const PlayButton = ({
   uris,
   contextUri,
   offset,
+  type,
 }: StartPlayingContextParams) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -25,13 +27,13 @@ const PlayButton = ({
     e.preventDefault();
     setIsFetching(true);
     if (offset) {
-      await startPlaying({ contextUri, offset });
+      await startPlaying({ contextUri, offset, type });
     } else if (uris && contextUri) {
-      await startPlaying({ uris, contextUri });
+      await startPlaying({ uris, contextUri, type });
     } else if (contextUri) {
-      await startPlaying({ contextUri });
+      await startPlaying({ contextUri, type });
     } else if (uris) {
-      await startPlaying({ uris });
+      await startPlaying({ uris, type });
     }
     /*
     try {
@@ -57,6 +59,8 @@ const PlayButton = ({
     });
   };
 
+  const buttonContent = type === "icon" ? <PlayIcon /> : <PlayRect />;
+
   return (
     <button
       className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
@@ -65,7 +69,7 @@ const PlayButton = ({
       disabled={isMutating}
       title="Play"
     >
-      <PlayIcon />
+      {buttonContent}
     </button>
   );
 };
