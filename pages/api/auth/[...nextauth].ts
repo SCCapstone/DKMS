@@ -116,8 +116,8 @@ const SCOPES = [
   "user-read-recently-played",
   "user-library-modify",
   "user-library-read",
-  // "user-read-email",
-  // "user-read-private",
+  "user-read-email",
+  "user-read-private",
 ] as const;
 
 export const authOptions: NextAuthOptions = {
