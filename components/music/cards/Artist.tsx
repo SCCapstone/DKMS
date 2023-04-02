@@ -73,7 +73,7 @@ const Artist = async ({
             isCompact ? "justify-end" : " absolute top-0 right-0 p-2"
           }`}
         >
-          <PlayButton uris={undefined} contextUri={artist.uri} />
+          <PlayButton contextUri={artist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
