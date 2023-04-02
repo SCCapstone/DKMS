@@ -3,6 +3,7 @@ import AudioFeatures from "@/components/music/AudioFeatures";
 import { ArtistsGrid } from "@/components/music/grids";
 import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import PlayButton from "@/components/music/PlayButton";
 import { formatNumber } from "@/lib/formatters";
 
 const ArtistView = ({
@@ -31,11 +32,14 @@ const ArtistView = ({
         content: `${formatNumber(albums.total)} Releases`,
         isCircle: true,
         buttons: (
-          <FollowButton
-            id={artist.id}
-            followType="artist"
-            isFollowing={isFollowing}
-          />
+          <>
+            <PlayButton contextUri={artist.uri} />
+            <FollowButton
+              id={artist.id}
+              followType="artist"
+              isFollowing={isFollowing}
+            />
+          </>
         ),
       }}
     />
