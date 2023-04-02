@@ -1,4 +1,4 @@
-import Device from "./device";
+import Device from "./Device";
 
 const DeviceList = ({
   deviceList,
