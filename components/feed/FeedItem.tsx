@@ -45,7 +45,7 @@ const FeedItem = ({
       </div>
       <p>{data.content}</p>
       {data.musicItem && (
-        <div className="grid">
+        <div className="grid mt-2">
           {data.musicItem.type === "track" && (
             // @ts-expect-error Server Component
             <Track track={data.musicItem} isCompact />

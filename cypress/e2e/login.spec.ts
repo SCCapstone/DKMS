@@ -1,4 +1,10 @@
-describe("Login", () => {
+/**
+ * NOTE: This test is skipped by default. To run it, remove the ".skip" from the
+ * describe.skip() function. This is done to prevent the test from running
+ * during CI, because Spotify detects the automated browser and blocks the
+ * request (and eventually the account itself).
+ */
+describe.skip("Login", () => {
   beforeEach(() => {
     void Cypress.session.clearAllSavedSessions();
   });
