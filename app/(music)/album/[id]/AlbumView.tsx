@@ -2,6 +2,7 @@ import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
+import ShareIcon from "@/components/ui/shareIcon";
 import { capitalize, formatNumber } from "@/lib/formatters";
 
 const AlbumView = ({
@@ -29,6 +30,12 @@ const AlbumView = ({
               Featuring <ArtistLinks artists={album.artists.slice(1)} />
             </p>
           ) : undefined,
+        buttons: (
+          <>
+            {/* @ts-expect-error Server Component */}
+            <ShareIcon musicItemId={album.id} musicItemType="album" />
+          </>
+        ),
       }}
       secondary={{
         imageUrl: artist.images[0].url,

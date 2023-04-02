@@ -2,6 +2,7 @@ import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
+import ShareIcon from "@/components/ui/shareIcon";
 import { formatNumber } from "@/lib/formatters";
 
 const AlbumView = ({
@@ -30,6 +31,12 @@ const AlbumView = ({
             Featuring{" "}
             <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
           </p>
+        ),
+        buttons: (
+          <>
+            {/* @ts-expect-error Server Component */}
+            <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
+          </>
         ),
       }}
     />

@@ -3,6 +3,7 @@ import Link from "next/link";
 import AudioFeatures from "@/components/music/AudioFeatures";
 import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
+import ShareIcon from "@/components/ui/shareIcon";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
 const TrackView = ({
@@ -37,12 +38,18 @@ const TrackView = ({
             </p>
           ),
         buttons: (
-          <Link
-            className="btn btn-primary btn-outline w-full"
-            href={`/album/${track.album.id}`}
-          >
-            View Album
-          </Link>
+          <>
+            <>
+              {/* @ts-expect-error Server Component */}
+              <ShareIcon musicItemId={track.id} musicItemType="track" />
+            </>
+            <Link
+              className="btn btn-primary btn-outline w-full"
+              href={`/album/${track.album.id}`}
+            >
+              View Album
+            </Link>
+          </>
         ),
       }}
       secondary={{
