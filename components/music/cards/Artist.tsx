@@ -41,8 +41,7 @@ const Artist = async ({
   });
 
   return (
-    <Link
-      href={`/artist/${artist.id}`}
+    <div
       className={`card ${
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl`}
@@ -53,14 +52,16 @@ const Artist = async ({
             isCompact ? "w-32 h-32" : ""
           } rounded-full overflow-clip relative aspect-square shadow-2xl`}
         >
-          <Image
-            className={isCompact ? "w-full h-full" : ""}
-            src={img}
-            alt={artist.name}
-            fill
-            blurDataURL={base64}
-            placeholder="blur"
-          />
+          <Link href={`/artist/${artist.id}`}>
+            <Image
+              className={isCompact ? "w-full h-full" : ""}
+              src={img}
+              alt={artist.name}
+              fill
+              blurDataURL={base64}
+              placeholder="blur"
+            />
+          </Link>
         </figure>
       </div>
       <div
@@ -74,10 +75,12 @@ const Artist = async ({
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
-        <h2 className="card-title">{artist.name}</h2>
-        {isCompact && `${formatNumber(artist.followers.total)} Followers`}
+        <Link href={`/artist/${artist.id}`}>
+          <h2 className="card-title">{artist.name}</h2>
+          {isCompact && `${formatNumber(artist.followers.total)} Followers`}
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 
