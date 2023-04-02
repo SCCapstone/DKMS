@@ -18,6 +18,9 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from "cypress/react18";
+import "react-loading-skeleton/dist/skeleton.css";
+
+import "@/app/globals.css";
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
