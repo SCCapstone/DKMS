@@ -18,9 +18,17 @@ const fetchServer = async <T>(
 ) => {
   const accessToken = await getServerAccessToken();
 
-  return baseFetch(input, init, accessToken).then(
-    (res) => res.json() as Promise<T>
-  );
+  const res = await baseFetch(input, init, accessToken);
+
+  try {
+    const data = (await res.json()) as T;
+    return data;
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(`Failed to parse JSON: ${JSON.stringify(err)}`);
+    }
+    throw new Error("Failed to parse JSON");
+  }
 };
 
 export default fetchServer;
