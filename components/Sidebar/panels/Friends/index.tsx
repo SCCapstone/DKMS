@@ -1,8 +1,7 @@
-import "server-only";
-
 import getFollowedUsers from "@/lib/followers/getFollowedUsers";
 
-import BasePanel from "./BasePanel";
+import BasePanel from "../BasePanel";
+
 import Friend from "./Friend";
 
 const Friends = async () => {
