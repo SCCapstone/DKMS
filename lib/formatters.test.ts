@@ -1,4 +1,9 @@
-import { formatNumber, formatDuration, capitalize } from "./formatters";
+import {
+  formatNumber,
+  formatDuration,
+  capitalize,
+  formatDate,
+} from "./formatters";
 
 describe("formatNumber()", () => {
   it("does not return a number", () => {
@@ -78,5 +83,21 @@ describe("capitalize()", () => {
 
   it("does not change the rest of the string", () => {
     expect(capitalize("hello world")).to.eq("Hello world");
+  });
+});
+
+describe("formatDate()", () => {
+  it("does not return a number", () => {
+    expect(formatDate("2021-04-25T17:19:15Z")).to.not.be.a("number");
+  });
+
+  it("returns a string", () => {
+    expect(formatDate("2021-04-25T17:19:15Z")).to.be.a("string");
+  });
+
+  it("returns a date in month/day/year", () => {
+    expect(formatDate("2021-04-25T17:19:15Z")).to.eq("04/25/2021");
+    expect(formatDate("2016-03-17T07:22:32Z")).to.eq("03/17/2016");
+    expect(formatDate("2007-12-18T01:43:11Z")).to.eq("12/18/2007");
   });
 });
