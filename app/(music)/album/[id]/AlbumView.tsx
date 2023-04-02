@@ -30,7 +30,7 @@ const AlbumView = ({
               Featuring <ArtistLinks artists={album.artists.slice(1)} />
             </p>
           ) : undefined,
-        buttons: <PlayButton contextUri={album.uri} type="rect" />,
+        buttons: <PlayButton contextUri={album.uri} />,
       }}
       secondary={{
         imageUrl: artist.images[0].url,
@@ -40,7 +40,7 @@ const AlbumView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
-        buttons: <PlayButton contextUri={artist.uri} type="rect" />,
+        buttons: <PlayButton contextUri={artist.uri} />,
       }}
     />
     <div className="divider" />
