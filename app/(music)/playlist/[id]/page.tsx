@@ -3,7 +3,7 @@ import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
 
 import PlaylistView from "./PlaylistView";
 
-export type extraDataTrack = {
+export type FilteredDataTrack = {
   added_at: string;
   added_by: SpotifyApi.UserObjectPublic;
 } & SpotifyApi.TrackObjectFull;
@@ -16,12 +16,12 @@ const getData = async (id: string) => {
   const tracks = playlist.tracks.items
     .filter((item) => item.track !== null)
     .map((item) => {
-      const extraData = {
+      const playlistTrackData = {
         added_at: item.added_at,
         added_by: item.added_by,
         ...item.track,
-      } as extraDataTrack;
-      return extraData;
+      } as FilteredDataTrack;
+      return playlistTrackData;
     });
 
   const audioFeatures =

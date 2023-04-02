@@ -1,7 +1,7 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDate, formatDuration } from "@/lib/formatters";
 
-import type { extraDataTrack } from "@/app/(music)/playlist/[id]/page";
+import type { FilteredDataTrack } from "@/app/(music)/playlist/[id]/page";
 
 const TrackList = ({
   tracks,
@@ -11,7 +11,7 @@ const TrackList = ({
   tracks:
     | SpotifyApi.TrackObjectSimplified[]
     | SpotifyApi.TrackObjectFull[]
-    | extraDataTrack[];
+    | FilteredDataTrack[];
   showNumber?: boolean;
   showAlbum?: boolean;
 }) => (
