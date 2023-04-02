@@ -1,6 +1,6 @@
 "use client";
 
-import ShareTextBox from "./shareTextBox";
+import ShareTextBox from "./ShareTextBox";
 
 import type { User } from "next-auth";
 
