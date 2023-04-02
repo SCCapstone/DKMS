@@ -21,6 +21,7 @@ const TrackList = ({
           <th>Artist</th>
           {showAlbum && "album" in tracks[0] && <th>Album</th>}
           <th className="text-right">Duration</th>
+          <th className="text-center">Play</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +44,7 @@ const TrackList = ({
               </td>
             )}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
-            <td>
+            <td className="text-center">
               <PlayButton uris={[track.uri]} />
             </td>
           </tr>
