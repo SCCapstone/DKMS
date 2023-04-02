@@ -2,7 +2,7 @@
 
 import fetchClient from "@/lib/fetch/fetchClient";
 
-type StartPlayingContextParams =
+export type StartPlayingContextParams =
   | {
       uris: string[];
       contextUri?: undefined;
@@ -31,4 +31,3 @@ async function startPlaying(params: StartPlayingContextParams) {
   });
 }
 export default startPlaying;
-export type { StartPlayingContextParams };
