@@ -92,7 +92,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
       <h4 className="font-black uppercase pb-2">Top Songs Statistics</h4>
       <AudioFeatures audioFeatures={averageAudioFeatures} />
       <div className="divider" />
-      <div className="grid md:grid-cols-3 gap-4 pb-5">
+      <div className="grid md:grid-cols-2 gap-4 pb-5">
         <div>
           <h4 className="font-black uppercase pb-2">Top Songs</h4>
           <TracksGrid tracks={data.topTracks.splice(0, 6)} isHalf />
@@ -101,18 +101,14 @@ const Profile = async ({ params }: { params: { username: string } }) => {
           <h4 className="font-black uppercase pb-2">Top Artists</h4>
           <ArtistsGrid artists={data.topArtists.splice(0, 8)} isHalf />
         </div>
-        <div>
-          <h4 className="font-black uppercase pb-2">Playlists</h4>
-          <PlaylistsGrid playlists={usersPlaylists.items} isHalf />
-        </div>
       </div>
-      {!isCurrentUser && (
-        <>
-          <div className="divider" />
-          <h4 className="font-black uppercase pb-2">Similar Music</h4>
-          <TracksGrid tracks={recommendations.tracks} />
-        </>
-      )}
+      <div>
+        <h4 className="font-black uppercase pb-2">Playlists</h4>
+        <PlaylistsGrid playlists={usersPlaylists.items} />
+      </div>
+      <div className="divider" />
+      <h4 className="font-black uppercase pb-2">Similar Music</h4>
+      <TracksGrid tracks={recommendations.tracks} />
     </>
   );
 };
