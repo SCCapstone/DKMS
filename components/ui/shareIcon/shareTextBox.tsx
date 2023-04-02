@@ -56,7 +56,7 @@ const ShareTextBox = ({
         <div className="flex items-center justify-between px-3 py-2">
           <button
             onClick={(e) => void handleSubmit(e)}
-            disabled={!postText || isMutating}
+            disabled={isMutating}
             type="submit"
             className={`${
               isMutating ? "loading" : ""
