@@ -2,13 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import FavoriteIcon from "@/components/ui/favoriteIcon";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
-
-import PlayButton from "../PlayButton";
 
 const checkIsFavorited = (trackId: string) =>
   fetchServer<SpotifyApi.CheckUsersSavedTracksResponse>(
