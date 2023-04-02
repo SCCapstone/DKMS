@@ -25,7 +25,7 @@ async function startPlaying(params: StartPlayingContextParams) {
     body: JSON.stringify({
       context_uri: params.contextUri,
       uris: params.uris,
-      offset: params,
+      offset: { uri: params.offset },
     }),
     cache: "no-cache",
   });

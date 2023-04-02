@@ -9,7 +9,11 @@ import PlayIcon from "./PlayIcon";
 
 import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
 
-const PlayButton = ({ uris, contextUri }: StartPlayingContextParams) => {
+const PlayButton = ({
+  uris,
+  contextUri,
+  offset,
+}: StartPlayingContextParams) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
@@ -25,6 +29,8 @@ const PlayButton = ({ uris, contextUri }: StartPlayingContextParams) => {
         await startPlaying({ uris, contextUri });
       } else if (uris) {
         await startPlaying({ uris });
+      } else if (offset) {
+        await startPlaying({ contextUri, offset });
       } else if (contextUri) {
         await startPlaying({ contextUri });
       }
