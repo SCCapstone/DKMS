@@ -18,7 +18,7 @@ const PlaybackPanel = ({ accessToken }: { accessToken: string }) => {
         <h2 className="normal-case font-bold">Playback</h2>
         <div className="divider" />
       </div>
-      <div className="pt-8">
+      <div className="flex-grow flex flex-col justify-center">
         <Player accessToken={accessToken} />
       </div>
     </div>
