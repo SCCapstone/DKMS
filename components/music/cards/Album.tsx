@@ -2,11 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
-
-import PlayButton from "../PlayButton";
 
 const Album = async ({
   album,
