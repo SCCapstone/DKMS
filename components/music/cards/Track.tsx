@@ -92,7 +92,7 @@ const Track = async ({
       </figure>
       <div className="card-body relative">
         <div className="card-actions justify-end">
-          <PlayButton uris={[track.uri]} contextUri={undefined} />
+          <PlayButton contextUri={track.album.uri} offset={track.uri} />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={track.id} musicItemType="track" />
