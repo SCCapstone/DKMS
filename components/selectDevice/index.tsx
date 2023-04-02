@@ -1,7 +1,7 @@
 import getAvailableDevices from "@/lib/device/getAvaliableDevices";
 import getPlaybackState from "@/lib/device/getPlaybackState";
 
-import DeviceList from "./deviceList";
+import DeviceList from "./DeviceList";
 
 const SelectDevice = async () => {
   const currentDevice = await getPlaybackState();
