@@ -24,31 +24,19 @@ const PlayButton = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (offset) {
-      await startPlaying({ contextUri, offset });
-    } else if (uris && contextUri) {
-      await startPlaying({ uris, contextUri });
-    } else if (contextUri) {
-      await startPlaying({ contextUri });
-    } else if (uris) {
-      await startPlaying({ uris });
-    }
-
-    /*
     try {
-      if (uris && contextUri) {
-        await startPlaying({ uris, contextUri });
-      } else if (uris) {
-        await startPlaying({ uris });
-      } else if (offset) {
+      if (offset) {
         await startPlaying({ contextUri, offset });
+      } else if (uris && contextUri) {
+        await startPlaying({ uris, contextUri });
       } else if (contextUri) {
         await startPlaying({ contextUri });
+      } else if (uris) {
+        await startPlaying({ uris });
       }
     } catch (error) {
       //   Button will not do anything if there is no active device
     }
-    */
 
     setIsFetching(false);
     startTransition(() => {
