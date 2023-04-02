@@ -62,6 +62,16 @@ const PlaybackIcon = ({
     {getSvg("playback", { width, height, selected })}
   </IconButton>
 );
+const QueueIcon = ({
+  selected,
+  width = DEFAULT_SIZE,
+  height = DEFAULT_SIZE,
+  onClick,
+}: IconProps) => (
+  <IconButton onClick={onClick}>
+    {getSvg("queue", { width, height, selected })}
+  </IconButton>
+);
 
 const SidebarIcons = ({
   onChange,
@@ -85,6 +95,12 @@ const SidebarIcons = ({
     <PlaybackIcon
       selected={currentSelection === "playback"}
       onClick={() => onChange("playback")}
+    />
+    <QueueIcon
+      selected={currentSelection === "queue"}
+      onClick={() => onChange("queue")}
+      width={20}
+      height={20}
     />
   </>
 );

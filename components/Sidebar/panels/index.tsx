@@ -1,3 +1,5 @@
+import Queue from "@/components/Sidebar/panels/Queue";
+
 import Friends from "./Friends";
 import Notifications from "./Notifications";
 import Playback from "./Playback";
@@ -10,6 +12,8 @@ const SidebarPanels = ({ isDesktop }: { isDesktop?: boolean }) => (
     <Notifications />
     {/* @ts-expect-error Next 13 handles async components */}
     <Playback />
+    {/* @ts-expect-error Next 13 handles async components */}
+    <Queue />
   </div>
 );
 
