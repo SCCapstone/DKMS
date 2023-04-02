@@ -3,11 +3,9 @@ import Device from "./device";
 const DeviceList = ({
   deviceList,
   currentDevice,
-  isPlaying,
 }: {
   deviceList: SpotifyApi.UserDevice[];
-  currentDevice: SpotifyApi.UserDevice;
-  isPlaying: boolean;
+  currentDevice: SpotifyApi.CurrentPlaybackResponse | undefined;
 }) => (
   <>
     <h3 className="text-lg font-bold">Select a device</h3>
@@ -16,8 +14,8 @@ const DeviceList = ({
         <Device
           key={device.id}
           device={device}
-          currentDevice={currentDevice}
-          isPlaying={isPlaying}
+          currentDeviceId={currentDevice?.device.id ?? ""}
+          isPlaying={currentDevice?.is_playing ?? false}
         />
       ))}
     </div>

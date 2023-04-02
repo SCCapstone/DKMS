@@ -7,11 +7,11 @@ import transferPlayback from "@/lib/device/transferPlayback";
 
 const Device = ({
   device,
-  currentDevice,
+  currentDeviceId,
   isPlaying,
 }: {
   device: SpotifyApi.UserDevice;
-  currentDevice: SpotifyApi.UserDevice;
+  currentDeviceId: string;
   isPlaying: boolean;
 }) => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const Device = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    if (currentDevice.id === device.id) {
+    if (currentDeviceId === device.id) {
       return;
     }
     if (isPlaying) {
@@ -45,7 +45,7 @@ const Device = ({
       disabled={isMutating}
       onClick={(e) => void handleClick(e)}
     >
-      {`${device.name} ${currentDevice.id === device.id ? "[Current]" : ""}`}
+      {`${device.name} ${currentDeviceId === device.id ? "[Current]" : ""}`}
     </button>
   );
 };
