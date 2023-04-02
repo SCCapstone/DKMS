@@ -1,12 +1,10 @@
-import BasePanel from "../BasePanel";
+import getServerAccessToken from "@/lib/getServerAccessToken";
 
-const Playback = () => {
-  const text = "Coming soon...";
-  return (
-    <BasePanel title="Playback" sidebarId="playback">
-      <p>{text}</p>
-    </BasePanel>
-  );
+import PlaybackPanel from "./PlaybackPanel";
+
+const Playback = async () => {
+  const accessToken = await getServerAccessToken();
+  return <PlaybackPanel accessToken={accessToken} />;
 };
 
 export default Playback;
