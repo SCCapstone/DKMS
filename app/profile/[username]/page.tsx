@@ -3,12 +3,17 @@ import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { ArtistsGrid, TracksGrid } from "@/components/music/grids";
+import {
+  ArtistsGrid,
+  PlaylistsGrid,
+  TracksGrid,
+} from "@/components/music/grids";
 import ProfileHead from "@/components/profile/ProfileHead";
 import fetchServer from "@/lib/fetch/fetchServer";
 import { profilesCol } from "@/lib/firestore";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
+import getPlaylistsForUser from "@/lib/getPlaylistsForUser";
 import {
   getCurrentUser,
   getIdFromUsername,
@@ -62,6 +67,8 @@ const Profile = async ({ params }: { params: { username: string } }) => {
 
   const isCurrentUser = username === currentUsername;
 
+  const usersPlaylists = await getPlaylistsForUser(username, 8);
+
   const { data, averageAudioFeatures, recommendations } = await getData(
     profileId
   );
@@ -95,13 +102,13 @@ const Profile = async ({ params }: { params: { username: string } }) => {
           <ArtistsGrid artists={data.topArtists.splice(0, 8)} isHalf />
         </div>
       </div>
-      {!isCurrentUser && (
-        <>
-          <div className="divider" />
-          <h4 className="font-black uppercase pb-2">Similar Music</h4>
-          <TracksGrid tracks={recommendations.tracks} />
-        </>
-      )}
+      <div>
+        <h4 className="font-black uppercase pb-2">Playlists</h4>
+        <PlaylistsGrid playlists={usersPlaylists.items} />
+      </div>
+      <div className="divider" />
+      <h4 className="font-black uppercase pb-2">Similar Music</h4>
+      <TracksGrid tracks={recommendations.tracks} />
     </>
   );
 };

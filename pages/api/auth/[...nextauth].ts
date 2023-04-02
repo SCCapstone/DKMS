@@ -111,13 +111,13 @@ const SCOPES = [
   // "playlist-modify-public",
   "user-follow-modify",
   "user-follow-read",
-  // "user-read-playback-position",
+  "user-read-playback-position",
   "user-top-read",
   "user-read-recently-played",
   "user-library-modify",
   "user-library-read",
-  // "user-read-email",
-  // "user-read-private",
+  "user-read-email",
+  "user-read-private",
 ] as const;
 
 export const authOptions: NextAuthOptions = {
