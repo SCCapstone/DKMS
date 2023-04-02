@@ -153,36 +153,52 @@ declare global {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
     interface Chainable {
       /**
-       * Custom command to log in to Spotify and store the session data.
-       * @param username Spotify username
-       * @param password Spotify password
-       * @example cy.login('username', 'password');
+       * Create a next-auth session cookie.
+       *
+       * This is recommended for all tests that require a logged in user.
        */
-      login(username: string, password: string): Chainable<JQuery>;
+      auth(): Chainable<JQuery>;
 
       /**
-       * Custom command to log in to Spotify using environment variables.
+       * Log in to Spotify using the provided credentials
+       * and store the session data.
+       *
+       * NOTE: This command is not recommended for CI use, because
+       * Spotify will block the account if it is used too many times.
+       *
+       * @param email Spotify email
+       * @param password Spotify password
+       * @example cy.login('email', 'password');
+       */
+      login(email: string, password: string): Chainable<JQuery>;
+
+      /**
+       * Log in to Spotify using environment variables.
+       *
+       * NOTE: This command is not recommended for CI use, because
+       * Spotify will block the account if it is used too many times.
+       *
+       * This command requires the following environment variables to be set:
+       * - `credentials.username`
+       * - `credentials.password`
+       *
        * @example cy.envLogin();
+       *
        */
       envLogin(): Chainable<JQuery>;
 
       /**
-       * Custom command to log out of Spotify and clear the session data.
+       * Log out of Spotify and clear the session data.
        * @example cy.logout();
        */
       logout(): Chainable<JQuery>;
 
       /**
-       * Custom command to navigate to a page by clicking on the menu bar.
+       * Navigate to a page by clicking on the menu bar.
        * @param page Text to click on
        * @example cy.navbarClick('Profile');
        */
       navbarClick(page: string): Chainable<JQuery>;
-
-      /**
-       * Custom command to create a mock session.
-       */
-      auth(): Chainable<JQuery>;
     }
   }
 }
