@@ -5,13 +5,15 @@ import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
 
-const AlbumView = ({
+import type { FilteredDataTrack } from "./page";
+
+const PlaylistView = ({
   playlist,
   tracks,
   averageAudioFeatures,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
-  tracks: SpotifyApi.TrackObjectFull[];
+  tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
@@ -47,4 +49,4 @@ const AlbumView = ({
   </>
 );
 
-export default AlbumView;
+export default PlaylistView;
