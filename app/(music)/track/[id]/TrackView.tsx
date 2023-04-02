@@ -39,7 +39,7 @@ const TrackView = ({
           ),
         buttons: (
           <>
-            <PlayButton uris={[track.uri]} />
+            <PlayButton contextUri={track.album.uri} offset={track.uri} />
             <Link
               className="btn btn-primary btn-outline w-full"
               href={`/album/${track.album.id}`}
