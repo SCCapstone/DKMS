@@ -1,9 +1,9 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDate, formatDuration } from "@/lib/formatters";
 
-import type { FilteredDataTrack } from "@/app/(music)/playlist/[id]/page";
-
 import PlayButton from "../PlayButton";
+
+import type { FilteredDataTrack } from "@/app/(music)/playlist/[id]/page";
 
 const TrackList = ({
   tracks,
