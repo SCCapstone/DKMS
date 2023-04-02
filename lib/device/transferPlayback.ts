@@ -1,21 +1,15 @@
-import putSpotifyData from "../putSpotifyData";
+import fetchClient from "@/lib/fetch/fetchClient";
 
-const transferPlayback = async (deviceId: string) => {
-  const response = await putSpotifyData(
-    "https://api.spotify.com/v1/me/player",
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        device_ids: [deviceId],
-        play: false,
-      }),
-    }
-  );
-
-  return response.ok;
-};
+const transferPlayback = async (
+  deviceId: string | null,
+  startPlaying: boolean
+) =>
+  fetchClient(`https://api.spotify.com/v1/me/player`, {
+    method: "PUT",
+    body: JSON.stringify({
+      device_ids: [deviceId],
+      play: startPlaying,
+    }),
+  });
 
 export default transferPlayback;

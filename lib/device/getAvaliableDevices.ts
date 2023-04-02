@@ -1,25 +1,10 @@
-import putSpotifyData from "../putSpotifyData";
+import fetchServer from "@/lib/fetch/fetchServer";
 
-type Device = {
-  id: string;
-  name: string;
-};
-
-type GetDevicesResponse = {
-  devices: Device[];
-};
-
-const getAvailableDevices = async (): Promise<Device[]> => {
-  const response: Response = await putSpotifyData(
-    "https://api.spotify.com/v1/me/player/devices",
-    {
-      headers: {},
-    }
+const getAvailableDevices = async () => {
+  const devices = await fetchServer<SpotifyApi.UserDevicesResponse>(
+    `https://api.spotify.com/v1/me/player/devices`
   );
-
-  const data = (await response.json()) as GetDevicesResponse;
-
-  return data.devices;
+  return devices.devices.filter((device) => device.id !== null);
 };
 
 export default getAvailableDevices;
