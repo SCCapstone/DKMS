@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import deleteFeedItem from "@/lib/feed/deleteFeedItem";
-import { unsaveFeedItem } from "@/lib/savedFeedItems";
+import unsaveFeedItem from "@/lib/savedFeedItems/unsaveFeedItem";
 
 const DeleteButton = ({
   userId,

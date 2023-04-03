@@ -29,6 +29,11 @@ declare module "next-auth" {
      * be hidden from search + global feed?
      */
     visibility: "public" | "private";
+    /**
+     * The Spotify product of the user — free or premium
+     * (used for determining if they can manage playback)
+     */
+    product: "free" | "premium";
   }
 
   interface Session extends DefaultSession {

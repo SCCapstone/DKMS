@@ -1,4 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
+import { cache } from "react";
 
 import firestore from "@/lib/firestore";
 
@@ -7,7 +8,7 @@ import getFeedComments from "./getFeedComments";
 import type { FirestoreFeedItem } from "../firestore/types";
 import type { DocumentReference } from "firebase/firestore";
 
-const findFeedItem = async (itemId: string) => {
+const findFeedItem = cache(async (itemId: string) => {
   const docRef = doc(
     firestore,
     "feed_items",
@@ -21,6 +22,6 @@ const findFeedItem = async (itemId: string) => {
   }
 
   return null;
-};
+});
 
 export default findFeedItem;
