@@ -4,7 +4,70 @@ describe("Navigation", () => {
     cy.auth();
   });
 
-  it("should navigate to the Settings page", () => {
+  it("should start on the feed page", () => {
+    // Start from the index page
+    cy.visit("/");
+    // The new page should contain an h1 with "Friends"
+    cy.get("h1").contains("Friends");
+  });
+
+  it("should navigate to the discover page", () => {
+    // Start from the index page
+    cy.visit("/");
+
+    // Find a link with an href attribute containing "discover" and click it
+    cy.navbarClick("Discover");
+
+    // The new url should include "/discover"
+    cy.url().should("include", "/discover");
+
+    // The new page should contain an h1 with "Discover"
+    cy.get("h1").contains("Discover");
+  });
+
+  it("should navigate to the profile page", () => {
+    // Start from the index page
+    cy.visit("/");
+
+    // Find a link with an href attribute containing "profile" and click it
+    cy.navbarClick("Profile");
+
+    // The new url should include "/profile"
+    cy.url().should("include", "/profile");
+
+    // The new page should contain an h1 with "Profile"
+    cy.get("h1").contains("Profile");
+  });
+
+  it("should navigate to the search page", () => {
+    // Start from the index page
+    cy.visit("/");
+
+    // Find a link with an href attribute containing "search" and click it
+    cy.navbarClick("Search");
+
+    // The new url should include "/search"
+    cy.url().should("include", "/search");
+
+    // The new page should contain an h1 with "Search"
+    cy.get("h1").contains("Search");
+  });
+
+  it("should navigate to the recommendations page", () => {
+    // Start from the index page
+    cy.visit("/");
+
+    // Find a link with an href attribute containing "recommendations" and click it
+    cy.navbarClick("Recommendations");
+
+    // The new url should include "/recommendations"
+    cy.url().should("include", "/recommendations");
+
+    // The new page should contain an h1 with "Recommendations"
+    cy.get("h1").contains("Recommendations");
+  });
+
+  it("should navigate to the settings page", () => {
     // Start from the index page
     cy.visit("/");
 

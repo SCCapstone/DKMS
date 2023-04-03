@@ -36,14 +36,20 @@ const getData = async (id: string) => {
 
   const data = profileDoc.data();
 
+  const { topTracks } = data;
+
+  const recommendations = await getRecommendationsForUser(id, 8);
+
+  if (topTracks.length === 0) {
+    return { data, averageAudioFeatures: undefined, recommendations };
+  }
+
   const audioFeatures =
     await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
-      `https://api.spotify.com/v1/audio-features?ids=${data.topTracks
+      `https://api.spotify.com/v1/audio-features?ids=${topTracks
         .map((track) => track.id)
         .join(",")}`
     );
-
-  const recommendations = await getRecommendationsForUser(id, 8);
 
   const averageAudioFeatures = getAverageAudioFeatures(audioFeatures);
 
@@ -110,6 +116,50 @@ const Profile = async ({ params }: { params: { username: string } }) => {
   const { data, averageAudioFeatures, recommendations } = await getData(
     profileId
   );
+
+  const { topTracks, topArtists } = data;
+  const notEnoughData =
+    topTracks.length === 0 || topArtists.length === 0 || !averageAudioFeatures;
+
+  if (notEnoughData) {
+    return (
+      <>
+        <ProfileHead
+          displayName={dkmsProfile.name}
+          username={username}
+          followers={spotifyData.followers?.total}
+          link={spotifyData.external_urls.spotify}
+        />
+        <FollowButton
+          isFollowing={isFollowed}
+          username={username}
+          followType="user"
+        />
+        <div className="divider" />
+        <div className="alert alert-info shadow-lg">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="stroke-current flex-shrink-0 w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>
+              This user does not have any top music! Encourage them to listen to
+              more on Spotify :)
+            </span>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

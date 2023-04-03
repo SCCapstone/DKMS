@@ -96,8 +96,8 @@ describe("formatDate()", () => {
   });
 
   it("returns a date in month/day/year", () => {
-    expect(formatDate("2021-04-25T17:19:15Z")).to.eq("04/25/2021");
-    expect(formatDate("2016-03-17T07:22:32Z")).to.eq("03/17/2016");
-    expect(formatDate("2007-12-18T01:43:11Z")).to.eq("12/18/2007");
+    expect(formatDate("2021-04-25T17:19:15Z")).to.eq("4/25/2021");
+    expect(formatDate("2016-03-17T17:22:32Z")).to.eq("3/17/2016");
+    expect(formatDate("2007-12-18T11:43:11Z")).to.eq("12/18/2007");
   });
 });

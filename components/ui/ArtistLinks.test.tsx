@@ -116,11 +116,13 @@ describe("<ArtistLinks />", () => {
       />
     );
 
-    cy.get("a").should("have.length", 1);
-    cy.get("a").should("have.text", "RAYE");
-    cy.get("a").should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
+    cy.get("a").should("have.length", 4);
+    cy.get("a").eq(0).should("have.text", "RAYE");
+    cy.get("a")
+      .eq(0)
+      .should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
 
-    cy.get("span").should("have.text", "& 3 more");
+    cy.get("button").should("have.text", "3 more");
   });
 
   it("removes duplicate artists", () => {
