@@ -11,8 +11,8 @@ const postFeedItem = async (
   musicItemType?: "track" | "playlist" | "artist" | "album" | undefined
 ) => {
   const docRef = await addDoc(feedCol, {
-    musicItemId,
-    musicItemType,
+    ...(musicItemId ? { musicItemId } : {}),
+    ...(musicItemType ? { musicItemType } : {}),
     content,
     userId: user.id,
     username: user.username,

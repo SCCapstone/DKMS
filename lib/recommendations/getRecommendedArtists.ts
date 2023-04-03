@@ -1,7 +1,6 @@
-import { doc, getDoc } from "firebase/firestore";
+import { getCachedProfileDoc } from "@/lib/firestore/cache";
 
 import fetchServer from "../fetch/fetchServer";
-import { profilesCol } from "../firestore";
 
 const DEFAULT_ARTIST = "4NHQUGzhtTLFvgF5SZesLK";
 
@@ -13,7 +12,7 @@ const getRecommendedArtistData = async (id: string, limit?: number) => {
 };
 
 const getRecommendedArtists = async (userId: string, limit?: number) => {
-  const profile = await getDoc(doc(profilesCol, userId));
+  const profile = await getCachedProfileDoc(userId);
 
   if (!profile.exists()) {
     return getRecommendedArtistData(DEFAULT_ARTIST, limit);

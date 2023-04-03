@@ -1,10 +1,7 @@
-import { doc, getDoc } from "firebase/firestore";
-
-import { profilesCol } from "@/lib/firestore";
+import { getCachedProfileDoc } from "@/lib/firestore/cache";
 
 const getSavedItemIds = async (userId: string) => {
-  const docRef = doc(profilesCol, userId);
-  const profile = await getDoc(docRef);
+  const profile = await getCachedProfileDoc(userId);
 
   const data = profile.data();
 

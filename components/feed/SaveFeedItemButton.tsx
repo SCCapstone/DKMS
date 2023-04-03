@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { saveFeedItem, unsaveFeedItem } from "@/lib/savedFeedItems";
+import saveFeedItem from "@/lib/savedFeedItems/saveFeedItem";
+import unsaveFeedItem from "@/lib/savedFeedItems/unsaveFeedItem";
 
 const SaveFeedItemButton = ({
   userId,

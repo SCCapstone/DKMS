@@ -148,6 +148,7 @@ export const authOptions: NextAuthOptions = {
         name: profile.display_name ?? profile.id,
         username: profile.id,
         visibility: "public",
+        product: profile.product === "premium" ? "premium" : "free",
       }),
     }),
   ],

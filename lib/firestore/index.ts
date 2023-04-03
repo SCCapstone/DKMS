@@ -11,15 +11,28 @@ import type {
 } from "./types";
 import type { DocumentData, CollectionReference } from "firebase/firestore";
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyA4I6SntGUr8boAz8_UsIhoWspRrjMWuxY",
-  authDomain: "dkms-spotify.firebaseapp.com",
-  projectId: "dkms-spotify",
-  storageBucket: "dkms-spotify.appspot.com",
-  messagingSenderId: "183020545123",
-  appId: "1:183020545123:web:457c0adaf0c3855b510456",
-  measurementId: "G-GDN3X0HN0L",
+const firebaseDevConfig = {
+  apiKey: "AIzaSyC4iFSz6W7HWZMS9f7ucDq3pdTjv_ftFdo",
+  authDomain: "dkms-dev-40360.firebaseapp.com",
+  projectId: "dkms-dev-40360",
+  storageBucket: "dkms-dev-40360.appspot.com",
+  messagingSenderId: "519500986185",
+  appId: "1:519500986185:web:ec957a6240f768c7d30c98",
 };
+
+const firebaseProdConfig = {
+  apiKey: "AIzaSyAdTuRQaAToqGWR-m87i5CLYbACvP_iCB4",
+  authDomain: "dkms-prod.firebaseapp.com",
+  projectId: "dkms-prod",
+  storageBucket: "dkms-prod.appspot.com",
+  messagingSenderId: "213938533244",
+  appId: "1:213938533244:web:4ab1764b63e2d9e540eaf9",
+};
+
+export const firebaseConfig =
+  process.env.NODE_ENV === "development"
+    ? firebaseDevConfig
+    : firebaseProdConfig;
 
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);

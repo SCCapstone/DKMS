@@ -3,14 +3,15 @@ import {
   PlaylistsGrid,
   TracksGrid,
 } from "@/components/music/grids";
+import RecommendationFilterButtons from "@/components/RecommendationFilterButtons";
 import PageTitle from "@/components/ui/PageTitle";
 import fetchServer from "@/lib/fetch/fetchServer";
 import { getCurrentUser } from "@/lib/getUser";
 import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 import getRecommendedArtists from "@/lib/recommendations/getRecommendedArtists";
 
-const getData = async (userId: string) => {
-  const recommendations = await getRecommendationsForUser(userId, 8);
+const getData = async (userId: string, target?: string) => {
+  const recommendations = await getRecommendationsForUser(userId, 8, target);
   const recommendedArtists = await getRecommendedArtists(userId, 8);
   const featuredPlaylists =
     await fetchServer<SpotifyApi.ListOfFeaturedPlaylistsResponse>(
@@ -19,13 +20,20 @@ const getData = async (userId: string) => {
 
   return { recommendations, recommendedArtists, featuredPlaylists };
 };
-const Recommendations = async () => {
+const Recommendations = async ({
+  searchParams,
+}: {
+  searchParams: {
+    /** Filter by saved items */ target: string | undefined;
+  };
+}) => {
   const user = await getCurrentUser();
-  const data = await getData(user.id);
+  const data = await getData(user.id, searchParams.target);
 
   return (
     <>
       <PageTitle title="Recommendations" />
+      <RecommendationFilterButtons />
       <h4 className="font-black uppercase pb-2">Recommended Songs</h4>
       <TracksGrid tracks={data.recommendations.tracks} />
       <div className="divider" />

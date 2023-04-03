@@ -1,4 +1,3 @@
-import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
@@ -10,7 +9,7 @@ import {
 } from "@/components/music/grids";
 import ProfileHead from "@/components/profile/ProfileHead";
 import fetchServer from "@/lib/fetch/fetchServer";
-import { profilesCol } from "@/lib/firestore";
+import { getCachedProfileDoc } from "@/lib/firestore/cache";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
 import getPlaylistsForUser from "@/lib/getPlaylistsForUser";
@@ -30,7 +29,7 @@ const getSpotifyProfile = async (username: string) =>
   );
 
 const getData = async (id: string) => {
-  const profileDoc = await getDoc(doc(profilesCol, id));
+  const profileDoc = await getCachedProfileDoc(id);
   if (!profileDoc.exists()) {
     notFound();
   }
@@ -52,20 +51,59 @@ const getData = async (id: string) => {
 };
 
 const Profile = async ({ params }: { params: { username: string } }) => {
-  const currentUsername = (await getCurrentUser()).username;
+  const currentUser = await getCurrentUser();
+  const currentUsername = currentUser.username;
   const { username } = params;
 
   const profileId = await getIdFromUsername(username);
   if (!profileId) {
     notFound();
   }
+  const isCurrentUser = username === currentUsername;
 
   const dkmsProfile = await getDkmsProfile(profileId);
   const spotifyData = await getSpotifyProfile(username);
+  const isPrivate = dkmsProfile.visibility === "private";
+
+  const hideUser = !isCurrentUser && isPrivate;
 
   const isFollowed = await isUserFollowing(username, "user");
-
-  const isCurrentUser = username === currentUsername;
+  if (hideUser) {
+    return (
+      <>
+        <ProfileHead
+          displayName={dkmsProfile.name}
+          username={username}
+          followers={spotifyData.followers?.total}
+          link={spotifyData.external_urls.spotify}
+        />
+        <FollowButton
+          isFollowing={isFollowed}
+          username={username}
+          followType="user"
+        />
+        <div className="divider" />
+        <div className="alert alert-warning shadow-lg">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span>This user is private!</span>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   const usersPlaylists = await getPlaylistsForUser(username, 8);
 

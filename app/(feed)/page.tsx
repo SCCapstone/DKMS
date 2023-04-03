@@ -2,7 +2,7 @@ import FeedPage from "@/components/feed";
 import PageTitle from "@/components/ui/PageTitle";
 import getFeedItems from "@/lib/feed/getFeedItems";
 import { getCurrentUser } from "@/lib/getUser";
-import { getSavedItemIds } from "@/lib/savedFeedItems";
+import getSavedItemIds from "@/lib/savedFeedItems/getSavedItemIds";
 
 const Feed = async ({
   searchParams,
