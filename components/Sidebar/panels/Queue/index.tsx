@@ -9,7 +9,7 @@ const Queue = async () => {
   // We need to disable this rule because we're checking for null
   // values in the next line, but TypeScript doesn't know that.
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (!queue)
+  if (!queue || queue.length === 0)
     return (
       <BasePanel title="Queue" sidebarId="queue">
         <p>Nothing is playing!</p>
