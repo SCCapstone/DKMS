@@ -9,9 +9,9 @@ DKMS is a social media-focused web application for Spotify. This [application](h
 In order to build this project you first have to install:
 
 - [Node.js](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com)
+- [Yarn](https://yarnpkg.com) (v1.x)
 
-The recommended way to get started is to use [Volta](https://volta.sh) to install both Node and Yarn.
+The recommended way to get started is to use [Volta](https://volta.sh) to install both Node and Yarn@1.
 
 ## Setup
 
@@ -25,19 +25,28 @@ This will also configure Husky, used to run pre-commit checks.
 
 ### Environment Variables
 
-Two environment variable files are required:
+Four environment variable files are required, three of which are not checked in to version control:
 
 - `.env` — for all public environment variables
   - `SPOTIFY_CLIENT_ID`
   - `NEXTAUTH_URL`
-- `.env.local` — for all private env secrets
+- `.env.{development,production}.local` — for all private env secrets
   - `NEXTAUTH_SECRET`
   - `SPOTIFY_CLIENT_SECRET`
   - `FIREBASE_PROJECT_ID`
   - `FIREBASE_CLIENT_EMAIL`
   - `FIREBASE_PRIVATE_KEY`
+  - `FIRESTORE_API_KEY`
+- `cypress.env.json` — specific Cypress E2E test env vars
+  - `session` — object containing:
+    - `secret`
+    - `accessToken`
+    - `refreshToken`
+  - `credentials` — object containing:
+    - `email`
+    - `password`
 
-For more information about environment variable files, see https://nextjs.org/docs/basic-features/environment-variables.
+For more information about environment variable files, see https://nextjs.org/docs/basic-features/environment-variables. Contact the developers for env files needed for debugging.
 
 ## Running
 
