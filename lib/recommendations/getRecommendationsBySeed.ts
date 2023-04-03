@@ -4,13 +4,22 @@ const getRecommendationsBySeed = async ({
   seedArtists,
   seedTracks,
   limit = 20,
+  target,
 }: {
   seedArtists: string[] | string;
   seedTracks: string[] | string;
   limit?: number;
-}) =>
-  fetchServer<SpotifyApi.RecommendationsFromSeedsResponse>(
-    `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists.toString()}&seed_tracks=${seedTracks.toString()}&limit=${limit.toString()}`
+  target?: { key: string; value: number };
+}) => {
+  const urlParams = new URLSearchParams({
+    seed_artists: seedArtists.toString(),
+    seed_tracks: seedTracks.toString(),
+    limit: limit.toString(),
+  });
+  if (target) urlParams.append(target.key, target.value.toString());
+  return fetchServer<SpotifyApi.RecommendationsFromSeedsResponse>(
+    `https://api.spotify.com/v1/recommendations?${urlParams.toString()}`
   );
+};
 
 export default getRecommendationsBySeed;
