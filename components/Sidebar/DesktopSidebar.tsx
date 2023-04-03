@@ -1,7 +1,7 @@
 import { getDocs, query, where } from "firebase/firestore";
 
 import { notificationsCol } from "@/lib/firestore";
-import { getCurrentUser } from "@/lib/getUser";
+import { getCurrentUser, getCurrentUserPremium } from "@/lib/getUser";
 
 import SidebarPanels from "./panels";
 import SidebarMenu from "./SidebarMenu";
@@ -15,11 +15,12 @@ const getNotificationAlert = async () => {
       ...doc.data(),
     }))
     .reverse();
-  return data.length === 0;
+  return data.length !== 0;
 };
 
 const DesktopSidebar = async () => {
   const notificationAlert = await getNotificationAlert();
+  const isPremium = await getCurrentUserPremium();
   return (
     <div className="hidden md:flex h-100% sticky top-0">
       <div className="h-screen sticky top-0 overflow-y-scroll">
@@ -27,7 +28,10 @@ const DesktopSidebar = async () => {
       </div>
       <div className="hidden md:block w-12 h-100% flex-col items-center gap-8 bg-primary text-primary-content">
         <div className="flex flex-col h-screen sticky top-0">
-          <SidebarMenu notificationAlert={notificationAlert} />
+          <SidebarMenu
+            notificationAlert={notificationAlert}
+            isPremium={isPremium}
+          />
         </div>
       </div>
     </div>

@@ -71,3 +71,12 @@ export const getCurrentUser = async () => {
 
   return getUserFromId(session.user.id);
 };
+
+/**
+ * Returns the currently logged in user's premium status.
+ */
+export const getCurrentUserPremium = async () => {
+  const user = await getCurrentUser();
+
+  return user.product === "premium";
+};

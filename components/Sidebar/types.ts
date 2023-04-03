@@ -3,6 +3,7 @@ const SIDEBAR_OPTIONS = [
   "notifications",
   "notificationsAlert",
   "playback",
+  "queue",
   "none",
 ] as const;
 

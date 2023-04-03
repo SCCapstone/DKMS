@@ -47,8 +47,8 @@ const NotificationsIcon = ({
 }: NotificationsIconProps) => (
   <IconButton onClick={onClick}>
     {notificationAlert
-      ? getSvg("notifications", { width, height, selected })
-      : getSvg("notificationsAlert", { width, height, selected })}
+      ? getSvg("notificationsAlert", { width, height, selected })
+      : getSvg("notifications", { width, height, selected })}
   </IconButton>
 );
 
@@ -62,15 +62,27 @@ const PlaybackIcon = ({
     {getSvg("playback", { width, height, selected })}
   </IconButton>
 );
+const QueueIcon = ({
+  selected,
+  width = DEFAULT_SIZE,
+  height = DEFAULT_SIZE,
+  onClick,
+}: IconProps) => (
+  <IconButton onClick={onClick}>
+    {getSvg("queue", { width, height, selected })}
+  </IconButton>
+);
 
 const SidebarIcons = ({
   onChange,
   currentSelection,
   notificationAlert,
+  isPremium,
 }: {
   onChange: (selection: SidebarOptions) => void;
   currentSelection: SidebarOptions;
   notificationAlert?: boolean;
+  isPremium?: boolean;
 }) => (
   <>
     <NotificationsIcon
@@ -82,10 +94,20 @@ const SidebarIcons = ({
       selected={currentSelection === "friends"}
       onClick={() => onChange("friends")}
     />
-    <PlaybackIcon
-      selected={currentSelection === "playback"}
-      onClick={() => onChange("playback")}
-    />
+    {isPremium && (
+      <>
+        <PlaybackIcon
+          selected={currentSelection === "playback"}
+          onClick={() => onChange("playback")}
+        />
+        <QueueIcon
+          selected={currentSelection === "queue"}
+          onClick={() => onChange("queue")}
+          width={20}
+          height={20}
+        />
+      </>
+    )}
   </>
 );
 
