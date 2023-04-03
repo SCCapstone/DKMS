@@ -1,5 +1,6 @@
 import { getDocs, query, where } from "firebase/firestore";
 import { getServerSession } from "next-auth";
+import { cache } from "react";
 import "server-only";
 
 import { accountsCol } from "@/lib/firestore";
@@ -12,7 +13,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
  * @param userId the Firestore user ID to search for
  * @returns the Spotify username of the user with the given ID, or undefined if no user is found
  */
-export const getUsernameFromId = async (userId: string) => {
+export const getUsernameFromId = cache(async (userId: string) => {
   const q = query(accountsCol, where("userId", "==", userId));
 
   const snapshot = await getDocs(q);
@@ -20,7 +21,7 @@ export const getUsernameFromId = async (userId: string) => {
     return undefined;
   }
   return snapshot.docs[0].data().username;
-};
+});
 
 /**
  * Matches a Spotify username to a Firestore user ID.
@@ -28,7 +29,7 @@ export const getUsernameFromId = async (userId: string) => {
  * @param username the Spotify username to search for
  * @returns the Firestore user ID of the user with the given username, or undefined if no user is found
  */
-export const getIdFromUsername = async (username: string) => {
+export const getIdFromUsername = cache(async (username: string) => {
   const q = query(accountsCol, where("providerAccountId", "==", username));
 
   const snapshot = await getDocs(q);
@@ -36,7 +37,7 @@ export const getIdFromUsername = async (username: string) => {
     return undefined;
   }
   return snapshot.docs[0].data().userId;
-};
+});
 
 /**
  * Returns the user data for the given DKMS user ID.

@@ -1,4 +1,5 @@
 import { getDocs, orderBy, query } from "firebase/firestore";
+import { cache } from "react";
 
 import { feedCol } from "@/lib/firestore";
 import getFollowedUsers from "@/lib/followers/getFollowedUsers";
@@ -38,47 +39,46 @@ const filterFeedDocs = async (
       publicIds.includes(doc.data().userId)
   );
 };
-const getFeedItems = async (params?: {
-  filterByFollowing?: boolean;
-  filterBySaved?: boolean;
-}) => {
-  const isPrivateFeed = params?.filterByFollowing ?? false;
-  const filterBySaved = params?.filterBySaved ?? false;
+const getFeedItems = cache(
+  async (params?: { filterByFollowing?: boolean; filterBySaved?: boolean }) => {
+    const isPrivateFeed = params?.filterByFollowing ?? false;
+    const filterBySaved = params?.filterBySaved ?? false;
 
-  const currentUserId = await getCurrentUser().then((user) => user.id);
-  const q = query(feedCol, orderBy("timestamp", "desc"));
-  const feedSnapshot = await getDocs(q);
+    const currentUserId = await getCurrentUser().then((user) => user.id);
+    const q = query(feedCol, orderBy("timestamp", "desc"));
+    const feedSnapshot = await getDocs(q);
 
-  const baseData = await filterFeedDocs(
-    feedSnapshot.docs,
-    currentUserId,
-    isPrivateFeed
-  );
+    const baseData = await filterFeedDocs(
+      feedSnapshot.docs,
+      currentUserId,
+      isPrivateFeed
+    );
 
-  const dataWithComments = await Promise.all(
-    baseData.map(async (doc) => {
-      const docId = doc.id;
-      const comments = await getFeedComments(docId);
-      const { musicItemId, musicItemType, ...data } = doc.data();
-      const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
-      return {
-        id: doc.id,
-        ...data,
-        comments,
-        musicItem,
-      };
-    })
-  );
+    const dataWithComments = await Promise.all(
+      baseData.map(async (doc) => {
+        const docId = doc.id;
+        const comments = await getFeedComments(docId);
+        const { musicItemId, musicItemType, ...data } = doc.data();
+        const musicItem = await getSpotifyFeedItem(musicItemId, musicItemType);
+        return {
+          id: doc.id,
+          ...data,
+          comments,
+          musicItem,
+        };
+      })
+    );
 
-  if (!filterBySaved) return dataWithComments;
+    if (!filterBySaved) return dataWithComments;
 
-  const savedItemIds = await getSavedItemIds(currentUserId);
+    const savedItemIds = await getSavedItemIds(currentUserId);
 
-  return dataWithComments.filter((post) =>
-    savedItemIds.includes(post.id.trim())
-  );
+    return dataWithComments.filter((post) =>
+      savedItemIds.includes(post.id.trim())
+    );
 
-  // return baseData;
-};
+    // return baseData;
+  }
+);
 
 export default getFeedItems;
