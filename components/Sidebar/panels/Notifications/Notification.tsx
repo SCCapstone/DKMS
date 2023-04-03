@@ -29,7 +29,7 @@ const Notification = ({
         </h4>
         <h5 className="text-xs text-primary">{timestamp}</h5>
       </header>
-      <p className="text-secondary">{body}</p>
+      <p className="text-primary">{body}</p>
       <div className="card-actions justify-end">
         <DismissButton notificationId={notificationId} />
       </div>
