@@ -89,7 +89,7 @@ const Track = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end">
+        <div className="card-actions justify-end flex flex-column">
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={track.id} musicItemType="track" />

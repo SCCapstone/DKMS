@@ -35,11 +35,6 @@ const FeedItem = ({
               <p>{data.username}</p>
             )}
             <p>{data.timestamp.toDate().toLocaleString()}</p>
-            {data.likedIds.length === 1 ? (
-              <p className="text-xs">Like: 1</p>
-            ) : (
-              <p className="text-xs">Likes: {data.likedIds.length}</p>
-            )}
           </div>
         </div>
       </div>

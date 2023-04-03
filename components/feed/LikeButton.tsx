@@ -66,6 +66,7 @@ const LikeButton = ({
           strokeLinejoin="round"
         />
       </svg>
+      {likes}
     </button>
   );
 };
