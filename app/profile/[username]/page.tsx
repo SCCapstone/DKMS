@@ -1,4 +1,3 @@
-import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 
 import FollowButton from "@/components/FollowButton";
