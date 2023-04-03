@@ -12,7 +12,7 @@ import type {
 import type { DocumentData, CollectionReference } from "firebase/firestore";
 
 const firebaseDevConfig = {
-  apiKey: "AIzaSyC4iFSz6W7HWZMS9f7ucDq3pdTjv_ftFdo",
+  apiKey: process.env.FIRESTORE_API_KEY,
   authDomain: "dkms-dev-40360.firebaseapp.com",
   projectId: "dkms-dev-40360",
   storageBucket: "dkms-dev-40360.appspot.com",
@@ -21,7 +21,7 @@ const firebaseDevConfig = {
 };
 
 const firebaseProdConfig = {
-  apiKey: "AIzaSyAdTuRQaAToqGWR-m87i5CLYbACvP_iCB4",
+  apiKey: process.env.FIRESTORE_API_KEY,
   authDomain: "dkms-prod.firebaseapp.com",
   projectId: "dkms-prod",
   storageBucket: "dkms-prod.appspot.com",
