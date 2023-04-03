@@ -42,7 +42,11 @@ import type { User } from "next-auth";
 // }
 
 Cypress.Commands.add("auth", () => {
-  cy.session("user.json", () => {
+  const fixtureFile = `user${
+    process.env.NODE_ENV === "development" ? "-development" : ""
+  }.json`;
+  cy.log(JSON.stringify(Cypress.env()));
+  cy.session(fixtureFile, () => {
     const session = Cypress.env("session") as
       | {
           refreshToken: string | undefined;
