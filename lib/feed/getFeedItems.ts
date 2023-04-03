@@ -4,7 +4,7 @@ import { feedCol } from "@/lib/firestore";
 import getFollowedUsers from "@/lib/followers/getFollowedUsers";
 import getPublicUsers from "@/lib/getPublicUsers";
 import { getCurrentUser } from "@/lib/getUser";
-import { getSavedItemIds } from "@/lib/savedFeedItems";
+import getSavedItemIds from "@/lib/savedFeedItems/getSavedItemIds";
 
 import getFeedComments from "./getFeedComments";
 import getSpotifyFeedItem from "./getSpotifyFeedItem";

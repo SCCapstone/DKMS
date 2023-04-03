@@ -1,8 +1,9 @@
-import { doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { getDocs, query, where } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 import "server-only";
 
-import { accountsCol, usersCol } from "@/lib/firestore";
+import { accountsCol } from "@/lib/firestore";
+import { getCachedUserDoc } from "@/lib/firestore/cache";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 /**
@@ -44,13 +45,13 @@ export const getIdFromUsername = async (username: string) => {
  * @returns The user data for the given ID
  */
 export const getUserFromId = async (userId: string) => {
-  const userData = await getDoc(doc(usersCol, userId));
+  const userDoc = await getCachedUserDoc(userId);
 
-  if (!userData.exists()) {
+  if (!userDoc.exists()) {
     throw new Error(`No user data for user ${userId}`);
   }
 
-  return { ...userData.data(), id: userData.id };
+  return { ...userDoc.data(), id: userDoc.id };
 };
 
 /**

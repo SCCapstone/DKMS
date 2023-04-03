@@ -10,7 +10,7 @@ import {
 } from "@/components/music/grids";
 import ProfileHead from "@/components/profile/ProfileHead";
 import fetchServer from "@/lib/fetch/fetchServer";
-import { profilesCol } from "@/lib/firestore";
+import { getCachedProfileDoc } from "@/lib/firestore/cache";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
 import getPlaylistsForUser from "@/lib/getPlaylistsForUser";
@@ -30,7 +30,7 @@ const getSpotifyProfile = async (username: string) =>
   );
 
 const getData = async (id: string) => {
-  const profileDoc = await getDoc(doc(profilesCol, id));
+  const profileDoc = await getCachedProfileDoc(id);
   if (!profileDoc.exists()) {
     notFound();
   }

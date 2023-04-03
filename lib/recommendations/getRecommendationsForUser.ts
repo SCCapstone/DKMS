@@ -1,6 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
-
-import { profilesCol } from "@/lib/firestore";
+import { getCachedProfileDoc } from "@/lib/firestore/cache";
 
 import getRecommendationsBySeed from "./getRecommendationsBySeed";
 import { TARGET_MAPPING } from "./recommendationTargets";
@@ -18,7 +16,7 @@ const getRecommendationsForUser = async (
   limit?: number,
   target?: string
 ) => {
-  const profile = await getDoc(doc(profilesCol, userId));
+  const profile = await getCachedProfileDoc(userId);
 
   if (!profile.exists()) {
     return getRecommendationsBySeed({

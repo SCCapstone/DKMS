@@ -1,12 +1,10 @@
-import { getDoc, doc } from "firebase/firestore";
-
 import UsernameLink from "@/components/ui/UsernameLink";
-import { profilesCol } from "@/lib/firestore";
+import { getCachedProfileDoc } from "@/lib/firestore/cache";
 
 import FriendItem from "./FriendItem";
 
 const getTopItems = async (id: string) => {
-  const profileDoc = await getDoc(doc(profilesCol, id));
+  const profileDoc = await getCachedProfileDoc(id);
   if (!profileDoc.exists()) {
     return undefined;
   }
