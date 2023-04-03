@@ -24,16 +24,22 @@ const getRecommendationsForUser = async (
       seedTracks: DEFAULT_TRACK,
     });
   }
+  const { topArtists, topTracks } = profile.data();
+
+  if (topArtists.length < 2 || topTracks.length < 2) {
+    return getRecommendationsBySeed({
+      seedArtists: DEFAULT_ARTIST,
+      seedTracks: DEFAULT_TRACK,
+    });
+  }
 
   const targetParam = isValidTarget(target)
     ? TARGET_MAPPING[target]
     : undefined;
 
-  const data = profile.data();
-
   return getRecommendationsBySeed({
-    seedArtists: data.topArtists.slice(0, 1).map((artist) => artist.id),
-    seedTracks: data.topTracks.slice(0, 2).map((track) => track.id),
+    seedArtists: topArtists.slice(0, 1).map((artist) => artist.id),
+    seedTracks: topTracks.slice(0, 2).map((track) => track.id),
     limit,
     target: targetParam,
   });
