@@ -62,6 +62,10 @@ To build and start in production mode, do:
 yarn build && yarn start
 ```
 
+### Playback
+
+Due to a technical limitation in Spotify's API, you must start playback on another device and then use DKMS to control it or transfer to your browser.
+
 # Deployment
 
 The recommended way to deploy this app is by using a cloud deployment platform such as [Vercel](https://vercel.com). Manual deployment instructions can be found on the Next.js website: https://nextjs.org/docs/deployment.
