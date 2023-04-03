@@ -18,9 +18,13 @@ const getRecommendedArtists = async (userId: string, limit?: number) => {
     return getRecommendedArtistData(DEFAULT_ARTIST, limit);
   }
 
-  const artists = profile.data().topArtists;
-  const randomIndex = Math.floor(Math.random() * artists.length);
-  const { id } = artists[randomIndex];
+  const { topArtists } = profile.data();
+
+  if (topArtists.length === 0) {
+    return getRecommendedArtistData(DEFAULT_ARTIST, limit);
+  }
+  const randomIndex = Math.floor(Math.random() * topArtists.length);
+  const { id } = topArtists[randomIndex];
 
   return getRecommendedArtistData(id, limit);
 };
