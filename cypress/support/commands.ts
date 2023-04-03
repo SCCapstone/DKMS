@@ -45,7 +45,6 @@ Cypress.Commands.add("auth", () => {
   const fixtureFile = `user${
     process.env.NODE_ENV === "development" ? "-development" : ""
   }.json`;
-  cy.log(JSON.stringify(Cypress.env()));
   cy.session(fixtureFile, () => {
     const session = Cypress.env("session") as
       | {
