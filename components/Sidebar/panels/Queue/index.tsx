@@ -1,9 +1,20 @@
 import Link from "next/link";
 
 import BasePanel from "@/components/Sidebar/panels/BasePanel";
+import { getCurrentUserPremium } from "@/lib/getUser";
 import getQueue from "@/lib/playback/getQueue";
 
 const Queue = async () => {
+  const isPremium = await getCurrentUserPremium();
+
+  if (!isPremium) {
+    return (
+      <BasePanel title="Queue" sidebarId="queue">
+        <p>Queue is a premium feature.</p>
+      </BasePanel>
+    );
+  }
+
   const { queue } = await getQueue();
 
   // We need to disable this rule because we're checking for null

@@ -8,9 +8,11 @@ import type { SidebarOptions } from "./types";
 const SidebarMenu = ({
   onChange,
   notificationAlert,
+  isPremium,
 }: {
   onChange?: (newSidebar: SidebarOptions) => void;
   notificationAlert?: boolean;
+  isPremium?: boolean;
 }) => {
   const [currentSidebar, setCurrentSidebar] = useSidebar();
 
@@ -25,6 +27,7 @@ const SidebarMenu = ({
       onChange={handleSidebarChange}
       currentSelection={currentSidebar}
       notificationAlert={notificationAlert}
+      isPremium={isPremium}
     />
   );
 };
