@@ -25,7 +25,7 @@ const FeedItem = ({
   <div id={data.id}>
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-row items-center pb-4">
+        <div className="flex flex-row items-top pb-4 pt-4">
           {/* @ts-expect-error Server Component */}
           <ProfileImage username={data.username} />
           <div>
@@ -36,11 +36,6 @@ const FeedItem = ({
             )}
             <p>{data.timestamp.toDate().toLocaleString()}</p>
           </div>
-        </div>
-        <div>
-          {currentUser.username === data.username && (
-            <DeleteButton userId={data.userId} postId={data.id} />
-          )}
         </div>
       </div>
       <p>{data.content}</p>
@@ -64,21 +59,22 @@ const FeedItem = ({
           )}
         </div>
       )}
-      <div className="flex flex-row justify-between items-center pt-30 pb-5 pl-15">
-        <div>
-          <LikeButton
-            userId={currentUser.id}
-            postId={data.id}
-            likes={data.likedIds.length}
-            likedIds={data.likedIds}
-            username={currentUser.username}
-          />
-        </div>
+      <div className="btn-group-horizontal pt-30 pb-5 pl-15">
+        <LikeButton
+          userId={currentUser.id}
+          postId={data.id}
+          likes={data.likedIds.length}
+          likedIds={data.likedIds}
+          username={currentUser.username}
+        />
         <SaveFeedItemButton
           userId={currentUser.id}
           postId={data.id}
           savedItemIds={savedItemIds}
         />
+        {currentUser.username === data.username && (
+          <DeleteButton userId={data.userId} postId={data.id} />
+        )}
       </div>
     </div>
     <div className="flex flex-col justify-start">

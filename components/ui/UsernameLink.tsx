@@ -7,10 +7,7 @@ const UsernameLink = ({
   username: string;
   children?: React.ReactNode;
 }) => (
-  <Link
-    className="link link-hover link-secondary"
-    href={`/profile/${username}`}
-  >
+  <Link className="link link-hover link-primary" href={`/profile/${username}`}>
     {children ?? username}
   </Link>
 );
