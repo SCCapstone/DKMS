@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { toast } from "react-hot-toast";
 
-import setDisplayName from "@/lib/setDisplayName";
+import setDisplayName from "@/lib/settings/setDisplayName";
 
 const DisplayNameCard = ({
   userId,

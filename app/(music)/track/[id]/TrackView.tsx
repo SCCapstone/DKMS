@@ -36,14 +36,11 @@ const TrackView = ({
               <Link href={`/album/${track.album.id}`}>{track.album.name}</Link>
             </p>
           ),
-        buttons: (
-          <Link
-            className="btn btn-primary btn-outline w-full"
-            href={`/album/${track.album.id}`}
-          >
-            View Album
-          </Link>
-        ),
+        musicItemId: track.id,
+        musicItemType: "track",
+        playbuttonContext: track.uri,
+        viewAlbum: true,
+        albumId: track.album.id,
       }}
       secondary={{
         imageUrl: artist.images[0].url,
@@ -53,6 +50,9 @@ const TrackView = ({
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,
+        musicItemId: track.artists[0].id,
+        musicItemType: "artist",
+        playbuttonContext: track.artists[0].uri,
       }}
     />
     <div className="divider" />

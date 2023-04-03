@@ -1,6 +1,9 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 
-const getData = (id: string, type: string) => {
+const getData = (
+  id: string,
+  type: "track" | "playlist" | "artist" | "album"
+) => {
   switch (type) {
     case "track":
       return fetchServer<SpotifyApi.TrackObjectFull>(
@@ -27,9 +30,8 @@ const getSpotifyFeedItem = async (
   musicItemId?: string,
   musicItemType?: "track" | "playlist" | "artist" | "album"
 ) => {
-  const type = musicItemType ?? "";
-  const id = musicItemId ?? "";
-  return getData(id, type);
+  if (!musicItemId || !musicItemType) return undefined;
+  return getData(musicItemId, musicItemType);
 };
 
 export default getSpotifyFeedItem;

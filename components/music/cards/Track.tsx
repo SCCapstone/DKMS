@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import PlayButton from "@/components/music/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import FavoriteIcon from "@/components/ui/favoriteIcon";
 import ShareIcon from "@/components/ui/shareIcon";
@@ -89,7 +90,8 @@ const Track = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end flex flex-column">
+        <div className="card-actions justify-end">
+          <PlayButton contextUri={track.album.uri} offset={track.uri} />
           <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={track.id} musicItemType="track" />

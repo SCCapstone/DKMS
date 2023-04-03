@@ -24,11 +24,24 @@ const getData = async (id: string) => {
         .join(",")}`
     );
 
+  const similarArtistsData =
+    await fetchServer<SpotifyApi.ArtistsRelatedArtistsResponse>(
+      `https://api.spotify.com/v1/artists/${id}/related-artists`
+    );
+  const similarArtists = similarArtistsData.artists.slice(0, 4);
+
   const averageAudioFeatures = getAverageAudioFeatures(audioFeatures);
 
   const isFollowing = await isUserFollowing(id, "artist");
 
-  return { artist, topTracks, albums, isFollowing, averageAudioFeatures };
+  return {
+    artist,
+    topTracks,
+    albums,
+    isFollowing,
+    averageAudioFeatures,
+    similarArtists,
+  };
 };
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -42,6 +55,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       albums={data.albums}
       isFollowing={data.isFollowing}
       averageAudioFeatures={data.averageAudioFeatures}
+      similarArtists={data.similarArtists}
     />
   );
 };

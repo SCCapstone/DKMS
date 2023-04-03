@@ -1,16 +1,18 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { TrackList } from "@/components/music/lists";
+import { OffsetTrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
 
-const AlbumView = ({
+import type { FilteredDataTrack } from "./page";
+
+const PlaylistView = ({
   playlist,
   tracks,
   averageAudioFeatures,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
-  tracks: SpotifyApi.TrackObjectFull[];
+  tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
 }) => (
   <>
@@ -31,13 +33,21 @@ const AlbumView = ({
             <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
           </p>
         ),
+        musicItemId: playlist.id,
+        musicItemType: "playlist",
+        playbuttonContext: playlist.uri,
       }}
     />
     <h4 className="font-black uppercase pb-2">Average Playlist Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <TrackList tracks={tracks} showNumber showAlbum />
+    <OffsetTrackList
+      contextUri={playlist.uri}
+      tracks={tracks}
+      showNumber
+      showAlbum
+    />
   </>
 );
 
-export default AlbumView;
+export default PlaylistView;

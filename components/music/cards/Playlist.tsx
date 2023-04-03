@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
+import PlayButton from "@/components/music/PlayButton";
 import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
@@ -46,33 +47,37 @@ const Playlist = async ({
   });
 
   return (
-    <Link
-      href={`/playlist/${playlist.id}`}
+    <div
       className={`card ${
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
       <figure className="relative aspect-square">
-        <Image
-          src={img}
-          alt={playlist.name}
-          fill
-          placeholder="blur"
-          blurDataURL={base64}
-        />
+        <Link href={`/playlist/${playlist.id}`}>
+          <Image
+            src={img}
+            alt={playlist.name}
+            fill
+            placeholder="blur"
+            blurDataURL={base64}
+          />
+        </Link>
       </figure>
       <div className="card-body relative">
         <div className="card-actions justify-end">
+          <PlayButton contextUri={playlist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
         </div>
-        <h2 className="text-lg truncate font-semibold">{playlist.name}</h2>
-        <p className={isCompact ? "text-sm truncate" : ""}>
-          {playlist.tracks.total}{" "}
-          {playlist.tracks.total === 1 ? "track" : "tracks"}
-        </p>
+        <Link href={`/playlist/${playlist.id}`}>
+          <h2 className="text-lg truncate font-semibold">{playlist.name}</h2>
+          <p className={isCompact ? "text-sm truncate" : ""}>
+            {playlist.tracks.total}{" "}
+            {playlist.tracks.total === 1 ? "track" : "tracks"}
+          </p>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 

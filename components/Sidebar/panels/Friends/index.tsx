@@ -1,12 +1,11 @@
-import "server-only";
+import getFollowedUsers from "@/lib/followers/getFollowedUsers";
 
-import getUsersFollowing from "@/lib/followers/getUsersFollowing";
+import BasePanel from "../BasePanel";
 
-import BasePanel from "./BasePanel";
 import Friend from "./Friend";
 
 const Friends = async () => {
-  const users = await getUsersFollowing();
+  const users = await getFollowedUsers();
   return (
     <BasePanel title="Friends" sidebarId="friends">
       <ul>

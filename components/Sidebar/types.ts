@@ -1,6 +1,7 @@
 const SIDEBAR_OPTIONS = [
   "friends",
   "notifications",
+  "notificationsAlert",
   "playback",
   "none",
 ] as const;

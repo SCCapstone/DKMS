@@ -9,6 +9,7 @@ const DEFAULT_TRACK = "0c6xIDDpzE81m2q797ordA";
 
 const getRecommendationsForUser = async (userId: string, limit?: number) => {
   const profile = await getDoc(doc(profilesCol, userId));
+
   if (!profile.exists()) {
     return getRecommendationsBySeed({
       seedArtists: DEFAULT_ARTIST,

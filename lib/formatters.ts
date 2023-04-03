@@ -36,3 +36,13 @@ export const formatDuration = (ms: number) => {
  */
 export const capitalize = (str: string) =>
   str.charAt(0).toLocaleUpperCase() + str.slice(1).toLocaleLowerCase();
+
+/**
+ * Takes in a date given by Spotify and returns it in month/day/year.
+ * @param date The date string from Spotify
+ * @returns The date in month/day/year
+ */
+export const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+};

@@ -11,6 +11,10 @@ type IconProps = {
   onClick: () => void;
 };
 
+type NotificationsIconProps = {
+  notificationAlert?: boolean;
+} & IconProps;
+
 const IconButton = ({
   children,
   onClick,
@@ -39,9 +43,12 @@ const NotificationsIcon = ({
   width = DEFAULT_SIZE,
   height = DEFAULT_SIZE,
   onClick,
-}: IconProps) => (
+  notificationAlert,
+}: NotificationsIconProps) => (
   <IconButton onClick={onClick}>
-    {getSvg("notifications", { width, height, selected })}
+    {notificationAlert
+      ? getSvg("notifications", { width, height, selected })
+      : getSvg("notificationsAlert", { width, height, selected })}
   </IconButton>
 );
 
@@ -59,18 +66,25 @@ const PlaybackIcon = ({
 const SidebarIcons = ({
   onChange,
   currentSelection,
+  notificationAlert,
 }: {
   onChange: (selection: SidebarOptions) => void;
   currentSelection: SidebarOptions;
+  notificationAlert?: boolean;
 }) => (
   <>
     <NotificationsIcon
       selected={currentSelection === "notifications"}
       onClick={() => onChange("notifications")}
+      notificationAlert={notificationAlert}
     />
     <FriendsIcon
       selected={currentSelection === "friends"}
       onClick={() => onChange("friends")}
+    />
+    <PlaybackIcon
+      selected={currentSelection === "playback"}
+      onClick={() => onChange("playback")}
     />
   </>
 );
