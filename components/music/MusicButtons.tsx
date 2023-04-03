@@ -48,7 +48,7 @@ const MusicButtons = ({
       target="_blank"
       rel="noopener noreferrer"
     >
-      <SpotifyIcon /> <span className="pl-1">Open in Spotify</span>
+      <SpotifyIcon /> <span className="pl-1 text-xs">Open in Spotify</span>
     </a>
   </div>
 );
