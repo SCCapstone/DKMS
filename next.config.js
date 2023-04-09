@@ -9,6 +9,7 @@ const nextConfig = withPlaiceholder({
     appDir: true,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
