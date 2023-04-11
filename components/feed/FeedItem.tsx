@@ -23,6 +23,7 @@ const FeedItem = ({
   showLink: boolean;
 }) => (
   <div id={data.id}>
+    <div className="divider" />
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-top pb-4 pt-4">
@@ -91,7 +92,6 @@ const FeedItem = ({
         ))}
       </ul>
     </div>
-    <div className="divider" />
   </div>
 );
 

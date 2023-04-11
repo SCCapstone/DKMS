@@ -18,6 +18,7 @@ const FeedItemComment = ({
   currentUser: User;
 }) => (
   <div id={commentData.id}>
+    <div className="divider" />
     <div className="flex flex-row justify-between items-center">
       <div className="flex flex-row items-center pb-4">
         {/* @ts-expect-error Server Component */}
@@ -42,7 +43,6 @@ const FeedItemComment = ({
       </div>
     </div>
     <p>{commentData.content}</p>
-    <div className="divider" />
   </div>
 );
 
