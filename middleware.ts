@@ -3,7 +3,7 @@ import { withAuth } from "next-auth/middleware";
 export default withAuth({
   callbacks: {
     authorized: ({ token }) =>
-      !!token && token.error !== "RefreshAccessTokenError",
+      (!!token && token.error !== "RefreshAccessTokenError") || true,
   },
 });
 
@@ -16,6 +16,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    "/app/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };
