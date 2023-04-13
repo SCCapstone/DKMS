@@ -48,7 +48,7 @@ const FeedPage = ({
     <div>
       <FeedFilterButtons />
       {showLinks && <FeedTextBox user={currentUser} />}
-      <ul>
+      <ul className="divide-y">
         {data.map((feedItem) => (
           <FeedItem
             key={feedItem.id}
