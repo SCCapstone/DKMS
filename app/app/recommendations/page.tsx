@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+import Skeleton from "react-loading-skeleton";
+
 import {
   ArtistsGrid,
   PlaylistsGrid,
@@ -33,7 +36,9 @@ const Recommendations = async ({
   return (
     <>
       <PageTitle title="Recommendations" />
-      <RecommendationFilterButtons />
+      <Suspense fallback={<Skeleton />}>
+        <RecommendationFilterButtons />
+      </Suspense>
       <h4 className="font-black uppercase pb-2">Recommended Songs</h4>
       <TracksGrid tracks={data.recommendations.tracks} />
       <div className="divider" />

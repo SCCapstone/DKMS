@@ -1,15 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-const SearchMenu = () => {
-  const searchParams = useSearchParams();
-
-  const searchQuery = searchParams?.get("q");
-
+const SearchMenu = ({ query }: { query: string }) => {
   const router = useRouter();
-  const [searchText, setSearchText] = useState(searchQuery ?? "");
+  const [searchText, setSearchText] = useState(query);
   const [isPending, startTransition] = useTransition();
 
   const handleSearch = (e: React.MouseEvent) => {
@@ -31,7 +27,7 @@ const SearchMenu = () => {
         />
         <button
           onClick={(e) => handleSearch(e)}
-          disabled={!searchText || isPending || searchQuery === searchText}
+          disabled={!searchText || isPending || query === searchText}
           type="submit"
           className={`${isPending ? "loading" : ""} btn btn-primary`}
         >

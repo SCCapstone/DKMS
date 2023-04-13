@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import FeedFilterButtons from "./FeedFilterButtons";
 import FeedItem from "./FeedItem";
 import FeedTextBox from "./FeedTextBox";
@@ -37,7 +39,9 @@ const FeedPage = ({
   if (data.length === 0) {
     return (
       <div>
-        <FeedFilterButtons />
+        <Suspense fallback={null}>
+          <FeedFilterButtons />
+        </Suspense>
         {showLinks && <FeedTextBox user={currentUser} />}
         <p>No feed items.</p>
       </div>
@@ -46,7 +50,9 @@ const FeedPage = ({
 
   return (
     <div>
-      <FeedFilterButtons />
+      <Suspense fallback={<p>loading filters...</p>}>
+        <FeedFilterButtons />
+      </Suspense>
       {showLinks && <FeedTextBox user={currentUser} />}
       <ul className="divide-y">
         {data.map((feedItem) => (
