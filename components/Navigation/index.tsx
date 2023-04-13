@@ -6,7 +6,7 @@ import type { MenuItems } from "./NavbarItem";
 const NAVBAR_ITEMS: MenuItems = [
   {
     label: "Feed",
-    url: "/app/",
+    url: "/app",
   },
   {
     label: "Discover",
