@@ -22,7 +22,7 @@ const FeedItem = ({
   savedItemIds?: string[];
   showLink: boolean;
 }) => (
-  <div id={data.id}>
+  <div id={data.id} className="mb-4">
     <div className="h-fit">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-top pb-4 pt-4">
@@ -79,7 +79,7 @@ const FeedItem = ({
     </div>
     <div className="flex flex-col justify-start">
       <FeedCommentBox postId={data.id} currentUser={currentUser} />
-      <ul className="ml-10">
+      <ul className="ml-10 divide-y divide-opacity-25">
         {data.comments.map((comment) => (
           <FeedItemComment
             postData={data}
@@ -91,7 +91,6 @@ const FeedItem = ({
         ))}
       </ul>
     </div>
-    <div className="divider" />
   </div>
 );
 

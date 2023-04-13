@@ -17,8 +17,8 @@ const FeedItemComment = ({
   showLink: boolean;
   currentUser: User;
 }) => (
-  <div id={commentData.id}>
-    <div className="flex flex-row justify-between items-center">
+  <div id={commentData.id} className="mb-4">
+    <div className="flex flex-row justify-between items-center mt-4">
       <div className="flex flex-row items-center pb-4">
         {/* @ts-expect-error Server Component */}
         <ProfileImage username={commentData.username} />
@@ -42,7 +42,6 @@ const FeedItemComment = ({
       </div>
     </div>
     <p>{commentData.content}</p>
-    <div className="divider" />
   </div>
 );
 

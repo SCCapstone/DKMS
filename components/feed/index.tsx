@@ -38,12 +38,7 @@ const FeedPage = ({
     return (
       <div>
         <FeedFilterButtons />
-        {showLinks && (
-          <>
-            <FeedTextBox user={currentUser} />
-            <div className="divider" />
-          </>
-        )}
+        {showLinks && <FeedTextBox user={currentUser} />}
         <p>No feed items.</p>
       </div>
     );
@@ -52,13 +47,8 @@ const FeedPage = ({
   return (
     <div>
       <FeedFilterButtons />
-      {showLinks && (
-        <>
-          <FeedTextBox user={currentUser} />
-          <div className="divider" />
-        </>
-      )}
-      <ul>
+      {showLinks && <FeedTextBox user={currentUser} />}
+      <ul className="divide-y">
         {data.map((feedItem) => (
           <FeedItem
             key={feedItem.id}
