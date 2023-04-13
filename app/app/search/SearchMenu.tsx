@@ -15,7 +15,7 @@ const SearchMenu = () => {
   const handleSearch = (e: React.MouseEvent) => {
     e.preventDefault();
     startTransition(() => {
-      router.replace(`/search?q=${searchText}`);
+      router.replace(`/app/search?q=${searchText}`);
     });
   };
 
