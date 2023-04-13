@@ -53,7 +53,7 @@ const Playlist = async ({
       } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
       <figure className="relative aspect-square">
-        <Link href={`/playlist/${playlist.id}`}>
+        <Link href={`/app/playlist/${playlist.id}`}>
           <Image
             src={img}
             alt={playlist.name}
@@ -69,7 +69,7 @@ const Playlist = async ({
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
         </div>
-        <Link href={`/playlist/${playlist.id}`}>
+        <Link href={`/app/playlist/${playlist.id}`}>
           <h2 className="text-lg truncate font-semibold">{playlist.name}</h2>
           <p className={isCompact ? "text-sm truncate" : ""}>
             {playlist.tracks.total}{" "}

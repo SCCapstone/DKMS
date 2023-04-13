@@ -33,7 +33,9 @@ const TrackView = ({
             "Single"
           ) : (
             <p className="font-black text-primary">
-              <Link href={`/album/${track.album.id}`}>{track.album.name}</Link>
+              <Link href={`/app/album/${track.album.id}`}>
+                {track.album.name}
+              </Link>
             </p>
           ),
         musicItemId: track.id,
@@ -46,7 +48,7 @@ const TrackView = ({
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
         url: artist.external_urls.spotify,
-        path: `/artist/${artist.id}`,
+        path: `/app/artist/${artist.id}`,
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,

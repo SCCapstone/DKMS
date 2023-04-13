@@ -6,27 +6,27 @@ import type { MenuItems } from "./NavbarItem";
 const NAVBAR_ITEMS: MenuItems = [
   {
     label: "Feed",
-    url: "/",
+    url: "/app/",
   },
   {
     label: "Discover",
-    url: "/discover",
+    url: "/app/discover",
   },
   {
     label: "Profile",
-    url: "/profile",
+    url: "/app/profile",
   },
   {
     label: "Search",
-    url: "/search",
+    url: "/app/search",
   },
   {
     label: "Recommendations",
-    url: "/recommendations",
+    url: "/app/recommendations",
   },
   {
     label: "Settings",
-    url: "/settings",
+    url: "/app/settings",
   },
   {
     label: "Logout",

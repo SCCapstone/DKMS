@@ -5,7 +5,7 @@ import { useTransition } from "react";
 
 const FeedFilterButtons = () => {
   const router = useRouter();
-  const pathname = usePathname() ?? "/";
+  const pathname = usePathname() ?? "/app";
   const searchParams = useSearchParams();
   const filterActive = searchParams?.get("s") === "true";
 

@@ -8,7 +8,7 @@ const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectSimplified }) => (
       <h5 className="text-xs truncate max-w-[112px]">
         <Link
           className="link link-hover link-secondary truncate max-w-[100px]"
-          href={`/track/${track.id}`}
+          href={`/app/track/${track.id}`}
         >
           {track.name}
         </Link>

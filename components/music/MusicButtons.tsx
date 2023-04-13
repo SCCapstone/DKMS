@@ -25,7 +25,7 @@ const MusicButtons = ({
     {viewAlbum && albumId && (
       <Link
         className="btn btn-primary btn-outline w-full"
-        href={`/album/${albumId}`}
+        href={`/app/album/${albumId}`}
       >
         View Album
       </Link>

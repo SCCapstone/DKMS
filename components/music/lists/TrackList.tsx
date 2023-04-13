@@ -3,7 +3,7 @@ import { formatDate, formatDuration } from "@/lib/formatters";
 
 import PlayButton from "../PlayButton";
 
-import type { FilteredDataTrack } from "@/app/(music)/playlist/[id]/page";
+import type { FilteredDataTrack } from "@/app/app/(music)/playlist/[id]/page";
 
 const TrackList = ({
   tracks,
@@ -36,7 +36,10 @@ const TrackList = ({
           <tr className="hover" key={track.id}>
             {showNumber && <td>{index + 1}</td>}
             <td>
-              <a className="font-bold text-primary" href={`/track/${track.id}`}>
+              <a
+                className="font-bold text-primary"
+                href={`/app/track/${track.id}`}
+              >
                 {track.name}
               </a>
             </td>
@@ -45,7 +48,7 @@ const TrackList = ({
             </td>
             {showAlbum && "album" in track && (
               <td>
-                <a className="font-bold" href={`/album/${track.album.id}`}>
+                <a className="font-bold" href={`/app/album/${track.album.id}`}>
                   {track.album.name}
                 </a>
               </td>
