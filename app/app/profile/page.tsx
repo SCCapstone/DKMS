@@ -10,7 +10,7 @@ const Page = () => {
   const router = useRouter();
 
   if (status === "authenticated") {
-    router.replace(`/profile/${session.user.username}`);
+    router.replace(`/app/profile/${session.user.username}`);
     return <Skeleton enableAnimation count={8} />;
   }
 
