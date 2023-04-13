@@ -39,6 +39,7 @@ const Page = async ({
 
 export default Page;
 
-// see:
-// https://beta.nextjs.org/docs/api-reference/file-conventions/page#searchparams-optional
+/**
+ * @see https://beta.nextjs.org/docs/api-reference/file-conventions/page#searchparams-optional
+ */
 export const dynamic = "force-dynamic";

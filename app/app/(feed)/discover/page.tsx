@@ -32,3 +32,8 @@ const DiscoverFeed = async ({
 };
 
 export default DiscoverFeed;
+
+/**
+ * @see https://beta.nextjs.org/docs/api-reference/file-conventions/page#searchparams-optional
+ */
+export const dynamic = "force-dynamic";
