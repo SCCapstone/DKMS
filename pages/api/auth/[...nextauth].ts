@@ -155,7 +155,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: async ({ token, user, account }) => {
       // Initial sign in
-      if (account && user) {
+      if (account) {
         if (!account.refresh_token || !account.access_token) {
           throw new Error("No refresh token or access token");
         }
