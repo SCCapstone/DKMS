@@ -52,6 +52,7 @@ const DisplayNameCard = ({
           className="btn btn-primary"
           onClick={(e) => void handleSubmit(e)}
           type="button"
+          disabled={isMutating}
         >
           {isMutating ? "Saving..." : "Save"}
         </button>
