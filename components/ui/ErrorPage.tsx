@@ -33,11 +33,13 @@ const ErrorPage = ({
             />
           </svg>
         </label>
-        <div className="card compact dropdown-content shadow bg-base-100 rounded-box w-auto">
+        <div className="card compact dropdown-content shadow bg-base-100 rounded-box w-96 overflow-x-scroll">
           <div className="card-body">
             <h2 className="card-title">{error.name}</h2>
             <p>{error.message}</p>
-            <code>{error.stack}</code>
+            <pre>
+              <code>{error.stack}</code>
+            </pre>
           </div>
         </div>
       </div>
