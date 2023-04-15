@@ -9,17 +9,17 @@ import type { SignInErrorTypes } from "next-auth/core/pages/signin";
 
 const ERROR_DESCRIPTIONS = {
   Signin:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
   OAuthSignin:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
   OAuthCallback:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
   OAuthCreateAccount:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
   EmailCreateAccount:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
   Callback:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
   OAuthAccountNotLinked:
     "To confirm your identity, sign in with the same account you used originally.",
   EmailSignin: "The e-mail could not be sent.",
@@ -27,7 +27,7 @@ const ERROR_DESCRIPTIONS = {
     "Sign in failed. Check the details you provided are correct.",
   SessionRequired: "Please sign in to access this page.",
   default:
-    "DKMS is currently in closed beta and your account has not yet been authorized.\nTo request access to our service, please contact the developers.",
+    "DKMS is currently in closed beta and your account has not yet been authorized. To use DKMS, please switch to an authorized account or contact the developers.",
 } as const;
 
 const SignInPage = async ({
