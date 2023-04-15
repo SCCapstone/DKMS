@@ -47,7 +47,7 @@ const MarketingNavbar = () => (
         </ul>
       </div>
       <h1>
-        <Link href="/app" className="btn btn-ghost normal-case text-xl">
+        <Link href="/" className="btn btn-ghost normal-case text-xl">
           DKMS
         </Link>
       </h1>
