@@ -1,12 +1,5 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
-import Navbar from "@/components/Navigation";
-import {
-  DesktopSidebar,
-  MobileSidebar,
-  SidebarPanels,
-} from "@/components/Sidebar";
-
 import "./globals.css";
 import Providers from "./providers";
 
@@ -19,18 +12,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
     </head>
     {/* Suppress theme errors: https://github.com/pacocoursey/next-themes#with-app */}
     <body suppressHydrationWarning>
-      <Providers>
-        <div className="md:flex flex-row min-h-screen">
-          <Navbar />
-
-          <main role="main" className="container mx-auto p-4 md:px-8 flex-grow">
-            <SidebarPanels />
-            <MobileSidebar>{children}</MobileSidebar>
-          </main>
-          {/* @ts-expect-error Server Component */}
-          <DesktopSidebar />
-        </div>
-      </Providers>
+      <Providers>{children}</Providers>
     </body>
   </html>
 );

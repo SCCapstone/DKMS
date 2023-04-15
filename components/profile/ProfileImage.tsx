@@ -47,7 +47,7 @@ const ProfileImage = async ({
   return hideLink ? (
     ImageComponent
   ) : (
-    <Link href={`/profile/${profile.id}`}>{ImageComponent}</Link>
+    <Link href={`/app/profile/${profile.id}`}>{ImageComponent}</Link>
   );
 };
 

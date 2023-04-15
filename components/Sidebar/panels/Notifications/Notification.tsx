@@ -18,7 +18,7 @@ const Notification = ({
   body: string;
 }) => (
   <li className="card card-compact bg-base-100 relative">
-    <a href={`/#${feedId}`} className="card-body">
+    <a href={`/app/#${feedId}`} className="card-body">
       <header className="pb-2">
         <h4 className="font-bold text-base">
           {username ? (

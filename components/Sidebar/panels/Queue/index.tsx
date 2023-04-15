@@ -35,7 +35,10 @@ const Queue = async () => {
             key={item.id}
             className="text-sm overflow-hidden text-ellipsis whitespace-nowrap"
           >
-            <Link href={`/track/${item.id}`} className="font-bold text-accent">
+            <Link
+              href={`/app/track/${item.id}`}
+              className="font-bold text-accent"
+            >
               {item.name}
             </Link>
           </li>

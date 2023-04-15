@@ -37,7 +37,7 @@ const AlbumView = ({
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
         url: artist.external_urls.spotify,
-        path: `/artist/${artist.id}`,
+        path: `/app/artist/${artist.id}`,
         title: artist.name,
         subtitle: `${formatNumber(artist.followers.total)} Followers`,
         isCircle: true,

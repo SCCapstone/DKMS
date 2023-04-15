@@ -43,7 +43,7 @@ const MobileNavbar = ({ items }: { items: MenuItems }) => (
       </div>
     </div>
     <div className="navbar-center">
-      <Link href="/" className="btn btn-ghost text-xl font-black">
+      <Link href="/app" className="btn btn-ghost text-xl font-black">
         DKMS
       </Link>
     </div>

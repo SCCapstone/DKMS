@@ -14,7 +14,7 @@ const checkIsActive = (
 
 const RecommendationFilterButtons = () => {
   const router = useRouter();
-  const pathname = usePathname() ?? "/recommendations";
+  const pathname = usePathname() ?? "/app/recommendations";
   const searchParams = useSearchParams();
 
   const [isPending, startTransition] = useTransition();

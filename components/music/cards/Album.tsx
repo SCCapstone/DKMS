@@ -60,7 +60,7 @@ const Album = async ({
       } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
     >
       <figure className="relative aspect-square">
-        <Link href={`/album/${album.id}`}>
+        <Link href={`/app/album/${album.id}`}>
           <Image
             src={img}
             alt={album.name}
@@ -80,7 +80,7 @@ const Album = async ({
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={album.id} musicItemType="album" />
         </div>
-        <Link href={`/album/${album.id}`}>
+        <Link href={`/app/album/${album.id}`}>
           <h2 className="text-lg truncate font-semibold">{album.name}</h2>
           <p className={isCompact ? "text-sm truncate" : ""}>
             {new Date(album.release_date).getFullYear()}

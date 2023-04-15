@@ -3,7 +3,7 @@ import Link from "next/link";
 const getLink = (
   artist: Pick<SpotifyApi.ArtistObjectSimplified, "name" | "id">
 ) => (
-  <Link className="font-bold text-secondary" href={`/artist/${artist.id}`}>
+  <Link className="font-bold text-secondary" href={`/app/artist/${artist.id}`}>
     {artist.name}
   </Link>
 );
