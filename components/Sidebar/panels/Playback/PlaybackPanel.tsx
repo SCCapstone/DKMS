@@ -1,17 +1,15 @@
 "use client";
 
+import Player from "@/components/Player";
 import { useSidebar } from "@/components/Sidebar/SidebarContext";
-
-import Player from "./Player";
 
 const PlaybackPanel = ({ accessToken }: { accessToken: string }) => {
   const [sidebar] = useSidebar();
-  const isCurrentSidebar = sidebar === "playback";
 
   return (
     <div
       className={`w-full md:w-64 max-h-screen h-screen flex flex-col md:p-4 md:bg-gray-200 md:text-black ${
-        isCurrentSidebar ? "" : "hidden"
+        sidebar === "playback" ? "" : "hidden"
       }`}
     >
       <div>
