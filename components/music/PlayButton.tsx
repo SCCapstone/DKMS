@@ -15,11 +15,8 @@ const PlayButton = (params: StartPlayingContextParams) => {
   const {
     currentDeviceState: [currentDeviceId],
   } = usePlayer();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
-
-  // Create inline loading UI
-  const isMutating = isFetching || isPending;
 
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -39,10 +36,10 @@ const PlayButton = (params: StartPlayingContextParams) => {
 
   return (
     <button
-      className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
+      className={`btn btn-ghost ${isFetching ? "loading" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
-      disabled={isMutating}
+      disabled={isFetching}
       title="Play"
     >
       <PlayIcon />
