@@ -4,14 +4,19 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 
+import { usePlayer } from "@/components/Player/PlayerContext";
+
 const Player = ({ accessToken }: { accessToken: string }) => {
-  const [isVisible, toggleVisibility] = useState(false);
+  const { currentDeviceState } = usePlayer();
+  const [isVisible, setIsVisible] = useState(false);
+  const [, setCurrentDeviceId] = currentDeviceState;
+
   const router = useRouter();
   if (!isVisible) {
     return (
       <button
         className="btn btn-ghost bg-spotify text-white btn-block"
-        onClick={() => toggleVisibility(true)}
+        onClick={() => setIsVisible(true)}
         type="button"
       >
         Connect to Spotify
@@ -19,21 +24,23 @@ const Player = ({ accessToken }: { accessToken: string }) => {
     );
   }
   return (
-    <>
-      {/* @see https://github.com/gilbarbara/react-spotify-web-playback/issues/154 */}
-      {/* @ts-expect-error SpotifyPlayer type error */}
-      <SpotifyPlayer
-        updateSavedStatus={() => router.refresh()}
-        syncExternalDevice
-        syncExternalDeviceInterval={5}
-        name="DKMS"
-        token={accessToken}
-        layout="compact"
-        showSaveIcon
-        persistDeviceSelection
-        hideAttribution
-      />
-    </>
+    <SpotifyPlayer
+      updateSavedStatus={() => router.refresh()}
+      syncExternalDevice
+      syncExternalDeviceInterval={5}
+      callback={(state) => {
+        if (state.status === "READY") {
+          setCurrentDeviceId(state.currentDeviceId);
+        }
+      }}
+      name="DKMS"
+      token={accessToken}
+      layout="compact"
+      showSaveIcon
+      persistDeviceSelection
+      uris={[]}
+      hideAttribution
+    />
   );
 };
 

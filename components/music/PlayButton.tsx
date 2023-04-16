@@ -3,18 +3,18 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import { usePlayer } from "@/components/Player/PlayerContext";
 import startPlaying from "@/lib/music/startPlaying";
 
 import PlayIcon from "./PlayIcon";
 
 import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
 
-const PlayButton = ({
-  uris,
-  contextUri,
-  offset,
-}: StartPlayingContextParams) => {
+const PlayButton = (params: StartPlayingContextParams) => {
   const router = useRouter();
+  const {
+    currentDeviceState: [currentDeviceId],
+  } = usePlayer();
   const [isPending, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
 
@@ -24,19 +24,10 @@ const PlayButton = ({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
-    try {
-      if (offset) {
-        await startPlaying({ contextUri, offset });
-      } else if (uris && contextUri) {
-        await startPlaying({ uris, contextUri });
-      } else if (contextUri) {
-        await startPlaying({ contextUri });
-      } else if (uris) {
-        await startPlaying({ uris });
-      }
-    } catch (error) {
-      //   Button will not do anything if there is no active device
-    }
+    await startPlaying({
+      ...params,
+      deviceId: currentDeviceId,
+    });
 
     setIsFetching(false);
     startTransition(() => {
