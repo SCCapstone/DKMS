@@ -16,6 +16,7 @@ const SearchMenu = () => {
     e.preventDefault();
     startTransition(() => {
       router.replace(`/app/search?q=${searchText}`);
+      router.refresh();
     });
   };
 
