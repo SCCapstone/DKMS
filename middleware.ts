@@ -7,4 +7,6 @@ export default withAuth({
   },
 });
 
-export const config = { matcher: ["/:path+"] };
+export const config = {
+  matcher: ["/app/:path*"],
+};

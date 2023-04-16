@@ -132,6 +132,9 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signIn: "/auth/signin",
+  },
   providers: [
     SpotifyProvider<SpotifyApi.CurrentUsersProfileResponse & SpotifyProfile>({
       authorization: {
