@@ -1,7 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
 import { usePlayer } from "@/components/Player/PlayerContext";
 import startPlaying from "@/lib/music/startPlaying";
@@ -11,11 +10,9 @@ import PlayIcon from "./PlayIcon";
 import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
 
 const PlayButton = (params: StartPlayingContextParams) => {
-  const router = useRouter();
   const {
     currentDeviceState: [currentDeviceId],
   } = usePlayer();
-  const [, startTransition] = useTransition();
   const [isFetching, setIsFetching] = useState(false);
 
   const handleClick = async (e: React.MouseEvent) => {
@@ -27,11 +24,6 @@ const PlayButton = (params: StartPlayingContextParams) => {
     });
 
     setIsFetching(false);
-    startTransition(() => {
-      // Refresh the current route and fetch new data from the server without
-      // losing client-side browser or React state.
-      router.refresh();
-    });
   };
 
   return (

@@ -18,7 +18,12 @@ const getRecommendationsBySeed = async ({
   });
   if (target) urlParams.append(target.key, target.value.toString());
   return fetchServer<SpotifyApi.RecommendationsFromSeedsResponse>(
-    `https://api.spotify.com/v1/recommendations?${urlParams.toString()}`
+    `https://api.spotify.com/v1/recommendations?${urlParams.toString()}`,
+    {
+      next: {
+        revalidate: false,
+      },
+    }
   );
 };
 
