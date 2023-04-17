@@ -38,7 +38,7 @@ const FeedItem = ({
           </div>
         </div>
       </div>
-      <p>{data.content}</p>
+      <p className="break-words">{data.content}</p>
       {data.musicItem && (
         <div className="grid mt-2">
           {data.musicItem.type === "track" && (

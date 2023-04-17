@@ -41,7 +41,7 @@ const FeedItemComment = ({
         )}
       </div>
     </div>
-    <p>{commentData.content}</p>
+    <p className="break-words">{commentData.content}</p>
   </div>
 );
 
