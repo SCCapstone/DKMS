@@ -7,6 +7,8 @@ import postFeedItem from "@/lib/feed/postFeedItem";
 
 import type { User } from "next-auth";
 
+const MAX_POST_LENGTH = 150;
+
 const FeedTextBox = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -30,6 +32,8 @@ const FeedTextBox = ({ user }: { user: User }) => {
     });
   };
 
+  const remainingChars = MAX_POST_LENGTH - postText.length;
+
   return (
     <form>
       <div className="w-full mb-4 rounded-lg bg-base-300">
@@ -39,6 +43,7 @@ const FeedTextBox = ({ user }: { user: User }) => {
             className="textarea w-full rounded-none input-bordered rounded-t-lg"
             placeholder="Write your musical thoughts..."
             value={postText}
+            maxLength={MAX_POST_LENGTH}
             onChange={(e) => setPostText(e.target.value)}
             required
             disabled={isMutating}
@@ -55,6 +60,9 @@ const FeedTextBox = ({ user }: { user: User }) => {
           >
             Post
           </button>
+          <div className="text-sm">
+            {remainingChars}/{MAX_POST_LENGTH}
+          </div>
         </div>
       </div>
     </form>
