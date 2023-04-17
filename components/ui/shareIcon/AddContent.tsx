@@ -2,6 +2,7 @@
 
 import ShareTextBox from "./ShareTextBox";
 
+import type { MusicItemTypes } from "@/lib/feed/postFeedItem";
 import type { User } from "next-auth";
 
 const AddContent = ({
@@ -13,7 +14,7 @@ const AddContent = ({
 }: {
   user: User;
   musicItemId?: string;
-  musicItemType?: "track" | "playlist" | "artist" | "album";
+  musicItemType?: MusicItemTypes;
   exit: boolean;
   handleClick: () => void;
 }) => {

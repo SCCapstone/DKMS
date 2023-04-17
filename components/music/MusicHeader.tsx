@@ -6,6 +6,8 @@ import MusicButtons from "./MusicButtons";
 import MusicImage from "./MusicImage";
 import PlayButton from "./PlayButton";
 
+import type { MusicItemTypes } from "@/lib/feed/postFeedItem";
+
 type CardProps = {
   imageUrl: string | undefined;
   defaultImage: string;
@@ -20,7 +22,7 @@ type CardProps = {
   isCircle?: boolean;
   /** Data for the ShareIcon */
   musicItemId: string;
-  musicItemType: "track" | "playlist" | "artist" | "album";
+  musicItemType: MusicItemTypes;
   /** Playbutton context */
   playbuttonContext: string;
   /** Additional view link */

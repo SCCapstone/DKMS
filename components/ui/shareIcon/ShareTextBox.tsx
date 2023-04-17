@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 
 import postFeedItem from "@/lib/feed/postFeedItem";
 
+import type { MusicItemTypes } from "@/lib/feed/postFeedItem";
 import type { User } from "next-auth";
 
 const ShareTextBox = ({
@@ -16,7 +17,7 @@ const ShareTextBox = ({
 }: {
   user: User;
   musicItemId?: string;
-  musicItemType?: "track" | "playlist" | "artist" | "album";
+  musicItemType?: MusicItemTypes;
   handleClick: () => void;
 }) => {
   const router = useRouter();

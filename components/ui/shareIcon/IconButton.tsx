@@ -5,6 +5,7 @@ import { useState } from "react";
 import AddContent from "./AddContent";
 import Share from "./icon";
 
+import type { MusicItemTypes } from "@/lib/feed/postFeedItem";
 import type { User } from "next-auth";
 
 const IconButton = ({
@@ -14,7 +15,7 @@ const IconButton = ({
 }: {
   user: User;
   musicItemId?: string;
-  musicItemType?: "track" | "playlist" | "artist" | "album";
+  musicItemType?: MusicItemTypes;
 }) => {
   const [modal, toggleModal] = useState(false);
 

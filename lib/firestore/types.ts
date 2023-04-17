@@ -1,3 +1,4 @@
+import type { MusicItemTypes } from "@/lib/feed/postFeedItem";
 import type { Timestamp } from "firebase/firestore";
 import type { Account, User } from "next-auth";
 
@@ -7,7 +8,7 @@ export type FirestoreAccount = Account;
 
 export type FirestoreFeedItem = {
   musicItemId?: string | undefined;
-  musicItemType?: "track" | "playlist" | "artist" | "album" | undefined;
+  musicItemType?: MusicItemTypes | undefined;
   timestamp: Timestamp;
   userId: string;
   content: string;
