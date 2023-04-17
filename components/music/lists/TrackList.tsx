@@ -9,6 +9,7 @@ const TrackList = ({
   tracks,
   showNumber,
   showAlbum,
+  contextUri,
 }: {
   tracks:
     | SpotifyApi.TrackObjectSimplified[]
@@ -16,6 +17,7 @@ const TrackList = ({
     | FilteredDataTrack[];
   showNumber?: boolean;
   showAlbum?: boolean;
+  contextUri?: string;
 }) => (
   <div className="overflow-x-auto">
     <table className="table table-compact">
@@ -57,7 +59,7 @@ const TrackList = ({
             {"added_by" in track && <td>{track.added_by.id}</td>}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td className="text-center">
-              <PlayButton uris={[track.uri]} />
+              <PlayButton uris={[track.uri]} contextUri={contextUri} />
             </td>
           </tr>
         ))}
