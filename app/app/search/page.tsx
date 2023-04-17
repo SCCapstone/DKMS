@@ -32,7 +32,12 @@ const Page = async ({
 }: {
   searchParams: { q: undefined | string };
 }) => {
-  const results = await getData(searchParams.q);
+  const encodedSearchParam = searchParams.q
+    ? encodeURIComponent(searchParams.q)
+    : undefined;
+  const results = await getData(encodedSearchParam);
+
+  // const results = await getData(searchParams.q);
 
   return searchParams.q ? <SearchResults results={results} /> : null;
 };
