@@ -37,8 +37,6 @@ const Page = async ({
     : undefined;
   const results = await getData(encodedSearchParam);
 
-  // const results = await getData(searchParams.q);
-
   return searchParams.q ? <SearchResults results={results} /> : null;
 };
 
