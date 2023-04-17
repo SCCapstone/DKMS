@@ -7,7 +7,7 @@ import postFeedComment from "@/lib/feed/postFeedComment";
 
 import type { User } from "next-auth";
 
-const MAX_COMMENT_LENGTH = 150;
+const MAX_COMMENT_LENGTH = 280;
 
 const FeedCommentBox = ({
   postId,

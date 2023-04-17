@@ -7,7 +7,7 @@ import postFeedItem from "@/lib/feed/postFeedItem";
 
 import type { User } from "next-auth";
 
-const MAX_POST_LENGTH = 150;
+const MAX_POST_LENGTH = 280;
 
 const FeedTextBox = ({ user }: { user: User }) => {
   const router = useRouter();
