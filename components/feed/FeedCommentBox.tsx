@@ -7,6 +7,8 @@ import postFeedComment from "@/lib/feed/postFeedComment";
 
 import type { User } from "next-auth";
 
+const MAX_COMMENT_LENGTH = 150;
+
 const FeedCommentBox = ({
   postId,
   currentUser,
@@ -45,6 +47,7 @@ const FeedCommentBox = ({
             className="textarea w-full textarea-bordered"
             placeholder="Your response"
             rows={1}
+            maxLength={MAX_COMMENT_LENGTH}
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
             disabled={isMutating}
