@@ -10,11 +10,13 @@ const TrackView = ({
   artist,
   audioFeatures,
   recommendations,
+  danceRecommendations,
 }: {
   track: SpotifyApi.TrackObjectFull;
   artist: SpotifyApi.ArtistObjectFull;
   audioFeatures: SpotifyApi.AudioFeaturesResponse;
   recommendations: SpotifyApi.RecommendationsFromSeedsResponse;
+  danceRecommendations: string[];
 }) => (
   <>
     <MusicHeader
@@ -40,7 +42,7 @@ const TrackView = ({
           ),
         musicItemId: track.id,
         musicItemType: "track",
-        playbuttonContext: track.uri,
+        playbuttonContext: track.album.uri,
         viewAlbum: true,
         albumId: track.album.id,
       }}
@@ -60,6 +62,13 @@ const TrackView = ({
     <div className="divider" />
     <h4 className="font-black uppercase pb-2">Track Statistics</h4>
     <AudioFeatures audioFeatures={audioFeatures} />
+    {danceRecommendations.length > 0 && (
+      <p className="pt-2 text-sm">
+        You could dance {danceRecommendations[0]}
+        {danceRecommendations[1] ? ` or ${danceRecommendations[1]}` : ""} to
+        this!
+      </p>
+    )}
     <div className="divider" />
     <h4 className="font-black uppercase">Similar Tracks</h4>
     <TrackList tracks={recommendations.tracks} showAlbum />
