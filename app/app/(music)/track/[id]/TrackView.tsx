@@ -40,7 +40,7 @@ const TrackView = ({
           ),
         musicItemId: track.id,
         musicItemType: "track",
-        playbuttonContext: track.uri,
+        playbuttonContext: track.album.uri,
         viewAlbum: true,
         albumId: track.album.id,
       }}
