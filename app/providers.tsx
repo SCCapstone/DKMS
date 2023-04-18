@@ -1,21 +1,28 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-import { Toaster } from "react-hot-toast";
 
-import SidebarProvider from "@/components/Sidebar/SidebarProvider";
 import { THEME_VALUES } from "@/lib/theme";
 
-const Providers = ({ children }: { children: React.ReactNode }) => (
+const Toaster = dynamic(
+  async () => {
+    const { Toaster: BaseToaster } = await import("react-hot-toast");
+    return BaseToaster;
+  },
+  {
+    ssr: false,
+  }
+);
+
+const GlobalProviders = ({ children }: { children: React.ReactNode }) => (
   <SessionProvider>
-    <SidebarProvider>
-      <ThemeProvider disableTransitionOnChange themes={[...THEME_VALUES]}>
-        <Toaster />
-        {children}
-      </ThemeProvider>
-    </SidebarProvider>
+    <ThemeProvider disableTransitionOnChange themes={[...THEME_VALUES]}>
+      <Toaster />
+      {children}
+    </ThemeProvider>
   </SessionProvider>
 );
 
-export default Providers;
+export default GlobalProviders;

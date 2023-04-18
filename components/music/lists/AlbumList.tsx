@@ -26,7 +26,7 @@ const AlbumList = ({
             <td>
               <Link
                 className="font-bold text-primary"
-                href={`/album/${album.id}`}
+                href={`/app/album/${album.id}`}
               >
                 {album.name} {album.restrictions?.reason}
               </Link>

@@ -53,7 +53,7 @@ const Artist = async ({
             isCompact ? "w-32 h-32" : ""
           } rounded-full overflow-clip relative aspect-square shadow-2xl`}
         >
-          <Link href={`/artist/${artist.id}`}>
+          <Link href={`/app/artist/${artist.id}`}>
             <Image
               className={isCompact ? "w-full h-full" : ""}
               src={img}
@@ -77,7 +77,7 @@ const Artist = async ({
           {/* @ts-expect-error Server Component */}
           <ShareIcon musicItemId={artist.id} musicItemType="artist" />
         </div>
-        <Link href={`/artist/${artist.id}`}>
+        <Link href={`/app/artist/${artist.id}`}>
           <h2 className="card-title">{artist.name}</h2>
           {isCompact && `${formatNumber(artist.followers.total)} Followers`}
         </Link>

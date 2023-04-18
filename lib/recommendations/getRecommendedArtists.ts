@@ -6,7 +6,12 @@ const DEFAULT_ARTIST = "4NHQUGzhtTLFvgF5SZesLK";
 
 const getRecommendedArtistData = async (id: string, limit?: number) => {
   const data = await fetchServer<SpotifyApi.ArtistsRelatedArtistsResponse>(
-    `https://api.spotify.com/v1/artists/${id}/related-artists`
+    `https://api.spotify.com/v1/artists/${id}/related-artists`,
+    {
+      next: {
+        revalidate: false,
+      },
+    }
   );
   return data.artists.slice(0, limit);
 };

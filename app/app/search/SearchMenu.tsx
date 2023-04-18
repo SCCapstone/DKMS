@@ -3,6 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 
+const MAX_SEARCH_LENGTH = 50;
+
 const SearchMenu = () => {
   const searchParams = useSearchParams();
 
@@ -15,7 +17,7 @@ const SearchMenu = () => {
   const handleSearch = (e: React.MouseEvent) => {
     e.preventDefault();
     startTransition(() => {
-      router.replace(`/search?q=${searchText}`);
+      router.replace(`/app/search?q=${searchText}`);
     });
   };
 
@@ -27,6 +29,7 @@ const SearchMenu = () => {
           placeholder="Search…"
           className="input input-bordered"
           value={searchText}
+          maxLength={MAX_SEARCH_LENGTH}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button

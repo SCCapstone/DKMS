@@ -132,6 +132,9 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signIn: "/auth/signin",
+  },
   providers: [
     SpotifyProvider<SpotifyApi.CurrentUsersProfileResponse & SpotifyProfile>({
       authorization: {
@@ -155,7 +158,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: async ({ token, user, account }) => {
       // Initial sign in
-      if (account && user) {
+      if (account) {
         if (!account.refresh_token || !account.access_token) {
           throw new Error("No refresh token or access token");
         }

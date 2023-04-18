@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 const baseFetch = async (
   input: RequestInfo | URL,
   init: RequestInit | undefined,
@@ -12,8 +14,15 @@ const baseFetch = async (
         }
       : init?.headers,
   });
-
   if (!res.ok) {
+    if (res.status === 403) {
+      redirect("/auth/signin?error=OAuthSignin");
+    }
+
+    if (res.status === 401) {
+      redirect("/auth/signin?error=SessionRequired");
+    }
+
     let data: unknown;
     try {
       data = (await res.json()) as unknown;
