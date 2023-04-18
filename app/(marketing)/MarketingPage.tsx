@@ -18,6 +18,14 @@ const MarketingPage = () => (
         </div>
       </div>
     </div>
+    <div className="hero bg-base-300">
+      <div className="mockup-phone">
+        <div className="camera" />
+        <div className="display">
+          <div className="artboard phone-1 artboard-demo">Hello</div>
+        </div>
+      </div>
+    </div>
     <div className="hero min-h-screen bg-base-300">
       <div className="hero-content text-center">
         <div className="max-w-lg">
