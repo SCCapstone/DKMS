@@ -4,7 +4,7 @@ import ScreenshotSection from "./ScreenshotSection";
 import TitleSection from "./TitleSection";
 import WhySection from "./WhySection";
 
-const MarketingPage = () => (
+const HomePage = () => (
   <div className="flex flex-col">
     <TitleSection />
     <WhySection />
@@ -14,4 +14,4 @@ const MarketingPage = () => (
   </div>
 );
 
-export default MarketingPage;
+export default HomePage;
