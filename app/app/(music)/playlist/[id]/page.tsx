@@ -20,9 +20,10 @@ const getData = async (id: string) => {
         added_at: item.added_at,
         added_by: item.added_by,
         ...item.track,
-      } as FilteredDataTrack;
+      } as FilteredDataTrack | SpotifyApi.EpisodeObjectFull;
       return playlistTrackData;
-    });
+    })
+    .filter((item) => item.type === "track") as FilteredDataTrack[];
 
   const audioFeatures =
     await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
@@ -31,7 +32,9 @@ const getData = async (id: string) => {
         .join(",")}`
     );
 
-  const averageAudioFeatures = getAverageAudioFeatures(audioFeatures);
+  const averageAudioFeatures = tracks[0]
+    ? getAverageAudioFeatures(audioFeatures)
+    : undefined;
 
   return { playlist, tracks, averageAudioFeatures };
 };
