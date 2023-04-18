@@ -14,39 +14,37 @@ const PlaylistView = ({
   playlist: SpotifyApi.PlaylistObjectFull;
   tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject | undefined;
-}) => {
-  if (averageAudioFeatures) {
-    return (
+}) => (
+  <>
+    <MusicHeader
+      primary={{
+        imageUrl: playlist.images[0].url,
+        defaultImage: "/images/defaults/playlist.png",
+        url: playlist.external_urls.spotify,
+        title: playlist.name,
+        subtitle: `${formatNumber(playlist.followers.total)} Followers | ${
+          playlist.tracks.total
+        } Tracks`,
+        content: playlist.description ? (
+          playlist.description
+        ) : (
+          <p>
+            Featuring{" "}
+            <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
+          </p>
+        ),
+        musicItemId: playlist.id,
+        musicItemType: "playlist",
+        playbuttonContext: playlist.uri,
+      }}
+    />
+    {averageAudioFeatures && (
       <>
-        <MusicHeader
-          primary={{
-            imageUrl: playlist.images[0].url,
-            defaultImage: "/images/defaults/playlist.png",
-            url: playlist.external_urls.spotify,
-            title: playlist.name,
-            subtitle: `${formatNumber(playlist.followers.total)} Followers | ${
-              playlist.tracks.total
-            } Tracks`,
-            content: playlist.description ? (
-              playlist.description
-            ) : (
-              <p>
-                Featuring{" "}
-                <ArtistLinks
-                  artists={tracks.flatMap((track) => track.artists)}
-                />
-              </p>
-            ),
-            musicItemId: playlist.id,
-            musicItemType: "playlist",
-            playbuttonContext: playlist.uri,
-          }}
-        />
         <h4 className="font-black uppercase pb-2">
           Average Playlist Statistics
         </h4>
         <AudioFeatures audioFeatures={averageAudioFeatures} />
-        <div className="divider" />
+        <div className="divider" />{" "}
         <OffsetTrackList
           contextUri={playlist.uri}
           tracks={tracks}
@@ -54,9 +52,8 @@ const PlaylistView = ({
           showAlbum
         />
       </>
-    );
-  }
-  return <p>No Playlist Available!</p>;
-};
+    )}
+  </>
+);
 
 export default PlaylistView;
