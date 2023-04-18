@@ -1,5 +1,5 @@
 const WhySection = () => (
-  <div className="flex flex-col hero min-h-200 bg-base-300 pt-4 pb-20">
+  <div className="flex flex-col hero min-h-200 bg-base-300 pt-10 pb-20">
     <h1 className="text-5xl font-bold text-primary text-left pb-10">
       Why DKMS?
     </h1>
