@@ -9,6 +9,7 @@ const MarketingPage = () => (
     <TitleSection />
     <WhySection />
     <ScreenshotSection />
+    <HowSection />
     <DemoVideoSection />
   </div>
 );
