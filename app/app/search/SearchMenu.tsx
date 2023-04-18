@@ -3,6 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 
+const MAX_SEARCH_LENGTH = 50;
+
 const SearchMenu = () => {
   const searchParams = useSearchParams();
 
@@ -27,6 +29,7 @@ const SearchMenu = () => {
           placeholder="Search…"
           className="input input-bordered"
           value={searchText}
+          maxLength={MAX_SEARCH_LENGTH}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
