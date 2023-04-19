@@ -13,7 +13,6 @@ const ArtistsGrid = ({
     } gap-4`}
   >
     {artists.map((artist, index) => (
-      // @ts-expect-error Next 13 handles async components
       <ArtistCard key={artist?.id ?? index} artist={artist} />
     ))}
   </div>

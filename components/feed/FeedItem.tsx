@@ -58,7 +58,6 @@ const FeedItem = ({
             <AlbumCard album={data.musicItem} isCompact />
           )}
           {data.musicItem.type === "artist" && (
-            // @ts-expect-error Server Component
             <ArtistCard artist={data.musicItem} isCompact />
           )}
         </div>

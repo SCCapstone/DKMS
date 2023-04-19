@@ -5,22 +5,15 @@ import { getPlaiceholder } from "plaiceholder";
 import PlayButton from "@/components/music/buttons/PlayButton";
 import ShareButton from "@/components/music/buttons/ShareButton";
 import Skeleton from "@/components/ui/Skeleton";
-import { formatNumber } from "@/lib/formatters";
 
-const Artist = async ({
+const NormalArtist = async ({
   artist,
-  isCompact,
 }: {
   artist: SpotifyApi.ArtistObjectFull | undefined;
-  isCompact?: boolean;
 }) => {
   if (!artist) {
     return (
-      <div
-        className={`card ${
-          isCompact ? "card-side" : "card-compact"
-        } bg-base-300 hover:bg-base-100 transition shadow-xl`}
-      >
+      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl">
         <div className="pt-8 px-8">
           <figure className="rounded-full overflow-clip relative aspect-square shadow-2xl" />
         </div>
@@ -42,20 +35,12 @@ const Artist = async ({
   });
 
   return (
-    <div
-      className={`card ${
-        isCompact ? "card-side" : "card-compact"
-      } bg-base-300 hover:bg-base-100 transition shadow-xl`}
-    >
-      <div className={isCompact ? "p-2" : "p-4 pb-0"}>
-        <figure
-          className={`${
-            isCompact ? "w-32 h-32" : ""
-          } rounded-full overflow-clip relative aspect-square shadow-2xl`}
-        >
+    <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl">
+      <div className="p-4 pb-0">
+        <figure className="rounded-full overflow-clip relative aspect-square shadow-2xl">
           <Link href={`/app/artist/${artist.id}`}>
             <Image
-              className={isCompact ? "w-full h-full" : ""}
+              className="w-full h-full"
               src={img}
               alt={artist.name}
               fill
@@ -65,21 +50,18 @@ const Artist = async ({
           </Link>
         </figure>
       </div>
-      <div
-        className={`card-body ${isCompact ? "" : "items-center text-center"}`}
-      >
-        <div className={`btn-group ${isCompact ? "justify-end" : ""}`}>
+      <div className="card-body items-center text-center">
+        <div className="btn-group">
           <PlayButton contextUri={artist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={artist.id} musicItemType="artist" />
         </div>
         <Link href={`/app/artist/${artist.id}`}>
           <h2 className="card-title">{artist.name}</h2>
-          {isCompact && `${formatNumber(artist.followers.total)} Followers`}
         </Link>
       </div>
     </div>
   );
 };
 
-export default Artist;
+export default NormalArtist;
