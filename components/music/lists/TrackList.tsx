@@ -18,7 +18,7 @@ const TrackList = ({
   showAlbum?: boolean;
 }) => (
   <div className="overflow-x-auto">
-    <table className="table table-compact w-full">
+    <table className="table table-compact">
       <thead>
         <tr>
           {showNumber && <th>#</th>}
@@ -35,7 +35,7 @@ const TrackList = ({
         {tracks.map((track, index) => (
           <tr className="hover" key={track.id}>
             {showNumber && <td>{index + 1}</td>}
-            <td className="truncate max-w-[300px]">
+            <td>
               <a
                 className="font-bold text-primary"
                 href={`/app/track/${track.id}`}
@@ -43,11 +43,11 @@ const TrackList = ({
                 {track.name}
               </a>
             </td>
-            <td className="truncate max-w-[300px]">
+            <td>
               <ArtistLinks artists={track.artists} />
             </td>
             {showAlbum && "album" in track && (
-              <td className="truncate max-w-[200px]">
+              <td>
                 <a className="font-bold" href={`/app/album/${track.album.id}`}>
                   {track.album.name}
                 </a>

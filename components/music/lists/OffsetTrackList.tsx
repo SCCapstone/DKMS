@@ -15,7 +15,7 @@ const OffsetTrackList = ({
   showAlbum?: boolean;
 }) => (
   <div className="overflow-x-auto">
-    <table className="table table-compact w-full">
+    <table className="table table-compact">
       <thead>
         <tr>
           {showNumber && <th>#</th>}
@@ -30,7 +30,7 @@ const OffsetTrackList = ({
         {tracks.map((track, index) => (
           <tr className="hover" key={track.id}>
             {showNumber && <td>{index + 1}</td>}
-            <td className="truncate max-w-[400px]">
+            <td>
               <a
                 className="font-bold text-primary"
                 href={`/app/track/${track.id}`}
@@ -38,7 +38,7 @@ const OffsetTrackList = ({
                 {track.name}
               </a>
             </td>
-            <td className="truncate max-w-[400px]">
+            <td>
               <ArtistLinks artists={track.artists} />
             </td>
             {showAlbum && "album" in track && (

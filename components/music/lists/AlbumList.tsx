@@ -23,7 +23,7 @@ const AlbumList = ({
       <tbody>
         {albums.map((album) => (
           <tr className="hover" key={album.id}>
-            <td className="truncate max-w-[500px]">
+            <td>
               <Link
                 className="font-bold text-primary"
                 href={`/app/album/${album.id}`}
