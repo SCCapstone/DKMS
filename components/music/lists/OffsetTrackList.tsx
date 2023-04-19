@@ -30,7 +30,7 @@ const OffsetTrackList = ({
         {tracks.map((track, index) => (
           <tr className="hover" key={track.id}>
             {showNumber && <td>{index + 1}</td>}
-            <td>
+            <td className="truncate max-w-[400px]">
               <a
                 className="font-bold text-primary"
                 href={`/app/track/${track.id}`}
