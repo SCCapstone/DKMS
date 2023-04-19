@@ -47,7 +47,7 @@ const TrackList = ({
               <ArtistLinks artists={track.artists} />
             </td>
             {showAlbum && "album" in track && (
-              <td className="truncate max-w-[200]">
+              <td className="truncate max-w-[200px]">
                 <a className="font-bold" href={`/app/album/${track.album.id}`}>
                   {track.album.name}
                 </a>
