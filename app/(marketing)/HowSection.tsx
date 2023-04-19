@@ -43,9 +43,9 @@ const HowSection = () => (
         <div className="card-body">
           <h2 className="card-title">Use playback</h2>
           <p>
-            First, click play on any song within the application. Then open
-            spotify on a device on the same network and change your device to
-            &ldquo;DKMS&rdquo;. Now play music to your heart&apos;s content!
+            Open a spotify on a device on the same network as the device using
+            the application and change your device to &ldquo;DKMS&rdquo;. Now
+            play music to your heart&apos;s content!
           </p>
         </div>
         <figure>

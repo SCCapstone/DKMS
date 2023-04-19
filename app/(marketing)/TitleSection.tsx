@@ -5,8 +5,8 @@ const TitleSection = () => (
     <div className="hero-content">
       <div className="card max-w-md bg-base-300">
         <div className="card-body text-center">
-          <h1 className="card-title text-5xl font-bold text-primary">
-            Do more with your Spotify
+          <h1 className="card-title text-5xl font-bold text-secondary">
+            Dance more with DKMS.
           </h1>
           <p className="py-6">
             Connect with others and discover more about your music circle than

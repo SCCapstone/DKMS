@@ -37,7 +37,15 @@ const ScreenshotSection = () => (
           alt="example artist"
         />
       </div>
-
+      <div className="carousel-item">
+        <Image
+          src="/images/defaults/exampleAlbum.png"
+          className="rounded-box"
+          width={960}
+          height={480}
+          alt="example album"
+        />
+      </div>
       <div className="carousel-item">
         <Image
           src="/images/defaults/exampleRecs.png"
@@ -45,6 +53,15 @@ const ScreenshotSection = () => (
           width={960}
           height={480}
           alt="example recommendations"
+        />
+      </div>
+      <div className="carousel-item">
+        <Image
+          src="/images/defaults/exampleSettings.png"
+          className="rounded-box"
+          width={960}
+          height={480}
+          alt="example settings"
         />
       </div>
     </div>
