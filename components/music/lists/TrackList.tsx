@@ -35,7 +35,7 @@ const TrackList = ({
         {tracks.map((track, index) => (
           <tr className="hover" key={track.id}>
             {showNumber && <td>{index + 1}</td>}
-            <td>
+            <td className="truncate max-w-[300px]">
               <a
                 className="font-bold text-primary"
                 href={`/app/track/${track.id}`}
@@ -47,7 +47,7 @@ const TrackList = ({
               <ArtistLinks artists={track.artists} />
             </td>
             {showAlbum && "album" in track && (
-              <td>
+              <td className="truncate max-w-[200]">
                 <a className="font-bold" href={`/app/album/${track.album.id}`}>
                   {track.album.name}
                 </a>
