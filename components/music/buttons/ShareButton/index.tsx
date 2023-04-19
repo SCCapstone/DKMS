@@ -1,8 +1,8 @@
 import { getCurrentUser } from "@/lib/getUser";
 
-import IconButton from "./IconButton";
+import ModalButton from "./ModalButton";
 
-const ShareIcon = async ({
+const ShareButton = async ({
   musicItemId,
   musicItemType,
 }: {
@@ -12,7 +12,7 @@ const ShareIcon = async ({
   const user = await getCurrentUser();
 
   return (
-    <IconButton
+    <ModalButton
       user={user}
       musicItemId={musicItemId}
       musicItemType={musicItemType}
@@ -20,4 +20,4 @@ const ShareIcon = async ({
   );
 };
 
-export default ShareIcon;
+export default ShareButton;

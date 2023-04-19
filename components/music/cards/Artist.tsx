@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
-import PlayButton from "@/components/music/PlayButton";
-import ShareIcon from "@/components/ui/shareIcon";
+import PlayButton from "@/components/music/buttons/PlayButton";
+import ShareButton from "@/components/music/buttons/ShareButton";
 import Skeleton from "@/components/ui/Skeleton";
 import { formatNumber } from "@/lib/formatters";
 
@@ -75,7 +75,7 @@ const Artist = async ({
         >
           <PlayButton contextUri={artist.uri} />
           {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={artist.id} musicItemType="artist" />
+          <ShareButton musicItemId={artist.id} musicItemType="artist" />
         </div>
         <Link href={`/app/artist/${artist.id}`}>
           <h2 className="card-title">{artist.name}</h2>

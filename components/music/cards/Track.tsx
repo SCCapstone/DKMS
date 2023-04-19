@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
-import PlayButton from "@/components/music/PlayButton";
+import FavoriteButton from "@/components/music/buttons/FavoriteButton";
+import PlayButton from "@/components/music/buttons/PlayButton";
+import ShareButton from "@/components/music/buttons/ShareButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
-import FavoriteIcon from "@/components/ui/favoriteIcon";
-import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
 
@@ -90,11 +90,11 @@ const Track = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end">
+        <div className="card-actions justify-end btn-group">
           <PlayButton contextUri={track.album.uri} offset={track.uri} />
-          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
+          <FavoriteButton isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={track.id} musicItemType="track" />
+          <ShareButton musicItemId={track.id} musicItemType="track" />
         </div>
         <Link href={`/app/track/${track.id}`}>
           <h2 className="text-lg truncate font-semibold">{track.name}</h2>

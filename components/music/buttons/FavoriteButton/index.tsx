@@ -7,7 +7,7 @@ import toggleFavorite from "@/lib/favoriteTracks/toggleFavorite";
 
 import { HeartRegular, HeartSolid } from "./icons";
 
-const FavoriteIcon = ({
+const FavoriteButton = ({
   isFavorited,
   trackId,
 }: {
@@ -45,4 +45,4 @@ const FavoriteIcon = ({
   );
 };
 
-export default FavoriteIcon;
+export default FavoriteButton;

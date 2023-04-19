@@ -3,11 +3,11 @@
 import { useState } from "react";
 
 import AddContent from "./AddContent";
-import Share from "./icon";
+import ShareIcon from "./ShareIcon";
 
 import type { User } from "next-auth";
 
-const IconButton = ({
+const ModalButton = ({
   user,
   musicItemId,
   musicItemType,
@@ -30,7 +30,7 @@ const IconButton = ({
         type="button"
         title="Share to feed"
       >
-        <Share />
+        <ShareIcon />
       </button>
 
       {modal && (
@@ -46,4 +46,4 @@ const IconButton = ({
   );
 };
 
-export default IconButton;
+export default ModalButton;

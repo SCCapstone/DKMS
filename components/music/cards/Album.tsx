@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
-import PlayButton from "@/components/music/PlayButton";
+import PlayButton from "@/components/music/buttons/PlayButton";
+import ShareButton from "@/components/music/buttons/ShareButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
-import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
 const Album = async ({
@@ -78,7 +78,7 @@ const Album = async ({
         <div className="card-actions justify-end">
           <PlayButton contextUri={album.uri} />
           {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={album.id} musicItemType="album" />
+          <ShareButton musicItemId={album.id} musicItemType="album" />
         </div>
         <Link href={`/app/album/${album.id}`}>
           <h2 className="text-lg truncate font-semibold">{album.name}</h2>

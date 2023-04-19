@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { capitalize } from "@/lib/formatters";
 
-import PlayButton from "../PlayButton";
+import PlayButton from "../buttons/PlayButton";
 
 const AlbumList = ({
   albums,

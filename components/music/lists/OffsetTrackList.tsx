@@ -1,7 +1,7 @@
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDuration } from "@/lib/formatters";
 
-import PlayButton from "../PlayButton";
+import PlayButton from "../buttons/PlayButton";
 
 const OffsetTrackList = ({
   contextUri,

@@ -1,10 +1,9 @@
 import Link from "next/link";
 
-import ShareIcon from "../ui/shareIcon";
-
+import PlayButton from "./buttons/PlayButton";
+import ShareButton from "./buttons/ShareButton";
 import MusicButtons from "./MusicButtons";
 import MusicImage from "./MusicImage";
-import PlayButton from "./PlayButton";
 
 type CardProps = {
   imageUrl: string | undefined;
@@ -73,7 +72,7 @@ const HeaderCard = ({
       <div className="btn-group pt-4">
         <PlayButton contextUri={playbuttonContext} />
         {/* @ts-expect-error Server Component */}
-        <ShareIcon musicItemId={musicItemId} musicItemType={musicItemType} />
+        <ShareButton musicItemId={musicItemId} musicItemType={musicItemType} />
       </div>
     </div>
     <div className="flex flex-col justify-between">
