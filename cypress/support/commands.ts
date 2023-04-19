@@ -43,8 +43,8 @@ import type { User } from "next-auth";
 
 Cypress.Commands.add("auth", () => {
   const fixtureFile = `user${
-    process.env.NODE_ENV === "development" ? "-development" : ""
-  }.json`;
+    Cypress.env("environment") === "development" ? "-development" : ""
+  }.json` as const;
   cy.session(fixtureFile, () => {
     const session = Cypress.env("session") as
       | {
@@ -68,8 +68,8 @@ Cypress.Commands.add("auth", () => {
       assert.fail("session.secret is not set");
     }
 
-    const accessTokenExpires = new Date().getTime() + 1000 * 60 * 60;
-    cy.fixture("user.json")
+    const accessTokenExpires = new Date().getTime();
+    cy.fixture(fixtureFile)
       .then((user: User) =>
         encode({
           token: { user, accessToken, accessTokenExpires, refreshToken },
