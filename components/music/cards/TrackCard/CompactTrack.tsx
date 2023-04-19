@@ -89,9 +89,9 @@ const CompactTrack = async ({
             {track.album.name}
           </p>
         </Link>
-        <p>
+        <div>
           <ArtistLinks artists={track.artists} />
-        </p>
+        </div>
         <div className="btn-group justify-end">
           <PlayButton contextUri={track.album.uri} offset={track.uri} />
           <FavoriteButton isFavorited={isFavorited} trackId={track.id} />

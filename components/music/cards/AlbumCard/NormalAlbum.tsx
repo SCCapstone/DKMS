@@ -76,9 +76,9 @@ const NormalAlbumCard = async ({
             {new Date(album.release_date).getFullYear()}
           </p>
         </Link>
-        <p className="pb-0">
+        <div className="pb-0">
           <ArtistLinks artists={album.artists} />
-        </p>
+        </div>
       </div>
     </div>
   );

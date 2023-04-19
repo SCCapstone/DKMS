@@ -14,7 +14,7 @@ const CompactAlbumCard = async ({
 }) => {
   if (!album) {
     return (
-      <div className="card card-side bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+      <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/album.png"
@@ -48,7 +48,7 @@ const CompactAlbumCard = async ({
   });
 
   return (
-    <div className="card card-side bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+    <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
       <figure className="relative aspect-square">
         <Link href={`/app/album/${album.id}`}>
           <Image
@@ -65,19 +65,22 @@ const CompactAlbumCard = async ({
       </figure>
 
       <div className="card-body relative">
-        <div className="btn-group justify-center">
-          <PlayButton contextUri={album.uri} />
-          {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={album.id} musicItemType="album" />
-        </div>
         <Link href={`/app/album/${album.id}`}>
-          <h2 className="text-lg truncate font-semibold">{album.name}</h2>
-          <p className="text-sm truncate">
-            {new Date(album.release_date).getFullYear()}
+          <h2 className="card-title text-primary font-extrabold">
+            {album.name}
+          </h2>
+          <p>
+            {new Date(album.release_date).getFullYear()} | {album.total_tracks}{" "}
+            songs
           </p>
         </Link>
         <div className="pb-0">
           <ArtistLinks artists={album.artists} />
+        </div>
+        <div className="btn-group justify-end">
+          <PlayButton contextUri={album.uri} />
+          {/* @ts-expect-error Server Component */}
+          <ShareButton musicItemId={album.id} musicItemType="album" />
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ const CompactArtist = async ({
 }) => {
   if (!artist) {
     return (
-      <div className="card card-side bg-base-300 hover:bg-base-100 transition shadow-xl">
+      <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl">
         <div className="pt-8 px-8">
           <figure className="rounded-full overflow-clip relative aspect-square shadow-2xl" />
         </div>

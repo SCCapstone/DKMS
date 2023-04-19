@@ -13,7 +13,7 @@ const CompactPlaylist = async ({
 }) => {
   if (!playlist) {
     return (
-      <div className="card card-side bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
+      <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square" />
         <div className="card-body">
           <h2 className="text-lg font-semibold truncate">
