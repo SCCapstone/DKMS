@@ -43,7 +43,7 @@ const TrackList = ({
                 {track.name}
               </a>
             </td>
-            <td>
+            <td className="truncate max-w-[300px]">
               <ArtistLinks artists={track.artists} />
             </td>
             {showAlbum && "album" in track && (
