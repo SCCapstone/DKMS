@@ -6,14 +6,14 @@ describe("Navigation", () => {
 
   it("should start on the feed page", () => {
     // Start from the index page
-    cy.visit("/");
+    cy.visit("/app");
     // The new page should contain an h1 with "Friends"
     cy.get("h1").contains("Friends");
   });
 
   it("should navigate to the discover page", () => {
     // Start from the index page
-    cy.visit("/");
+    cy.visit("/app");
 
     // Find a link with an href attribute containing "discover" and click it
     cy.navbarClick("Discover");
@@ -27,7 +27,7 @@ describe("Navigation", () => {
 
   it("should navigate to the profile page", () => {
     // Start from the index page
-    cy.visit("/");
+    cy.visit("/app");
 
     // Find a link with an href attribute containing "profile" and click it
     cy.navbarClick("Profile");
@@ -41,7 +41,7 @@ describe("Navigation", () => {
 
   it("should navigate to the search page", () => {
     // Start from the index page
-    cy.visit("/");
+    cy.visit("/app");
 
     // Find a link with an href attribute containing "search" and click it
     cy.navbarClick("Search");
@@ -55,7 +55,7 @@ describe("Navigation", () => {
 
   it("should navigate to the recommendations page", () => {
     // Start from the index page
-    cy.visit("/");
+    cy.visit("/app");
 
     // Find a link with an href attribute containing "recommendations" and click it
     cy.navbarClick("Recommendations");
@@ -69,7 +69,7 @@ describe("Navigation", () => {
 
   it("should navigate to the settings page", () => {
     // Start from the index page
-    cy.visit("/");
+    cy.visit("/app");
 
     // Find a link with an href attribute containing "settings" and click it
     cy.navbarClick("Settings");
@@ -83,7 +83,7 @@ describe("Navigation", () => {
 
   it("should navigate back to the feed when starting on a different page", () => {
     // Start from the settings page
-    cy.visit("/settings");
+    cy.visit("/app/settings");
 
     // Find a link with an href attribute containing "feed" and click it
     cy.navbarClick("Feed");
@@ -97,7 +97,7 @@ describe("Navigation", () => {
 
   it("should navigate to the feed when clicking on the logo", () => {
     // Start from the settings page
-    cy.visit("/settings");
+    cy.visit("/app/settings");
 
     // Find the logo and click it
     cy.navbarClick("DKMS");
