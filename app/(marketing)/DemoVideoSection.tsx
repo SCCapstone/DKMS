@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const DemoVideoSection = () => (
-  <div className="bg-base-100 pb-10">
+  <div className="bg-base-100 pb-10 container mx-auto">
     <h2 className="text-5xl font-bold text-right py-10 pr-10 text-primary">
       Final Demo Video
     </h2>
