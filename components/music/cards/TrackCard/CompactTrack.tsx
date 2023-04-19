@@ -17,23 +17,17 @@ const checkIsFavorited = (trackId: string) =>
     }
   ).then((data) => data[0]);
 
-const Track = async ({
+const CompactTrack = async ({
   track,
-  isCompact,
 }: {
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | undefined;
-  isCompact?: boolean;
 }) => {
   if (!track) {
     return (
-      <div
-        className={`card ${
-          isCompact ? "card-side" : "card-compact"
-        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-      >
+      <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/track.png"
@@ -70,11 +64,7 @@ const Track = async ({
   const isFavorited = await checkIsFavorited(track.id);
 
   return (
-    <div
-      className={`card ${
-        isCompact ? "card-side" : "card-compact"
-      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-    >
+    <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl">
       <figure className="relative aspect-square">
         <Link href={`/app/track/${track.id}`}>
           <Image
@@ -90,25 +80,27 @@ const Track = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="btn-group justify-center">
-          <PlayButton contextUri={track.album.uri} offset={track.uri} />
-          <FavoriteButton isFavorited={isFavorited} trackId={track.id} />
-          {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={track.id} musicItemType="track" />
-        </div>
         <Link href={`/app/track/${track.id}`}>
-          <h2 className="text-lg truncate font-semibold">{track.name}</h2>
-          <p className={isCompact ? "text-sm truncate" : ""}>
+          <h2 className="card-title text-primary font-extrabold">
+            {track.name}
+          </h2>
+          <p>
             {new Date(track.album.release_date).getFullYear()} |{" "}
             {track.album.name}
           </p>
         </Link>
-        <div className={isCompact ? "text-sm truncate" : "pb-0"}>
+        <p>
           <ArtistLinks artists={track.artists} />
+        </p>
+        <div className="btn-group justify-end">
+          <PlayButton contextUri={track.album.uri} offset={track.uri} />
+          <FavoriteButton isFavorited={isFavorited} trackId={track.id} />
+          {/* @ts-expect-error Server Component */}
+          <ShareButton musicItemId={track.id} musicItemType="track" />
         </div>
       </div>
     </div>
   );
 };
 
-export default Track;
+export default CompactTrack;

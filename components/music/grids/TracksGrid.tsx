@@ -16,7 +16,6 @@ const TracksGrid = ({
     } gap-4`}
   >
     {tracks.map((track, index) => (
-      // @ts-expect-error Next 13 handles async components
       <TrackCard key={track?.id ?? index} track={track} />
     ))}
   </div>
