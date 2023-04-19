@@ -15,7 +15,7 @@ const OffsetTrackList = ({
   showAlbum?: boolean;
 }) => (
   <div className="overflow-x-auto">
-    <table className="table table-compact">
+    <table className="table table-compact w-full">
       <thead>
         <tr>
           {showNumber && <th>#</th>}
