@@ -1,13 +1,14 @@
 // Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.
 
-const BUTTON_SIZE = 20;
-const PlayIcon = () => (
+const REGULAR_SIZE = 24;
+const SMALL_SIZE = 20;
+const PlayIcon = ({ small }: { small?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 384 512"
     className="stroke-current fill-current"
-    height={BUTTON_SIZE}
-    width={BUTTON_SIZE}
+    height={small ? SMALL_SIZE : REGULAR_SIZE}
+    width={small ? SMALL_SIZE : REGULAR_SIZE}
   >
     <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
   </svg>

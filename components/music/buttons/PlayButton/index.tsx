@@ -9,7 +9,11 @@ import PlayIcon from "./PlayIcon";
 
 import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
 
-const PlayButton = (params: StartPlayingContextParams) => {
+type PlayButtonProps = {
+  small?: boolean;
+} & StartPlayingContextParams;
+const PlayButton = (props: PlayButtonProps) => {
+  const { small, ...params } = props;
   const {
     currentDeviceState: [currentDeviceId],
   } = usePlayer();
@@ -28,13 +32,13 @@ const PlayButton = (params: StartPlayingContextParams) => {
 
   return (
     <button
-      className={`btn btn-ghost btn-sm ${isFetching ? "loading" : ""}`}
+      className={`btn btn-ghost btn-square ${isFetching ? "loading" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isFetching}
       title="Play"
     >
-      <PlayIcon />
+      <PlayIcon small={small} />
     </button>
   );
 };

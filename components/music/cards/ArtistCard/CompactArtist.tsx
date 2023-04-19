@@ -56,9 +56,9 @@ const CompactArtist = async ({
           <p>{formatNumber(artist.followers.total)} followers</p>
         </Link>
         <div className="btn-group justify-end">
-          <PlayButton contextUri={artist.uri} />
+          <PlayButton contextUri={artist.uri} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={artist.id} musicItemType="artist" />
+          <ShareButton musicItemId={artist.id} musicItemType="artist" small />
         </div>
       </div>
     </div>

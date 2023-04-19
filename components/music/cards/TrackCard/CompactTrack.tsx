@@ -93,10 +93,10 @@ const CompactTrack = async ({
           <ArtistLinks artists={track.artists} />
         </div>
         <div className="btn-group justify-end">
-          <PlayButton contextUri={track.album.uri} offset={track.uri} />
-          <FavoriteButton isFavorited={isFavorited} trackId={track.id} />
+          <PlayButton contextUri={track.album.uri} offset={track.uri} small />
+          <FavoriteButton isFavorited={isFavorited} trackId={track.id} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={track.id} musicItemType="track" />
+          <ShareButton musicItemId={track.id} musicItemType="track" small />
         </div>
       </div>
     </div>

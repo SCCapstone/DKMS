@@ -81,10 +81,10 @@ const NormalTrack = async ({
       </figure>
       <div className="card-body relative">
         <div className="btn-group justify-center">
-          <PlayButton contextUri={track.album.uri} offset={track.uri} />
-          <FavoriteButton isFavorited={isFavorited} trackId={track.id} />
+          <PlayButton contextUri={track.album.uri} offset={track.uri} small />
+          <FavoriteButton isFavorited={isFavorited} trackId={track.id} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={track.id} musicItemType="track" />
+          <ShareButton musicItemId={track.id} musicItemType="track" small />
         </div>
         <Link href={`/app/track/${track.id}`}>
           <h2 className="text-lg truncate font-semibold">{track.name}</h2>

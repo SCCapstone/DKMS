@@ -52,9 +52,9 @@ const NormalArtist = async ({
       </div>
       <div className="card-body items-center text-center">
         <div className="btn-group">
-          <PlayButton contextUri={artist.uri} />
+          <PlayButton contextUri={artist.uri} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={artist.id} musicItemType="artist" />
+          <ShareButton musicItemId={artist.id} musicItemType="artist" small />
         </div>
         <Link href={`/app/artist/${artist.id}`}>
           <h2 className="card-title">{artist.name}</h2>

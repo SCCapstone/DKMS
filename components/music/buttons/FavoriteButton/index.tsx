@@ -10,9 +10,11 @@ import { HeartRegular, HeartSolid } from "./icons";
 const FavoriteButton = ({
   isFavorited,
   trackId,
+  small,
 }: {
   isFavorited: boolean;
   trackId: string;
+  small?: boolean;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -34,13 +36,17 @@ const FavoriteButton = ({
 
   return (
     <button
-      className={`btn btn-ghost btn-sm ${isMutating ? "loading" : ""}`}
+      className={`btn btn-ghost btn-square ${isMutating ? "loading" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}
       title="Favorite song on Spotify"
     >
-      {isFavorited ? <HeartSolid /> : <HeartRegular />}
+      {isFavorited ? (
+        <HeartSolid small={small} />
+      ) : (
+        <HeartRegular small={small} />
+      )}
     </button>
   );
 };

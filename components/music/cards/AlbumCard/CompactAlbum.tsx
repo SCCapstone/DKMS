@@ -78,9 +78,9 @@ const CompactAlbumCard = async ({
           <ArtistLinks artists={album.artists} />
         </div>
         <div className="btn-group justify-end">
-          <PlayButton contextUri={album.uri} />
+          <PlayButton contextUri={album.uri} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={album.id} musicItemType="album" />
+          <ShareButton musicItemId={album.id} musicItemType="album" small />
         </div>
       </div>
     </div>

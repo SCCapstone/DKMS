@@ -55,9 +55,13 @@ const NormalPlaylist = async ({
       </figure>
       <div className="card-body relative">
         <div className="btn-group justify-center">
-          <PlayButton contextUri={playlist.uri} />
+          <PlayButton contextUri={playlist.uri} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={playlist.id} musicItemType="playlist" />
+          <ShareButton
+            musicItemId={playlist.id}
+            musicItemType="playlist"
+            small
+          />
         </div>
         <Link href={`/app/playlist/${playlist.id}`}>
           <h2 className="text-lg truncate font-semibold">{playlist.name}</h2>

@@ -64,9 +64,13 @@ const CompactPlaylist = async ({
           </p>
         </Link>
         <div className="btn-group justify-end">
-          <PlayButton contextUri={playlist.uri} />
+          <PlayButton contextUri={playlist.uri} small />
           {/* @ts-expect-error Server Component */}
-          <ShareButton musicItemId={playlist.id} musicItemType="playlist" />
+          <ShareButton
+            musicItemId={playlist.id}
+            musicItemType="playlist"
+            small
+          />
         </div>
       </div>
     </div>

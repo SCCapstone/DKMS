@@ -11,10 +11,12 @@ const ModalButton = ({
   user,
   musicItemId,
   musicItemType,
+  small,
 }: {
   user: User;
   musicItemId?: string;
   musicItemType?: "track" | "playlist" | "artist" | "album";
+  small?: boolean;
 }) => {
   const [modal, toggleModal] = useState(false);
 
@@ -25,12 +27,12 @@ const ModalButton = ({
   return (
     <>
       <button
-        className="btn btn-ghost btn-sm"
+        className="btn btn-ghost btn-square"
         onClick={handleClick}
         type="button"
         title="Share to feed"
       >
-        <ShareIcon />
+        <ShareIcon small={small} />
       </button>
 
       {modal && (
