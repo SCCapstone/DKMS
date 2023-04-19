@@ -90,7 +90,7 @@ const Track = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end btn-group">
+        <div className="btn-group justify-center">
           <PlayButton contextUri={track.album.uri} offset={track.uri} />
           <FavoriteButton isFavorited={isFavorited} trackId={track.id} />
           {/* @ts-expect-error Server Component */}

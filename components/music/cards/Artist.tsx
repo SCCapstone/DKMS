@@ -47,7 +47,7 @@ const Artist = async ({
         isCompact ? "card-side" : "card-compact"
       } bg-base-300 hover:bg-base-100 transition shadow-xl`}
     >
-      <div className={isCompact ? "p-2" : "pt-8 px-8 mt-5"}>
+      <div className={isCompact ? "p-2" : "p-4 pb-0"}>
         <figure
           className={`${
             isCompact ? "w-32 h-32" : ""
@@ -68,11 +68,7 @@ const Artist = async ({
       <div
         className={`card-body ${isCompact ? "" : "items-center text-center"}`}
       >
-        <div
-          className={`card-actions ${
-            isCompact ? "justify-end" : " absolute top-0 right-0 p-2"
-          }`}
-        >
+        <div className={`btn-group ${isCompact ? "justify-end" : ""}`}>
           <PlayButton contextUri={artist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={artist.id} musicItemType="artist" />

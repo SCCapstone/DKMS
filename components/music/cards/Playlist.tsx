@@ -64,7 +64,7 @@ const Playlist = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end">
+        <div className="btn-group justify-center">
           <PlayButton contextUri={playlist.uri} />
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={playlist.id} musicItemType="playlist" />
