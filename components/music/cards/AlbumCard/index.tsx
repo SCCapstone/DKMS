@@ -1,7 +1,7 @@
-import CompactAlbumCard from "./CompactAlbumCard";
-import NormalAlbumCard from "./NormalAlbumCard";
+import CompactAlbum from "./CompactAlbum";
+import NormalAlbum from "./NormalAlbum";
 
-const Album = ({
+const AlbumCard = ({
   album,
   isCompact,
 }: {
@@ -10,11 +10,11 @@ const Album = ({
 }) => {
   if (isCompact) {
     // @ts-expect-error Next 13 server component
-    return <CompactAlbumCard album={album} />;
+    return <CompactAlbum album={album} />;
   }
 
   // @ts-expect-error Next 13 server component
-  return <NormalAlbumCard album={album} />;
+  return <NormalAlbum album={album} />;
 };
 
-export default Album;
+export default AlbumCard;

@@ -1,4 +1,4 @@
-import { Artist } from "@/components/music/cards";
+import { ArtistCard } from "@/components/music/cards";
 
 const ArtistsGrid = ({
   artists,
@@ -14,7 +14,7 @@ const ArtistsGrid = ({
   >
     {artists.map((artist, index) => (
       // @ts-expect-error Next 13 handles async components
-      <Artist key={artist?.id ?? index} artist={artist} />
+      <ArtistCard key={artist?.id ?? index} artist={artist} />
     ))}
   </div>
 );

@@ -1,4 +1,9 @@
-import { Album, Artist, Playlist, Track } from "@/components/music/cards";
+import {
+  AlbumCard,
+  ArtistCard,
+  PlaylistCard,
+  TrackCard,
+} from "@/components/music/cards";
 import ProfileImage from "@/components/profile/ProfileImage";
 import UsernameLink from "@/components/ui/UsernameLink";
 
@@ -43,18 +48,18 @@ const FeedItem = ({
         <div className="grid mt-2">
           {data.musicItem.type === "track" && (
             // @ts-expect-error Server Component
-            <Track track={data.musicItem} isCompact />
+            <TrackCard track={data.musicItem} isCompact />
           )}
           {data.musicItem.type === "playlist" && (
             // @ts-expect-error Server Component
-            <Playlist playlist={data.musicItem} isCompact />
+            <PlaylistCard playlist={data.musicItem} isCompact />
           )}
           {data.musicItem.type === "album" && (
-            <Album album={data.musicItem} isCompact />
+            <AlbumCard album={data.musicItem} isCompact />
           )}
           {data.musicItem.type === "artist" && (
             // @ts-expect-error Server Component
-            <Artist artist={data.musicItem} isCompact />
+            <ArtistCard artist={data.musicItem} isCompact />
           )}
         </div>
       )}

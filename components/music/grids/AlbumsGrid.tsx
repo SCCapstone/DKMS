@@ -1,4 +1,4 @@
-import { Album } from "@/components/music/cards";
+import { AlbumCard } from "@/components/music/cards";
 
 const AlbumsGrid = ({
   albums,
@@ -13,7 +13,7 @@ const AlbumsGrid = ({
     } gap-4`}
   >
     {albums.map((album, index) => (
-      <Album key={album?.id ?? index} album={album} />
+      <AlbumCard key={album?.id ?? index} album={album} />
     ))}
   </div>
 );
