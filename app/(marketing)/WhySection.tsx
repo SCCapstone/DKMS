@@ -1,9 +1,9 @@
 const WhySection = () => (
-  <div className="flex flex-col hero min-h-200 bg-base-300 pt-10 pb-20">
+  <div className="flex flex-col hero min-h-200 bg-base-300 pt-10 pb-20 items-center">
     <h1 className="text-5xl font-bold text-primary text-left pb-10">
       Why DKMS?
     </h1>
-    <div className="grid grid-cols-3 w-full gap-20 px-64">
+    <div className="grid grid-cols-3 w-full gap-20 2xl:px-64">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Connect</h2>

@@ -48,7 +48,7 @@ const SignInPage = async ({
   const errorText = errorType ? ERROR_DESCRIPTIONS[errorType] : undefined;
 
   return (
-    <>
+    <div className="min-h-screen px-10 pt-5">
       <h2 className="text-2xl font-bold py-3">Sign In</h2>
       <span className="divider mt-0" />
 
@@ -73,7 +73,7 @@ const SignInPage = async ({
         </div>
       )}
       <SignInButton />
-    </>
+    </div>
   );
 };
 

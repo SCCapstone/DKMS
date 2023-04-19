@@ -1,4 +1,4 @@
-import SignInButton from "./auth/signin/SignInButton";
+import Link from "next/link";
 
 const TitleSection = () => (
   <div className="hero min-h-screen bg-base-100">
@@ -11,7 +11,9 @@ const TitleSection = () => (
           Connect with others and discover more about your music circle than
           ever.
         </p>
-        <SignInButton />
+        <Link className="btn btn-secondary normal-case" href="/auth/signin">
+          SIGN IN
+        </Link>
       </div>
     </div>
   </div>

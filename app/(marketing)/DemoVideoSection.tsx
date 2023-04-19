@@ -5,7 +5,7 @@ const DemoVideoSection = () => (
     <h2 className="text-5xl font-bold text-right py-10 pr-10 text-primary">
       Final Demo Video
     </h2>
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-2 gap-5 px-5">
       <div className="pl-20">
         <Image
           width="750"
