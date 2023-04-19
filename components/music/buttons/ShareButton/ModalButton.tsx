@@ -25,7 +25,7 @@ const ModalButton = ({
   return (
     <>
       <button
-        className="btn btn-ghost"
+        className="btn btn-ghost btn-sm"
         onClick={handleClick}
         type="button"
         title="Share to feed"

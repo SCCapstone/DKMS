@@ -28,7 +28,7 @@ const PlayButton = (params: StartPlayingContextParams) => {
 
   return (
     <button
-      className={`btn btn-ghost ${isFetching ? "loading" : ""}`}
+      className={`btn btn-ghost btn-sm ${isFetching ? "loading" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isFetching}

@@ -34,7 +34,7 @@ const FavoriteButton = ({
 
   return (
     <button
-      className={`btn btn-ghost ${isMutating ? "loading" : ""}`}
+      className={`btn btn-ghost btn-sm ${isMutating ? "loading" : ""}`}
       onClick={(e) => void handleClick(e)}
       type="button"
       disabled={isMutating}
