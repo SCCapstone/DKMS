@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const TitleSection = () => (
-  <div className="hero min-h-screen bg-base-100">
+  <div className="hero min-h-screen bg-gradient-to-r from-transparent via-primary to-secondary">
     <div className="hero-content">
       <div className="card max-w-md bg-base-300">
         <div className="card-body text-center">
