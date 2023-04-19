@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const HowSection = () => (
-  <div className="bg-base-300 pb-10 container mx-auto">
+  <div className="bg-base-300 pb-10">
     <h1 className="text-5xl font-bold text-left py-10 pl-10">How to use</h1>
     <div className="grid grid-cols-1 gap-y-10 px-20">
       <div className="card card-side bg-base-100 shadow-xl">

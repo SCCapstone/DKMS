@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const ScreenshotSection = () => (
-  <div className="preview border-base-300 bg-base-200 flex flex-wrap items-center justify-center py-10 container mx-auto">
+  <div className="preview border-base-300 bg-base-200 flex flex-wrap items-center justify-center py-10">
     <div className="flex flex-col items-center">
       <h1 className="text-5xl font-bold text-secondary pb-4">Preview</h1>
       <p className="pb-10">
