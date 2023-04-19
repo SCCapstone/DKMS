@@ -51,7 +51,6 @@ const FeedItem = ({
             <TrackCard track={data.musicItem} isCompact />
           )}
           {data.musicItem.type === "playlist" && (
-            // @ts-expect-error Server Component
             <PlaylistCard playlist={data.musicItem} isCompact />
           )}
           {data.musicItem.type === "album" && (
