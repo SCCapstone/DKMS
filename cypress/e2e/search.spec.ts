@@ -25,7 +25,7 @@ describe("Search", () => {
 
     cy.get("button").contains("Search").click();
 
-    // The search results should contain an h2 with "RAYE"
+    // The search results should contain a link with "RAYE"
     cy.get("a").contains("RAYE");
     cy.url().should("include", "/search?q=RAYE");
   });
@@ -38,7 +38,7 @@ describe("Search", () => {
 
     cy.get("button").contains("Search").click();
 
-    // The search results should contain an h2 with "Lover"
+    // The search results should contain a link with "Lover"
     cy.get("a").contains("Lover");
     cy.url().should("include", "/search?q=Lover");
   });
@@ -51,9 +51,9 @@ describe("Search", () => {
 
     cy.get("button").contains("Search").click();
 
-    // The search results should contain an h2 with "Flamme"
-    cy.get("a").contains("Flamme");
     cy.url().should("include", "/search?q=Flamme");
+    // The search results should contain a link with "Flamme"
+    cy.get("a").contains("Flamme");
   });
 
   it("should search for a playlist", () => {
@@ -64,9 +64,9 @@ describe("Search", () => {
 
     cy.get("button").contains("Search").click();
 
-    // The search results should contain an h2 with "Summer"
     cy.url().should("include", "/search?q=Summer");
-    // cy.get("a").should("include", "Summer");
+    // The search results should contain a link with "Summer"
+    cy.get("a").contains("Summer");
   });
 
   it("should search for a user by Spotify username", () => {
@@ -78,7 +78,7 @@ describe("Search", () => {
 
       cy.get("button").contains("Search").click();
 
-      // The search results should contain an h2 with the username
+      // The search results should contain a link with the username
       cy.get("a").contains(user.username);
     });
   });
@@ -92,8 +92,72 @@ describe("Search", () => {
 
       cy.get("button").contains("Search").click();
 
-      // The search results should contain an h2 with the display name
+      // The search results should contain a link with the display name
       cy.get("a").contains(user.username);
+    });
+  });
+});
+
+describe("Search Navigation", () => {
+  beforeEach(() => {
+    // Log in before each test
+    cy.auth();
+  });
+
+  it("should navigate to an artist's page", () => {
+    // Start from the search results page
+    cy.visit("/app/search?q=RAYE");
+
+    // Find a link with an href attribute containing "artist" and click it
+    cy.get('a[href*="artist"]').contains("RAYE").click();
+
+    // The artist page should contain an h2 with "RAYE"
+    cy.get("h2").contains("RAYE");
+  });
+
+  it("should navigate to an album's page", () => {
+    // Start from the search results page
+    cy.visit("/app/search?q=Lover");
+
+    // Find a link with an href attribute containing "album" and click it
+    cy.get('a[href*="album"]').contains("Lover").click();
+
+    // The album page should contain an h2 with "Lover"
+    cy.get("h2").contains("Lover");
+  });
+
+  it("should navigate to a track's page", () => {
+    // Start from the search results page
+    cy.visit("/app/search?q=Flamme");
+
+    // Find a link with an href attribute containing "track" and click it
+    cy.get('a[href*="track"]').contains("Flamme").click();
+
+    // The track page should contain an h2 with "Flamme"
+    cy.get("h2").contains("Flamme");
+  });
+
+  it("should navigate to a playlist's page", () => {
+    // Start from the search results page
+    cy.visit("/app/search?q=Summer");
+
+    // Find a link with an href attribute containing "playlist" and click it
+    cy.get('a[href*="playlist"]').contains("Summer").click();
+
+    // The playlist page should contain an h2 with "Summer"
+    cy.get("h2").contains("Summer");
+  });
+
+  it("should navigate to a user's page", () => {
+    cy.fixture(fixtureFile).then((user: User) => {
+      // Start from the search results page
+      cy.visit(`/app/search?q=${user.name}`);
+
+      // Find a link with an href attribute containing "user" and click it
+      cy.get('a[href*="profile"]').contains(user.username).click();
+
+      // The user page should contain an h2 with the username
+      cy.get("h2").contains(user.username);
     });
   });
 });
