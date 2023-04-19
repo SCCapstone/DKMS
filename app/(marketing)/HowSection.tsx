@@ -15,7 +15,7 @@ const HowSection = () => (
         </div>
         <figure>
           <Image
-            src="/images/defaults/exampleProfile.png"
+            src="/images/defaults/exampleFeed.png"
             width={480}
             height={240}
             alt="example feed"
@@ -50,7 +50,7 @@ const HowSection = () => (
         </div>
         <figure>
           <Image
-            src="/images/defaults/exampleFeed.png"
+            src="/images/defaults/examplePlayback.png"
             width={480}
             height={240}
             alt="example feed"
