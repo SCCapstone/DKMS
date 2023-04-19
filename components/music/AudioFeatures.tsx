@@ -28,17 +28,17 @@ const AudioFeatures = ({
       value: audioFeatures.loudness + 60,
       max: 65,
     },
-  ] as const;
+  ];
 
   return (
     <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-primary text-primary-content">
       {data.map((feature) => (
         <div key={feature.name} className="stat">
-          <p className="stat-title text-primary-content">{feature.name}</p>
-          <p className="stat-value">
+          <div className="stat-title">{feature.name}</div>
+          <div className="stat-value">
             {`${Math.round((feature.value / feature.max) * 100)}%`}
-          </p>
-          <div className="stat-desc text-primary-content">
+          </div>
+          <div className="stat-desc">
             <progress
               className="progress progress-secondary"
               value={feature.value}

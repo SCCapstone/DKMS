@@ -1,5 +1,4 @@
 import fetchServer from "@/lib/fetch/fetchServer";
-import getDanceRecommendations from "@/lib/getDanceRecommendations";
 
 import TrackView from "./TrackView";
 
@@ -40,18 +39,7 @@ const getData = async (id: string) => {
       }
     );
 
-  const danceRecommendations = getDanceRecommendations(
-    audioFeatures.tempo,
-    audioFeatures.time_signature
-  );
-
-  return {
-    track,
-    artist,
-    audioFeatures,
-    recommendations,
-    danceRecommendations,
-  };
+  return { track, artist, audioFeatures, recommendations };
 };
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -63,7 +51,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
       artist={data.artist}
       audioFeatures={data.audioFeatures}
       recommendations={data.recommendations}
-      danceRecommendations={data.danceRecommendations}
     />
   );
 };
