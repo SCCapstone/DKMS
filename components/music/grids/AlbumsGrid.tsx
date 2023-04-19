@@ -13,7 +13,6 @@ const AlbumsGrid = ({
     } gap-4`}
   >
     {albums.map((album, index) => (
-      // @ts-expect-error Next 13 handles async components
       <Album key={album?.id ?? index} album={album} />
     ))}
   </div>

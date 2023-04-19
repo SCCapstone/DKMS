@@ -7,20 +7,14 @@ import ShareButton from "@/components/music/buttons/ShareButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import Skeleton from "@/components/ui/Skeleton";
 
-const Album = async ({
+const NormalAlbumCard = async ({
   album,
-  isCompact,
 }: {
   album: SpotifyApi.AlbumObjectSimplified | undefined;
-  isCompact?: boolean;
 }) => {
   if (!album) {
     return (
-      <div
-        className={`card ${
-          isCompact ? "card-side" : "card-compact"
-        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-      >
+      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/album.png"
@@ -54,11 +48,7 @@ const Album = async ({
   });
 
   return (
-    <div
-      className={`card ${
-        isCompact ? "card-side" : "card-compact"
-      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-    >
+    <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
       <figure className="relative aspect-square">
         <Link href={`/app/album/${album.id}`}>
           <Image
@@ -82,16 +72,16 @@ const Album = async ({
         </div>
         <Link href={`/app/album/${album.id}`}>
           <h2 className="text-lg truncate font-semibold">{album.name}</h2>
-          <p className={isCompact ? "text-sm truncate" : ""}>
+          <p className="text-sm truncate">
             {new Date(album.release_date).getFullYear()}
           </p>
         </Link>
-        <div className="pb-0">
+        <p className="pb-0">
           <ArtistLinks artists={album.artists} />
-        </div>
+        </p>
       </div>
     </div>
   );
 };
 
-export default Album;
+export default NormalAlbumCard;
