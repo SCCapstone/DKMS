@@ -13,6 +13,8 @@ const getData = async (id: string) => {
     `https://api.spotify.com/v1/playlists/${id}`
   );
 
+  let hasPodcast = false;
+
   const tracks = playlist.tracks.items
     .filter((item) => item.track !== null)
     .map((item) => {
@@ -20,9 +22,16 @@ const getData = async (id: string) => {
         added_at: item.added_at,
         added_by: item.added_by,
         ...item.track,
-      } as FilteredDataTrack;
+      } as FilteredDataTrack | SpotifyApi.EpisodeObjectFull;
       return playlistTrackData;
-    });
+    })
+    .filter((item) => {
+      if (item.type !== "track") {
+        hasPodcast = true;
+        return false;
+      }
+      return true;
+    }) as FilteredDataTrack[];
 
   const audioFeatures =
     await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
@@ -31,9 +40,11 @@ const getData = async (id: string) => {
         .join(",")}`
     );
 
-  const averageAudioFeatures = getAverageAudioFeatures(audioFeatures);
+  const averageAudioFeatures = tracks[0]
+    ? getAverageAudioFeatures(audioFeatures)
+    : undefined;
 
-  return { playlist, tracks, averageAudioFeatures };
+  return { playlist, tracks, averageAudioFeatures, hasPodcast };
 };
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -44,6 +55,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       playlist={data.playlist}
       tracks={data.tracks}
       averageAudioFeatures={data.averageAudioFeatures}
+      hasPodcast={data.hasPodcast}
     />
   );
 };
