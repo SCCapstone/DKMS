@@ -40,6 +40,16 @@ const PlaylistView = ({
         playbuttonContext: playlist.uri,
       }}
     />
+
+    {averageAudioFeatures && (
+      <>
+        <h4 className="font-black uppercase pb-2">
+          Average Playlist Statistics
+        </h4>
+        <AudioFeatures audioFeatures={averageAudioFeatures} />
+        <div className="divider" />{" "}
+      </>
+    )}
     {hasPodcast && (
       <div className="alert alert-warning shadow-lg">
         <div>
@@ -64,19 +74,12 @@ const PlaylistView = ({
       </div>
     )}
     {averageAudioFeatures && (
-      <>
-        <h4 className="font-black uppercase pb-2">
-          Average Playlist Statistics
-        </h4>
-        <AudioFeatures audioFeatures={averageAudioFeatures} />
-        <div className="divider" />{" "}
-        <OffsetTrackList
-          contextUri={playlist.uri}
-          tracks={tracks}
-          showNumber
-          showAlbum
-        />
-      </>
+      <OffsetTrackList
+        contextUri={playlist.uri}
+        tracks={tracks}
+        showNumber
+        showAlbum
+      />
     )}
   </>
 );
