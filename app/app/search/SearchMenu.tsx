@@ -22,15 +22,13 @@ const SearchMenu = () => {
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (searchText !== searchQuery) {
-      handleSearch();
-    }
+    handleSearch();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (searchText !== searchQuery) {
+      if (searchText && searchText !== searchQuery && !isPending) {
         handleSearch();
       }
     }
