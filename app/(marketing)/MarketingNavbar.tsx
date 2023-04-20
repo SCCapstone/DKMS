@@ -3,7 +3,7 @@ import Link from "next/link";
 const NAVBAR_ITEMS = [
   {
     label: "About",
-    href: "/",
+    href: "/about",
   },
   {
     label: "Sign In",
