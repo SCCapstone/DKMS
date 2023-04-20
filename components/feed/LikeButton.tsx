@@ -49,6 +49,7 @@ const LikeButton = ({
       type="button"
       onClick={(e) => void handleClick(e)}
       title="Like feed item"
+      id="likeButton"
     >
       <svg
         className={liked ? "fill-current" : "fill-base-100"}
