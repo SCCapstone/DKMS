@@ -21,7 +21,10 @@ const WhySection = () => (
       </h2>
       <main className="grid grid-cols-3 w-full gap-8">
         {CARDS.map(({ title, body }) => (
-          <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition">
+          <div
+            key={title}
+            className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
+          >
             <div className="card-body">
               <h3 className="card-title">{title}</h3>
               <p>{body}</p>
