@@ -22,16 +22,19 @@ const SearchMenu = () => {
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    handleSearch();
+    if (searchText !== searchQuery) {
+      handleSearch();
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleSearch();
+      if (searchText !== searchQuery) {
+        handleSearch();
+      }
     }
   };
-
   return (
     <div className="form-control">
       <div className="input-group">
