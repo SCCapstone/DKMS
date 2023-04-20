@@ -103,9 +103,9 @@ const Track = async ({
             {track.album.name}
           </p>
         </Link>
-        <p className={isCompact ? "text-sm truncate" : "pb-0"}>
+        <div className={isCompact ? "text-sm truncate" : "pb-0"}>
           <ArtistLinks artists={track.artists} />
-        </p>
+        </div>
       </div>
     </div>
   );

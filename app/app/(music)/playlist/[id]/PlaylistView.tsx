@@ -30,10 +30,10 @@ const PlaylistView = ({
         content: playlist.description ? (
           playlist.description
         ) : (
-          <p>
+          <>
             Featuring{" "}
             <ArtistLinks artists={tracks.flatMap((track) => track.artists)} />
-          </p>
+          </>
         ),
         musicItemId: playlist.id,
         musicItemType: "playlist",

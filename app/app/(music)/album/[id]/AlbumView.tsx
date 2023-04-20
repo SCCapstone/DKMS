@@ -25,9 +25,9 @@ const AlbumView = ({
         ).toLocaleDateString()} | ${capitalize(album.album_type)}`,
         content:
           album.artists.length > 1 ? (
-            <p>
+            <>
               Featuring <ArtistLinks artists={album.artists.slice(1)} />
-            </p>
+            </>
           ) : undefined,
         musicItemId: album.id,
         musicItemType: "album",

@@ -23,19 +23,19 @@ const ArtistLinks = ({
     case 0:
       return null;
     case 1:
-      return getLink(uniqueArtists[0]);
+      return <p>{getLink(uniqueArtists[0])}</p>;
     case 2:
       return (
-        <>
+        <p>
           {getLink(uniqueArtists[0])}&nbsp;& {getLink(uniqueArtists[1])}
-        </>
+        </p>
       );
     case 3:
       return (
-        <>
+        <p>
           {getLink(uniqueArtists[0])}, {getLink(uniqueArtists[1])}, &{" "}
           {getLink(uniqueArtists[2])}
-        </>
+        </p>
       );
     default:
       return (

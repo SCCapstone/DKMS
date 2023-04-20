@@ -14,9 +14,9 @@ const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectSimplified }) => (
         </Link>
       </h5>
       <h5>&nbsp;•&nbsp;</h5>
-      <h5 className="text-xs truncate max-w-[112px]">
+      <div className="text-xs truncate max-w-[112px]">
         <ArtistLinks artists={track.artists} />
-      </h5>
+      </div>
     </div>
   </li>
 );
