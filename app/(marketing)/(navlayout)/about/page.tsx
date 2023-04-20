@@ -64,7 +64,7 @@ const AboutPage = () => (
                   width={64}
                 />
                 <div className="flex flex-col">
-                  <h3 className="text-lg text-base font-semibold leading-7 tracking-tight">
+                  <h3 className="text-lg font-semibold leading-7 tracking-tight">
                     {member.name}
                   </h3>
                   <div className="flex flex-col">
