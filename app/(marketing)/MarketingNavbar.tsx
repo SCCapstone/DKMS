@@ -12,7 +12,7 @@ const NAVBAR_ITEMS = [
 ] as const;
 
 const MarketingNavbar = () => (
-  <nav className="navbar bg-primary text-primary-content">
+  <nav className="navbar bg-neutral text-neutral-content">
     <div className="navbar-start">
       <div className="dropdown">
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-tabindex */}
@@ -35,7 +35,7 @@ const MarketingNavbar = () => (
         <ul
           // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary text-primary-content rounded-box w-52"
+          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-neutral text-neutral-content rounded-box w-52"
         >
           {NAVBAR_ITEMS.map((item) => (
             <li key={item.label}>
