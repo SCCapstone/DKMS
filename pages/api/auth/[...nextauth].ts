@@ -20,49 +20,42 @@ const EXPIRES_IN = 3000000;
  * returns the old token and an error property
  */
 const refreshAccessToken = async (token: JWT) => {
-  try {
-    if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
-      throw new Error("Missing Spotify client ID or secret");
-    }
-
-    const url = `https://accounts.spotify.com/api/token?${new URLSearchParams({
-      grant_type: "refresh_token",
-      refresh_token: token.refreshToken,
-    }).toString()}`;
-
-    const response = await baseFetch(url, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${Buffer.from(
-          `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-        ).toString("base64")}`,
-      },
-      method: "POST",
-      cache: "no-cache",
-    });
-
-    const refreshedTokens = (await response.json()) as {
-      access_token: string;
-      token_type: "Bearer";
-      scope: string;
-      expires_in: number;
-    };
-
-    if (!response.ok) {
-      throw new Error(`${response.status}: ${response.statusText}`);
-    }
-
-    return {
-      ...token,
-      accessToken: refreshedTokens.access_token,
-      accessTokenExpires: Date.now() + EXPIRES_IN,
-    };
-  } catch (error) {
-    return {
-      ...token,
-      error: "RefreshAccessTokenError",
-    };
+  if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
+    throw new Error("Missing Spotify client ID or secret");
   }
+
+  const url = `https://accounts.spotify.com/api/token?${new URLSearchParams({
+    grant_type: "refresh_token",
+    refresh_token: token.refreshToken,
+  }).toString()}`;
+
+  const response = await baseFetch(url, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${Buffer.from(
+        `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+      ).toString("base64")}`,
+    },
+    method: "POST",
+    cache: "no-cache",
+  });
+
+  const refreshedTokens = (await response.json()) as {
+    access_token: string;
+    token_type: "Bearer";
+    scope: string;
+    expires_in: number;
+  };
+
+  if (!response.ok) {
+    throw new Error(`${response.status}: ${response.statusText}`);
+  }
+
+  return {
+    ...token,
+    accessToken: refreshedTokens.access_token,
+    accessTokenExpires: Date.now() + EXPIRES_IN,
+  };
 };
 
 const onSignIn: EventCallbacks["signIn"] = async (message) => {
