@@ -14,16 +14,21 @@ const SearchMenu = () => {
   const [searchText, setSearchText] = useState(searchQuery ?? "");
   const [isPending, startTransition] = useTransition();
 
-  const handleSearch = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleSearch = () => {
     startTransition(() => {
       router.replace(`/app/search?q=${searchText}`);
     });
   };
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSearch(e as unknown as React.MouseEvent);
+      e.preventDefault();
+      handleSearch();
     }
   };
 
@@ -40,7 +45,7 @@ const SearchMenu = () => {
           onKeyDown={handleKeyDown}
         />
         <button
-          onClick={(e) => handleSearch(e)}
+          onClick={handleClick}
           disabled={!searchText || isPending || searchQuery === searchText}
           type="submit"
           className={`${isPending ? "loading" : ""} btn btn-primary`}
