@@ -1,4 +1,4 @@
-import { Track } from "@/components/music/cards";
+import { TrackCard } from "@/components/music/cards";
 
 const TracksGrid = ({
   tracks,
@@ -16,8 +16,7 @@ const TracksGrid = ({
     } gap-4`}
   >
     {tracks.map((track, index) => (
-      // @ts-expect-error Next 13 handles async components
-      <Track key={track?.id ?? index} track={track} />
+      <TrackCard key={track?.id ?? index} track={track} />
     ))}
   </div>
 );

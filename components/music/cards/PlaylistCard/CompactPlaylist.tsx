@@ -2,24 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
-import PlayButton from "@/components/music/PlayButton";
-import ShareIcon from "@/components/ui/shareIcon";
+import PlayButton from "@/components/music/buttons/PlayButton";
+import ShareButton from "@/components/music/buttons/ShareButton";
 import Skeleton from "@/components/ui/Skeleton";
 
-const Playlist = async ({
+const CompactPlaylist = async ({
   playlist,
-  isCompact,
 }: {
   playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
-  isCompact?: boolean;
 }) => {
   if (!playlist) {
     return (
-      <div
-        className={`card ${
-          isCompact ? "card-side" : "card-compact"
-        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-      >
+      <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square" />
         <div className="card-body">
           <h2 className="text-lg font-semibold truncate">
@@ -47,11 +41,7 @@ const Playlist = async ({
   });
 
   return (
-    <div
-      className={`card ${
-        isCompact ? "card-side" : "card-compact"
-      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-    >
+    <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
       <figure className="relative aspect-square">
         <Link href={`/app/playlist/${playlist.id}`}>
           <Image
@@ -64,21 +54,27 @@ const Playlist = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end">
-          <PlayButton contextUri={playlist.uri} />
-          {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={playlist.id} musicItemType="playlist" />
-        </div>
         <Link href={`/app/playlist/${playlist.id}`}>
-          <h2 className="text-lg truncate font-semibold">{playlist.name}</h2>
-          <p className={isCompact ? "text-sm truncate" : ""}>
+          <h2 className="card-title text-primary font-extrabold">
+            {playlist.name}
+          </h2>
+          <p>
             {playlist.tracks.total}{" "}
             {playlist.tracks.total === 1 ? "track" : "tracks"}
           </p>
         </Link>
+        <div className="btn-group justify-end">
+          <PlayButton contextUri={playlist.uri} small />
+          {/* @ts-expect-error Server Component */}
+          <ShareButton
+            musicItemId={playlist.id}
+            musicItemType="playlist"
+            small
+          />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Playlist;
+export default CompactPlaylist;

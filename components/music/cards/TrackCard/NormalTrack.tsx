@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
-import PlayButton from "@/components/music/PlayButton";
+import FavoriteButton from "@/components/music/buttons/FavoriteButton";
+import PlayButton from "@/components/music/buttons/PlayButton";
+import ShareButton from "@/components/music/buttons/ShareButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
-import FavoriteIcon from "@/components/ui/favoriteIcon";
-import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
 
@@ -17,23 +17,17 @@ const checkIsFavorited = (trackId: string) =>
     }
   ).then((data) => data[0]);
 
-const Track = async ({
+const NormalTrack = async ({
   track,
-  isCompact,
 }: {
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | undefined;
-  isCompact?: boolean;
 }) => {
   if (!track) {
     return (
-      <div
-        className={`card ${
-          isCompact ? "card-side" : "card-compact"
-        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-      >
+      <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/track.png"
@@ -70,11 +64,7 @@ const Track = async ({
   const isFavorited = await checkIsFavorited(track.id);
 
   return (
-    <div
-      className={`card ${
-        isCompact ? "card-side" : "card-compact"
-      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-    >
+    <div className="card card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
       <figure className="relative aspect-square">
         <Link href={`/app/track/${track.id}`}>
           <Image
@@ -90,20 +80,20 @@ const Track = async ({
         </Link>
       </figure>
       <div className="card-body relative">
-        <div className="card-actions justify-end">
-          <PlayButton contextUri={track.album.uri} offset={track.uri} />
-          <FavoriteIcon isFavorited={isFavorited} trackId={track.id} />
+        <div className="btn-group justify-center">
+          <PlayButton contextUri={track.album.uri} offset={track.uri} small />
+          <FavoriteButton isFavorited={isFavorited} trackId={track.id} small />
           {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={track.id} musicItemType="track" />
+          <ShareButton musicItemId={track.id} musicItemType="track" small />
         </div>
         <Link href={`/app/track/${track.id}`}>
           <h2 className="text-lg truncate font-semibold">{track.name}</h2>
-          <p className={isCompact ? "text-sm truncate" : ""}>
+          <p>
             {new Date(track.album.release_date).getFullYear()} |{" "}
             {track.album.name}
           </p>
         </Link>
-        <div className={isCompact ? "text-sm truncate" : "pb-0"}>
+        <div className="pb-0">
           <ArtistLinks artists={track.artists} />
         </div>
       </div>
@@ -111,4 +101,4 @@ const Track = async ({
   );
 };
 
-export default Track;
+export default NormalTrack;

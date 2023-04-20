@@ -2,25 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPlaiceholder } from "plaiceholder";
 
-import PlayButton from "@/components/music/PlayButton";
+import PlayButton from "@/components/music/buttons/PlayButton";
+import ShareButton from "@/components/music/buttons/ShareButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
-import ShareIcon from "@/components/ui/shareIcon";
 import Skeleton from "@/components/ui/Skeleton";
 
-const Album = async ({
+const CompactAlbumCard = async ({
   album,
-  isCompact,
 }: {
   album: SpotifyApi.AlbumObjectSimplified | undefined;
-  isCompact?: boolean;
 }) => {
   if (!album) {
     return (
-      <div
-        className={`card ${
-          isCompact ? "card-side" : "card-compact"
-        } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-      >
+      <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
         <figure className="relative aspect-square">
           <Image
             src="/images/defaults/album.png"
@@ -54,11 +48,7 @@ const Album = async ({
   });
 
   return (
-    <div
-      className={`card ${
-        isCompact ? "card-side" : "card-compact"
-      } bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip`}
-    >
+    <div className="card card-side card-compact bg-base-300 hover:bg-base-100 transition shadow-xl overflow-clip">
       <figure className="relative aspect-square">
         <Link href={`/app/album/${album.id}`}>
           <Image
@@ -75,23 +65,26 @@ const Album = async ({
       </figure>
 
       <div className="card-body relative">
-        <div className="card-actions justify-end">
-          <PlayButton contextUri={album.uri} />
-          {/* @ts-expect-error Server Component */}
-          <ShareIcon musicItemId={album.id} musicItemType="album" />
-        </div>
         <Link href={`/app/album/${album.id}`}>
-          <h2 className="text-lg truncate font-semibold">{album.name}</h2>
-          <p className={isCompact ? "text-sm truncate" : ""}>
-            {new Date(album.release_date).getFullYear()}
+          <h2 className="card-title text-primary font-extrabold">
+            {album.name}
+          </h2>
+          <p>
+            {new Date(album.release_date).getFullYear()} | {album.total_tracks}{" "}
+            songs
           </p>
         </Link>
         <div className="pb-0">
           <ArtistLinks artists={album.artists} />
+        </div>
+        <div className="btn-group justify-end">
+          <PlayButton contextUri={album.uri} small />
+          {/* @ts-expect-error Server Component */}
+          <ShareButton musicItemId={album.id} musicItemType="album" small />
         </div>
       </div>
     </div>
   );
 };
 
-export default Album;
+export default CompactAlbumCard;
