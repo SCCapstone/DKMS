@@ -1,11 +1,5 @@
-import { withAuth } from "next-auth/middleware";
-
-export default withAuth({
-  callbacks: {
-    authorized: ({ token }) =>
-      !!token && token.error !== "RefreshAccessTokenError",
-  },
-});
+// eslint-disable-next-line no-restricted-exports
+export { default } from "next-auth/middleware";
 
 export const config = {
   matcher: ["/app/:path*"],
