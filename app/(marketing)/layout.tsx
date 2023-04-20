@@ -5,7 +5,7 @@ import MarketingNavbar from "./MarketingNavbar";
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-col min-h-screen">
     <MarketingNavbar />
-    <main className="flex-grow p-4 md:px-8">{children}</main>
+    <main className="flex-grow">{children}</main>
     <footer className="footer items-center p-4 bg-neutral text-neutral-content">
       <div className="items-center grid-flow-col">
         <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
