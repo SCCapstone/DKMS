@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 const TEAM_INFORMATION = [
   {
@@ -31,62 +30,76 @@ const TEAM_INFORMATION = [
     profile_picture: "https://avatars.githubusercontent.com/u/71657089?v=4",
     github_link: "https://github.com/masondjoseph",
   },
-];
+] as const;
+
 const AboutPage = () => (
-  <div className="card py-24 sm:py-32 bg-base-100">
-    <div className="card-body mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-      <div className="card bg-base-300 max-w-2xl">
-        <div className="card-body flex flex-col">
+  <>
+    <div className="hero p-10 bg-base-200">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <h1 className="text-5xl font-bold">About DKMS</h1>
+          <p className="py-6">
+            DKMS is a social media-focused web application for Spotify. This
+            application consists of a centralized feed where users can post,
+            share, and comment with other users. Additionally, a personized
+            profile page enhances the user interaction experience. This
+            application uses Spotify&apos;s Web API to build and pull data, as
+            well as to authenticate users. DKMS is built using Next and React.
+          </p>
+          <a
+            href="https://github.com/sccapstone/dkms"
+            className="btn btn-primary"
+          >
+            View GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+    <div className="container mx-auto py-10 space-y-10">
+      <div className="card bg-base-300 max-w-2xl mx-auto text-center">
+        <div className="card-body">
           <h2 className="text-primary text-3xl font-bold tracking-tight sm:text-4xl">
             Our Team
           </h2>
-          <p className="mt-6 text-lg leading-8">
-            Here are the developers of DKMS!
-          </p>
-          <Link
-            className="link-secondary"
-            href="https://github.com/sccapstone/dkms"
-          >
-            Project Github
-          </Link>
+          <p className="text-lg">Here are the developers of DKMS!</p>
         </div>
       </div>
-      <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+      <ul className="grid gap-8 grid-cols-2 md:grid-cols-5">
         {TEAM_INFORMATION.map((member) => (
-          <li key={member.name}>
-            <div className="card card-side bg-base-300">
-              <div className="card-body flex flex-row items-center gap-x-6">
-                <Image
-                  className="rounded-full"
-                  src={member.profile_picture}
-                  alt=""
-                  height={64}
-                  width={64}
-                />
-                <div className="flex flex-col">
-                  <h3 className="text-lg font-semibold leading-7 tracking-tight">
-                    {member.name}
-                  </h3>
-                  <div className="flex flex-col">
-                    <a className="link-primary" href={member.github_link}>
-                      GitHub
+          <li
+            key={member.name}
+            className="card card-side card-compact bg-base-300 shadow-xl hover:shadow-2xl transition"
+          >
+            <div className="card-body items-center">
+              <Image
+                className="rounded-full"
+                src={member.profile_picture}
+                alt=""
+                height={64}
+                width={64}
+              />
+              <h3 className="card-title">{member.name}</h3>
+              <ul className="list-disc list-inside self-start">
+                <li>
+                  <a className="link-primary" href={member.github_link}>
+                    GitHub
+                  </a>
+                </li>
+
+                {"linkedin_link" in member && (
+                  <li>
+                    <a className="link-primary" href={member.linkedin_link}>
+                      LinkedIn
                     </a>
-                    <div>
-                      {member.linkedin_link ? (
-                        <a className="link-primary" href={member.linkedin_link}>
-                          LinkedIn
-                        </a>
-                      ) : undefined}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  </li>
+                )}
+              </ul>
             </div>
           </li>
         ))}
       </ul>
     </div>
-  </div>
+  </>
 );
 
 export default AboutPage;
