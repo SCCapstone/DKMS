@@ -21,6 +21,12 @@ const SearchMenu = () => {
     });
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch(e as unknown as React.MouseEvent);
+    }
+  };
+
   return (
     <div className="form-control">
       <div className="input-group">
@@ -31,6 +37,7 @@ const SearchMenu = () => {
           value={searchText}
           maxLength={MAX_SEARCH_LENGTH}
           onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <button
           onClick={(e) => handleSearch(e)}
