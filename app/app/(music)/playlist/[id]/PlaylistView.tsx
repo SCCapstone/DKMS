@@ -10,10 +10,12 @@ const PlaylistView = ({
   playlist,
   tracks,
   averageAudioFeatures,
+  hasPodcast,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
   tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject | undefined;
+  hasPodcast: boolean;
 }) => (
   <>
     <MusicHeader
@@ -38,7 +40,7 @@ const PlaylistView = ({
         playbuttonContext: playlist.uri,
       }}
     />
-    {playlist.tracks.total !== tracks.length && (
+    {hasPodcast && (
       <div className="alert alert-warning shadow-lg">
         <div>
           <svg
