@@ -18,11 +18,20 @@ const ProfileHead = ({
       <ProfileImage username={username} isProfilePage hideLink />
     </a>
     <div className="flex flex-col">
-      <h2 className="normal-case font-bold">
-        {!displayName || username === displayName
-          ? username
-          : `${displayName} — ${username}`}
-      </h2>
+      {!displayName || username === displayName ? (
+        <h2 className="normal-case font-bold overflow-hidden text-ellipsis">
+          {username}
+        </h2>
+      ) : (
+        <div className="flex flex-col min-w-[200px] lg:max-w-[700px] md:max-w-[500px] sm:max-w-[300px]">
+          <h2 className="normal-case font-bold overflow-hidden text-ellipsis">
+            {displayName}
+          </h2>
+          <h2 className="normal-case font-bold overflow-hidden text-ellipsis">
+            {username}
+          </h2>
+        </div>
+      )}
       {followers && (
         <h3 className="normal-case">{formatNumber(followers)} followers</h3>
       )}

@@ -7,12 +7,14 @@ const UsernameLink = ({
   username: string;
   children?: React.ReactNode;
 }) => (
-  <Link
-    className="link link-hover link-primary"
-    href={`/app/profile/${username}`}
-  >
-    {children ?? username}
-  </Link>
+  <h5 className="link-primary text-ellipsis overflow-hidden">
+    <Link
+      className="link link-hover link-primary"
+      href={`/app/profile/${username}`}
+    >
+      {children ?? username}
+    </Link>
+  </h5>
 );
 
 export default UsernameLink;
