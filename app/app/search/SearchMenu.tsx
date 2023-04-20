@@ -23,8 +23,7 @@ const SearchMenu = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const syntheticEvent = new MouseEvent("click");
-      handleSearch(syntheticEvent as unknown as React.MouseEvent);
+      handleSearch(e as unknown as React.MouseEvent);
     }
   };
 
