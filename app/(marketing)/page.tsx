@@ -1,10 +1,11 @@
-import MarketingNavbar from "@/app/(marketing)/MarketingNavbar";
-
-import DemoVideoSection from "./DemoVideoSection";
-import HowSection from "./HowSection";
-import ScreenshotSection from "./ScreenshotSection";
-import TitleSection from "./TitleSection";
-import WhySection from "./WhySection";
+import MarketingNavbar from "./MarketingNavbar";
+import {
+  DemoVideoSection,
+  HowSection,
+  ScreenshotSection,
+  TitleSection,
+  WhySection,
+} from "./sections";
 
 const HomePage = () => (
   <>
