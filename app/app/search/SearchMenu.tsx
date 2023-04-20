@@ -35,6 +35,7 @@ const SearchMenu = () => {
       }
     }
   };
+
   return (
     <div className="form-control">
       <div className="input-group">
