@@ -7,7 +7,7 @@ const NAVBAR_ITEMS = [
   },
   {
     label: "Sign In",
-    href: "/auth/signin",
+    href: "/app",
   },
 ] as const;
 
