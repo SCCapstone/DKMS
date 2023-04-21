@@ -23,7 +23,7 @@ const Notifications = async () => {
   return (
     <BasePanel title="Notifications" sidebarId="notifications">
       {data.length === 0 ? (
-        <div className="card card-compact bg-base-100">
+        <div className="card card-compact bg-base-100 text-base-content">
           <div className="card-body items-center text-center">
             <h2 className="card-title">No notifications :(</h2>
           </div>
