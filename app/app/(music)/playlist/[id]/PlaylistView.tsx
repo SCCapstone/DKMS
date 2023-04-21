@@ -43,15 +43,17 @@ const PlaylistView = ({
 
     {averageAudioFeatures && (
       <>
+        <div className="divider" />
         <h4 className="font-black uppercase pb-2">
           Average Playlist Statistics
         </h4>
         <AudioFeatures audioFeatures={averageAudioFeatures} />
-        <div className="divider" />{" "}
+        <div className="divider" />
+        <h4 className="font-black uppercase pb-2">Songs</h4>
       </>
     )}
     {hasPodcast && (
-      <div className="alert alert-warning shadow-lg">
+      <div className="alert alert-warning shadow-lg mb-2">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
