@@ -4,17 +4,19 @@ import NormalAlbum from "./NormalAlbum";
 const AlbumCard = ({
   album,
   isCompact,
+  isPremium,
 }: {
   album: SpotifyApi.AlbumObjectSimplified | undefined;
   isCompact?: boolean;
+  isPremium: boolean;
 }) => {
   if (isCompact) {
     // @ts-expect-error Next 13 server component
-    return <CompactAlbum album={album} />;
+    return <CompactAlbum album={album} isPremium={isPremium} />;
   }
 
   // @ts-expect-error Next 13 server component
-  return <NormalAlbum album={album} />;
+  return <NormalAlbum album={album} isPremium={isPremium} />;
 };
 
 export default AlbumCard;

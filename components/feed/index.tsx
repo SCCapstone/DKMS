@@ -28,11 +28,13 @@ const FeedPage = ({
   currentUser,
   savedItemIds,
   showLinks = false,
+  isPremium,
 }: {
   data: FeedItemType[];
   currentUser: User;
   savedItemIds?: string[];
   showLinks?: boolean;
+  isPremium: boolean;
 }) => {
   if (data.length === 0) {
     return (
@@ -56,6 +58,7 @@ const FeedPage = ({
             currentUser={currentUser}
             savedItemIds={savedItemIds}
             showLink={showLinks}
+            isPremium={isPremium}
           />
         ))}
       </ul>

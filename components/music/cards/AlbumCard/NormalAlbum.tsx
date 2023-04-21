@@ -9,8 +9,10 @@ import Skeleton from "@/components/ui/Skeleton";
 
 const NormalAlbumCard = async ({
   album,
+  isPremium,
 }: {
   album: SpotifyApi.AlbumObjectSimplified | undefined;
+  isPremium: boolean;
 }) => {
   if (!album) {
     return (
@@ -66,7 +68,7 @@ const NormalAlbumCard = async ({
 
       <div className="card-body relative">
         <div className="btn-group justify-center">
-          <PlayButton contextUri={album.uri} small />
+          {isPremium && <PlayButton contextUri={album.uri} small />}
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={album.id} musicItemType="album" small />
         </div>

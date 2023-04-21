@@ -4,17 +4,19 @@ import NormalPlaylist from "./NormalPlaylist";
 const PlaylistCard = ({
   playlist,
   isCompact,
+  isPremium,
 }: {
   playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
   isCompact?: boolean;
+  isPremium: boolean;
 }) => {
   if (isCompact) {
     // @ts-expect-error Next 13 server component
-    return <CompactPlaylist playlist={playlist} />;
+    return <CompactPlaylist playlist={playlist} isPremium={isPremium} />;
   }
 
   // @ts-expect-error Next 13 server component
-  return <NormalPlaylist playlist={playlist} />;
+  return <NormalPlaylist playlist={playlist} isPremium={isPremium} />;
 };
 
 export default PlaylistCard;

@@ -19,11 +19,13 @@ const checkIsFavorited = (trackId: string) =>
 
 const CompactTrack = async ({
   track,
+  isPremium,
 }: {
   track:
     | SpotifyApi.TrackObjectFull
     | SpotifyApi.RecommendationTrackObject
     | undefined;
+  isPremium: boolean;
 }) => {
   if (!track) {
     return (
@@ -93,7 +95,9 @@ const CompactTrack = async ({
           <ArtistLinks artists={track.artists} />
         </div>
         <div className="btn-group justify-end">
-          <PlayButton contextUri={track.album.uri} offset={track.uri} small />
+          {isPremium && (
+            <PlayButton contextUri={track.album.uri} offset={track.uri} small />
+          )}
           <FavoriteButton isFavorited={isFavorited} trackId={track.id} small />
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={track.id} musicItemType="track" small />

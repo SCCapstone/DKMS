@@ -3,9 +3,11 @@ import { ArtistCard } from "@/components/music/cards";
 const ArtistsGrid = ({
   artists,
   isHalf,
+  isPremium,
 }: {
   artists: readonly SpotifyApi.ArtistObjectFull[] | readonly undefined[];
   isHalf?: boolean;
+  isPremium: boolean;
 }) => (
   <div
     className={`grid grid-cols-2 ${
@@ -13,7 +15,11 @@ const ArtistsGrid = ({
     } gap-4`}
   >
     {artists.map((artist, index) => (
-      <ArtistCard key={artist?.id ?? index} artist={artist} />
+      <ArtistCard
+        key={artist?.id ?? index}
+        artist={artist}
+        isPremium={isPremium}
+      />
     ))}
   </div>
 );
