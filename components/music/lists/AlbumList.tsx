@@ -1,8 +1,7 @@
 import Link from "next/link";
 
+import PlayButton from "@/components/music/buttons/PlayButton";
 import { capitalize } from "@/lib/formatters";
-
-import PlayButton from "../PlayButton";
 
 const AlbumList = ({
   albums,
@@ -37,7 +36,7 @@ const AlbumList = ({
               {new Date(album.release_date).getUTCFullYear()},
             </td>
             <td className="text-center">
-              <PlayButton contextUri={album.uri} />
+              <PlayButton contextUri={album.uri} small />
             </td>
           </tr>
         ))}

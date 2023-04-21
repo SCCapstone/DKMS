@@ -1,11 +1,8 @@
 // Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.
 
-import MarketingNavbar from "./MarketingNavbar";
-
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-col min-h-screen">
-    <MarketingNavbar />
-    <main className="flex-grow">{children}</main>
+    {children}
     <footer className="footer items-center p-4 bg-neutral text-neutral-content">
       <div className="items-center grid-flow-col">
         <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
