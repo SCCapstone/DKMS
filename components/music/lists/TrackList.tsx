@@ -6,6 +6,7 @@ import type { FilteredDataTrack } from "@/app/app/(music)/playlist/[id]/page";
 
 const TrackList = ({
   tracks,
+  contextUri,
   showNumber,
   showAlbum,
 }: {
@@ -13,6 +14,7 @@ const TrackList = ({
     | SpotifyApi.TrackObjectSimplified[]
     | SpotifyApi.TrackObjectFull[]
     | FilteredDataTrack[];
+  contextUri?: string;
   showNumber?: boolean;
   showAlbum?: boolean;
 }) => (
@@ -56,7 +58,11 @@ const TrackList = ({
             {"added_by" in track && <td>{track.added_by.id}</td>}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td className="text-center">
-              <PlayButton uris={[track.uri]} small />
+              {contextUri ? (
+                <PlayButton contextUri={contextUri} offset={track.uri} small />
+              ) : (
+                <PlayButton uris={[track.uri]} small />
+              )}
             </td>
           </tr>
         ))}
