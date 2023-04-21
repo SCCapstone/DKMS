@@ -1,9 +1,3 @@
-import type { User } from "next-auth";
-
-const fixtureFile = `user${
-  Cypress.env("environment") === "development" ? "-development" : ""
-}.json` as const;
-
 describe("Feed", () => {
   beforeEach(() => {
     cy.auth();
@@ -28,6 +22,14 @@ describe("Feed", () => {
     cy.get("p").contains("Post Test");
   });
 
+  it("should be able to comment on a post", () => {
+    // Start from feed page
+    cy.visit("/app");
+    // Type in comment box
+    cy.get('[id="chat"]').type("Comment");
+    cy.get("p").contains("Comment");
+  });
+
   it("should be able to like a post", () => {
     // Start from feed page
     cy.visit("/app");
@@ -35,6 +37,26 @@ describe("Feed", () => {
     cy.get('[id="likeButton"]').click();
     // Should contain 1 like
     cy.get('[id="likeButton"]').contains("1");
+  });
+
+  it("should be able to save a post", () => {
+    // Start from feed page
+    cy.visit("/app");
+    // Find save button
+    cy.get('[id="saveButton"]').click();
+    // Switch to saved posts
+    cy.get("button").contains("Saved").click();
+    // Search saved posts
+    cy.get("p").contains("Post Test");
+  });
+
+  it("should be able to delete a post", () => {
+    // Start from feed page
+    cy.visit("/app");
+    // Find delete button
+    cy.get('[id="deleteButton"]').click();
+    // Post should no longer exist
+    cy.get("p").contains("Post Text").should("not.exist");
   });
 });
 

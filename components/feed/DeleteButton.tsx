@@ -35,6 +35,7 @@ const DeleteButton = ({
   };
   return (
     <button
+      id="deleteButton"
       type="button"
       onClick={(e) => void handleDelete(e)}
       disabled={isMutating}
