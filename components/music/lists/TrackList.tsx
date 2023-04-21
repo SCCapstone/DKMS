@@ -18,8 +18,8 @@ const TrackList = ({
   showNumber?: boolean;
   showAlbum?: boolean;
 }) => (
-  <div className="overflow-x-auto">
-    <table className="table table-compact">
+  <div className="overflow-x-auto md:w-[calc(100vw-20rem)]">
+    <table className="table table-compact w-full [&_th]:first:relative">
       <thead>
         <tr>
           {showNumber && <th>#</th>}
