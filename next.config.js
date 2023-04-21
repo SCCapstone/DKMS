@@ -8,6 +8,28 @@ const nextConfig = withPlaiceholder({
   experimental: {
     appDir: true,
   },
+  redirects: () => [
+    {
+      source: "/login",
+      destination: "/auth/signin",
+      permanent: true,
+    },
+    {
+      source: "/signin",
+      destination: "/auth/signin",
+      permanent: true,
+    },
+    {
+      source: "/logout",
+      destination: "/auth/signout",
+      permanent: true,
+    },
+    {
+      source: "/signout",
+      destination: "/auth/signout",
+      permanent: true,
+    },
+  ],
   images: {
     unoptimized: true,
     remotePatterns: [
