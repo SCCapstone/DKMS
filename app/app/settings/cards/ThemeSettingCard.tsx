@@ -22,7 +22,7 @@ const ThemeSettingCard = () => {
       <div className="card-body">
         <h4 className="card-title">Theme</h4>
         <select
-          className="text-primary select select-bordered w-full"
+          className="select select-bordered w-full"
           onChange={(e) => handleChange(e.target.value)}
           value={theme}
         >
