@@ -3,18 +3,20 @@
 import { useState } from "react";
 
 import AddContent from "./AddContent";
-import Share from "./icon";
+import ShareIcon from "./ShareIcon";
 
 import type { User } from "next-auth";
 
-const IconButton = ({
+const ModalButton = ({
   user,
   musicItemId,
   musicItemType,
+  small,
 }: {
   user: User;
   musicItemId?: string;
   musicItemType?: "track" | "playlist" | "artist" | "album";
+  small?: boolean;
 }) => {
   const [modal, toggleModal] = useState(false);
 
@@ -25,12 +27,12 @@ const IconButton = ({
   return (
     <>
       <button
-        className="btn btn-ghost"
+        className="btn btn-ghost btn-square"
         onClick={handleClick}
         type="button"
         title="Share to feed"
       >
-        <Share />
+        <ShareIcon small={small} />
       </button>
 
       {modal && (
@@ -46,4 +48,4 @@ const IconButton = ({
   );
 };
 
-export default IconButton;
+export default ModalButton;

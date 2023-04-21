@@ -1,7 +1,6 @@
+import PlayButton from "@/components/music/buttons/PlayButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatDate, formatDuration } from "@/lib/formatters";
-
-import PlayButton from "../PlayButton";
 
 import type { FilteredDataTrack } from "@/app/app/(music)/playlist/[id]/page";
 
@@ -57,7 +56,7 @@ const TrackList = ({
             {"added_by" in track && <td>{track.added_by.id}</td>}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
             <td className="text-center">
-              <PlayButton uris={[track.uri]} />
+              <PlayButton uris={[track.uri]} small />
             </td>
           </tr>
         ))}
