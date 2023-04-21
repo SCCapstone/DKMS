@@ -17,9 +17,9 @@ describe("Post and Delete Feed Item and Comment", () => {
     cy.visit("/app");
     // Post a feed item
     cy.get("textarea[id=comment]").click();
-    cy.type("This is a test post!");
+    cy.get("textarea[id=comment]").type("This is a test post!");
 
-    cy.get("button").contains("POST").click();
+    cy.get(`button:contains("Post")`).eq(1).click();
 
     // A feed item should be posted with "This is a test post!"
     cy.get("p").contains("This is a test post!");
@@ -30,10 +30,12 @@ describe("Post and Delete Feed Item and Comment", () => {
 
     cy.visit("/app");
     // Post a comment
-    cy.get('textarea[id="chat"]').click();
-    cy.type("This is a test comment!");
+    cy.get("textarea[id=chat]").eq(0).click();
+    cy.get("textarea[id=chat]").eq(0).type("This is a test comment!");
 
-    cy.get("button").contains("COMMENT").click();
+    cy.get("button").contains("Comment").click();
+
+    // need to wait for page to update
 
     // A feed comment should be posted with "This is a test comment!"
     cy.get("p").contains("This is a test comment!");
