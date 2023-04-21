@@ -8,8 +8,8 @@ const AlbumList = ({
 }: {
   albums: SpotifyApi.AlbumObjectSimplified[];
 }) => (
-  <div className="overflow-x-auto">
-    <table className="table table-compact w-full">
+  <div className="overflow-x-auto md:w-[calc(100vw-20rem)]">
+    <table className="table table-compact w-full [&_th]:first:relative">
       <thead>
         <tr>
           <th>Title</th>
@@ -33,7 +33,7 @@ const AlbumList = ({
             <td>{album.total_tracks}</td>
             <td>{capitalize(album.album_type)}</td>
             <td className="text-right">
-              {new Date(album.release_date).getUTCFullYear()},
+              {new Date(album.release_date).getUTCFullYear()}
             </td>
             <td className="text-center">
               <PlayButton contextUri={album.uri} small />
