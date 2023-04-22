@@ -35,8 +35,6 @@ describe("Post and Delete Feed Item and Comment", () => {
 
     cy.get("button").contains("Comment").click();
 
-    // need to wait for page to update
-
     // A feed comment should be posted with "This is a test comment!"
     cy.get("p").contains("This is a test comment!");
   });
