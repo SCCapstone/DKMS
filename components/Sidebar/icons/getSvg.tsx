@@ -60,7 +60,6 @@ const getSvg = (type: SidebarOptions, params: IconOptions) => {
     case "notifications":
       return (
         <svg
-          id="notificationsButton"
           width={width}
           height={height}
           viewBox="0 0 24 24"
