@@ -26,7 +26,7 @@ describe("Feed", () => {
     // Start from feed page
     cy.visit("/app");
     // Type in comment box
-    cy.get('[id="chat"]').type("Comment");
+    cy.get("[id=chat]").type("Comment");
     cy.get("p").contains("Comment");
   });
 
@@ -34,16 +34,16 @@ describe("Feed", () => {
     // Start from feed page
     cy.visit("/app");
     // Find like button
-    cy.get('[id="likeButton"]').click();
+    cy.get("[id=likeButton]").click();
     // Should contain 1 like
-    cy.get('[id="likeButton"]').contains("1");
+    cy.get("[id=likeButton]").contains("1");
   });
 
   it("should be able to save a post", () => {
     // Start from feed page
     cy.visit("/app");
     // Find save button
-    cy.get('[id="saveButton"]').click();
+    cy.get("[id=saveButton]").click();
     // Switch to saved posts
     cy.get("button").contains("Saved").click();
     // Search saved posts
@@ -54,7 +54,7 @@ describe("Feed", () => {
     // Start from feed page
     cy.visit("/app");
     // Find delete button
-    cy.get('[id="deleteButton"]').click();
+    cy.get("[id=deleteButton]").click();
     // Post should no longer exist
     cy.get("p").contains("Post Text").should("not.exist");
   });
