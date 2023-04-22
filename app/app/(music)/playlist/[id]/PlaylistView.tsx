@@ -11,15 +11,18 @@ const PlaylistView = ({
   tracks,
   averageAudioFeatures,
   hasPodcast,
+  isPremium,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
   tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject | undefined;
   hasPodcast: boolean;
+  isPremium: boolean;
 }) => (
   <>
     <MusicHeader
       primary={{
+        isPremium,
         imageUrl: playlist.images[0].url,
         defaultImage: "/images/defaults/playlist.png",
         url: playlist.external_urls.spotify,
@@ -79,6 +82,7 @@ const PlaylistView = ({
         tracks={tracks}
         showNumber
         showAlbum
+        isPremium={isPremium}
       />
     )}
   </>

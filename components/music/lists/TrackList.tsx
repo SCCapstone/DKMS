@@ -8,6 +8,7 @@ const TrackList = ({
   tracks,
   showNumber,
   showAlbum,
+  isPremium,
 }: {
   tracks:
     | SpotifyApi.TrackObjectSimplified[]
@@ -15,6 +16,7 @@ const TrackList = ({
     | FilteredDataTrack[];
   showNumber?: boolean;
   showAlbum?: boolean;
+  isPremium: boolean;
 }) => (
   <div className="overflow-x-auto">
     <table className="table table-compact">
@@ -27,7 +29,7 @@ const TrackList = ({
           {"added_at" in tracks[0] && <th>Date added</th>}
           {"added_by" in tracks[0] && <th>Added by</th>}
           <th className="text-right">Duration</th>
-          <th className="text-center">Play</th>
+          {isPremium && <th className="text-center">Play</th>}
         </tr>
       </thead>
       <tbody>
@@ -55,9 +57,11 @@ const TrackList = ({
             {"added_at" in track && <td>{formatDate(track.added_at)}</td>}
             {"added_by" in track && <td>{track.added_by.id}</td>}
             <td className="text-right">{formatDuration(track.duration_ms)}</td>
-            <td className="text-center">
-              <PlayButton uris={[track.uri]} small />
-            </td>
+            {isPremium && (
+              <td className="text-center">
+                <PlayButton uris={[track.uri]} small />
+              </td>
+            )}
           </tr>
         ))}
       </tbody>

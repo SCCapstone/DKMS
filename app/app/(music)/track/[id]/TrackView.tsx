@@ -11,16 +11,19 @@ const TrackView = ({
   audioFeatures,
   recommendations,
   danceRecommendations,
+  isPremium,
 }: {
   track: SpotifyApi.TrackObjectFull;
   artist: SpotifyApi.ArtistObjectFull;
   audioFeatures: SpotifyApi.AudioFeaturesResponse;
   recommendations: SpotifyApi.RecommendationsFromSeedsResponse;
   danceRecommendations: string[];
+  isPremium: boolean;
 }) => (
   <>
     <MusicHeader
       primary={{
+        isPremium,
         imageUrl: track.album.images[0].url,
         defaultImage: "/images/defaults/album.png",
         url: track.external_urls.spotify,
@@ -47,6 +50,7 @@ const TrackView = ({
         albumId: track.album.id,
       }}
       secondary={{
+        isPremium,
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
         url: artist.external_urls.spotify,
@@ -71,7 +75,11 @@ const TrackView = ({
     )}
     <div className="divider" />
     <h4 className="font-black uppercase">Similar Tracks</h4>
-    <TrackList tracks={recommendations.tracks} showAlbum />
+    <TrackList
+      tracks={recommendations.tracks}
+      showAlbum
+      isPremium={isPremium}
+    />
   </>
 );
 
