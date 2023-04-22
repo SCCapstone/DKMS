@@ -4,17 +4,19 @@ import NormalArtist from "./NormalArtist";
 const ArtistCard = ({
   artist,
   isCompact,
+  isPremium,
 }: {
   artist: SpotifyApi.ArtistObjectFull | undefined;
   isCompact?: boolean;
+  isPremium: boolean;
 }) => {
   if (isCompact) {
     // @ts-expect-error Next 13 server component
-    return <CompactArtist artist={artist} />;
+    return <CompactArtist artist={artist} isPremium={isPremium} />;
   }
 
   // @ts-expect-error Next 13 server component
-  return <NormalArtist artist={artist} />;
+  return <NormalArtist artist={artist} isPremium={isPremium} />;
 };
 
 export default ArtistCard;

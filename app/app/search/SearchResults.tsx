@@ -26,9 +26,10 @@ const LOADING_ITEMS = {
 
 type SearchResultsProps = {
   results: (SpotifyApi.SearchResponse & { users: FirestoreUser[] }) | undefined;
+  isPremium: boolean;
 };
 
-const SearchResults = ({ results }: SearchResultsProps) => {
+const SearchResults = ({ results, isPremium }: SearchResultsProps) => {
   const { albums, tracks, artists, playlists, users } =
     results ?? LOADING_ITEMS;
 
@@ -37,25 +38,25 @@ const SearchResults = ({ results }: SearchResultsProps) => {
       {albums?.items && (
         <>
           <h2 className="font-black">Albums</h2>
-          <AlbumsGrid albums={albums.items} />
+          <AlbumsGrid albums={albums.items} isPremium={isPremium} />
         </>
       )}
       {artists?.items && (
         <>
           <h2 className="font-black">Artists</h2>
-          <ArtistsGrid artists={artists.items} />
+          <ArtistsGrid artists={artists.items} isPremium={isPremium} />
         </>
       )}
       {tracks?.items && (
         <>
           <h2 className="font-black">Tracks</h2>
-          <TracksGrid tracks={tracks.items} />
+          <TracksGrid tracks={tracks.items} isPremium={isPremium} />
         </>
       )}
       {playlists?.items && (
         <>
           <h2 className="font-black">Playlists</h2>
-          <PlaylistsGrid playlists={playlists.items} />
+          <PlaylistsGrid playlists={playlists.items} isPremium={isPremium} />
         </>
       )}
       {users && users.length > 0 && (

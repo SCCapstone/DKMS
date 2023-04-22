@@ -3,12 +3,14 @@ import { TrackCard } from "@/components/music/cards";
 const TracksGrid = ({
   tracks,
   isHalf,
+  isPremium,
 }: {
   tracks:
     | readonly SpotifyApi.TrackObjectFull[]
     | readonly SpotifyApi.RecommendationTrackObject[]
     | readonly undefined[];
   isHalf?: boolean;
+  isPremium: boolean;
 }) => (
   <div
     className={`grid grid-cols-2 ${
@@ -16,7 +18,7 @@ const TracksGrid = ({
     } gap-4`}
   >
     {tracks.map((track, index) => (
-      <TrackCard key={track?.id ?? index} track={track} />
+      <TrackCard key={track?.id ?? index} track={track} isPremium={isPremium} />
     ))}
   </div>
 );

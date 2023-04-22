@@ -1,5 +1,6 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
+import { getCurrentUserPremium } from "@/lib/getUser";
 
 import AlbumView from "./AlbumView";
 
@@ -26,11 +27,14 @@ const getData = async (id: string) => {
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const data = await getData(id);
+  const isPremium = await getCurrentUserPremium();
+
   return (
     <AlbumView
       album={data.album}
       artist={data.artist}
       averageAudioFeatures={data.averageAudioFeatures}
+      isPremium={isPremium}
     />
   );
 };

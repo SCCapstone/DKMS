@@ -9,6 +9,7 @@ const TrackList = ({
   contextUri,
   showNumber,
   showAlbum,
+  isPremium,
 }: {
   tracks:
     | SpotifyApi.TrackObjectSimplified[]
@@ -17,6 +18,7 @@ const TrackList = ({
   contextUri?: string;
   showNumber?: boolean;
   showAlbum?: boolean;
+  isPremium: boolean;
 }) => (
   <div className="max-w-[40vw] rounded-xl mx-auto bg-neutral p-4">
     <div className="overflow-x-auto rounded-xl">
@@ -30,7 +32,7 @@ const TrackList = ({
             {"added_at" in tracks[0] && <th>Date added</th>}
             {"added_by" in tracks[0] && <th>Added by</th>}
             <th className="text-right">Duration</th>
-            <th className="text-center">Play</th>
+            {isPremium && <th className="text-center">Play</th>}
           </tr>
         </thead>
         <tbody>
@@ -63,17 +65,19 @@ const TrackList = ({
               <td className="text-right">
                 {formatDuration(track.duration_ms)}
               </td>
-              <td className="text-center">
-                {contextUri ? (
-                  <PlayButton
-                    contextUri={contextUri}
-                    offset={track.uri}
-                    small
-                  />
-                ) : (
-                  <PlayButton uris={[track.uri]} small />
-                )}
-              </td>
+              {isPremium && (
+                <td className="text-center">
+                  {contextUri ? (
+                    <PlayButton
+                      contextUri={contextUri}
+                      offset={track.uri}
+                      small
+                    />
+                  ) : (
+                    <PlayButton uris={[track.uri]} small />
+                  )}
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

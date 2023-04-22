@@ -9,8 +9,10 @@ import { formatNumber } from "@/lib/formatters";
 
 const CompactArtist = async ({
   artist,
+  isPremium,
 }: {
   artist: SpotifyApi.ArtistObjectFull | undefined;
+  isPremium: boolean;
 }) => {
   if (!artist) {
     return (
@@ -56,7 +58,7 @@ const CompactArtist = async ({
           <p>{formatNumber(artist.followers.total)} followers</p>
         </Link>
         <div className="btn-group justify-end">
-          <PlayButton contextUri={artist.uri} small />
+          {isPremium && <PlayButton contextUri={artist.uri} small />}
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={artist.id} musicItemType="artist" small />
         </div>

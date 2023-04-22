@@ -1,5 +1,6 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 import getPublicUsers from "@/lib/getPublicUsers";
+import { getCurrentUserPremium } from "@/lib/getUser";
 
 import SearchResults from "./SearchResults";
 
@@ -36,8 +37,11 @@ const Page = async ({
     ? encodeURIComponent(searchParams.q)
     : undefined;
   const results = await getData(encodedSearchParam);
+  const isPremium = await getCurrentUserPremium();
 
-  return searchParams.q ? <SearchResults results={results} /> : null;
+  return searchParams.q ? (
+    <SearchResults results={results} isPremium={isPremium} />
+  ) : null;
 };
 
 export default Page;

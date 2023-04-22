@@ -8,8 +8,10 @@ import Skeleton from "@/components/ui/Skeleton";
 
 const NormalPlaylist = async ({
   playlist,
+  isPremium,
 }: {
   playlist: SpotifyApi.PlaylistObjectSimplified | undefined;
+  isPremium: boolean;
 }) => {
   if (!playlist) {
     return (
@@ -55,7 +57,7 @@ const NormalPlaylist = async ({
       </figure>
       <div className="card-body relative">
         <div className="btn-group justify-center">
-          <PlayButton contextUri={playlist.uri} small />
+          {isPremium && <PlayButton contextUri={playlist.uri} small />}
           {/* @ts-expect-error Server Component */}
           <ShareButton
             musicItemId={playlist.id}

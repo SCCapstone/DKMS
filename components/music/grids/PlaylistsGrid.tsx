@@ -3,11 +3,13 @@ import { PlaylistCard } from "@/components/music/cards";
 const PlaylistsGrid = ({
   playlists,
   isHalf,
+  isPremium,
 }: {
   playlists:
     | readonly SpotifyApi.PlaylistObjectSimplified[]
     | readonly undefined[];
   isHalf?: boolean;
+  isPremium: boolean;
 }) => {
   if (playlists.length === 0) {
     return <p>No playlists.</p>;
@@ -19,7 +21,11 @@ const PlaylistsGrid = ({
       } gap-4`}
     >
       {playlists.map((playlist, index) => (
-        <PlaylistCard key={playlist?.id ?? index} playlist={playlist} />
+        <PlaylistCard
+          key={playlist?.id ?? index}
+          playlist={playlist}
+          isPremium={isPremium}
+        />
       ))}
     </div>
   );

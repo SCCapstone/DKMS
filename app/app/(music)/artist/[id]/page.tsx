@@ -1,6 +1,7 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 import isUserFollowing from "@/lib/followers/isUserFollowing";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
+import { getCurrentUserPremium } from "@/lib/getUser";
 
 import ArtistView from "./ArtistView";
 
@@ -47,6 +48,7 @@ const getData = async (id: string) => {
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const data = await getData(id);
+  const isPremium = await getCurrentUserPremium();
 
   return (
     <ArtistView
@@ -56,6 +58,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       isFollowing={data.isFollowing}
       averageAudioFeatures={data.averageAudioFeatures}
       similarArtists={data.similarArtists}
+      isPremium={isPremium}
     />
   );
 };

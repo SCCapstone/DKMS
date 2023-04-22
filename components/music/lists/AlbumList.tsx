@@ -5,8 +5,10 @@ import { capitalize } from "@/lib/formatters";
 
 const AlbumList = ({
   albums,
+  isPremium,
 }: {
   albums: SpotifyApi.AlbumObjectSimplified[];
+  isPremium: boolean;
 }) => (
   <div className="max-w-[40vw] rounded-xl mx-auto bg-neutral p-4">
     <div className="overflow-x-auto rounded-xl">
@@ -17,7 +19,7 @@ const AlbumList = ({
             <th>Tracks</th>
             <th>Type</th>
             <th className="text-right">Released</th>
-            <th className="text-center">Play</th>
+            {isPremium && <th className="text-center">Play</th>}
           </tr>
         </thead>
         <tbody>
@@ -36,9 +38,11 @@ const AlbumList = ({
               <td className="text-right">
                 {new Date(album.release_date).getUTCFullYear()}
               </td>
-              <td className="text-center">
-                <PlayButton contextUri={album.uri} small />
-              </td>
+              {isPremium && (
+                <td className="text-center">
+                  <PlayButton contextUri={album.uri} small />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

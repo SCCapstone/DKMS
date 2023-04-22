@@ -1,5 +1,6 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
+import { getCurrentUserPremium } from "@/lib/getUser";
 
 import PlaylistView from "./PlaylistView";
 
@@ -50,12 +51,15 @@ const getData = async (id: string) => {
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const data = await getData(id);
+  const isPremium = await getCurrentUserPremium();
+
   return (
     <PlaylistView
       playlist={data.playlist}
       tracks={data.tracks}
       averageAudioFeatures={data.averageAudioFeatures}
       hasPodcast={data.hasPodcast}
+      isPremium={isPremium}
     />
   );
 };
