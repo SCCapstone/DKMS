@@ -36,7 +36,8 @@ const Queue = async () => {
             className="text-sm overflow-hidden text-ellipsis whitespace-nowrap"
           >
             <Link
-              href={`/app/track/${item.id}`}
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+              href={item === null ? `` : `/app/track/${item.id}`}
               className="font-bold text-accent"
             >
               {item.name}
