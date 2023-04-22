@@ -1,5 +1,6 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 import getDanceRecommendations from "@/lib/getDanceRecommendations";
+import { getCurrentUserPremium } from "@/lib/getUser";
 
 import TrackView from "./TrackView";
 
@@ -57,6 +58,8 @@ const getData = async (id: string) => {
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const data = await getData(id);
+  const isPremium = await getCurrentUserPremium();
+
   return (
     <TrackView
       track={data.track}
@@ -64,6 +67,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
       audioFeatures={data.audioFeatures}
       recommendations={data.recommendations}
       danceRecommendations={data.danceRecommendations}
+      isPremium={isPremium}
     />
   );
 };

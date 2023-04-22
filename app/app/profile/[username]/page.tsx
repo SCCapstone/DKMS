@@ -15,6 +15,7 @@ import getAverageAudioFeatures from "@/lib/getAverageAudioFeatures";
 import getPlaylistsForUser from "@/lib/getPlaylistsForUser";
 import {
   getCurrentUser,
+  getCurrentUserPremium,
   getIdFromUsername,
   getUserFromId,
 } from "@/lib/getUser";
@@ -120,6 +121,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
   const { topTracks, topArtists } = data;
   const notEnoughData =
     topTracks.length === 0 || topArtists.length === 0 || !averageAudioFeatures;
+  const isPremium = await getCurrentUserPremium();
 
   if (notEnoughData) {
     return (
@@ -183,20 +185,28 @@ const Profile = async ({ params }: { params: { username: string } }) => {
       <div className="grid md:grid-cols-2 gap-4 pb-5">
         <div>
           <h4 className="font-black uppercase pb-2">Top Songs</h4>
-          <TracksGrid tracks={data.topTracks.splice(0, 6)} isHalf />
+          <TracksGrid
+            tracks={data.topTracks.splice(0, 6)}
+            isHalf
+            isPremium={isPremium}
+          />
         </div>
         <div>
           <h4 className="font-black uppercase pb-2">Top Artists</h4>
-          <ArtistsGrid artists={data.topArtists.splice(0, 8)} isHalf />
+          <ArtistsGrid
+            artists={data.topArtists.splice(0, 8)}
+            isHalf
+            isPremium={isPremium}
+          />
         </div>
       </div>
       <div>
         <h4 className="font-black uppercase pb-2">Playlists</h4>
-        <PlaylistsGrid playlists={usersPlaylists.items} />
+        <PlaylistsGrid playlists={usersPlaylists.items} isPremium={isPremium} />
       </div>
       <div className="divider" />
       <h4 className="font-black uppercase pb-2">Similar Music</h4>
-      <TracksGrid tracks={recommendations.tracks} />
+      <TracksGrid tracks={recommendations.tracks} isPremium={isPremium} />
     </>
   );
 };

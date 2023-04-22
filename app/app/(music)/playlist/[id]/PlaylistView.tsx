@@ -1,5 +1,5 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { OffsetTrackList } from "@/components/music/lists";
+import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
@@ -11,15 +11,18 @@ const PlaylistView = ({
   tracks,
   averageAudioFeatures,
   hasPodcast,
+  isPremium,
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
   tracks: FilteredDataTrack[];
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject | undefined;
   hasPodcast: boolean;
+  isPremium: boolean;
 }) => (
   <>
     <MusicHeader
       primary={{
+        isPremium,
         imageUrl: playlist.images[0].url,
         defaultImage: "/images/defaults/playlist.png",
         url: playlist.external_urls.spotify,
@@ -76,11 +79,12 @@ const PlaylistView = ({
       </div>
     )}
     {averageAudioFeatures && (
-      <OffsetTrackList
+      <TrackList
         contextUri={playlist.uri}
         tracks={tracks}
         showNumber
         showAlbum
+        isPremium={isPremium}
       />
     )}
   </>

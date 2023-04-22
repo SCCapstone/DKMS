@@ -6,6 +6,7 @@ import MusicButtons from "./MusicButtons";
 import MusicImage from "./MusicImage";
 
 type CardProps = {
+  isPremium: boolean;
   imageUrl: string | undefined;
   defaultImage: string;
   /** The Spotify URL */
@@ -31,6 +32,7 @@ type CardProps = {
 };
 
 const HeaderCard = ({
+  isPremium,
   imageUrl,
   defaultImage,
   url,
@@ -70,7 +72,7 @@ const HeaderCard = ({
         </a>
       )}
       <div className="btn-group pt-4">
-        <PlayButton contextUri={playbuttonContext} />
+        {isPremium && <PlayButton contextUri={playbuttonContext} />}
         {/* @ts-expect-error Server Component */}
         <ShareButton musicItemId={musicItemId} musicItemType={musicItemType} />
       </div>
@@ -107,6 +109,7 @@ const MusicHeader = ({
 }) => (
   <header className="grid grid-cols-2 md:grid-cols-4 gap-4 md:pb-4 text-center md:text-left">
     <HeaderCard
+      isPremium={primary.isPremium}
       imageUrl={primary.imageUrl}
       defaultImage={primary.defaultImage}
       url={primary.url}
@@ -126,6 +129,7 @@ const MusicHeader = ({
     />
     {secondary && (
       <HeaderCard
+        isPremium={secondary.isPremium}
         imageUrl={secondary.imageUrl}
         defaultImage={secondary.defaultImage}
         url={secondary.url}

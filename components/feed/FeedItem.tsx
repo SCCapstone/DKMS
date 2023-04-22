@@ -21,11 +21,13 @@ const FeedItem = ({
   currentUser,
   savedItemIds,
   showLink,
+  isPremium,
 }: {
   data: FeedItemType;
   currentUser: User;
   savedItemIds?: string[];
   showLink: boolean;
+  isPremium: boolean;
 }) => (
   <div id={data.id} className="mb-4">
     <div className="h-fit">
@@ -47,16 +49,24 @@ const FeedItem = ({
       {data.musicItem && (
         <div className="grid mt-2">
           {data.musicItem.type === "track" && (
-            <TrackCard track={data.musicItem} isCompact />
+            <TrackCard track={data.musicItem} isCompact isPremium={isPremium} />
           )}
           {data.musicItem.type === "playlist" && (
-            <PlaylistCard playlist={data.musicItem} isCompact />
+            <PlaylistCard
+              playlist={data.musicItem}
+              isCompact
+              isPremium={isPremium}
+            />
           )}
           {data.musicItem.type === "album" && (
-            <AlbumCard album={data.musicItem} isCompact />
+            <AlbumCard album={data.musicItem} isCompact isPremium={isPremium} />
           )}
           {data.musicItem.type === "artist" && (
-            <ArtistCard artist={data.musicItem} isCompact />
+            <ArtistCard
+              artist={data.musicItem}
+              isCompact
+              isPremium={isPremium}
+            />
           )}
         </div>
       )}

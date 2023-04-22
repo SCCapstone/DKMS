@@ -8,8 +8,10 @@ import Skeleton from "@/components/ui/Skeleton";
 
 const NormalArtist = async ({
   artist,
+  isPremium,
 }: {
   artist: SpotifyApi.ArtistObjectFull | undefined;
+  isPremium: boolean;
 }) => {
   if (!artist) {
     return (
@@ -52,7 +54,7 @@ const NormalArtist = async ({
       </div>
       <div className="card-body items-center text-center">
         <div className="btn-group">
-          <PlayButton contextUri={artist.uri} small />
+          {isPremium && <PlayButton contextUri={artist.uri} small />}
           {/* @ts-expect-error Server Component */}
           <ShareButton musicItemId={artist.id} musicItemType="artist" small />
         </div>

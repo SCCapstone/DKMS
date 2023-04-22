@@ -11,6 +11,7 @@ const ArtistView = ({
   isFollowing,
   averageAudioFeatures,
   similarArtists,
+  isPremium,
 }: {
   artist: SpotifyApi.ArtistObjectFull;
   topTracks: SpotifyApi.ArtistsTopTracksResponse;
@@ -18,10 +19,12 @@ const ArtistView = ({
   isFollowing: boolean;
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
   similarArtists: SpotifyApi.ArtistObjectFull[];
+  isPremium: boolean;
 }) => (
   <>
     <MusicHeader
       primary={{
+        isPremium,
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
         url: artist.external_urls.spotify,
@@ -42,12 +45,12 @@ const ArtistView = ({
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
     <h4 className="font-black uppercase pb-2">Top Tracks</h4>
-    <TrackList tracks={topTracks.tracks} showAlbum />
+    <TrackList tracks={topTracks.tracks} isPremium={isPremium} showAlbum />
     <h4 className="font-black uppercase pb-2">Recent Albums</h4>
-    <AlbumList albums={albums.items} />
+    <AlbumList albums={albums.items} isPremium={isPremium} />
     <div className="divider" />
     <h4 className="font-black uppercase pb-2">Similar Artists</h4>
-    <ArtistsGrid artists={similarArtists} />
+    <ArtistsGrid artists={similarArtists} isPremium={isPremium} />
   </>
 );
 

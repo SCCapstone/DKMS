@@ -6,7 +6,7 @@ import {
 import RecommendationFilterButtons from "@/components/RecommendationFilterButtons";
 import PageTitle from "@/components/ui/PageTitle";
 import fetchServer from "@/lib/fetch/fetchServer";
-import { getCurrentUser } from "@/lib/getUser";
+import { getCurrentUser, getCurrentUserPremium } from "@/lib/getUser";
 import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 import getRecommendedArtists from "@/lib/recommendations/getRecommendedArtists";
 
@@ -29,19 +29,23 @@ const Recommendations = async ({
 }) => {
   const user = await getCurrentUser();
   const data = await getData(user.id, searchParams.target);
+  const isPremium = await getCurrentUserPremium();
 
   return (
     <>
       <PageTitle title="Recommendations" />
       <RecommendationFilterButtons />
       <h4 className="font-black uppercase pb-2">Recommended Songs</h4>
-      <TracksGrid tracks={data.recommendations.tracks} />
+      <TracksGrid tracks={data.recommendations.tracks} isPremium={isPremium} />
       <div className="divider" />
       <h4 className="font-black uppercase pb-2">Recommended Artists</h4>
-      <ArtistsGrid artists={data.recommendedArtists} />
+      <ArtistsGrid artists={data.recommendedArtists} isPremium={isPremium} />
       <div className="divider" />
       <h4 className="font-black uppercase pb-2">Featured Playlists</h4>
-      <PlaylistsGrid playlists={data.featuredPlaylists.playlists.items} />
+      <PlaylistsGrid
+        playlists={data.featuredPlaylists.playlists.items}
+        isPremium={isPremium}
+      />
     </>
   );
 };

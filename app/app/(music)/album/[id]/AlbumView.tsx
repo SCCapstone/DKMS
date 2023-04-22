@@ -1,5 +1,5 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { OffsetTrackList } from "@/components/music/lists";
+import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { capitalize, formatNumber } from "@/lib/formatters";
@@ -8,14 +8,17 @@ const AlbumView = ({
   album,
   artist,
   averageAudioFeatures,
+  isPremium,
 }: {
   album: SpotifyApi.AlbumObjectFull;
   artist: SpotifyApi.ArtistObjectFull;
   averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
+  isPremium: boolean;
 }) => (
   <>
     <MusicHeader
       primary={{
+        isPremium,
         imageUrl: album.images[0].url,
         defaultImage: "/images/defaults/album.png",
         url: album.external_urls.spotify,
@@ -34,6 +37,7 @@ const AlbumView = ({
         playbuttonContext: album.uri,
       }}
       secondary={{
+        isPremium,
         imageUrl: artist.images[0].url,
         defaultImage: "/images/defaults/artist.png",
         url: artist.external_urls.spotify,
@@ -50,7 +54,11 @@ const AlbumView = ({
     <h4 className="font-black uppercase pb-2">Average Album Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <OffsetTrackList contextUri={album.uri} tracks={album.tracks.items} />
+    <TrackList
+      contextUri={album.uri}
+      tracks={album.tracks.items}
+      isPremium={isPremium}
+    />
   </>
 );
 
