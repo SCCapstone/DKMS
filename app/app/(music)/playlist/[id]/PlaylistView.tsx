@@ -1,5 +1,5 @@
 import AudioFeatures from "@/components/music/AudioFeatures";
-import { OffsetTrackList } from "@/components/music/lists";
+import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
@@ -77,7 +77,7 @@ const PlaylistView = ({
       </div>
     )}
     {averageAudioFeatures && (
-      <OffsetTrackList
+      <TrackList
         contextUri={playlist.uri}
         tracks={tracks}
         showNumber
