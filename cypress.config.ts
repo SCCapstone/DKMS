@@ -17,8 +17,8 @@ export default defineConfig({
   },
 
   env: {
-    spotify_username: "dkmstests@gmail.com",
-    spotify_password: "dkms1234",
+    spotify_username: "",
+    spotify_password: "",
   },
 
   e2e: {
