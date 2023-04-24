@@ -27,7 +27,7 @@ const MusicButtons = ({
         className="btn btn-primary btn-outline w-full"
         href={`/app/album/${albumId}`}
       >
-        View Album
+        View
       </Link>
     )}
     {viewFollow && artistId && (
