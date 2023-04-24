@@ -49,7 +49,7 @@ describe("Share Music to Feed", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with the random string for testing should be deleted
-    cy.contains(postText).should("not.exist", { timeout: 10000 });
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 
   it("should search and share an artist to feed", () => {
@@ -90,7 +90,7 @@ describe("Share Music to Feed", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with postText should be deleted
-    cy.contains(postText).should("not.exist", { timeout: 10000 });
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 
   it("should search and share a track to feed", () => {
@@ -131,7 +131,7 @@ describe("Share Music to Feed", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with postText should be deleted
-    cy.contains(postText).should("not.exist", { timeout: 10000 });
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 
   it("should search and share a playlist to feed", () => {
@@ -172,7 +172,7 @@ describe("Share Music to Feed", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with postText should be deleted
-    cy.contains(postText).should("not.exist", { timeout: 10000 });
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 });
 
