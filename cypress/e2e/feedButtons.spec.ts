@@ -1,5 +1,3 @@
-const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
-const commentText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
 describe("Feed", () => {
   beforeEach(() => {
     // Log in before each test
@@ -13,7 +11,12 @@ describe("Feed", () => {
     cy.get("h1").contains("Friends");
   });
 
-  it("should be able to post text to the feed", () => {
+  it("should be able to post an item, comment on it, like it, unlike it, save it, unsave it, and delete it", () => {
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
+    const commentText = `Testing: ${Math.random()
+      .toString(36)
+      .substring(2, 8)}`;
+
     // Start from feed page
     cy.visit("/app");
 
@@ -25,11 +28,6 @@ describe("Feed", () => {
 
     // The feed should now contain a post that includes a randomly generated string for testing
     cy.get("p").contains(postText);
-  });
-
-  it("should be able to comment on a post", () => {
-    // Start from feed page
-    cy.visit("/app");
 
     // Post a comment
     cy.get("textarea[id=chat]").eq(0).click();
@@ -39,33 +37,18 @@ describe("Feed", () => {
 
     // A feed comment should be posted with a randomly generated string for testing
     cy.get("p").contains(commentText);
-  });
-
-  it("should be able to like a post", () => {
-    // Start from feed page
-    cy.visit("/app");
 
     // Like post
     cy.get("button[id=likeButton]").eq(0).click();
 
     // Should contain 1 like
     cy.get("button[id=likeButton]").eq(0).contains("1");
-  });
-
-  it("should be able to unlike a post", () => {
-    // Start from feed page
-    cy.visit("/app");
 
     // Like post
     cy.get("button[id=likeButton]").eq(0).click();
 
     // Should contain 1 like
     cy.get("button[id=likeButton]").eq(0).contains("0");
-  });
-
-  it("should be able to save a post", () => {
-    // Start from feed page
-    cy.visit("/app");
 
     // Find save button
     cy.get("button[id=saveButton]").eq(0).click();
@@ -78,11 +61,12 @@ describe("Feed", () => {
 
     // A post containing postText random string should be present
     cy.get("p").contains(postText);
-  });
 
-  it("should be able to delete a post", () => {
-    // Start from feed page
-    cy.visit("/app");
+    // Find save button
+    cy.get("button[id=saveButton]").eq(0).click();
+
+    // Should be on the saved posts url
+    cy.url().should("include", "/app");
 
     // Find delete button
     cy.get("button[id=deleteButton]").eq(0).click();
