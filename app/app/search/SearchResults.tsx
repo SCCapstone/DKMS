@@ -35,27 +35,27 @@ const SearchResults = ({ results, isPremium }: SearchResultsProps) => {
 
   return (
     <div>
+      {tracks?.items && (
+        <>
+          <h2 className="font-black pt-2">Songs</h2>
+          <TracksGrid tracks={tracks.items} isPremium={isPremium} />
+        </>
+      )}
       {albums?.items && (
         <>
-          <h2 className="font-black">Albums</h2>
+          <h2 className="font-black pt-2">Albums</h2>
           <AlbumsGrid albums={albums.items} isPremium={isPremium} />
         </>
       )}
       {artists?.items && (
         <>
-          <h2 className="font-black">Artists</h2>
+          <h2 className="font-black pt-2">Artists</h2>
           <ArtistsGrid artists={artists.items} isPremium={isPremium} />
-        </>
-      )}
-      {tracks?.items && (
-        <>
-          <h2 className="font-black">Tracks</h2>
-          <TracksGrid tracks={tracks.items} isPremium={isPremium} />
         </>
       )}
       {playlists?.items && (
         <>
-          <h2 className="font-black">Playlists</h2>
+          <h2 className="font-black pt-2">Playlists</h2>
           <PlaylistsGrid playlists={playlists.items} isPremium={isPremium} />
         </>
       )}
