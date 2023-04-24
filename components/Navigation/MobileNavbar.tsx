@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import SidebarMenu from "@/components/Sidebar/SidebarMenu";
+import { getCurrentUserPremium } from "@/lib/getUser";
 
 import NavbarItem from "./NavbarItem";
 
@@ -26,31 +27,34 @@ const DropdownButton = () => (
   </label>
 );
 
-const MobileNavbar = ({ items }: { items: MenuItems }) => (
-  <nav className="navbar bg-primary text-primary-content md:hidden sticky top-0 drop-shadow">
-    <div className="navbar-start">
-      <div className="dropdown">
-        <DropdownButton />
-        <ul
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-          tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-        >
-          {items.map((item) => (
-            <NavbarItem key={item.label} item={item} />
-          ))}
-        </ul>
+const MobileNavbar = async ({ items }: { items: MenuItems }) => {
+  const isPremium = await getCurrentUserPremium();
+  return (
+    <nav className="navbar bg-primary text-primary-content md:hidden sticky top-0 drop-shadow">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <DropdownButton />
+          <ul
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+            tabIndex={0}
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {items.map((item) => (
+              <NavbarItem key={item.label} item={item} />
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
-    <div className="navbar-center">
-      <Link href="/app" className="btn btn-ghost text-xl font-black">
-        DKMS
-      </Link>
-    </div>
-    <div className="navbar-end">
-      <SidebarMenu />
-    </div>
-  </nav>
-);
+      <div className="navbar-center">
+        <Link href="/app" className="btn btn-ghost text-xl font-black">
+          DKMS
+        </Link>
+      </div>
+      <div className="navbar-end">
+        <SidebarMenu isPremium={isPremium} />
+      </div>
+    </nav>
+  );
+};
 
 export default MobileNavbar;
