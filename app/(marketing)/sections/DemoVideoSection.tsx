@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const DemoVideoSection = () => (
   <section className="bg-base-100 py-10">
     <div className="container mx-auto">
@@ -16,11 +14,14 @@ const DemoVideoSection = () => (
         </div>
       </div>
       <div className="mt-10 p-4 bg-neutral rounded-box shadow-inner w-fit mx-auto">
-        <Image
-          width="750"
-          height="250"
-          src="/images/defaults/videoPlaceholder.png"
-          alt="video placeholder"
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/QhuB8HYGNHQ"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
         />
       </div>
     </div>
