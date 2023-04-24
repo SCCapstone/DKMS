@@ -23,7 +23,7 @@ const Friend = async ({
   if (!data) {
     return null;
   }
-  const tracks = data.topTracks.slice(0, 2);
+  const topTrack = data.topTracks[0];
   return (
     <li>
       <div className="h-fit">
@@ -32,11 +32,7 @@ const Friend = async ({
             <UsernameLink username={username}>{username}</UsernameLink>
           </h4>
         </div>
-        <ul>
-          {tracks.map((track) => (
-            <FriendItem key={track.id} track={track} />
-          ))}
-        </ul>
+        <FriendItem track={topTrack} />
         <div className="divider" />
       </div>
     </li>
