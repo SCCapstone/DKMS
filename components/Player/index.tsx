@@ -30,21 +30,44 @@ const Player = ({ accessToken }: { accessToken: string }) => {
         <br />
       </div>
       {isVisible ? (
-        <SpotifyPlayer
-          updateSavedStatus={() => router.refresh()}
-          syncExternalDevice
-          syncExternalDeviceInterval={2}
-          callback={(state) => {
-            setCurrentDeviceId(state.currentDeviceId);
-          }}
-          name="DKMS"
-          token={accessToken}
-          layout="compact"
-          showSaveIcon
-          persistDeviceSelection
-          uris={[]}
-          hideAttribution
-        />
+        <div>
+          <SpotifyPlayer
+            updateSavedStatus={() => router.refresh()}
+            syncExternalDevice
+            syncExternalDeviceInterval={2}
+            callback={(state) => {
+              setCurrentDeviceId(state.currentDeviceId);
+            }}
+            name="DKMS"
+            token={accessToken}
+            layout="compact"
+            showSaveIcon
+            persistDeviceSelection
+            uris={[]}
+            hideAttribution
+          />
+          <div className="pt-4">
+            <div className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+              <input type="checkbox" />
+              <div className="align-center collapse-title text-xs font-bold">
+                Setup Instructions
+              </div>
+              <div className="collapse-content text-xs">
+                <ol>
+                  <li>
+                    1. Open Spotify on your browser or another device on your
+                    network
+                  </li>
+                  <li>2. Select &apos;DKMS&apos; as your device</li>
+                  <li>
+                    3. Select a song within the DKMS application and hit play to
+                    start listening!
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <button
           className="btn btn-ghost bg-spotify text-white btn-block"
