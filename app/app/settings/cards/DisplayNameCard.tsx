@@ -44,7 +44,7 @@ const DisplayNameCard = ({
           placeholder="Type here"
           value={nameInput}
           onChange={(e) => setNameInput(e.target.value)}
-          className="input w-full max-w-xs"
+          className="input w-full md:max-w-xs"
           disabled={isMutating}
         />
 

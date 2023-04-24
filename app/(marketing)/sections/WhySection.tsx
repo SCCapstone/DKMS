@@ -19,7 +19,7 @@ const WhySection = () => (
       <h2 className="text-5xl font-bold text-primary text-left pb-10">
         Why DKMS?
       </h2>
-      <main className="grid grid-cols-3 w-full gap-8">
+      <main className="grid md:grid-cols-3 w-full gap-8">
         {CARDS.map(({ title, body }) => (
           <div
             key={title}
