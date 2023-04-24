@@ -15,7 +15,7 @@ const Queue = async () => {
     );
   }
 
-  const { queue } = await getQueue();
+  const queue = await getQueue();
 
   // We need to disable this rule because we're checking for null
   // values in the next line, but TypeScript doesn't know that.
