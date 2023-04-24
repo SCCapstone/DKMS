@@ -42,6 +42,7 @@ const SaveFeedItemButton = ({
 
   return (
     <button
+      id="saveButton"
       className={`btn btn-ghost btn-secondary ${isMutating ? "loading" : ""}`}
       type="button"
       onClick={(e) => void handleClick(e)}
