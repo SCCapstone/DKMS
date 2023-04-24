@@ -37,6 +37,7 @@ const NAVBAR_ITEMS: MenuItems = [
 const NavbarContainer = () => (
   <>
     <DesktopNavigation items={NAVBAR_ITEMS} />
+    {/* @ts-expect-error Next 13 async component */}
     <MobileNavbar items={NAVBAR_ITEMS} />
   </>
 );
