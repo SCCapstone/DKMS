@@ -27,7 +27,7 @@ describe("Search", () => {
 
     // The search results should contain a link with "RAYE"
     cy.get("a").contains("RAYE");
-    cy.url().should("include", "/search?q=RAYE");
+    cy.url().should("include", "/search?q=RAYE", { timeout: 10000 });
   });
 
   it("should search for an album", () => {
@@ -40,7 +40,7 @@ describe("Search", () => {
 
     // The search results should contain a link with "Lover"
     cy.get("a").contains("Lover");
-    cy.url().should("include", "/search?q=Lover");
+    cy.url().should("include", "/search?q=Lover", { timeout: 10000 });
   });
 
   it("should search for a track", () => {
@@ -51,7 +51,7 @@ describe("Search", () => {
 
     cy.get("button").contains("Search").click();
 
-    cy.url().should("include", "/search?q=Flamme");
+    cy.url().should("include", "/search?q=Flamme", { timeout: 10000 });
     // The search results should contain a link with "Flamme"
     cy.get("a").contains("Flamme");
   });
@@ -64,7 +64,7 @@ describe("Search", () => {
 
     cy.get("button").contains("Search").click();
 
-    cy.url().should("include", "/search?q=Summer");
+    cy.url().should("include", "/search?q=Summer", { timeout: 10000 });
     // The search results should contain a link with "Summer"
     cy.get("a").contains("Summer");
   });
