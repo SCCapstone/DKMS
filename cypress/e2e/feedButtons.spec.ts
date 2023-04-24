@@ -72,7 +72,7 @@ describe("Feed", () => {
     cy.get("button[id=deleteButton]").eq(0).click();
 
     // Post should no longer exist
-    cy.get("p").contains(postText).should("not.exist", { timeout: 10000 });
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 });
 

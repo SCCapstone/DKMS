@@ -19,7 +19,7 @@ describe("Navigation", () => {
     cy.navbarClick("Discover");
 
     // The new url should include "/discover"
-    cy.url().should("include", "/discover", { timeout: 10000 });
+    cy.url().should("include", "/discover");
 
     // The new page should contain an h1 with "Discover"
     cy.get("h1").contains("Discover");
@@ -33,7 +33,7 @@ describe("Navigation", () => {
     cy.navbarClick("Profile");
 
     // The new url should include "/profile"
-    cy.url().should("include", "/profile", { timeout: 10000 });
+    cy.url().should("include", "/profile");
 
     // The new page should contain an h1 with "Profile"
     cy.get("h1").contains("Profile");
@@ -47,7 +47,7 @@ describe("Navigation", () => {
     cy.navbarClick("Search");
 
     // The new url should include "/search"
-    cy.url().should("include", "/search", { timeout: 10000 });
+    cy.url().should("include", "/search");
 
     // The new page should contain an h1 with "Search"
     cy.get("h1").contains("Search");
@@ -61,7 +61,7 @@ describe("Navigation", () => {
     cy.navbarClick("Recommendations");
 
     // The new url should include "/recommendations"
-    cy.url().should("include", "/recommendations", { timeout: 10000 });
+    cy.url().should("include", "/recommendations");
 
     // The new page should contain an h1 with "Recommendations"
     cy.get("h1").contains("Recommendations");
@@ -75,7 +75,7 @@ describe("Navigation", () => {
     cy.navbarClick("Settings");
 
     // The new url should include "/settings"
-    cy.url().should("include", "/settings", { timeout: 10000 });
+    cy.url().should("include", "/settings");
 
     // The new page should contain an h1 with "Settings"
     cy.get("h1").contains("Settings");
@@ -89,7 +89,7 @@ describe("Navigation", () => {
     cy.navbarClick("Feed");
 
     // The new url should include "/"
-    cy.url().should("include", "/", { timeout: 10000 });
+    cy.url().should("include", "/");
 
     // The new page should contain an h1 with "Friends"
     cy.get("h1").contains("Friends");
@@ -103,7 +103,7 @@ describe("Navigation", () => {
     cy.navbarClick("DKMS");
 
     // The new url should include "/"
-    cy.url().should("include", "/", { timeout: 10000 });
+    cy.url().should("include", "/");
 
     // The new page should contain an h1 with "Feed"
     cy.get("h1").contains("Friends");

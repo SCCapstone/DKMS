@@ -43,7 +43,7 @@ describe("Post and Delete Feed Item and Comment", () => {
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
 
     // A feed item with the random string for a post should be deleted
-    cy.contains(postText).should("not.exist", { timeout: 10000 });
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 });
 
