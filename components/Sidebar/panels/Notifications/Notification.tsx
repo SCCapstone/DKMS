@@ -17,7 +17,7 @@ const Notification = ({
   username: string | undefined;
   body: string;
 }) => (
-  <li className="card card-compact bg-base-100 relative">
+  <li className="card card-compact bg-base-100 text-base-content">
     <a href={`/app/#${feedId}`} className="card-body">
       <header className="pb-2">
         <h4 className="font-bold text-base">
@@ -27,9 +27,9 @@ const Notification = ({
             title
           )}
         </h4>
-        <h5 className="text-xs text-primary">{timestamp}</h5>
+        <h5 className="text-xs text-base-content">{timestamp}</h5>
       </header>
-      <p className="text-primary text-ellipsis overflow-hidden">{body}</p>
+      <p className="text-base-content text-ellipsis overflow-hidden">{body}</p>
       <div className="card-actions justify-end">
         <DismissButton notificationId={notificationId} />
       </div>

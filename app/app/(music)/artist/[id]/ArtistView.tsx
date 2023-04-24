@@ -44,12 +44,12 @@ const ArtistView = ({
     <h4 className="font-black uppercase pb-2">Average Artist Statistics</h4>
     <AudioFeatures audioFeatures={averageAudioFeatures} />
     <div className="divider" />
-    <h4 className="font-black uppercase">Top Tracks</h4>
-    <TrackList tracks={topTracks.tracks} showAlbum isPremium={isPremium} />
-    <h4 className="font-black uppercase">Recent Albums</h4>
+    <h4 className="font-black uppercase pb-2">Top Tracks</h4>
+    <TrackList tracks={topTracks.tracks} isPremium={isPremium} showAlbum />
+    <h4 className="font-black uppercase pb-2">Recent Albums</h4>
     <AlbumList albums={albums.items} isPremium={isPremium} />
     <div className="divider" />
-    <h4 className="font-black uppercase">Similar Artists</h4>
+    <h4 className="font-black uppercase pb-2">Similar Artists</h4>
     <ArtistsGrid artists={similarArtists} isPremium={isPremium} />
   </>
 );
