@@ -26,8 +26,9 @@ describe("Share Music to Feed", () => {
     // Share the album to feed
     cy.get(`button[title="Share to feed"]`).eq(0).click();
     // Add text to the post
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("Sharing an album to feed! TEST");
+    cy.get("textarea[id=comment]").type(postText);
 
     cy.get("button").contains("Share").click();
 
@@ -35,8 +36,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     cy.reload();
 
-    // A feed item with the text "Sharing an album to feed! TEST" should be present
-    cy.get("p").contains("Sharing an album to feed! TEST");
+    // A feed item with the a random string for testing should be present
+    cy.get("p").contains(postText);
 
     // A feed item with a card with the album information should be present
     cy.get('div[class*="card"]').find("img").eq(0).click();
@@ -47,8 +48,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
-    // A feed item with "Sharing an album to feed! TEST" should be deleted
-    cy.contains("Sharing an album to feed! TEST").should("not.exist");
+    // A feed item with the random string for testing should be deleted
+    cy.contains(postText).should("not.exist");
   });
 
   it("should search and share an artist to feed", () => {
@@ -66,8 +67,9 @@ describe("Share Music to Feed", () => {
     // Share the artist to feed
     cy.get(`button[title="Share to feed"]`).eq(4).click();
     // Add text to the post
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("Sharing an artist to feed! TEST");
+    cy.get("textarea[id=comment]").type(postText);
 
     cy.get("button").contains("Share").click();
 
@@ -75,8 +77,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     cy.reload();
 
-    // A feed item with the text "Sharing an artist to feed! TEST" should be present
-    cy.get("p").contains("Sharing an artist to feed! TEST");
+    // A feed item with the text postText should be present
+    cy.get("p").contains(postText);
 
     // A feed item with a card with the artist information should be present
     cy.get('div[class*="card"]').find("img").eq(0).click();
@@ -87,8 +89,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
-    // A feed item with "Sharing an artist to feed! TEST" should be deleted
-    cy.contains("Sharing an artist to feed! TEST").should("not.exist");
+    // A feed item with postText should be deleted
+    cy.contains(postText).should("not.exist");
   });
 
   it("should search and share a track to feed", () => {
@@ -106,8 +108,9 @@ describe("Share Music to Feed", () => {
     // Share the track to feed
     cy.get(`button[title="Share to feed"]`).eq(8).click();
     // Add text to the post
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("Sharing a track to feed! TEST");
+    cy.get("textarea[id=comment]").type(postText);
 
     cy.get("button").contains("Share").click();
 
@@ -115,8 +118,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     cy.reload();
 
-    // A feed item with the text "Sharing a track to feed! TEST" should be present
-    cy.get("p").contains("Sharing a track to feed! TEST");
+    // A feed item with the text postText should be present
+    cy.get("p").contains(postText);
 
     // A feed item with a card with the track information should be present
     cy.get('div[class*="card"]').find("img").eq(0).click();
@@ -127,8 +130,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
-    // A feed item with "Sharing a track to feed! TEST" should be deleted
-    cy.contains("Sharing a track to feed! TEST").should("not.exist");
+    // A feed item with postText should be deleted
+    cy.contains(postText).should("not.exist");
   });
 
   it("should search and share a playlist to feed", () => {
@@ -146,8 +149,9 @@ describe("Share Music to Feed", () => {
     // Share the playlist to feed
     cy.get(`button[title="Share to feed"]`).eq(12).click();
     // Add text to the post
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("Sharing a playlist to feed! TEST");
+    cy.get("textarea[id=comment]").type(postText);
 
     cy.get("button").contains("Share").click();
 
@@ -155,8 +159,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     cy.reload();
 
-    // A feed item with the text "Sharing a playlist to feed! TEST" should be present
-    cy.get("p").contains("Sharing a playlist to feed! TEST");
+    // A feed item with the text postText should be present
+    cy.get("p").contains(postText);
 
     // A feed item with a card with the playlist information should be present
     cy.get('div[class*="card"]').find("img").eq(0).click();
@@ -167,8 +171,8 @@ describe("Share Music to Feed", () => {
     cy.visit("/app");
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
-    // A feed item with "Sharing a playlist to feed! TEST" should be deleted
-    cy.contains("Sharing a playlist to feed! TEST").should("not.exist");
+    // A feed item with postText should be deleted
+    cy.contains(postText).should("not.exist");
   });
 });
 

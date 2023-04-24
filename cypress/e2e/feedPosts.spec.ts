@@ -1,3 +1,5 @@
+const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
+const commentText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
 describe("Post and Delete Feed Item and Comment", () => {
   beforeEach(() => {
     // Log in before each test
@@ -17,12 +19,12 @@ describe("Post and Delete Feed Item and Comment", () => {
     cy.visit("/app");
     // Post a feed item
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("This is a test post!");
+    cy.get("textarea[id=comment]").type(postText);
 
     cy.get(`button:contains("Post")`).eq(1).click();
 
-    // A feed item should be posted with "This is a test post!"
-    cy.get("p").contains("This is a test post!");
+    // A feed item should be posted with random string for testing
+    cy.get("p").contains(postText);
   });
 
   it("should post a comment", () => {
@@ -31,12 +33,12 @@ describe("Post and Delete Feed Item and Comment", () => {
     cy.visit("/app");
     // Post a comment
     cy.get("textarea[id=chat]").eq(0).click();
-    cy.get("textarea[id=chat]").eq(0).type("This is a test comment!");
+    cy.get("textarea[id=chat]").eq(0).type(commentText);
 
     cy.get("button").contains("Comment").click();
 
-    // A feed comment should be posted with "This is a test comment!"
-    cy.get("p").contains("This is a test comment!");
+    // A feed comment should be posted with a random string for testing
+    cy.get("p").contains(commentText);
   });
 
   it("should delete a comment", () => {
@@ -46,8 +48,8 @@ describe("Post and Delete Feed Item and Comment", () => {
     // Delete the comment that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(1).click();
 
-    // A comment with "This is a test comment!" should be deleted
-    cy.contains("This is a test comment!").should("not.exist");
+    // A comment with the random strings for a comment should be deleted
+    cy.contains(commentText).should("not.exist");
   });
 
   it("should delete a feed item", () => {
@@ -57,8 +59,8 @@ describe("Post and Delete Feed Item and Comment", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
 
-    // A feed item with "This is a test post!" should be deleted
-    cy.contains("This is a test post!").should("not.exist");
+    // A feed item with the random string for a post should be deleted
+    cy.contains(postText).should("not.exist");
   });
 });
 
