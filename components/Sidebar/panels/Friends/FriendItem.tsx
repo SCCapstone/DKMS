@@ -3,18 +3,12 @@ import Link from "next/link";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 
 const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectSimplified }) => (
-  <li>
-    <div className="flex flex-row justify-start content-center max-w-[224px]">
-      <h5 className="text-xs truncate max-w-[112px]">
-        <Link
-          className="link link-hover link-secondary truncate max-w-[100px]"
-          href={`/app/track/${track.id}`}
-        >
-          {track.name}
-        </Link>
-      </h5>
-      <h5>&nbsp;•&nbsp;</h5>
-      <div className="text-xs truncate max-w-[112px]">
+  <li className="card card-compact bg-base-300 text-base-content text-xs">
+    <div className="card-body">
+      <h4 className="font-bold truncate text-xs">
+        <Link href={`/app/track/${track.id}`}>{track.name}</Link>
+      </h4>
+      <div className="text-xs">
         <ArtistLinks artists={track.artists} />
       </div>
     </div>

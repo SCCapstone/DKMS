@@ -59,7 +59,7 @@ const NormalArtist = async ({
           <ShareButton musicItemId={artist.id} musicItemType="artist" small />
         </div>
         <Link href={`/app/artist/${artist.id}`}>
-          <h2 className="card-title">{artist.name}</h2>
+          <h2 className="text-lg font-semibold">{artist.name}</h2>
         </Link>
       </div>
     </div>

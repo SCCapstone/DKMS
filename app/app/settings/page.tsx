@@ -8,7 +8,7 @@ const Settings = async () => {
   return (
     <>
       <PageTitle title="Settings" />
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid md:grid-cols-3 gap-4 md:gap-2">
         <ThemeSettingCard />
         <DisplayNameCard
           userId={currentUser.id}
