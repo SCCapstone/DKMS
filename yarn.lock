@@ -5360,6 +5360,13 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-error-boundary@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-4.0.4.tgz#d2e84505b0a67cec7a6bf33b0146faadfe31597d"
+  integrity sha512-AbqMFx8bCsob8rCHZvJYQ42MQijK0/034RUvan9qrqyJCpazr8d9vKHrysbxcr6odoHLZvQEcYomFPoIqH9fow==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 react-hot-toast@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.4.0.tgz#b91e7a4c1b6e3068fc599d3d83b4fb48668ae51d"
