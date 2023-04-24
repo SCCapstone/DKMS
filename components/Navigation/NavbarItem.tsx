@@ -22,7 +22,7 @@ const NavbarItem = ({ item }: { item: ItemType }) => {
         <button
           type="button"
           className="font-bold"
-          onClick={() => void signOut()}
+          onClick={() => void signOut({ callbackUrl: "/" })}
         >
           {item.label}
         </button>

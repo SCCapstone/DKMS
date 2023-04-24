@@ -8,7 +8,7 @@ const PlaybackPanel = ({ accessToken }: { accessToken: string }) => {
 
   return (
     <div
-      className={`w-full md:w-64 max-h-screen h-screen flex flex-col md:p-4 md:bg-gray-200 md:text-black ${
+      className={`w-full md:w-64 max-h-screen h-screen flex flex-col md:p-4 md:bg-neutral md:text-neutral-content ${
         sidebar === "playback" ? "" : "hidden"
       }`}
     >

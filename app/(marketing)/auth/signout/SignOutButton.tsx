@@ -6,7 +6,7 @@ const SignOutButton = () => (
   <button
     className="btn btn-ghost bg-spotify text-white"
     type="button"
-    onClick={() => void signOut()}
+    onClick={() => void signOut({ callbackUrl: "/" })}
   >
     Sign Out
   </button>

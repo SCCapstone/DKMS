@@ -46,16 +46,16 @@ const PrivacySettingCard = ({
           pages.
         </p>
         <div className="flex flex-col">
-          <div className="form-control w-52">
+          <div className="form-control">
             <label htmlFor="visibility" className="cursor-pointer label">
-              <span className="label-text">Currently {visibility}</span>
+              <span className="label-text">Private Account</span>
               <input
                 type="checkbox"
                 name="visibility"
                 id="visibilityToggle"
-                className="toggle toggle-primary"
                 disabled={isMutating}
                 checked={visibility === "public"}
+                className="checkbox checkbox-accent"
                 onChange={(e) => void handleToggle(e)}
               />
             </label>

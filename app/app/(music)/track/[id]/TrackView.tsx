@@ -74,7 +74,7 @@ const TrackView = ({
       </p>
     )}
     <div className="divider" />
-    <h4 className="font-black uppercase">Similar Tracks</h4>
+    <h4 className="font-black uppercase pb-2">Similar Tracks</h4>
     <TrackList
       tracks={recommendations.tracks}
       showAlbum

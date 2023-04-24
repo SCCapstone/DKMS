@@ -12,7 +12,7 @@ const TitleSection = () => (
             Connect with others and discover more about your music circle than
             ever.
           </p>
-          <Link className="btn btn-secondary" href="/auth/signin">
+          <Link className="btn btn-secondary" href="/app">
             Sign In
           </Link>
         </div>
