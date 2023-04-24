@@ -49,7 +49,7 @@ const DisplayNameCard = ({
         />
 
         <button
-          className="btn btn-primary"
+          className="btn btn-accent"
           onClick={(e) => void handleSubmit(e)}
           type="button"
           disabled={isMutating}
