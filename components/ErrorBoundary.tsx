@@ -21,7 +21,6 @@ type Props = {
 type State = {
   hasError: boolean;
 };
-
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -48,10 +47,10 @@ class ErrorBoundary extends Component<Props, State> {
       <div>
         {hasError ? (
           <BasePanel title={title} sidebarId={sidebarId}>
-            <h1>Something went wrong!</h1>
+            <h1 className="font-bold">Something went wrong!</h1>
           </BasePanel>
         ) : (
-          <div>{children}</div>
+          children
         )}
       </div>
     );
