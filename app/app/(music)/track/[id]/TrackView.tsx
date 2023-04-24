@@ -64,7 +64,7 @@ const TrackView = ({
       }}
     />
     <div className="divider" />
-    <h4 className="font-black uppercase pb-2">Track Statistics</h4>
+    <h4 className="font-black uppercase pb-2">Song Statistics</h4>
     <AudioFeatures audioFeatures={audioFeatures} />
     {danceRecommendations.length > 0 && (
       <p className="pt-2 text-sm">
@@ -74,7 +74,7 @@ const TrackView = ({
       </p>
     )}
     <div className="divider" />
-    <h4 className="font-black uppercase pb-2">Similar Tracks</h4>
+    <h4 className="font-black uppercase pb-2">Similar Songs</h4>
     <TrackList
       tracks={recommendations.tracks}
       showAlbum

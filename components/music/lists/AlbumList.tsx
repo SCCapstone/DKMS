@@ -16,7 +16,7 @@ const AlbumList = ({
         <thead>
           <tr>
             <th>Title</th>
-            <th>Tracks</th>
+            <th># Songs</th>
             <th>Type</th>
             <th className="text-right">Released</th>
             {isPremium && <th className="text-center">Play</th>}
