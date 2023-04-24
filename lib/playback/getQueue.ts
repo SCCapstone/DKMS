@@ -4,7 +4,8 @@ const getQueue = async () => {
   const data = await fetchServer<SpotifyApi.UsersQueueResponse>(
     "https://api.spotify.com/v1/me/player/queue"
   );
-  return data;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  return data.queue.filter((item) => item !== null);
 };
 
 export default getQueue;

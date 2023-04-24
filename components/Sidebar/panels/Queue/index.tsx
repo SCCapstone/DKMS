@@ -15,7 +15,7 @@ const Queue = async () => {
     );
   }
 
-  const { queue } = await getQueue();
+  const queue = await getQueue();
 
   // We need to disable this rule because we're checking for null
   // values in the next line, but TypeScript doesn't know that.
@@ -36,8 +36,7 @@ const Queue = async () => {
             className="text-sm overflow-hidden text-ellipsis whitespace-nowrap"
           >
             <Link
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              href={item === null ? `` : `/app/track/${item.id}`}
+              href={`/app/track/${item.id}`}
               className="font-bold text-accent"
             >
               {item.name}
