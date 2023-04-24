@@ -40,7 +40,7 @@ const SearchMenu = () => {
         <input
           type="text"
           placeholder="Search…"
-          className="input input-bordered"
+          className="input input-bordered w-full"
           value={searchText}
           maxLength={MAX_SEARCH_LENGTH}
           onChange={(e) => setSearchText(e.target.value)}
