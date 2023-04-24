@@ -1,3 +1,5 @@
+const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
+const commentText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
 describe("Feed", () => {
   beforeEach(() => {
     // Log in before each test
@@ -17,12 +19,12 @@ describe("Feed", () => {
 
     // Post a feed item
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("Post Test");
+    cy.get("textarea[id=comment]").type(postText);
 
     cy.get(`button:contains("Post")`).eq(1).click();
 
-    // The feed should now contain a post that includes "Post Test"
-    cy.get("p").contains("Post Test");
+    // The feed should now contain a post that includes a randomly generated string for testing
+    cy.get("p").contains(postText);
   });
 
   it("should be able to comment on a post", () => {
@@ -31,12 +33,12 @@ describe("Feed", () => {
 
     // Post a comment
     cy.get("textarea[id=chat]").eq(0).click();
-    cy.get("textarea[id=chat]").eq(0).type("Test Comment");
+    cy.get("textarea[id=chat]").eq(0).type(commentText);
 
     cy.get("button").contains("Comment").click();
 
-    // A feed comment should be posted with "Test Comment"
-    cy.get("p").contains("Test Comment");
+    // A feed comment should be posted with a randomly generated string for testing
+    cy.get("p").contains(commentText);
   });
 
   it("should be able to like a post", () => {
@@ -74,8 +76,8 @@ describe("Feed", () => {
     // Should be on the saved posts url
     cy.url().should("include", "/app?s=true");
 
-    // A post containing "Post Test" should be present
-    cy.get("p").contains("Post Test");
+    // A post containing postText random string should be present
+    cy.get("p").contains(postText);
   });
 
   it("should be able to delete a post", () => {
@@ -86,7 +88,7 @@ describe("Feed", () => {
     cy.get("button[id=deleteButton]").eq(0).click();
 
     // Post should no longer exist
-    cy.get("p").contains("Post Text").should("not.exist");
+    cy.get("p").contains(postText).should("not.exist");
   });
 });
 
