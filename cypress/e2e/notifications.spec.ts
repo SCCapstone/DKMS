@@ -16,21 +16,26 @@ describe("Notifications", () => {
   });
 
   it("should give a notification when the user receives a comment on their post", () => {
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
+    const commentText = `Testing: ${Math.random()
+      .toString(36)
+      .substring(2, 8)}`;
+
     // Start from the feed page
     cy.visit("/app");
 
     // Post a feed item
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("This is a test post!");
+    cy.get("textarea[id=comment]").type(postText);
     cy.get(`button:contains("Post")`).eq(1).click();
-    // A feed item should be posted with "This is a test post!"
-    cy.get("p").contains("This is a test post!");
+    // A feed item should be posted with a random string for testing
+    cy.get("p").contains(postText);
     // Post a comment
     cy.get("textarea[id=chat]").eq(0).click();
-    cy.get("textarea[id=chat]").eq(0).type("Test Comment");
+    cy.get("textarea[id=chat]").eq(0).type(commentText);
     cy.get("button").contains("Comment").click();
-    // A feed comment should be posted with "Test Comment"
-    cy.get("p").contains("Test Comment");
+    // A feed comment should be posted with a random string for testing
+    cy.get("p").contains(commentText);
 
     // Click the notifications button to open the notifications menu
     cy.get("button[id=notificationsButton]").eq(0).click({ force: true });
@@ -46,19 +51,21 @@ describe("Notifications", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with "This is a test post!" should be deleted
-    cy.contains("This is a test post!").should("not.exist");
+    cy.contains(postText).should("not.exist");
   });
 
   it("should give notification when the user receives a like on their post", () => {
+    const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
+
     // Start from the feed page
     cy.visit("/app");
 
     // Post a feed item
     cy.get("textarea[id=comment]").click();
-    cy.get("textarea[id=comment]").type("This is a test post!");
+    cy.get("textarea[id=comment]").type(postText);
     cy.get(`button:contains("Post")`).eq(1).click();
-    // A feed item should be posted with "This is a test post!"
-    cy.get("p").contains("This is a test post!");
+    // A feed item should be posted with a random string for testing
+    cy.get("p").contains(postText);
     // Like post
     cy.get("button[id=likeButton]").eq(0).click();
     // Should contain 1 like
@@ -77,8 +84,8 @@ describe("Notifications", () => {
 
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
-    // A feed item with "This is a test post!" should be deleted
-    cy.contains("This is a test post!").should("not.exist");
+    // A feed item with the random string for testing should be deleted
+    cy.contains(postText).should("not.exist");
   });
 });
 
