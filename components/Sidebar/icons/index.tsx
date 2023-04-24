@@ -18,11 +18,18 @@ type NotificationsIconProps = {
 const IconButton = ({
   children,
   onClick,
+  id,
 }: {
   children: React.ReactNode;
   onClick: () => void;
+  id?: string;
 }) => (
-  <button type="button" onClick={onClick} className="btn btn-ghost btn-circle">
+  <button
+    id={id}
+    type="button"
+    onClick={onClick}
+    className="btn btn-ghost btn-circle"
+  >
     {children}
   </button>
 );
@@ -45,7 +52,7 @@ const NotificationsIcon = ({
   onClick,
   notificationAlert,
 }: NotificationsIconProps) => (
-  <IconButton onClick={onClick}>
+  <IconButton id="notificationsButton" onClick={onClick}>
     {notificationAlert
       ? getSvg("notificationsAlert", { width, height, selected })
       : getSvg("notifications", { width, height, selected })}

@@ -15,7 +15,7 @@ const getData = async () => {
       id: doc.id,
       ...doc.data(),
     }))
-    .reverse();
+    .sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
 };
 
 const Notifications = async () => {
