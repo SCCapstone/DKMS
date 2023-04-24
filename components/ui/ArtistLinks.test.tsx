@@ -27,7 +27,11 @@ describe("<ArtistLinks />", () => {
 
     cy.get("a").should("have.length", 1);
     cy.get("a").should("have.text", "RAYE");
-    cy.get("a").should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
+    cy.get("a").should(
+      "have.attr",
+      "href",
+      "/app/artist/5KKpBU5eC2tJDzf0wmlRp2"
+    );
   });
 
   it("renders two artists when two artists are available", () => {
@@ -50,11 +54,11 @@ describe("<ArtistLinks />", () => {
     cy.get("a").eq(0).should("have.text", "RAYE");
     cy.get("a")
       .eq(0)
-      .should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
+      .should("have.attr", "href", "/app/artist/5KKpBU5eC2tJDzf0wmlRp2");
     cy.get("a").eq(1).should("have.text", "070 Shake");
     cy.get("a")
       .eq(1)
-      .should("have.attr", "href", "/artist/12Zk1DFhCbHY6v3xep2ZjI");
+      .should("have.attr", "href", "/app/artist/12Zk1DFhCbHY6v3xep2ZjI");
   });
 
   it("renders three artists when three artists are available", () => {
@@ -81,15 +85,15 @@ describe("<ArtistLinks />", () => {
     cy.get("a").eq(0).should("have.text", "RAYE");
     cy.get("a")
       .eq(0)
-      .should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
+      .should("have.attr", "href", "/app/artist/5KKpBU5eC2tJDzf0wmlRp2");
     cy.get("a").eq(1).should("have.text", "070 Shake");
     cy.get("a")
       .eq(1)
-      .should("have.attr", "href", "/artist/12Zk1DFhCbHY6v3xep2ZjI");
+      .should("have.attr", "href", "/app/artist/12Zk1DFhCbHY6v3xep2ZjI");
     cy.get("a").eq(2).should("have.text", "Ari Lennox");
     cy.get("a")
       .eq(2)
-      .should("have.attr", "href", "/artist/1vaQ6v3pOFxAIrFoPrAcom");
+      .should("have.attr", "href", "/app/artist/1vaQ6v3pOFxAIrFoPrAcom");
   });
 
   it("renders an artist and an additional artist count when more than three artists are available", () => {
@@ -120,7 +124,7 @@ describe("<ArtistLinks />", () => {
     cy.get("a").eq(0).should("have.text", "RAYE");
     cy.get("a")
       .eq(0)
-      .should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
+      .should("have.attr", "href", "/app/artist/5KKpBU5eC2tJDzf0wmlRp2");
 
     cy.get("button").should("have.text", "3 more");
   });
@@ -143,6 +147,10 @@ describe("<ArtistLinks />", () => {
 
     cy.get("a").should("have.length", 1);
     cy.get("a").should("have.text", "RAYE");
-    cy.get("a").should("have.attr", "href", "/artist/5KKpBU5eC2tJDzf0wmlRp2");
+    cy.get("a").should(
+      "have.attr",
+      "href",
+      "/app/artist/5KKpBU5eC2tJDzf0wmlRp2"
+    );
   });
 });

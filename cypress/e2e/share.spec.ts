@@ -24,7 +24,7 @@ describe("Share Music to Feed", () => {
     cy.url().should("include", "/search?q=Nirvana");
 
     // Share the album to feed
-    cy.get(`button[title="Share to feed"]`).eq(0).click();
+    cy.get(`button[title="Share to feed"]`).eq(4).click();
     // Add text to the post
     const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
@@ -65,7 +65,7 @@ describe("Share Music to Feed", () => {
     cy.url().should("include", "/search?q=Nirvana");
 
     // Share the artist to feed
-    cy.get(`button[title="Share to feed"]`).eq(4).click();
+    cy.get(`button[title="Share to feed"]`).eq(8).click();
     // Add text to the post
     const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
@@ -106,7 +106,7 @@ describe("Share Music to Feed", () => {
     cy.url().should("include", "/search?q=Nirvana");
 
     // Share the track to feed
-    cy.get(`button[title="Share to feed"]`).eq(8).click();
+    cy.get(`button[title="Share to feed"]`).eq(0).click();
     // Add text to the post
     const postText = `Testing: ${Math.random().toString(36).substring(2, 8)}`;
     cy.get("textarea[id=comment]").click();
