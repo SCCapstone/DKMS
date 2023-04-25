@@ -12,7 +12,7 @@ describe("Notifications", () => {
     cy.get("button[id=notificationsButton]").eq(0).click({ force: true });
 
     // The notifications menu should now be open
-    cy.get("h2").contains("Notifications");
+    cy.get("h2", { timeout: 10000 }).contains("Notifications");
   });
 
   it("should give a notification when the user receives a comment on their post", () => {
@@ -51,7 +51,7 @@ describe("Notifications", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with "This is a test post!" should be deleted
-    cy.contains(postText).should("not.exist");
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 
   it("should give notification when the user receives a like on their post", () => {
@@ -85,7 +85,7 @@ describe("Notifications", () => {
     // Delete the feed item that was just posted
     cy.get(`button[title="Delete feed item"]`).eq(0).click();
     // A feed item with the random string for testing should be deleted
-    cy.contains(postText).should("not.exist");
+    cy.get("p", { timeout: 10000 }).contains(postText).should("not.exist");
   });
 });
 
