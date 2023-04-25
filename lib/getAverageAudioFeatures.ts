@@ -37,6 +37,10 @@ function getAverageAudioFeatures(
     type: "audio_features",
   };
 
+  if (audioFeatures.length === 0) {
+    return averageAudioFeatures;
+  }
+
   audioFeatures.forEach((audioFeature) => {
     averageAudioFeatures.danceability += audioFeature.danceability;
     averageAudioFeatures.energy += audioFeature.energy;
