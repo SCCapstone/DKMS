@@ -55,7 +55,7 @@ const getData = async (id: string) => {
       `https://api.spotify.com/v1/audio-features?ids=${topTracks
         .map((track) => track.id)
         .join(",")}`
-    );
+    ).then((res) => res.audio_features);
 
   const averageAudioFeatures = getAverageAudioFeatures(audioFeatures);
 

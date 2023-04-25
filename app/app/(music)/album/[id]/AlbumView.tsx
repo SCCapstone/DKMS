@@ -4,6 +4,8 @@ import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { capitalize, formatNumber } from "@/lib/formatters";
 
+import type { AverageAudioFeatures } from "@/lib/getAverageAudioFeatures";
+
 /* Album Page */
 const AlbumView = ({
   album,
@@ -13,7 +15,7 @@ const AlbumView = ({
 }: {
   album: SpotifyApi.AlbumObjectFull;
   artist: SpotifyApi.ArtistObjectFull;
-  averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
+  averageAudioFeatures: AverageAudioFeatures;
   isPremium: boolean;
 }) => (
   <>

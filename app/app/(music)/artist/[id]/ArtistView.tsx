@@ -4,6 +4,8 @@ import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { formatNumber } from "@/lib/formatters";
 
+import type { AverageAudioFeatures } from "@/lib/getAverageAudioFeatures";
+
 /* Artist Page */
 const ArtistView = ({
   artist,
@@ -18,7 +20,7 @@ const ArtistView = ({
   topTracks: SpotifyApi.ArtistsTopTracksResponse;
   albums: SpotifyApi.ArtistsAlbumsResponse;
   isFollowing: boolean;
-  averageAudioFeatures: SpotifyApi.AudioFeaturesObject;
+  averageAudioFeatures: AverageAudioFeatures;
   similarArtists: SpotifyApi.ArtistObjectFull[];
   isPremium: boolean;
 }) => (
