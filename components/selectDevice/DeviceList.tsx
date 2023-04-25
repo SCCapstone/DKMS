@@ -1,5 +1,6 @@
 import Device from "./Device";
 
+/* List of devices for playback */
 const DeviceList = ({
   deviceList,
   currentDevice,

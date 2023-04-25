@@ -1,5 +1,6 @@
 "use client";
 
+/* Sign out button */
 import { signOut } from "next-auth/react";
 
 const SignOutButton = () => (

@@ -12,6 +12,7 @@ const Feed = async ({
   };
 }) => {
   const { s } = searchParams;
+  /* Get feed items only of users that logged in user is following */
   const data = await getFeedItems({
     filterByFollowing: true,
     filterBySaved: !!s,

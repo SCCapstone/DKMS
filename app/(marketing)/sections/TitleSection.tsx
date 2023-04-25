@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+/* Title section of marketing page */
 const TitleSection = () => (
   <div className="hero h-full bg-gradient-to-bl via-primary from-25% from-secondary shadow-inner">
     <div className="hero-content">

@@ -6,6 +6,7 @@ import { formatNumber } from "@/lib/formatters";
 
 import type { FilteredDataTrack } from "./page";
 
+/* Playlist Page */
 const PlaylistView = ({
   playlist,
   tracks,

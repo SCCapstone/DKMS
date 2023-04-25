@@ -26,6 +26,13 @@ const getData = (
   }
 };
 
+/**
+ * Fetch data for feed items with music items
+ * @param musicItemId Id of music item
+ * @param musitItemType Type of music item
+ * @returns Undefined if it is not a music item
+ * @returns The data of the music item
+ */
 const getSpotifyFeedItem = async (
   musicItemId?: string,
   musicItemType?: "track" | "playlist" | "artist" | "album"

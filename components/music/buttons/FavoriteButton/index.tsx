@@ -7,6 +7,7 @@ import toggleFavorite from "@/lib/favoriteTracks/toggleFavorite";
 
 import { HeartRegular, HeartSolid } from "./icons";
 
+/* Favorite button for music items */
 const FavoriteButton = ({
   isFavorited,
   trackId,

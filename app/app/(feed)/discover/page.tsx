@@ -4,6 +4,7 @@ import getFeedItems from "@/lib/feed/getFeedItems";
 import { getCurrentUser, getCurrentUserPremium } from "@/lib/getUser";
 import getSavedItemIds from "@/lib/savedFeedItems/getSavedItemIds";
 
+/* Discover feed page */
 const DiscoverFeed = async ({
   searchParams,
 }: {
@@ -12,6 +13,7 @@ const DiscoverFeed = async ({
   };
 }) => {
   const { s } = searchParams;
+  /* Get feed items of all users */
   const data = await getFeedItems({
     filterBySaved: !!s,
   });

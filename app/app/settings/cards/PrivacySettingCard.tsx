@@ -9,6 +9,7 @@ import toggleVisibility from "@/lib/settings/toggleVisibility";
 
 import type { User } from "next-auth";
 
+/* Privacy setting section of settings page */
 const PrivacySettingCard = ({
   userId,
   visibility,
@@ -23,6 +24,7 @@ const PrivacySettingCard = ({
   // Create inline loading UI
   const isMutating = isFetching || isPending;
 
+  /* Change privacy of profile */
   const otherVisibility = toggleVisibility(visibility);
   const handleToggle = async (e: React.ChangeEvent) => {
     e.preventDefault();

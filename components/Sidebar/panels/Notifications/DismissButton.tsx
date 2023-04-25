@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 
 import deleteNotifications from "@/lib/notifications/deleteNotifications";
 
+/* Button to dismiss notification */
 const DismissButton = ({ notificationId }: { notificationId: string }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();

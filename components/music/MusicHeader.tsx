@@ -5,6 +5,7 @@ import ShareButton from "./buttons/ShareButton";
 import MusicButtons from "./MusicButtons";
 import MusicImage from "./MusicImage";
 
+/* Header for music item pages */
 type CardProps = {
   isPremium: boolean;
   imageUrl: string | undefined;

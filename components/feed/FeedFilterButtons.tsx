@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 
+/* Buttons to filter feed */
 const FeedFilterButtons = () => {
   const router = useRouter();
   const pathname = usePathname() ?? "/app";

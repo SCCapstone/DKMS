@@ -8,6 +8,7 @@ const getData = async (username: string) =>
     `https://api.spotify.com/v1/users/${username}`
   );
 
+/* Format for profile image */
 const ProfileImage = async ({
   username,
   isProfilePage,

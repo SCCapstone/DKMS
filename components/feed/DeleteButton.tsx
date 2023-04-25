@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import deleteFeedItem from "@/lib/feed/deleteFeedItem";
 import unsaveFeedItem from "@/lib/savedFeedItems/unsaveFeedItem";
 
+/* Delete button for feed posts and comments */
 const DeleteButton = ({
   userId,
   postId,

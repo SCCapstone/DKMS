@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/lib/getUser";
 
 import ModalButton from "./ModalButton";
 
+/* Share button for sharing music items to feed */
 const ShareButton = async ({
   musicItemId,
   musicItemType,

@@ -30,6 +30,7 @@ const AudioFeatures = ({
     },
   ] as const;
 
+  /* Audio feature display */
   return (
     <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-primary text-primary-content">
       {data.map((feature) => (

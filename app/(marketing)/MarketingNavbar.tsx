@@ -11,6 +11,7 @@ const NAVBAR_ITEMS = [
   },
 ] as const;
 
+/* Marketing navbar with navigation to sign in page and about page */
 const MarketingNavbar = () => (
   <nav className="navbar bg-neutral text-neutral-content">
     <div className="navbar-start">

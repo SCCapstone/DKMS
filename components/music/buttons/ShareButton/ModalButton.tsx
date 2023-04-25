@@ -7,6 +7,7 @@ import ShareIcon from "./ShareIcon";
 
 import type { User } from "next-auth";
 
+/* Modal button for share button */
 const ModalButton = ({
   user,
   musicItemId,

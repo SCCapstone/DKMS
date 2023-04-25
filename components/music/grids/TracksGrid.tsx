@@ -1,5 +1,6 @@
 import { TrackCard } from "@/components/music/cards";
 
+/* Grid layout for tracks in search results */
 const TracksGrid = ({
   tracks,
   isHalf,

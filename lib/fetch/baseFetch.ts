@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 
+/* Fetch for client and server */
 const baseFetch = async (
   input: RequestInfo | URL,
   init: RequestInit | undefined,

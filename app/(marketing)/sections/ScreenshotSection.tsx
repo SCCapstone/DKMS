@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+/* Section of marketing page displaying application screenshots */
 const ScreenshotSection = () => (
   <section className="bg-base-200 flex flex-wrap items-center justify-center py-10">
     <div className="container mx-auto">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+/* Link for usernames */
 const UsernameLink = ({
   username,
   children,

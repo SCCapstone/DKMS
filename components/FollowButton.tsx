@@ -19,6 +19,7 @@ type FollowButtonProps =
       followType: "artist";
     };
 
+/* Follow button for artists and users */
 const FollowButton = ({
   isFollowing,
   username,

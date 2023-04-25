@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import ArtistLinks from "@/components/ui/ArtistLinks";
 
+/* Friends individual top song */
 const FriendItem = ({ track }: { track: SpotifyApi.TrackObjectSimplified }) => (
   <li className="card card-compact bg-base-300 text-base-content text-xs">
     <div className="card-body">

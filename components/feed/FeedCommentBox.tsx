@@ -9,6 +9,7 @@ import type { User } from "next-auth";
 
 const MAX_COMMENT_LENGTH = 280;
 
+/* Feed comment box to comment on posts */
 const FeedCommentBox = ({
   postId,
   currentUser,
@@ -25,6 +26,7 @@ const FeedCommentBox = ({
 
   const [commentText, setCommentText] = useState("");
 
+  /* Post comment */
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);

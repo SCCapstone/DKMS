@@ -12,6 +12,7 @@ const checkIsActive = (
   key: string
 ) => searchParams?.get("target") === key;
 
+/* Buttons for recommendation filters */
 const RecommendationFilterButtons = () => {
   const router = useRouter();
   const pathname = usePathname() ?? "/app/recommendations";

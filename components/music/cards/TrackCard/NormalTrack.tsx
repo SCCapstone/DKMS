@@ -9,6 +9,7 @@ import ArtistLinks from "@/components/ui/ArtistLinks";
 import Skeleton from "@/components/ui/Skeleton";
 import fetchServer from "@/lib/fetch/fetchServer";
 
+/* Check if track is favorited by user */
 const checkIsFavorited = (trackId: string) =>
   fetchServer<SpotifyApi.CheckUsersSavedTracksResponse>(
     `https://api.spotify.com/v1/me/tracks/contains?ids=${trackId}`,
@@ -17,6 +18,7 @@ const checkIsFavorited = (trackId: string) =>
     }
   ).then((data) => data[0]);
 
+/* Normal sized track display */
 const NormalTrack = async ({
   track,
   isPremium,

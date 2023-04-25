@@ -1,6 +1,7 @@
 import CompactArtist from "./CompactArtist";
 import NormalArtist from "./NormalArtist";
 
+/* Artist display card */
 const ArtistCard = ({
   artist,
   isCompact,

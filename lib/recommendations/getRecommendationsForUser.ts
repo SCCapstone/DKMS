@@ -11,6 +11,14 @@ const DEFAULT_TRACK = "0c6xIDDpzE81m2q797ordA";
 const isValidTarget = (target: string | undefined): target is TargetOption =>
   !!target && target in TARGET_MAPPING;
 
+/**
+ * Gets recommendations for a certain user
+ *
+ * @param userId id of user to get recommendations for
+ * @param limit number of return values to limit to
+ * @param target optional target value to help focus recommendations
+ * @returns A list of recommendations for the user
+ */
 const getRecommendationsForUser = async (
   userId: string,
   limit?: number,

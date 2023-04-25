@@ -139,6 +139,13 @@ const DANCE_DATA = [
   },
 ];
 
+/**
+ * Determines which dance is best for a track
+ *
+ * @param tempo the tempo of the track
+ * @param timeSignature time signature of the track
+ * @returns list of dance recommendations
+ */
 const getDanceRecommendations = (tempo: number, timeSignature: number) =>
   DANCE_DATA.filter(
     (dance) =>

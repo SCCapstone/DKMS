@@ -9,6 +9,7 @@ import type { User } from "next-auth";
 
 const MAX_POST_LENGTH = 280;
 
+/* Feed text box to create a new post */
 const FeedTextBox = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -19,6 +20,7 @@ const FeedTextBox = ({ user }: { user: User }) => {
 
   const [postText, setPostText] = useState("");
 
+  /* Post new post */
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);

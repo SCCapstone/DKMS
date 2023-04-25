@@ -1,5 +1,6 @@
 import { ArtistCard } from "@/components/music/cards";
 
+/* Grid layout for artists in search results */
 const ArtistsGrid = ({
   artists,
   isHalf,

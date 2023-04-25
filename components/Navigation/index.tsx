@@ -34,6 +34,7 @@ const NAVBAR_ITEMS: MenuItems = [
   },
 ] as const;
 
+/* Navbar buttons */
 const NavbarContainer = () => (
   <>
     <DesktopNavigation items={NAVBAR_ITEMS} />

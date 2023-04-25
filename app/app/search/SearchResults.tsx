@@ -8,6 +8,7 @@ import UsernameLink from "@/components/ui/UsernameLink";
 
 import type { FirestoreUser } from "@/lib/firestore/types";
 
+/* Placeholders to appear when page is loading */
 const LOADING_ITEMS = {
   albums: {
     items: Array<undefined>(4).fill(undefined),
@@ -29,6 +30,7 @@ type SearchResultsProps = {
   isPremium: boolean;
 };
 
+/* Page for search results */
 const SearchResults = ({ results, isPremium }: SearchResultsProps) => {
   const { albums, tracks, artists, playlists, users } =
     results ?? LOADING_ITEMS;

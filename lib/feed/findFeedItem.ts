@@ -8,6 +8,12 @@ import getFeedComments from "./getFeedComments";
 import type { FirestoreFeedItem } from "../firestore/types";
 import type { DocumentReference } from "firebase/firestore";
 
+/**
+ * Fetches feed item data by searching for its id
+ *
+ * @param itemId id of the feed item to fetch
+ * @returns The data of the fetched feed item
+ */
 const findFeedItem = cache(async (itemId: string) => {
   const docRef = doc(
     firestore,

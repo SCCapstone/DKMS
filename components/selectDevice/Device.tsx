@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 
 import transferPlayback from "@/lib/device/transferPlayback";
 
+/* Device logic for playback */
 const Device = ({
   device,
   currentDeviceId,
@@ -21,12 +22,14 @@ const Device = ({
   // Create inline loading UI
   const isMutating = isFetching;
 
+  /* If user selects device */
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);
     if (currentDeviceId === device.id) {
       return;
     }
+    /* If something is currently playing, transfer playback to device */
     if (isPlaying) {
       await transferPlayback(device.id, true);
     } else {

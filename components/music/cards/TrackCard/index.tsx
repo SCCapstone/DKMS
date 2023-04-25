@@ -1,6 +1,7 @@
 import CompactTrack from "./CompactTrack";
 import NormalTrack from "./NormalTrack";
 
+/* Track display */
 const TrackCard = ({
   track,
   isCompact,

@@ -4,6 +4,7 @@ import { useSidebar } from "../SidebarContext";
 
 import type { SidebarOptions } from "../types";
 
+/* Base panel layout for sidebar layouts */
 const BasePanel = ({
   sidebarId,
   title,

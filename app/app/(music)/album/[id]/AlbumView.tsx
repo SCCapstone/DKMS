@@ -4,6 +4,7 @@ import MusicHeader from "@/components/music/MusicHeader";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import { capitalize, formatNumber } from "@/lib/formatters";
 
+/* Album Page */
 const AlbumView = ({
   album,
   artist,

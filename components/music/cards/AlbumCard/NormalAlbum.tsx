@@ -7,6 +7,7 @@ import ShareButton from "@/components/music/buttons/ShareButton";
 import ArtistLinks from "@/components/ui/ArtistLinks";
 import Skeleton from "@/components/ui/Skeleton";
 
+/* Normal sized album card display */
 const NormalAlbumCard = async ({
   album,
   isPremium,

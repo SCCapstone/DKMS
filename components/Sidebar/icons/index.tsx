@@ -4,6 +4,9 @@ import type { SidebarOptions } from "../types";
 
 const DEFAULT_SIZE = 28;
 
+/* Icons for each sidebar icon */
+
+/* Props for each sidebar icon */
 type IconProps = {
   width?: number;
   height?: number;

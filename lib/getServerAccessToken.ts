@@ -3,6 +3,9 @@ import "server-only";
 
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
+/**
+ * Fetches access token for server
+ */
 const getServerAccessToken = async () => {
   const session = await getServerSession(authOptions);
 

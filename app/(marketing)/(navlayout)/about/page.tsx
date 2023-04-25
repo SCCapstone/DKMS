@@ -1,5 +1,7 @@
+/* About page for marketing page that displays information about team */
 import Image from "next/image";
 
+/* Team information */
 const TEAM_INFORMATION = [
   {
     name: "Sophie Crane",

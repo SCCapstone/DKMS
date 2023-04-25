@@ -1,6 +1,7 @@
 import CompactAlbum from "./CompactAlbum";
 import NormalAlbum from "./NormalAlbum";
 
+/* Album Card display */
 const AlbumCard = ({
   album,
   isCompact,

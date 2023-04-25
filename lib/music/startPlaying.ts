@@ -22,6 +22,11 @@ export type StartPlayingContextParams =
       deviceId?: string;
     };
 
+/**
+ * Starts playing playback
+ *
+ * @param params the data needed to begin playback
+ */
 async function startPlaying(params: StartPlayingContextParams) {
   return fetchClient(
     `https://api.spotify.com/v1/me/player/play${

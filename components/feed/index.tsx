@@ -23,6 +23,7 @@ export type FeedItemType = {
     | undefined;
 } & Omit<FirestoreFeedItem, "musicItemId" | "musicItemType">;
 
+/* Feed Page */
 const FeedPage = ({
   data,
   currentUser,

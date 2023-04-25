@@ -1,3 +1,9 @@
+/**
+ * Determines averages for audio features
+ *
+ * @param audioFeatures audio features for multiple tracks
+ * @returns average audio features
+ */
 const getAverageAudioFeatures = (
   audioFeatures: SpotifyApi.MultipleAudioFeaturesResponse
 ) => {

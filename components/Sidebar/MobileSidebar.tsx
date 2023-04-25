@@ -2,6 +2,7 @@
 
 import { useSidebar } from "./SidebarContext";
 
+/* Layout for sidebar on mobile */
 const MobileSidebar = ({ children }: { children: React.ReactNode }) => {
   const [sidebar] = useSidebar();
   return (

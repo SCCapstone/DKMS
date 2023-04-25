@@ -5,9 +5,11 @@ import { toast } from "react-hot-toast";
 
 import { THEME_VALUES, validateTheme } from "@/lib/theme";
 
+/* Theme setting section of settings page */
 const ThemeSettingCard = () => {
   const { theme, setTheme } = useTheme();
 
+  /* Change to newly selected theme */
   const handleChange = (selectedTheme: string) => {
     if (validateTheme(selectedTheme)) {
       setTheme(selectedTheme);

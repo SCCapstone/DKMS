@@ -5,6 +5,7 @@ import Friends from "./Friends";
 import Notifications from "./Notifications";
 import Playback from "./Playback";
 
+/* Sidebar panels */
 const SidebarPanels = ({ isDesktop }: { isDesktop?: boolean }) => (
   <div className={isDesktop ? "hidden md:block" : "md:hidden"}>
     <ErrorBoundary title="Friends" sidebarId="friends">

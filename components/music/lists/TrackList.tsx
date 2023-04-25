@@ -4,6 +4,7 @@ import { formatDate, formatDuration } from "@/lib/formatters";
 
 import type { FilteredDataTrack } from "@/app/app/(music)/playlist/[id]/page";
 
+/* List view for tracks */
 const TrackList = ({
   tracks,
   contextUri,

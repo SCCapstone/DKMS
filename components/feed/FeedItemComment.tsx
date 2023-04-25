@@ -6,6 +6,7 @@ import DeleteButton from "./DeleteButton";
 import type { FeedCommentType, FeedItemType } from ".";
 import type { User } from "next-auth";
 
+/* Feed comment for each singular comment */
 const FeedItemComment = ({
   postData,
   commentData,

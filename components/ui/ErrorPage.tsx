@@ -1,3 +1,4 @@
+/* Layout of error page */
 const ErrorPage = ({
   error,
   reset,

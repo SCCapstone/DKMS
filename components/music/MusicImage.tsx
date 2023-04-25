@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getPlaiceholder } from "plaiceholder";
 
+/* Format for music item images */
 const MusicImage = async ({
   src,
   alt,

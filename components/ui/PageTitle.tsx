@@ -1,3 +1,4 @@
+/* Formatting of each page's title */
 const PageTitle = ({
   title,
   subtitle,

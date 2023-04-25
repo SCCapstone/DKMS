@@ -7,6 +7,7 @@ import BasePanel from "../BasePanel";
 
 import Notification from "./Notification";
 
+/* Get notification data */
 const getData = async () => {
   const currentUser = await getCurrentUser();
   const q = query(notificationsCol, where("recipientId", "==", currentUser.id));
@@ -18,6 +19,7 @@ const getData = async () => {
     .sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
 };
 
+/* Display user's notifications */
 const Notifications = async () => {
   const data = await getData();
   return (

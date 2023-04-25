@@ -4,7 +4,9 @@ import { getCurrentUserPremium } from "@/lib/getUser";
 
 import TrackView from "./TrackView";
 
+/* Fetch data for track */
 const getData = async (id: string) => {
+  /* Fetch track data */
   const track = await fetchServer<SpotifyApi.TrackObjectFull>(
     `https://api.spotify.com/v1/tracks/${id}`,
     {
@@ -13,6 +15,8 @@ const getData = async (id: string) => {
       },
     }
   );
+
+  /* Fetch data for track's artist */
   const artist = await fetchServer<SpotifyApi.ArtistObjectFull>(
     `https://api.spotify.com/v1/artists/${track.artists[0].id}`,
     {
@@ -22,6 +26,7 @@ const getData = async (id: string) => {
     }
   );
 
+  /* Fetch data for track's audio features */
   const audioFeatures = await fetchServer<SpotifyApi.AudioFeaturesResponse>(
     `https://api.spotify.com/v1/audio-features/${id}`,
     {
@@ -31,6 +36,7 @@ const getData = async (id: string) => {
     }
   );
 
+  /* Fetch recommendations for track */
   const recommendations =
     await fetchServer<SpotifyApi.RecommendationsFromSeedsResponse>(
       `https://api.spotify.com/v1/recommendations?seed_tracks=${id}&limit=10`,
@@ -41,6 +47,7 @@ const getData = async (id: string) => {
       }
     );
 
+  /* fetch dance recommendations for track */
   const danceRecommendations = getDanceRecommendations(
     audioFeatures.tempo,
     audioFeatures.time_signature
