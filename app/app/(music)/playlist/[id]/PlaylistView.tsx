@@ -5,6 +5,7 @@ import ArtistLinks from "@/components/ui/ArtistLinks";
 import { formatNumber } from "@/lib/formatters";
 
 import type { FilteredDataTrack } from "./page";
+import type { AverageAudioFeatures } from "@/lib/getAverageAudioFeatures";
 
 /* Playlist Page */
 const PlaylistView = ({
@@ -16,7 +17,7 @@ const PlaylistView = ({
 }: {
   playlist: SpotifyApi.PlaylistObjectFull;
   tracks: FilteredDataTrack[];
-  averageAudioFeatures: SpotifyApi.AudioFeaturesObject | undefined;
+  averageAudioFeatures: AverageAudioFeatures | undefined;
   hasPodcast: boolean;
   isPremium: boolean;
 }) => (

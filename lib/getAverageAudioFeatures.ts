@@ -1,13 +1,28 @@
+export type AverageAudioFeatures = Pick<
+  SpotifyApi.AudioFeaturesObject,
+  | "danceability"
+  | "energy"
+  | "key"
+  | "loudness"
+  | "mode"
+  | "speechiness"
+  | "acousticness"
+  | "instrumentalness"
+  | "liveness"
+  | "valence"
+  | "tempo"
+  | "type"
+>;
 /**
  * Determines averages for audio features
  *
  * @param audioFeatures audio features for multiple tracks
  * @returns average audio features
  */
-const getAverageAudioFeatures = (
-  audioFeatures: SpotifyApi.AudioFeaturesObject[]
-) => {
-  const averageAudioFeatures: SpotifyApi.AudioFeaturesResponse = {
+function getAverageAudioFeatures(
+  audioFeatures: readonly AverageAudioFeatures[]
+) {
+  const averageAudioFeatures: AverageAudioFeatures = {
     danceability: 0,
     energy: 0,
     key: 0,
@@ -20,12 +35,6 @@ const getAverageAudioFeatures = (
     valence: 0,
     tempo: 0,
     type: "audio_features",
-    id: "",
-    uri: "",
-    track_href: "",
-    analysis_url: "",
-    duration_ms: 0,
-    time_signature: 0,
   };
 
   audioFeatures.forEach((audioFeature) => {
@@ -40,8 +49,6 @@ const getAverageAudioFeatures = (
     averageAudioFeatures.liveness += audioFeature.liveness;
     averageAudioFeatures.valence += audioFeature.valence;
     averageAudioFeatures.tempo += audioFeature.tempo;
-    averageAudioFeatures.duration_ms += audioFeature.duration_ms;
-    averageAudioFeatures.time_signature += audioFeature.time_signature;
   });
 
   averageAudioFeatures.danceability /= audioFeatures.length;
@@ -55,10 +62,8 @@ const getAverageAudioFeatures = (
   averageAudioFeatures.liveness /= audioFeatures.length;
   averageAudioFeatures.valence /= audioFeatures.length;
   averageAudioFeatures.tempo /= audioFeatures.length;
-  averageAudioFeatures.duration_ms /= audioFeatures.length;
-  averageAudioFeatures.time_signature /= audioFeatures.length;
 
   return averageAudioFeatures;
-};
+}
 
 export default getAverageAudioFeatures;
