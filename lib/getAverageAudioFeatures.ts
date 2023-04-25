@@ -5,7 +5,7 @@
  * @returns average audio features
  */
 const getAverageAudioFeatures = (
-  audioFeatures: SpotifyApi.MultipleAudioFeaturesResponse
+  audioFeatures: SpotifyApi.AudioFeaturesObject[]
 ) => {
   const averageAudioFeatures: SpotifyApi.AudioFeaturesResponse = {
     danceability: 0,
@@ -28,7 +28,7 @@ const getAverageAudioFeatures = (
     time_signature: 0,
   };
 
-  audioFeatures.audio_features.forEach((audioFeature) => {
+  audioFeatures.forEach((audioFeature) => {
     averageAudioFeatures.danceability += audioFeature.danceability;
     averageAudioFeatures.energy += audioFeature.energy;
     averageAudioFeatures.key += audioFeature.key;
@@ -44,19 +44,19 @@ const getAverageAudioFeatures = (
     averageAudioFeatures.time_signature += audioFeature.time_signature;
   });
 
-  averageAudioFeatures.danceability /= audioFeatures.audio_features.length;
-  averageAudioFeatures.energy /= audioFeatures.audio_features.length;
-  averageAudioFeatures.key /= audioFeatures.audio_features.length;
-  averageAudioFeatures.loudness /= audioFeatures.audio_features.length;
-  averageAudioFeatures.mode /= audioFeatures.audio_features.length;
-  averageAudioFeatures.speechiness /= audioFeatures.audio_features.length;
-  averageAudioFeatures.acousticness /= audioFeatures.audio_features.length;
-  averageAudioFeatures.instrumentalness /= audioFeatures.audio_features.length;
-  averageAudioFeatures.liveness /= audioFeatures.audio_features.length;
-  averageAudioFeatures.valence /= audioFeatures.audio_features.length;
-  averageAudioFeatures.tempo /= audioFeatures.audio_features.length;
-  averageAudioFeatures.duration_ms /= audioFeatures.audio_features.length;
-  averageAudioFeatures.time_signature /= audioFeatures.audio_features.length;
+  averageAudioFeatures.danceability /= audioFeatures.length;
+  averageAudioFeatures.energy /= audioFeatures.length;
+  averageAudioFeatures.key /= audioFeatures.length;
+  averageAudioFeatures.loudness /= audioFeatures.length;
+  averageAudioFeatures.mode /= audioFeatures.length;
+  averageAudioFeatures.speechiness /= audioFeatures.length;
+  averageAudioFeatures.acousticness /= audioFeatures.length;
+  averageAudioFeatures.instrumentalness /= audioFeatures.length;
+  averageAudioFeatures.liveness /= audioFeatures.length;
+  averageAudioFeatures.valence /= audioFeatures.length;
+  averageAudioFeatures.tempo /= audioFeatures.length;
+  averageAudioFeatures.duration_ms /= audioFeatures.length;
+  averageAudioFeatures.time_signature /= audioFeatures.length;
 
   return averageAudioFeatures;
 };

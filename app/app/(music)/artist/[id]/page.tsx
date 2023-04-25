@@ -28,7 +28,7 @@ const getData = async (id: string) => {
       `https://api.spotify.com/v1/audio-features?ids=${topTracks.tracks
         .map((track) => track.id)
         .join(",")}`
-    );
+    ).then((res) => res.audio_features);
 
   /* Fetch similar artists' data for current artist */
   const similarArtistsData =
