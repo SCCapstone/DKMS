@@ -15,6 +15,15 @@ type DeleteNotificationsType =
       commentId?: undefined;
       notificationIds: string[];
     };
+
+/**
+ * Deletes notification from database
+ *
+ * @param postId id of post for notifications to be deleted
+ * @param commentId id of comments for notifications to be deleted
+ * @param notificationIds ids of notification to be deleted
+ * @returns promise that is resolved once the batch of notifications is deleted
+ */
 const deleteNotifications = async ({
   postId,
   commentId,

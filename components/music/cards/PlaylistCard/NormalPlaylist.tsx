@@ -6,6 +6,7 @@ import PlayButton from "@/components/music/buttons/PlayButton";
 import ShareButton from "@/components/music/buttons/ShareButton";
 import Skeleton from "@/components/ui/Skeleton";
 
+/* Normally sized playlist display */
 const NormalPlaylist = async ({
   playlist,
   isPremium,

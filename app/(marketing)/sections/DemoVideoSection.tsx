@@ -1,3 +1,4 @@
+/* Section of Marketing Page including final demo video */
 const DemoVideoSection = () => (
   <section className="bg-base-100 py-10">
     <div className="container mx-auto">

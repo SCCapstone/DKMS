@@ -4,6 +4,7 @@ import { getCurrentUserPremium } from "@/lib/getUser";
 
 import SearchResults from "./SearchResults";
 
+/* Search Firebase for users */
 const searchFirebase = async (searchQuery: string) => {
   const usersData = await getPublicUsers();
 
@@ -13,6 +14,7 @@ const searchFirebase = async (searchQuery: string) => {
       user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
+/* Fetch data for search from spotify */
 const searchSpotify = async (searchQuery: string) =>
   fetchServer<SpotifyApi.SearchResponse>(
     `https://api.spotify.com/v1/search?q=${searchQuery}&type=album,track,artist,playlist&limit=4`

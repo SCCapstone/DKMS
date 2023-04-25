@@ -3,6 +3,7 @@ import { getCachedProfileDoc } from "@/lib/firestore/cache";
 
 import FriendItem from "./FriendItem";
 
+/* Get top songs for friend */
 const getTopItems = async (id: string) => {
   const profileDoc = await getCachedProfileDoc(id);
   if (!profileDoc.exists()) {
@@ -12,6 +13,7 @@ const getTopItems = async (id: string) => {
   return profileDoc.data();
 };
 
+/* Displays friend's top two songs */
 const Friend = async ({
   username,
   userId,

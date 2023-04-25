@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 
 import setDisplayName from "@/lib/settings/setDisplayName";
 
+/* Display name change section for settings page */
 const DisplayNameCard = ({
   userId,
   displayName,
@@ -22,6 +23,7 @@ const DisplayNameCard = ({
 
   const [nameInput, setNameInput] = useState(displayName);
 
+  /* Set display name to newly typed name */
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsFetching(true);

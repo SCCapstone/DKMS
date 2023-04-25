@@ -4,6 +4,7 @@ import { AlbumList, TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { formatNumber } from "@/lib/formatters";
 
+/* Artist Page */
 const ArtistView = ({
   artist,
   topTracks,

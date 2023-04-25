@@ -2,6 +2,7 @@ import UsernameLink from "@/components/ui/UsernameLink";
 
 import DismissButton from "./DismissButton";
 
+/* Layout for individual notification */
 const Notification = ({
   notificationId,
   feedId,

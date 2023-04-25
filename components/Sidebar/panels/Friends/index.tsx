@@ -4,6 +4,7 @@ import BasePanel from "../BasePanel";
 
 import Friend from "./Friend";
 
+/* Friends panel for sidebar that displays each friend's top 2 songs */
 const Friends = async () => {
   const users = await getFollowedUsers();
   return (

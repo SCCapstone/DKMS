@@ -3,6 +3,7 @@ import Link from "next/link";
 import PlayButton from "@/components/music/buttons/PlayButton";
 import { capitalize } from "@/lib/formatters";
 
+/* List view for albums */
 const AlbumList = ({
   albums,
   isPremium,

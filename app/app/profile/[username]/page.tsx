@@ -21,14 +21,17 @@ import {
 } from "@/lib/getUser";
 import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 
+/* Fetch profile data from DKMS database */
 const getDkmsProfile = async (profileId: string) => getUserFromId(profileId);
 
+/* Fetch profile data from Spotify API */
 const getSpotifyProfile = async (username: string) =>
   fetchServer<SpotifyApi.UserProfileResponse>(
     `https://api.spotify.com/v1/users/${username}`,
     { cache: "no-cache" }
   );
 
+/* Get data for profile */
 const getData = async (id: string) => {
   const profileDoc = await getCachedProfileDoc(id);
   if (!profileDoc.exists()) {
@@ -39,12 +42,14 @@ const getData = async (id: string) => {
 
   const { topTracks } = data;
 
+  /* Get recommendations for user */
   const recommendations = await getRecommendationsForUser(id, 8);
 
   if (topTracks.length === 0) {
     return { data, averageAudioFeatures: undefined, recommendations };
   }
 
+  /* Fetch audio feature data for user */
   const audioFeatures =
     await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
       `https://api.spotify.com/v1/audio-features?ids=${topTracks
@@ -123,6 +128,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
     topTracks.length === 0 || topArtists.length === 0 || !averageAudioFeatures;
   const isPremium = await getCurrentUserPremium();
 
+  /* Layout if there are 0 tracks or artists or there are no audio features available */
   if (notEnoughData) {
     return (
       <>

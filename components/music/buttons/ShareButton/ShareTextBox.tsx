@@ -8,6 +8,7 @@ import postFeedItem from "@/lib/feed/postFeedItem";
 
 import type { User } from "next-auth";
 
+/* Text box for share button modal */
 const ShareTextBox = ({
   user,
   musicItemId,

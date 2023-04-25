@@ -12,6 +12,8 @@ import type { StartPlayingContextParams } from "@/lib/music/startPlaying";
 type PlayButtonProps = {
   small?: boolean;
 } & StartPlayingContextParams;
+
+/* Play button for artists, albums, playlists, and songs */
 const PlayButton = (props: PlayButtonProps) => {
   const { small, ...params } = props;
   const {

@@ -5,19 +5,24 @@ import { getCurrentUserPremium } from "@/lib/getUser";
 
 import ArtistView from "./ArtistView";
 
+/* Get data for artist */
 const getData = async (id: string) => {
+  /* Fetch artist data */
   const artist = await fetchServer<SpotifyApi.ArtistObjectFull>(
     `https://api.spotify.com/v1/artists/${id}`
   );
 
+  /* Fetch artist's top tracks */
   const topTracks = await fetchServer<SpotifyApi.ArtistsTopTracksResponse>(
     `https://api.spotify.com/v1/artists/${id}/top-tracks?market=US`
   );
 
+  /* Fetch artist's albums */
   const albums = await fetchServer<SpotifyApi.ArtistsAlbumsResponse>(
     `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album,single&market=US&limit=10`
   );
 
+  /* Fetch audio features for artist */
   const audioFeatures =
     await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
       `https://api.spotify.com/v1/audio-features?ids=${topTracks.tracks
@@ -25,6 +30,7 @@ const getData = async (id: string) => {
         .join(",")}`
     );
 
+  /* Fetch similar artists' data for current artist */
   const similarArtistsData =
     await fetchServer<SpotifyApi.ArtistsRelatedArtistsResponse>(
       `https://api.spotify.com/v1/artists/${id}/related-artists`

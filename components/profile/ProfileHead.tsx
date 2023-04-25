@@ -1,6 +1,7 @@
 import ProfileImage from "@/components/profile/ProfileImage";
 import { formatNumber } from "@/lib/formatters";
 
+/* Header for profile page */
 const ProfileHead = ({
   displayName,
   username,

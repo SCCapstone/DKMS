@@ -1,5 +1,7 @@
 "use client";
 
+/* Sign in button to direct to Spotify sign in page */
+
 import { signIn } from "next-auth/react";
 
 const SignInButton = () => (

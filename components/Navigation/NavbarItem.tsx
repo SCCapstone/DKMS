@@ -15,6 +15,7 @@ export type ItemType =
 
 export type MenuItems = readonly ItemType[];
 
+/* Layout for each individual menu item */
 const NavbarItem = ({ item }: { item: ItemType }) => {
   if ("buttonType" in item) {
     return (

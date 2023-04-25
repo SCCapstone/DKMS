@@ -6,6 +6,14 @@ import dispatchNotification from "../notifications/dispatchNotification";
 
 import type { User } from "next-auth";
 
+/**
+ * Posts comment to feed item
+ *
+ * @param postId Id of post that is being commented on
+ * @param user User that is commenting
+ * @param content text content of the comment
+ * @returns Id of the posted comment
+ */
 const postFeedComment = async (postId: string, user: User, content: string) => {
   const docRef = await addDoc(getCommentsCol(postId), {
     content,

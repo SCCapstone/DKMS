@@ -21,6 +21,7 @@ type Props = {
 type State = {
   hasError: boolean;
 };
+/* Error Boundary for sidebar panels */
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);

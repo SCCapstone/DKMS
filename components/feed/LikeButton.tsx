@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 
 import { likeItem, unlikeItem } from "@/lib/likeButton";
 
+/* Like button to like post */
 const LikeButton = ({
   userId,
   postId,

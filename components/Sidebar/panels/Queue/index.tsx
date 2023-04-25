@@ -4,9 +4,11 @@ import BasePanel from "@/components/Sidebar/panels/BasePanel";
 import { getCurrentUserPremium } from "@/lib/getUser";
 import getQueue from "@/lib/playback/getQueue";
 
+/* Layout for queue panel */
 const Queue = async () => {
   const isPremium = await getCurrentUserPremium();
 
+  /* Only lets premium users use queue */
   if (!isPremium) {
     return (
       <BasePanel title="Queue" sidebarId="queue">

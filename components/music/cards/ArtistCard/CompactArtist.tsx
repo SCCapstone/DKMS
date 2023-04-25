@@ -7,6 +7,7 @@ import ShareButton from "@/components/music/buttons/ShareButton";
 import Skeleton from "@/components/ui/Skeleton";
 import { formatNumber } from "@/lib/formatters";
 
+/* Compact artist display */
 const CompactArtist = async ({
   artist,
   isPremium,

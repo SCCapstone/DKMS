@@ -7,6 +7,7 @@ import NavbarItem from "./NavbarItem";
 
 import type { MenuItems } from "./NavbarItem";
 
+/* Dropdown button for navbar items */
 const DropdownButton = () => (
   // eslint-disable-next-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-tabindex
   <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -27,6 +28,7 @@ const DropdownButton = () => (
   </label>
 );
 
+/* Layout for mobile navbar */
 const MobileNavbar = async ({ items }: { items: MenuItems }) => {
   const isPremium = await getCurrentUserPremium();
   return (

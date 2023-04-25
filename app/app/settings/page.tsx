@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/getUser";
 
 import { ThemeSettingCard, DisplayNameCard, PrivacySettingCard } from "./cards";
 
+/* Settings Page */
 const Settings = async () => {
   const currentUser = await getCurrentUser();
   return (

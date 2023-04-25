@@ -6,6 +6,7 @@ import PlayerContext from "./PlayerContext";
 
 import type { PlayerContextType } from "./PlayerContext";
 
+/* Playback provider */
 const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentDeviceId, setCurrentDeviceId] = useState<string | undefined>(
     undefined

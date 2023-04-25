@@ -4,6 +4,13 @@ import fetchServer from "../fetch/fetchServer";
 
 const DEFAULT_ARTIST = "4NHQUGzhtTLFvgF5SZesLK";
 
+/**
+ * Fetches data of recommended artists
+ *
+ * @param id id of artist
+ * @param limit limit of number of returned artists
+ * @returns data for recommended artists
+ */
 const getRecommendedArtistData = async (id: string, limit?: number) => {
   const data = await fetchServer<SpotifyApi.ArtistsRelatedArtistsResponse>(
     `https://api.spotify.com/v1/artists/${id}/related-artists`,
@@ -16,6 +23,13 @@ const getRecommendedArtistData = async (id: string, limit?: number) => {
   return data.artists.slice(0, limit);
 };
 
+/**
+ * Gets recommended artists for users
+ *
+ * @param userId id of user to get recommended artists for
+ * @param limit limit on number of artists to return
+ * @returns list of recommended artists
+ */
 const getRecommendedArtists = async (userId: string, limit?: number) => {
   const profile = await getCachedProfileDoc(userId);
 

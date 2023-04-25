@@ -3,6 +3,7 @@
 import Player from "@/components/Player";
 import { useSidebar } from "@/components/Sidebar/SidebarContext";
 
+/* Playback panel */
 const PlaybackPanel = ({ accessToken }: { accessToken: string }) => {
   const [sidebar] = useSidebar();
 

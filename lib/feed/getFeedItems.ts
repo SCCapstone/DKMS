@@ -13,16 +13,19 @@ import getSpotifyFeedItem from "./getSpotifyFeedItem";
 import type { FirestoreFeedItem } from "@/lib/firestore/types";
 import type { QueryDocumentSnapshot } from "firebase/firestore";
 
+/* get filtered feed docs for current user */
 const filterFeedDocs = async (
   docs: QueryDocumentSnapshot<FirestoreFeedItem>[],
   currentUserId: string,
   isPrivate: boolean
 ) => {
+  /* filter check if user is private */
   if (isPrivate) {
     const followingIds = await getFollowedUsers().then((users) =>
       users.map((user) => user.id)
     );
 
+    /* Filter by following */
     return docs.filter(
       (doc) =>
         doc.data().userId === currentUserId ||
@@ -30,15 +33,25 @@ const filterFeedDocs = async (
     );
   }
 
+  /* Get public users ids */
   const publicIds = await getPublicUsers().then((users) =>
     users.map((user) => user.id)
   );
+  /* filter by which users are public */
   return docs.filter(
     (doc) =>
       doc.data().userId === currentUserId ||
       publicIds.includes(doc.data().userId)
   );
 };
+
+/**
+ * Fetches feed item data
+ *
+ * @param filterByFollowing boolean that indicates if the method should filter the feed items by following or not
+ * @param filterBySaved boolean that indicates if the method should filter the feed items by if they're saved or not
+ * @returns array of feed items
+ */
 const getFeedItems = cache(
   async (params?: { filterByFollowing?: boolean; filterBySaved?: boolean }) => {
     const isPrivateFeed = params?.filterByFollowing ?? false;
@@ -76,8 +89,6 @@ const getFeedItems = cache(
     return dataWithComments.filter((post) =>
       savedItemIds.includes(post.id.trim())
     );
-
-    // return baseData;
   }
 );
 

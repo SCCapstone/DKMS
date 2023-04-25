@@ -1,5 +1,6 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 
+/* Get current state of playback */
 const getPlaybackState = async () => {
   try {
     const res = await fetchServer<SpotifyApi.CurrentPlaybackResponse>(

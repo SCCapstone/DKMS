@@ -13,6 +13,7 @@ const CARDS = [
   },
 ] as const;
 
+/* Marketing page section explaining why DKMS is needed */
 const WhySection = () => (
   <section className="flex flex-col bg-base-300 py-10 items-center">
     <div className="container mx-auto">

@@ -4,18 +4,22 @@ import { getCurrentUserPremium } from "@/lib/getUser";
 
 import PlaylistView from "./PlaylistView";
 
+/* Type for information about filtered data  */
 export type FilteredDataTrack = {
   added_at: string;
   added_by: SpotifyApi.UserObjectPublic;
 } & SpotifyApi.TrackObjectFull;
 
+/* Fetch playlist data */
 const getData = async (id: string) => {
+  /* Fetch playlist data */
   const playlist = await fetchServer<SpotifyApi.PlaylistObjectFull>(
     `https://api.spotify.com/v1/playlists/${id}`
   );
 
   let hasPodcast = false;
 
+  /* Create new array without null items */
   const tracks = playlist.tracks.items
     .filter((item) => item.track !== null)
     .map((item) => {
@@ -26,6 +30,7 @@ const getData = async (id: string) => {
       } as FilteredDataTrack | SpotifyApi.EpisodeObjectFull;
       return playlistTrackData;
     })
+    /* Filter out podcasts */
     .filter((item) => {
       if (item.type !== "track") {
         hasPodcast = true;
@@ -34,6 +39,7 @@ const getData = async (id: string) => {
       return true;
     }) as FilteredDataTrack[];
 
+  /* Fetch audio features for playlist */
   const audioFeatures =
     await fetchServer<SpotifyApi.MultipleAudioFeaturesResponse>(
       `https://api.spotify.com/v1/audio-features?ids=${tracks

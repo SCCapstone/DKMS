@@ -6,6 +6,7 @@ import PlayButton from "@/components/music/buttons/PlayButton";
 import ShareButton from "@/components/music/buttons/ShareButton";
 import Skeleton from "@/components/ui/Skeleton";
 
+/* Compact playlist display */
 const CompactPlaylist = async ({
   playlist,
   isPremium,

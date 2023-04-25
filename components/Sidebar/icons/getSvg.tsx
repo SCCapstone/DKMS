@@ -6,6 +6,7 @@ type IconOptions = {
   selected?: boolean;
 };
 
+/* Fetch svgs for sidebar */
 const getSvg = (type: SidebarOptions, params: IconOptions) => {
   const { width, height, selected } = params;
   switch (type) {

@@ -1,5 +1,6 @@
 import fetchClient from "@/lib/fetch/fetchClient";
 
+/* transfer playback to new device */
 const transferPlayback = async (
   deviceId: string | null,
   startPlaying: boolean

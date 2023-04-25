@@ -7,6 +7,7 @@ import {
 
 import AppProviders from "./providers";
 
+/* Layout of application when logged in */
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <AppProviders>
     <div className="md:flex flex-row min-h-screen">

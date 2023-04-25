@@ -1,5 +1,14 @@
 import fetchServer from "@/lib/fetch/fetchServer";
 
+/**
+ * Gets recommendations by seed tracks or artists
+ *
+ * @param seedArtists artist or artists to base recommendations on
+ * @param seedTracks track or tracks to base recommendations on
+ * @param limit limit on how many recommendations are returned
+ * @param target target value to focus for recommendations
+ * @returns A list of recommendations based on seeds
+ */
 const getRecommendationsBySeed = async ({
   seedArtists,
   seedTracks,

@@ -5,6 +5,7 @@ import { useSidebar } from "./SidebarContext";
 
 import type { SidebarOptions } from "./types";
 
+/* Sidebar menu with icons */
 const SidebarMenu = ({
   onChange,
   notificationAlert,
@@ -16,6 +17,7 @@ const SidebarMenu = ({
 }) => {
   const [currentSidebar, setCurrentSidebar] = useSidebar();
 
+  /* Change sidebar when buttons are clicked */
   const handleSidebarChange = (newSidebar: SidebarOptions) => {
     const sidebarValue = newSidebar === currentSidebar ? "none" : newSidebar;
     setCurrentSidebar(sidebarValue);

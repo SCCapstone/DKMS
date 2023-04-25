@@ -1,5 +1,6 @@
 import { AlbumCard } from "@/components/music/cards";
 
+/* Grid layout for album cards in search results */
 const AlbumsGrid = ({
   albums,
   isHalf,

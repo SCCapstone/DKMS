@@ -4,6 +4,7 @@ import ShareTextBox from "./ShareTextBox";
 
 import type { User } from "next-auth";
 
+/* Pop up to add text to post when sharing music item */
 const AddContent = ({
   user,
   musicItemId,

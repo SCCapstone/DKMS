@@ -1,3 +1,4 @@
+/* Marketing Page Layout */
 import MarketingNavbar from "@/app/(marketing)/MarketingNavbar";
 
 const NavLayout = ({ children }: { children: React.ReactNode }) => (

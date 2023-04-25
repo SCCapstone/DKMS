@@ -5,6 +5,7 @@ import { TrackList } from "@/components/music/lists";
 import MusicHeader from "@/components/music/MusicHeader";
 import { capitalize, formatDuration, formatNumber } from "@/lib/formatters";
 
+/* Track Page */
 const TrackView = ({
   track,
   artist,

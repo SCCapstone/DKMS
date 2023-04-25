@@ -10,9 +10,13 @@ import { getCurrentUser, getCurrentUserPremium } from "@/lib/getUser";
 import getRecommendationsForUser from "@/lib/recommendations/getRecommendationsForUser";
 import getRecommendedArtists from "@/lib/recommendations/getRecommendedArtists";
 
+/* Fetch data for recommendations page */
 const getData = async (userId: string, target?: string) => {
+  /* Fetch general recommendations for user */
   const recommendations = await getRecommendationsForUser(userId, 8, target);
+  /* Fetch recommended artists for user */
   const recommendedArtists = await getRecommendedArtists(userId, 8);
+  /* Fetch general featured playlists */
   const featuredPlaylists =
     await fetchServer<SpotifyApi.ListOfFeaturedPlaylistsResponse>(
       `https://api.spotify.com/v1/browse/featured-playlists?limit=8`

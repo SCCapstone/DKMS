@@ -11,6 +11,15 @@ const DISPATCH_MESSAGES = {
 
 type DispatchNotificationType = keyof typeof DISPATCH_MESSAGES;
 
+/**
+ * Dispatches notification when user likes or comments on currently logged in user's post
+ *
+ * @param feedId id of feed that notification is dispatching for
+ * @param commentId id of commentId that notification may be dispatching for
+ * @param username username of user that is liking or commenting on post
+ * @param type type of notification - comment or like
+ * @returns id of notification
+ */
 const dispatchNotification = async ({
   feedId,
   commentId,

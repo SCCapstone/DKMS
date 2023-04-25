@@ -4,6 +4,7 @@ import SpotifyIcon from "@/components/ui/SpotifyIcon";
 
 import FollowButton from "../FollowButton";
 
+/* Music buttons for artist, album, and track pages */
 const MusicButtons = ({
   spotifyUri,
   path,

@@ -5,6 +5,7 @@ import SpotifyPlayer from "react-spotify-web-playback";
 
 import { usePlayer } from "@/components/Player/PlayerContext";
 
+/* Playback layout */
 const Player = ({ accessToken }: { accessToken: string }) => {
   const { currentDeviceState, visibleState } = usePlayer();
   const [isVisible, setIsVisible] = visibleState;

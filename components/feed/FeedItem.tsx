@@ -16,6 +16,7 @@ import SaveFeedItemButton from "./SaveFeedItemButton";
 import type { FeedItemType } from ".";
 import type { User } from "next-auth";
 
+/* Individual feed item for singular post */
 const FeedItem = ({
   data,
   currentUser,

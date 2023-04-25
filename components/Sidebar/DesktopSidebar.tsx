@@ -6,6 +6,7 @@ import { getCurrentUser, getCurrentUserPremium } from "@/lib/getUser";
 import SidebarPanels from "./panels";
 import SidebarMenu from "./SidebarMenu";
 
+/* Get notification alerts to indicate if there are notifications present */
 const getNotificationAlert = async () => {
   const currentUser = await getCurrentUser();
   const q = query(notificationsCol, where("recipientId", "==", currentUser.id));
@@ -18,6 +19,7 @@ const getNotificationAlert = async () => {
   return data.length !== 0;
 };
 
+/* Layout for sidebar on desktop */
 const DesktopSidebar = async () => {
   const notificationAlert = await getNotificationAlert();
   const isPremium = await getCurrentUserPremium();

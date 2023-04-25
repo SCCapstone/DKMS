@@ -1,6 +1,7 @@
 import CompactPlaylist from "./CompactPlaylist";
 import NormalPlaylist from "./NormalPlaylist";
 
+/* Playlist display */
 const PlaylistCard = ({
   playlist,
   isCompact,

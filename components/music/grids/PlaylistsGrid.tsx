@@ -1,5 +1,6 @@
 import { PlaylistCard } from "@/components/music/cards";
 
+/* Grid layout for playlists in search results */
 const PlaylistsGrid = ({
   playlists,
   isHalf,

@@ -7,6 +7,7 @@ import {
   WhySection,
 } from "./sections";
 
+/* Marketing page components */
 const HomePage = () => (
   <>
     <header className="h-screen">

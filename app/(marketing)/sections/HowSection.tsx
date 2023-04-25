@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+/* Section of marketing page explaining how to use application */
 const HowSection = () => (
   <section className="bg-base-300 pb-10">
     <div className="container mx-auto">

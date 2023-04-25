@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+/* Get link for artist */
 const getLink = (
   artist: Pick<SpotifyApi.ArtistObjectSimplified, "name" | "id">
 ) => (
@@ -19,6 +20,7 @@ const ArtistLinks = ({
       index === self.findIndex((t) => t.name === value.name)
   );
 
+  /* Format artist link based on number of artists */
   switch (uniqueArtists.length) {
     case 0:
       return null;
