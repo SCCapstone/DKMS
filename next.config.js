@@ -35,15 +35,7 @@ const nextConfig = withPlaiceholder({
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.fbcdn.net",
-      },
-      {
-        protocol: "https",
-        hostname: "**.scdn.co",
-      },
-      {
-        protocol: "https",
-        hostname: "**.spotifycdn.com",
+        hostname: "**",
       },
     ],
   },
